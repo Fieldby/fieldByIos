@@ -14,8 +14,12 @@ import PanModal
 class PhoneViewController: UIViewController {
 
     //Top view
+    @IBOutlet weak var backButton: UIButton!
+    
+    @IBOutlet weak var mainLabel: UILabel!
     @IBOutlet weak var oneLabel: UILabel!
     @IBOutlet weak var twoLabel: UILabel!
+    @IBOutlet weak var agreeLabel: UILabel!
     
     @IBOutlet weak var phoneContainer: UIView!
     @IBOutlet weak var phoneTextField: UITextField!
@@ -26,9 +30,12 @@ class PhoneViewController: UIViewController {
     @IBOutlet weak var nameView: UIView!
     @IBOutlet weak var nameTextField: UITextField!
     
+    @IBOutlet weak var agreementView: UIView!
+    
     @IBOutlet var viewModel: PhoneViewModel!
     
-    private let statusSubject = BehaviorSubject<EditingStatus>(value: .number)
+    private var editingStatus = EditingStatus.number
+    private let defaultGrayColor = UIColor(red: 147, green: 147, blue: 147)
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -59,9 +66,18 @@ class PhoneViewController: UIViewController {
         nameContainer.layer.borderColor = UIColor.main.cgColor
         nameContainer.layer.borderWidth = 1
         nameView.isHidden = true
+        
+        agreeLabel.isHidden = true
+        agreementView.isHidden = true
     }
     
     private func bind() {
+        backButton.rx.tap
+            .subscribe(onNext: { [unowned self] in
+                self.navigationController?.popViewController(animated: true)
+            })
+            .disposed(by: rx.disposeBag)
+        
         phoneTextField.rx.text
             .orEmpty
             .bind(to: viewModel.numberSubject)
@@ -73,19 +89,41 @@ class PhoneViewController: UIViewController {
             })
             .disposed(by: rx.disposeBag)
         
-        certificationButton.rx.tap
-            .subscribe(onNext: { [unowned self] in
-                
-                
-                
-                
-                oneLabel.text = "확인 중입니다."
-                twoLabel.isHidden = true
-                phoneTextField.resignFirstResponder()
-                bottomView.isHidden = true
-                viewModel.presentCheckNumberVC()
+        nameTextField.rx.text
+            .orEmpty
+            .bind(to: viewModel.nameSubject)
+            .disposed(by: rx.disposeBag)
+        
+        viewModel.nameValidSubject
+            .subscribe(onNext: { [unowned self] bool in
+                bool ? nameValid() : nameInvalid()
             })
             .disposed(by: rx.disposeBag)
+        
+        certificationButton.rx.tap
+            .subscribe(onNext: { [unowned self] in
+                switch editingStatus {
+                case .number:
+                    oneLabel.text = "확인 중입니다."
+                    twoLabel.isHidden = true
+                    phoneTextField.resignFirstResponder()
+                    bottomView.isHidden = true
+                    viewModel.presentCheckNumberVC()
+                case .name:
+                    startAgreement()
+                case .agreement:
+                    break
+                }
+
+            })
+            .disposed(by: rx.disposeBag)
+        
+        
+        
+        
+        /*
+         ViewModel functions
+         */
         
         viewModel.presentCheckNumberVC = { [unowned self] in
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "checknumberVC") as! CheckNumberViewController
@@ -118,24 +156,53 @@ class PhoneViewController: UIViewController {
     private func makeCertificationValid() {
         phoneContainer.layer.borderWidth = 0
         certificationButton.backgroundColor = .main
+        certificationButton.isEnabled = true
     }
     
     private func makeCertificationInvalid() {
         phoneContainer.layer.borderWidth = 1
-        certificationButton.backgroundColor = UIColor(red: 147, green: 147, blue: 147)
+        certificationButton.backgroundColor = defaultGrayColor
+        certificationButton.isEnabled = false
+    }
+    
+    private func nameValid() {
+        nameContainer.layer.borderWidth = 0
+        certificationButton.backgroundColor = .main
+        certificationButton.isEnabled = true
+    }
+    
+    private func nameInvalid() {
+        nameContainer.layer.borderWidth = 1
+        certificationButton.backgroundColor = defaultGrayColor
+        certificationButton.isEnabled = false
+    }
+    
+    private func startAgreement() {
+        bottomView.isHidden = true
+        agreeLabel.isHidden = false
+        agreementView.isHidden = false
+        nameTextField.resignFirstResponder()
+        nameTextField.isUserInteractionEnabled = false
+
     }
 
     func startWritingName() {
         phoneTextField.isUserInteractionEnabled = false
         nameView.isHidden = false
+        mainLabel.text = "본인인증"
+        oneLabel.isHidden = true
         nameTextField.becomeFirstResponder()
-        statusSubject.onNext(.name)
+        editingStatus = .name
+        certificationButton.isEnabled = false
         certificationButton.setTitle("입력 완료", for: .normal)
+
+        certificationButton.backgroundColor = defaultGrayColor
     }
     
     enum EditingStatus {
         case number
         case name
+        case agreement
     }
     
 }

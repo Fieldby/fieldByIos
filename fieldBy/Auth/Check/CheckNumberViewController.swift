@@ -72,9 +72,11 @@ class CheckNumberViewController: UIViewController {
                 if bool {
                     self.codeContainer.layer.borderWidth = 0
                     self.nextButton.backgroundColor = .main
+                    nextButton.isEnabled = true
                 } else {
                     self.codeContainer.layer.borderWidth = 1
                     self.nextButton.backgroundColor = UIColor(red: 147, green: 147, blue: 147)
+                    nextButton.isEnabled = false
                 }
             })
             .disposed(by: rx.disposeBag)
