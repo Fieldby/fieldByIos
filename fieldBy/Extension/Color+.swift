@@ -12,6 +12,10 @@ extension UIColor {
     class var main: UIColor {
         return UIColor(named: "MainColor")!
     }
+    
+    class var fieldByGray: UIColor {
+        return UIColor(named: "LightGray")!
+    }
 }
 
 extension UIColor {

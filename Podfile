@@ -7,6 +7,7 @@ target 'fieldBy' do
 
   # Pods for fieldBy
 
+  pod 'PanModal'
   pod 'SnapKit'
   pod 'Then'
   pod 'Alamofire'  

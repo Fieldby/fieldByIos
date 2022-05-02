@@ -18,7 +18,6 @@ class SigninViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        print("viewcontroller")
         makeUI()
         animateView()
         bind()

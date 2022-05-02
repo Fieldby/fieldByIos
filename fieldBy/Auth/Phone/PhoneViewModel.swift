@@ -9,15 +9,12 @@ import RxSwift
 import RxCocoa
 import NSObject_Rx
 
-protocol PhoneViewModelType {
-    func checkPhoneNumberValid()
-    
-}
-
 class PhoneViewModel: NSObject {
     let numberSubject = BehaviorSubject<String>(value: "")
     let numberValidSubject = BehaviorSubject<Bool>(value: false)
     let isCertificatedSubject = BehaviorSubject<Bool>(value: false)
+    
+    var presentCheckNumberVC: (() -> ())!
     
     override init() {
         super.init()
@@ -28,5 +25,7 @@ class PhoneViewModel: NSObject {
             
             
     }
+    
+    
     
 }

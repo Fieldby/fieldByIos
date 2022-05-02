@@ -16,6 +16,8 @@
 		D106B0B4281EA2A500E6CCFA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D106B0B2281EA2A500E6CCFA /* LaunchScreen.storyboard */; };
 		D11FD9AE281F6D50008AE32A /* PhoneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11FD9AD281F6D50008AE32A /* PhoneViewModel.swift */; };
 		D11FD9B1281F74A5008AE32A /* CheckNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11FD9B0281F74A5008AE32A /* CheckNumberViewController.swift */; };
+		D1329DF3281FF2AD00760DDA /* CommonViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1329DF2281FF2AD00760DDA /* CommonViews.swift */; };
+		D180FA7F281FF48E0004FECF /* CheckNumberViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D180FA7E281FF48E0004FECF /* CheckNumberViewModel.swift */; };
 		D1AA5CB5281EA41100279CC8 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1AA5CB4281EA41100279CC8 /* Auth.storyboard */; };
 		D1AA5CB7281EA50700279CC8 /* SigninViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AA5CB6281EA50700279CC8 /* SigninViewController.swift */; };
 		D1AA5CBA281EAEAD00279CC8 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AA5CB9281EAEAD00279CC8 /* Color+.swift */; };
@@ -36,6 +38,8 @@
 		D106B0B5281EA2A500E6CCFA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D11FD9AD281F6D50008AE32A /* PhoneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneViewModel.swift; sourceTree = "<group>"; };
 		D11FD9B0281F74A5008AE32A /* CheckNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckNumberViewController.swift; sourceTree = "<group>"; };
+		D1329DF2281FF2AD00760DDA /* CommonViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonViews.swift; sourceTree = "<group>"; };
+		D180FA7E281FF48E0004FECF /* CheckNumberViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckNumberViewModel.swift; sourceTree = "<group>"; };
 		D1AA5CB4281EA41100279CC8 /* Auth.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
 		D1AA5CB6281EA50700279CC8 /* SigninViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninViewController.swift; sourceTree = "<group>"; };
 		D1AA5CB9281EAEAD00279CC8 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
@@ -94,6 +98,7 @@
 		D106B0A6281EA2A400E6CCFA /* fieldBy */ = {
 			isa = PBXGroup;
 			children = (
+				D1329DF1281FF2A200760DDA /* Singletons */,
 				D1B9A10B281FDC8100389BC1 /* System */,
 				D1AA5CB8281EAEA300279CC8 /* Extension */,
 				D1AA5CB3281EA40500279CC8 /* Main */,
@@ -117,8 +122,17 @@
 			isa = PBXGroup;
 			children = (
 				D11FD9B0281F74A5008AE32A /* CheckNumberViewController.swift */,
+				D180FA7E281FF48E0004FECF /* CheckNumberViewModel.swift */,
 			);
 			path = Check;
+			sourceTree = "<group>";
+		};
+		D1329DF1281FF2A200760DDA /* Singletons */ = {
+			isa = PBXGroup;
+			children = (
+				D1329DF2281FF2AD00760DDA /* CommonViews.swift */,
+			);
+			path = Singletons;
 			sourceTree = "<group>";
 		};
 		D1AA5CB2281EA40000279CC8 /* Auth */ = {
@@ -277,6 +291,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D180FA7F281FF48E0004FECF /* CheckNumberViewModel.swift in Sources */,
 				D11FD9B1281F74A5008AE32A /* CheckNumberViewController.swift in Sources */,
 				D1AA5CB7281EA50700279CC8 /* SigninViewController.swift in Sources */,
 				D1AA5CBA281EAEAD00279CC8 /* Color+.swift in Sources */,
@@ -284,6 +299,7 @@
 				D106B0AC281EA2A400E6CCFA /* ViewController.swift in Sources */,
 				D1AA5CBC281EAF1A00279CC8 /* PhoneViewController.swift in Sources */,
 				D106B0A8281EA2A400E6CCFA /* AppDelegate.swift in Sources */,
+				D1329DF3281FF2AD00760DDA /* CommonViews.swift in Sources */,
 				D106B0AA281EA2A400E6CCFA /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
