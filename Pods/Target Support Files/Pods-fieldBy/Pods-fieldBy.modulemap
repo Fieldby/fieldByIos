@@ -1,0 +1,6 @@
+framework module Pods_fieldBy {
+  umbrella header "Pods-fieldBy-umbrella.h"
+
+  export *
+  module * { export * }
+}
