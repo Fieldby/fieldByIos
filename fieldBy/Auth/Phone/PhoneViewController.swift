@@ -16,6 +16,7 @@ class PhoneViewController: UIViewController {
     //Top view
     @IBOutlet weak var backButton: UIButton!
     
+    @IBOutlet weak var topSpace: UIView!
     @IBOutlet weak var mainLabel: UILabel!
     @IBOutlet weak var oneLabel: UILabel!
     @IBOutlet weak var twoLabel: UILabel!
@@ -31,6 +32,33 @@ class PhoneViewController: UIViewController {
     @IBOutlet weak var nameTextField: UITextField!
     
     @IBOutlet weak var agreementView: UIView!
+    
+    //Agreement
+    
+    private var agreeAll = false
+    @IBOutlet weak var agreeAllButton: UIButton!
+    @IBOutlet weak var agreeAllImageView: UIImageView!
+    
+    private var usage = false
+    @IBOutlet weak var usageButton: UIButton!
+    @IBOutlet weak var usageImageView: UIImageView!
+    
+    private var privacy = false
+    @IBOutlet weak var privacyButton: UIButton!
+    @IBOutlet weak var privacyImageView: UIImageView!
+    
+    private var marketing = false
+    @IBOutlet weak var marketingButton: UIButton!
+    @IBOutlet weak var marketingImageView: UIImageView!
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     @IBOutlet var viewModel: PhoneViewModel!
     
@@ -104,11 +132,7 @@ class PhoneViewController: UIViewController {
             .subscribe(onNext: { [unowned self] in
                 switch editingStatus {
                 case .number:
-                    oneLabel.text = "확인 중입니다."
-                    twoLabel.isHidden = true
-                    phoneTextField.resignFirstResponder()
-                    bottomView.isHidden = true
-                    viewModel.presentCheckNumberVC()
+                    endEditingNumber()
                 case .name:
                     startAgreement()
                 case .agreement:
@@ -118,7 +142,81 @@ class PhoneViewController: UIViewController {
             })
             .disposed(by: rx.disposeBag)
         
+        agreeAllButton.rx.tap
+            .throttle(.seconds(1), latest: false, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] in
+
+                viewModel.usageSubject.onNext(!agreeAll)
+                usage = !agreeAll
+                viewModel.privacySubject.onNext(!agreeAll)
+                privacy = !agreeAll
+                viewModel.marketingSubject.onNext(!agreeAll)
+                marketing = !agreeAll
+                
+                viewModel.agreeAllSubject.onNext(!agreeAll)
+                
+                agreeAll = !agreeAll
+            })
+            .disposed(by: rx.disposeBag)
         
+        usageButton.rx.tap
+            .throttle(.seconds(1), latest: false, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] in
+                viewModel.usageSubject.onNext(!usage)
+                usage = !usage
+                if !usage == false {
+                    agreeAll = false
+                }
+            })
+            .disposed(by: rx.disposeBag)
+        
+        privacyButton.rx.tap
+            .throttle(.seconds(1), latest: false, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] in
+                viewModel.privacySubject.onNext(!privacy)
+                privacy = !privacy
+                if !privacy == false {
+                    agreeAll = false
+                }
+            })
+            .disposed(by: rx.disposeBag)
+        
+        marketingButton.rx.tap
+            .throttle(.seconds(1), latest: false, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] in
+                viewModel.marketingSubject.onNext(!marketing)
+                marketing = !marketing
+                if !privacy == false {
+                    agreeAll = false
+                }
+            })
+            .disposed(by: rx.disposeBag)
+        
+        viewModel.agreeAllSubject
+            .subscribe(onNext: { bool in
+                print("@@@ \(bool)")
+            })
+            .disposed(by: rx.disposeBag)
+
+        viewModel.agreeAllSubject
+            .map { $0 ? UIImage(named: "authCheckSelected") : UIImage(named: "authCheckUnselected") }
+            .bind(to: agreeAllImageView.rx.image)
+            .disposed(by: rx.disposeBag)
+        
+        viewModel.usageSubject
+            .map { $0 ? UIImage(named: "authCheckSelected") : UIImage(named: "authCheckUnselected") }
+            .bind(to: usageImageView.rx.image)
+            .disposed(by: rx.disposeBag)
+        
+        viewModel.privacySubject
+            .map { $0 ? UIImage(named: "authCheckSelected") : UIImage(named: "authCheckUnselected") }
+            .bind(to: privacyImageView.rx.image)
+            .disposed(by: rx.disposeBag)
+        
+        viewModel.marketingSubject
+            .map { $0 ? UIImage(named: "authCheckSelected") : UIImage(named: "authCheckUnselected") }
+            .bind(to: marketingImageView.rx.image)
+            .disposed(by: rx.disposeBag)
         
         
         /*
@@ -177,26 +275,42 @@ class PhoneViewController: UIViewController {
         certificationButton.isEnabled = false
     }
     
+    private func endEditingNumber() {
+        phoneTextField.resignFirstResponder()
+        UIView.animate(withDuration: 0.3) { [unowned self] in
+            oneLabel.text = "확인 중입니다."
+            twoLabel.isHidden = true
+            bottomView.isHidden = true
+        } completion: { [unowned self] _ in
+            viewModel.presentCheckNumberVC()
+        }
+    }
+    
     private func startAgreement() {
-        bottomView.isHidden = true
-        agreeLabel.isHidden = false
-        agreementView.isHidden = false
         nameTextField.resignFirstResponder()
         nameTextField.isUserInteractionEnabled = false
-
+        UIView.animate(withDuration: 0.3) { [unowned self] in
+            bottomView.isHidden = true
+            agreeLabel.isHidden = false
+            agreementView.isHidden = false
+            topSpace.isHidden = true
+        }
     }
 
     func startWritingName() {
         phoneTextField.isUserInteractionEnabled = false
-        nameView.isHidden = false
-        mainLabel.text = "본인인증"
-        oneLabel.isHidden = true
+
         nameTextField.becomeFirstResponder()
         editingStatus = .name
         certificationButton.isEnabled = false
-        certificationButton.setTitle("입력 완료", for: .normal)
+        UIView.animate(withDuration: 0.3) { [unowned self] in
+            nameView.isHidden = false
+            mainLabel.text = "본인인증"
+            oneLabel.isHidden = true
+            certificationButton.setTitle("입력 완료", for: .normal)
+            certificationButton.backgroundColor = defaultGrayColor
+        }
 
-        certificationButton.backgroundColor = defaultGrayColor
     }
     
     enum EditingStatus {

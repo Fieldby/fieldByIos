@@ -103,6 +103,7 @@
 				D1AA5CB8281EAEA300279CC8 /* Extension */,
 				D1AA5CB3281EA40500279CC8 /* Main */,
 				D1AA5CB2281EA40000279CC8 /* Auth */,
+				D106B0B0281EA2A500E6CCFA /* Assets.xcassets */,
 				D106B0B5281EA2A500E6CCFA /* Info.plist */,
 				D1B9A10C281FDC9700389BC1 /* GoogleService-Info.plist */,
 			);
@@ -167,7 +168,6 @@
 			children = (
 				D106B0AB281EA2A400E6CCFA /* ViewController.swift */,
 				D106B0A9281EA2A400E6CCFA /* SceneDelegate.swift */,
-				D106B0B0281EA2A500E6CCFA /* Assets.xcassets */,
 				D106B0A7281EA2A400E6CCFA /* AppDelegate.swift */,
 				D106B0B2281EA2A500E6CCFA /* LaunchScreen.storyboard */,
 			);

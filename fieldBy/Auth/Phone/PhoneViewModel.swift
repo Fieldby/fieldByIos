@@ -17,6 +17,13 @@ class PhoneViewModel: NSObject {
     let nameSubject = BehaviorSubject<String>(value: "")
     let nameValidSubject = BehaviorSubject<Bool>(value: false)
     
+    let agreeAllSubject = PublishSubject<Bool>()
+    
+    let usageSubject = BehaviorSubject<Bool>(value: false)
+    let privacySubject = BehaviorSubject<Bool>(value: false)
+    let marketingSubject = BehaviorSubject<Bool>(value: false)
+    
+    
     var presentCheckNumberVC: (() -> ())!
     
     override init() {
@@ -29,6 +36,19 @@ class PhoneViewModel: NSObject {
         nameSubject.map { return $0.count > 1 && $0.count < 6 }
             .bind(to: nameValidSubject)
             .disposed(by: rx.disposeBag)
+        
+        Observable.combineLatest(usageSubject, privacySubject, marketingSubject)
+            .map { b1, b2, b3 -> Bool in
+                print(b1, b2, b3)
+                if b1 == true && b2 == true && b3 == true {
+                    return true
+                }
+                return false
+            }
+            .bind(to: agreeAllSubject)
+            .disposed(by: rx.disposeBag)
+            
+
             
             
     }
