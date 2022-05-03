@@ -360,14 +360,25 @@
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="8x2-qi-gAg">
                                 <rect key="frame" x="197" y="443" width="20" height="20"/>
                             </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5oq-rK-nBx">
+                                <rect key="frame" x="23" y="780" width="368" height="59"/>
+                                <color key="backgroundColor" name="MainColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="5oq-rK-nBx" secondAttribute="height" multiplier="349:56" id="O9F-9e-Or1"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title=" 예, 동의합니다." image="authCheckUnselected"/>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="0YB-mu-vWs"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="5oq-rK-nBx" firstAttribute="centerX" secondItem="0YB-mu-vWs" secondAttribute="centerX" id="7z9-yb-ENE"/>
                             <constraint firstItem="597-yq-qUo" firstAttribute="centerY" secondItem="Qz5-R8-gle" secondAttribute="centerY" id="8SH-Nv-ZsQ"/>
                             <constraint firstItem="Wut-2w-nOJ" firstAttribute="top" secondItem="oYh-0k-x77" secondAttribute="bottom" constant="28" id="CTD-dQ-W8X"/>
                             <constraint firstItem="Wut-2w-nOJ" firstAttribute="leading" secondItem="0YB-mu-vWs" secondAttribute="leading" constant="20" id="Kas-vI-AZO"/>
                             <constraint firstItem="oYh-0k-x77" firstAttribute="leading" secondItem="FuU-rW-wzI" secondAttribute="leading" constant="20" id="Mmo-f0-Ahm"/>
+                            <constraint firstItem="5oq-rK-nBx" firstAttribute="leading" secondItem="0YB-mu-vWs" secondAttribute="leading" constant="23" id="Ocb-KX-eOl"/>
                             <constraint firstItem="597-yq-qUo" firstAttribute="leading" secondItem="Qz5-R8-gle" secondAttribute="trailing" constant="5" id="P2Q-Gv-3Zn"/>
                             <constraint firstItem="u3L-s8-VYW" firstAttribute="bottom" secondItem="FuU-rW-wzI" secondAttribute="bottom" id="Q8T-sw-TKX"/>
                             <constraint firstItem="0YB-mu-vWs" firstAttribute="top" secondItem="Vw7-k5-yW9" secondAttribute="top" constant="-6" id="RVh-L3-VLY"/>
@@ -378,6 +389,7 @@
                             <constraint firstItem="u3L-s8-VYW" firstAttribute="leading" secondItem="FuU-rW-wzI" secondAttribute="leading" id="aTD-It-ibY"/>
                             <constraint firstItem="oYh-0k-x77" firstAttribute="top" secondItem="Qz5-R8-gle" secondAttribute="bottom" constant="3" id="j2M-3P-XhJ"/>
                             <constraint firstItem="8x2-qi-gAg" firstAttribute="centerX" secondItem="0YB-mu-vWs" secondAttribute="centerX" id="jnY-E1-ROT"/>
+                            <constraint firstItem="0YB-mu-vWs" firstAttribute="bottom" secondItem="5oq-rK-nBx" secondAttribute="bottom" constant="23" id="mWr-wf-bPT"/>
                             <constraint firstItem="Vw7-k5-yW9" firstAttribute="leading" secondItem="FuU-rW-wzI" secondAttribute="leading" constant="10" id="mlT-O4-pPj"/>
                             <constraint firstItem="Qz5-R8-gle" firstAttribute="top" secondItem="Vw7-k5-yW9" secondAttribute="bottom" constant="28" id="rCo-wx-7jY"/>
                             <constraint firstAttribute="trailing" secondItem="u3L-s8-VYW" secondAttribute="trailing" id="srT-2c-VeI"/>
@@ -392,6 +404,7 @@
                         <outlet property="backButton" destination="Vw7-k5-yW9" id="dUU-YG-8lc"/>
                         <outlet property="bottomView" destination="u3L-s8-VYW" id="ird-25-20B"/>
                         <outlet property="certificationButton" destination="bnK-iD-hu7" id="Vza-h2-cs5"/>
+                        <outlet property="finalButton" destination="5oq-rK-nBx" id="YbA-as-8Jp"/>
                         <outlet property="indicator" destination="8x2-qi-gAg" id="mrw-SM-jOV"/>
                         <outlet property="mainLabel" destination="Qz5-R8-gle" id="6Qj-X0-yuZ"/>
                         <outlet property="marketingButton" destination="E48-9K-I8o" id="wi2-m8-DBF"/>

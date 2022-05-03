@@ -52,7 +52,8 @@ class PhoneViewController: UIViewController {
     @IBOutlet weak var marketingImageView: UIImageView!
     
     
-
+    @IBOutlet weak var finalButton: UIButton!
+    
     @IBOutlet weak var indicator: UIActivityIndicatorView!
 
     @IBOutlet var viewModel: PhoneViewModel!
@@ -93,6 +94,8 @@ class PhoneViewController: UIViewController {
         agreeLabel.isHidden = true
         agreementView.isHidden = true
         indicator.isHidden = true
+        finalButton.isHidden = true
+        finalButton.layer.cornerRadius = 13
     }
     
     private func bind() {
@@ -207,6 +210,13 @@ class PhoneViewController: UIViewController {
             .bind(to: marketingImageView.rx.image)
             .disposed(by: rx.disposeBag)
         
+        finalButton.rx.tap
+            .subscribe(onNext: { [unowned self] in
+                let vc = UIStoryboard(name: "Address", bundle: nil).instantiateViewController(withIdentifier: "addressVC") as! AddressViewController
+                self.navigationController?.pushViewController(vc, animated: true)
+            })
+            .disposed(by: rx.disposeBag)
+        
         
         /*
          ViewModel functions
@@ -292,6 +302,9 @@ class PhoneViewController: UIViewController {
             .disposed(by: rx.disposeBag)
   
 
+        viewModel.finalButtonValidSubject
+            .bind(to: finalButton.rx.isEnabled)
+            .disposed(by: rx.disposeBag)
 
     }
     
@@ -303,6 +316,7 @@ class PhoneViewController: UIViewController {
             agreeLabel.isHidden = false
             agreementView.isHidden = false
             topSpace.isHidden = true
+            finalButton.isHidden = false
         }
     }
 

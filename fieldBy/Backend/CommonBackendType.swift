@@ -23,7 +23,7 @@ class CommonBackendType {
         }
     }
     
-    static func parseParams(path: String, params: [String: Any] = ["print":"pretty"]) -> String {
+    static func parseParams(baseUrl: String = baseUrl, path: String, params: [String: Any] = ["print":"pretty"]) -> String {
         let queryParams = params.map { k, v in "\(k)=\(v)" }.joined(separator: "&")
         var fullPath = path.hasPrefix("http") ? path : self.baseUrl + path + ".json"
         if !queryParams.isEmpty {
@@ -42,12 +42,11 @@ class CommonBackendType {
         return request
     }
     
-    static func single<T: Codable>(path: String, type: T.Type, params: [String: Any] = ["print":"pretty"], body: [String: Any] = [:], method: HTTPMethod = .get) -> Single<T> {
+    static func single<T: Codable>(baseUrl: String = baseUrl, path: String, type: T.Type, params: [String: Any] = ["print":"pretty"], body: [String: Any] = [:], method: HTTPMethod = .get) -> Single<T> {
         
         return Single.create() { observable in
-            let fullPath = self.parseParams(path: path, params: params)
+            let fullPath = self.parseParams(baseUrl: baseUrl, path: path, params: params)
 
-            print("@@@\(fullPath)")
             guard let url = URL(string: fullPath.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!) else {
 //                observable(.error(DatabaseFetchingErrorType.urlFailedError))
                 return Disposables.create()

@@ -22,6 +22,8 @@ class PhoneViewModel: NSObject {
     let privacySubject = BehaviorSubject<Bool>(value: false)
     let marketingSubject = BehaviorSubject<Bool>(value: false)
     
+    let finalButtonValidSubject = BehaviorSubject<Bool>(value: false)
+    
     
     var presentCheckNumberVC: (() -> ())!
     var pushFailedVC: (() -> ())!
@@ -47,6 +49,10 @@ class PhoneViewModel: NSObject {
             .bind(to: agreeAllSubject)
             .disposed(by: rx.disposeBag)
             
+        Observable.combineLatest(usageSubject, privacySubject)
+            .map { $0 && $1 }
+            .bind(to: finalButtonValidSubject)
+            .disposed(by: rx.disposeBag)
 
 
             
