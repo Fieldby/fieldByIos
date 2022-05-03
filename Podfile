@@ -21,5 +21,7 @@ target 'fieldBy' do
   pod 'Firebase/Auth'
   pod 'Firebase/Messaging'
   pod 'Firebase/Analytics'
+  pod 'Firebase/Storage'
+  pod 'Firebase/Database'
 
 end

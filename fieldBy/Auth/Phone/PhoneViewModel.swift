@@ -12,7 +12,6 @@ import NSObject_Rx
 class PhoneViewModel: NSObject {
     let numberSubject = BehaviorSubject<String>(value: "")
     let numberValidSubject = BehaviorSubject<Bool>(value: false)
-    let isCertificatedSubject = BehaviorSubject<Bool>(value: false)
     
     let nameSubject = BehaviorSubject<String>(value: "")
     let nameValidSubject = BehaviorSubject<Bool>(value: false)
@@ -25,6 +24,7 @@ class PhoneViewModel: NSObject {
     
     
     var presentCheckNumberVC: (() -> ())!
+    var pushFailedVC: (() -> ())!
     
     override init() {
         super.init()
@@ -39,7 +39,6 @@ class PhoneViewModel: NSObject {
         
         Observable.combineLatest(usageSubject, privacySubject, marketingSubject)
             .map { b1, b2, b3 -> Bool in
-                print(b1, b2, b3)
                 if b1 == true && b2 == true && b3 == true {
                     return true
                 }
@@ -49,8 +48,18 @@ class PhoneViewModel: NSObject {
             .disposed(by: rx.disposeBag)
             
 
+
             
-            
+    }
+    
+    func checkNumber() -> Observable<Bool> {
+        
+        return Observable.zip(AuthManager.certificatedNumberList().asObservable(), numberSubject)
+            .map { list, number -> Bool in
+                return list.contains(number)
+            }
+
+
     }
     
     

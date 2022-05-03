@@ -7,6 +7,9 @@
 
 import UIKit
 import PanModal
+import RxSwift
+import RxCocoa
+import NSObject_Rx
 
 class CheckNumberViewController: UIViewController {
     
@@ -33,6 +36,8 @@ class CheckNumberViewController: UIViewController {
         
         makeUI()
         bind()
+        
+
     }
 
     private func makeUI() {

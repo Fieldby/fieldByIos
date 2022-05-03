@@ -52,14 +52,9 @@ class PhoneViewController: UIViewController {
     @IBOutlet weak var marketingImageView: UIImageView!
     
     
-    
-    
-    
-    
-    
-    
-    
-    
+
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
+
     @IBOutlet var viewModel: PhoneViewModel!
     
     private var editingStatus = EditingStatus.number
@@ -97,6 +92,7 @@ class PhoneViewController: UIViewController {
         
         agreeLabel.isHidden = true
         agreementView.isHidden = true
+        indicator.isHidden = true
     }
     
     private func bind() {
@@ -138,7 +134,6 @@ class PhoneViewController: UIViewController {
                 case .agreement:
                     break
                 }
-
             })
             .disposed(by: rx.disposeBag)
         
@@ -191,12 +186,6 @@ class PhoneViewController: UIViewController {
                 }
             })
             .disposed(by: rx.disposeBag)
-        
-        viewModel.agreeAllSubject
-            .subscribe(onNext: { bool in
-                print("@@@ \(bool)")
-            })
-            .disposed(by: rx.disposeBag)
 
         viewModel.agreeAllSubject
             .map { $0 ? UIImage(named: "authCheckSelected") : UIImage(named: "authCheckUnselected") }
@@ -227,6 +216,11 @@ class PhoneViewController: UIViewController {
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "checknumberVC") as! CheckNumberViewController
             vc.topVC = self
             self.presentPanModal(vc)
+        }
+        
+        viewModel.pushFailedVC = { [unowned self] in
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "certifailedVC") as! CertiFailedViewController
+            self.navigationController?.pushViewController(vc, animated: true)
         }
         
     }
@@ -277,13 +271,28 @@ class PhoneViewController: UIViewController {
     
     private func endEditingNumber() {
         phoneTextField.resignFirstResponder()
+        indicator.isHidden = false
+        indicator.startAnimating()
+        
         UIView.animate(withDuration: 0.3) { [unowned self] in
             oneLabel.text = "확인 중입니다."
             twoLabel.isHidden = true
             bottomView.isHidden = true
-        } completion: { [unowned self] _ in
-            viewModel.presentCheckNumberVC()
         }
+        viewModel.checkNumber()
+            .subscribe(onNext: { [unowned self] bool in
+                indicator.stopAnimating()
+                indicator.isHidden = true
+                if bool {
+                    viewModel.presentCheckNumberVC()
+                } else {
+                    viewModel.pushFailedVC()
+                }
+            })
+            .disposed(by: rx.disposeBag)
+  
+
+
     }
     
     private func startAgreement() {

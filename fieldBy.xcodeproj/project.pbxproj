@@ -17,7 +17,10 @@
 		D11FD9AE281F6D50008AE32A /* PhoneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11FD9AD281F6D50008AE32A /* PhoneViewModel.swift */; };
 		D11FD9B1281F74A5008AE32A /* CheckNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11FD9B0281F74A5008AE32A /* CheckNumberViewController.swift */; };
 		D1329DF3281FF2AD00760DDA /* CommonViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1329DF2281FF2AD00760DDA /* CommonViews.swift */; };
+		D15391C928210A4900E12140 /* CommonBackendType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15391C828210A4900E12140 /* CommonBackendType.swift */; };
 		D180FA7F281FF48E0004FECF /* CheckNumberViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D180FA7E281FF48E0004FECF /* CheckNumberViewModel.swift */; };
+		D1A99CC328210FB300E414E4 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A99CC228210FB300E414E4 /* AuthManager.swift */; };
+		D1A99CC6282113D600E414E4 /* CertiFailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A99CC5282113D600E414E4 /* CertiFailedViewController.swift */; };
 		D1AA5CB5281EA41100279CC8 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1AA5CB4281EA41100279CC8 /* Auth.storyboard */; };
 		D1AA5CB7281EA50700279CC8 /* SigninViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AA5CB6281EA50700279CC8 /* SigninViewController.swift */; };
 		D1AA5CBA281EAEAD00279CC8 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AA5CB9281EAEAD00279CC8 /* Color+.swift */; };
@@ -39,7 +42,10 @@
 		D11FD9AD281F6D50008AE32A /* PhoneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneViewModel.swift; sourceTree = "<group>"; };
 		D11FD9B0281F74A5008AE32A /* CheckNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckNumberViewController.swift; sourceTree = "<group>"; };
 		D1329DF2281FF2AD00760DDA /* CommonViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonViews.swift; sourceTree = "<group>"; };
+		D15391C828210A4900E12140 /* CommonBackendType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonBackendType.swift; sourceTree = "<group>"; };
 		D180FA7E281FF48E0004FECF /* CheckNumberViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckNumberViewModel.swift; sourceTree = "<group>"; };
+		D1A99CC228210FB300E414E4 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
+		D1A99CC5282113D600E414E4 /* CertiFailedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertiFailedViewController.swift; sourceTree = "<group>"; };
 		D1AA5CB4281EA41100279CC8 /* Auth.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
 		D1AA5CB6281EA50700279CC8 /* SigninViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninViewController.swift; sourceTree = "<group>"; };
 		D1AA5CB9281EAEAD00279CC8 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
@@ -98,6 +104,7 @@
 		D106B0A6281EA2A400E6CCFA /* fieldBy */ = {
 			isa = PBXGroup;
 			children = (
+				D15391C728210A4100E12140 /* Backend */,
 				D1329DF1281FF2A200760DDA /* Singletons */,
 				D1B9A10B281FDC8100389BC1 /* System */,
 				D1AA5CB8281EAEA300279CC8 /* Extension */,
@@ -136,12 +143,30 @@
 			path = Singletons;
 			sourceTree = "<group>";
 		};
+		D15391C728210A4100E12140 /* Backend */ = {
+			isa = PBXGroup;
+			children = (
+				D15391C828210A4900E12140 /* CommonBackendType.swift */,
+				D1A99CC228210FB300E414E4 /* AuthManager.swift */,
+			);
+			path = Backend;
+			sourceTree = "<group>";
+		};
+		D1A99CC4282113C500E414E4 /* CeritificationFailed */ = {
+			isa = PBXGroup;
+			children = (
+				D1A99CC5282113D600E414E4 /* CertiFailedViewController.swift */,
+			);
+			path = CeritificationFailed;
+			sourceTree = "<group>";
+		};
 		D1AA5CB2281EA40000279CC8 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
 				D1AA5CB4281EA41100279CC8 /* Auth.storyboard */,
 				D1AA5CB6281EA50700279CC8 /* SigninViewController.swift */,
 				D11FD9AC281F6D44008AE32A /* Phone */,
+				D1A99CC4282113C500E414E4 /* CeritificationFailed */,
 				D11FD9AF281F7474008AE32A /* Check */,
 			);
 			path = Auth;
@@ -292,11 +317,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				D180FA7F281FF48E0004FECF /* CheckNumberViewModel.swift in Sources */,
+				D1A99CC328210FB300E414E4 /* AuthManager.swift in Sources */,
 				D11FD9B1281F74A5008AE32A /* CheckNumberViewController.swift in Sources */,
 				D1AA5CB7281EA50700279CC8 /* SigninViewController.swift in Sources */,
 				D1AA5CBA281EAEAD00279CC8 /* Color+.swift in Sources */,
 				D11FD9AE281F6D50008AE32A /* PhoneViewModel.swift in Sources */,
 				D106B0AC281EA2A400E6CCFA /* ViewController.swift in Sources */,
+				D1A99CC6282113D600E414E4 /* CertiFailedViewController.swift in Sources */,
+				D15391C928210A4900E12140 /* CommonBackendType.swift in Sources */,
 				D1AA5CBC281EAF1A00279CC8 /* PhoneViewController.swift in Sources */,
 				D106B0A8281EA2A400E6CCFA /* AppDelegate.swift in Sources */,
 				D1329DF3281FF2AD00760DDA /* CommonViews.swift in Sources */,
