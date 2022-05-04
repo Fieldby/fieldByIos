@@ -87,10 +87,8 @@ class AddressViewController: UIViewController {
                         indicator.isHidden = true
                     }
                 case .detail:
-                    break
+                    pushInstaVC()
                 }
-                
-
             })
             .disposed(by: rx.disposeBag)
         
@@ -121,6 +119,7 @@ class AddressViewController: UIViewController {
         addrContainerView.layer.borderWidth = 0
         tableView.isHidden = true
         detailAddrContainer.isHidden = false
+        detailTextField.becomeFirstResponder()
         editingStatus = .detail
     }
     
@@ -152,6 +151,11 @@ class AddressViewController: UIViewController {
         self.bottomView.transform = .identity
     }
 
+    private func pushInstaVC() {
+        let vc = storyboard?.instantiateViewController(withIdentifier: "instagramVC") as! InstagramViewController
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
     enum EditingStatus {
         case addr
         case detail
@@ -161,7 +165,7 @@ class AddressViewController: UIViewController {
 
 extension AddressViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 120
+        return 130
     }
 }
 
