@@ -35,19 +35,24 @@ class PhoneViewController: UIViewController {
     
     //Agreement
     
+    @IBOutlet weak var spaceView: UIView!
+    @IBOutlet weak var agreementFoldButton: UIButton!
     private var agreeAll = false
     @IBOutlet weak var agreeAllButton: UIButton!
     @IBOutlet weak var agreeAllImageView: UIImageView!
     
     private var usage = false
+    @IBOutlet weak var usageView: UIView!
     @IBOutlet weak var usageButton: UIButton!
     @IBOutlet weak var usageImageView: UIImageView!
     
     private var privacy = false
+    @IBOutlet weak var privacyView: UIView!
     @IBOutlet weak var privacyButton: UIButton!
     @IBOutlet weak var privacyImageView: UIImageView!
     
     private var marketing = false
+    @IBOutlet weak var marketingView: UIView!
     @IBOutlet weak var marketingButton: UIButton!
     @IBOutlet weak var marketingImageView: UIImageView!
     
@@ -57,6 +62,8 @@ class PhoneViewController: UIViewController {
     @IBOutlet weak var indicator: UIActivityIndicatorView!
 
     @IBOutlet var viewModel: PhoneViewModel!
+    
+    private var folded = false
     
     private var editingStatus = EditingStatus.number
     private let defaultGrayColor = UIColor(red: 147, green: 147, blue: 147)
@@ -154,7 +161,14 @@ class PhoneViewController: UIViewController {
                 
                 viewModel.agreeAllSubject.onNext(!agreeAll)
                 
+                if agreeAll {
+                    openAgreement()
+                } else {
+                    foldAgreement()
+                }
+                
                 agreeAll = !agreeAll
+                
             })
             .disposed(by: rx.disposeBag)
         
@@ -215,6 +229,18 @@ class PhoneViewController: UIViewController {
             .subscribe(onNext: { [unowned self] in
                 let vc = UIStoryboard(name: "Address", bundle: nil).instantiateViewController(withIdentifier: "addressVC") as! AddressViewController
                 self.navigationController?.pushViewController(vc, animated: true)
+            })
+            .disposed(by: rx.disposeBag)
+        
+        agreementFoldButton.rx.tap
+            .subscribe(onNext: { [unowned self] in
+                if !folded {
+
+                    foldAgreement()
+                } else {
+
+                    openAgreement()
+                }
             })
             .disposed(by: rx.disposeBag)
         
@@ -333,6 +359,32 @@ class PhoneViewController: UIViewController {
             oneLabel.isHidden = true
             certificationButton.setTitle("입력 완료", for: .normal)
             certificationButton.backgroundColor = defaultGrayColor
+        }
+
+    }
+    
+    private func foldAgreement() {
+        UIView.animate(withDuration: 0.3) { [unowned self] in
+            agreementFoldButton.setImage(UIImage(named: "chevron.down"), for: .normal)
+            spaceView.isHidden = true
+            usageView.isHidden = true
+            privacyView.isHidden = true
+            marketingView.isHidden = true
+        } completion: { [unowned self] _ in
+            folded = true
+        }
+    }
+    
+    private func openAgreement() {
+        
+        UIView.animate(withDuration: 0.3) { [unowned self] in
+            agreementFoldButton.setImage(UIImage(named: "chevron.up"), for: .normal)
+            spaceView.isHidden = false
+            usageView.isHidden = false
+            privacyView.isHidden = false
+            marketingView.isHidden = false
+        } completion: { [unowned self] _ in
+            folded = false
         }
 
     }

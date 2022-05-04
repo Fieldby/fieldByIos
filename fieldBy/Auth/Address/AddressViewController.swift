@@ -63,6 +63,8 @@ class AddressViewController: UIViewController {
         detailAddrContainer.layer.cornerRadius = 13
         detailAddrContainer.layer.borderWidth = 1
         detailAddrContainer.layer.borderColor = UIColor.main.cgColor
+        
+        bottomView.isHidden = true
     }
     
     private func bind() {

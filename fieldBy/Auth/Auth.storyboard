@@ -135,13 +135,25 @@
                                                                 </constraints>
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                             </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="acq-Os-G9k">
+                                                                <rect key="frame" x="274" y="-6.5" width="50" height="50"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="50" id="4mf-rU-i55"/>
+                                                                    <constraint firstAttribute="width" constant="50" id="s87-Ja-CQ0"/>
+                                                                </constraints>
+                                                                <color key="tintColor" red="0.78039215689999997" green="0.78039215689999997" blue="0.78039215689999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                <state key="normal" image="chevron.up"/>
+                                                            </button>
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
+                                                            <constraint firstItem="acq-Os-G9k" firstAttribute="centerY" secondItem="i4Q-rF-oit" secondAttribute="centerY" id="7SB-YI-i4z"/>
                                                             <constraint firstItem="4s0-To-hrD" firstAttribute="centerX" secondItem="183-i3-oq3" secondAttribute="centerX" id="9iN-lr-wiJ"/>
                                                             <constraint firstItem="4s0-To-hrD" firstAttribute="top" secondItem="i4Q-rF-oit" secondAttribute="top" id="NDh-dk-Jah"/>
                                                             <constraint firstItem="183-i3-oq3" firstAttribute="centerY" secondItem="i4Q-rF-oit" secondAttribute="centerY" id="VM7-ZK-msz"/>
                                                             <constraint firstAttribute="height" constant="37" id="c5X-uU-Z6v"/>
+                                                            <constraint firstAttribute="trailing" secondItem="acq-Os-G9k" secondAttribute="trailing" constant="50" id="gac-bs-wFb"/>
                                                             <constraint firstAttribute="bottom" secondItem="4s0-To-hrD" secondAttribute="bottom" id="hq4-Dr-ifR"/>
                                                             <constraint firstItem="Zl5-82-cfN" firstAttribute="leading" secondItem="183-i3-oq3" secondAttribute="trailing" constant="10" id="n4v-kW-eXO"/>
                                                             <constraint firstItem="Zl5-82-cfN" firstAttribute="centerY" secondItem="i4Q-rF-oit" secondAttribute="centerY" id="pEW-Pp-KzI"/>
@@ -175,6 +187,15 @@
                                                                 <rect key="frame" x="15" y="0.0" width="37" height="37"/>
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                             </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yd7-1N-0kE">
+                                                                <rect key="frame" x="280" y="0.0" width="40" height="37"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="40" id="deR-dK-OeT"/>
+                                                                    <constraint firstAttribute="height" constant="37" id="ntf-CH-OYH"/>
+                                                                </constraints>
+                                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                <state key="normal" image="chevron.right"/>
+                                                            </button>
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
@@ -185,8 +206,10 @@
                                                             <constraint firstAttribute="height" constant="37" id="T84-HI-lAh"/>
                                                             <constraint firstItem="yAg-Wc-yF8" firstAttribute="width" secondItem="yAg-Wc-yF8" secondAttribute="height" multiplier="1:1" id="bTN-o4-Jb5"/>
                                                             <constraint firstItem="JH0-RV-duw" firstAttribute="leading" secondItem="DtI-iF-rEE" secondAttribute="leading" constant="21" id="h4v-E6-dLF"/>
+                                                            <constraint firstAttribute="trailing" secondItem="Yd7-1N-0kE" secondAttribute="trailing" constant="54" id="hCc-o0-4yi"/>
                                                             <constraint firstItem="WD0-Mn-hwd" firstAttribute="centerY" secondItem="DtI-iF-rEE" secondAttribute="centerY" id="hN8-dX-Q8y"/>
                                                             <constraint firstItem="yAg-Wc-yF8" firstAttribute="centerX" secondItem="JH0-RV-duw" secondAttribute="centerX" id="mjq-t5-wTG"/>
+                                                            <constraint firstItem="Yd7-1N-0kE" firstAttribute="centerY" secondItem="DtI-iF-rEE" secondAttribute="centerY" id="uoE-aT-Xdh"/>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LVc-Jc-rWF">
@@ -209,14 +232,25 @@
                                                                 <rect key="frame" x="15" y="0.0" width="37" height="37"/>
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                             </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="neH-mf-SI2">
+                                                                <rect key="frame" x="280" y="0.0" width="40" height="37"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="37" id="cHD-2U-rtk"/>
+                                                                    <constraint firstAttribute="width" constant="40" id="cpq-SO-eBB"/>
+                                                                </constraints>
+                                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                <state key="normal" image="chevron.right"/>
+                                                            </button>
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstItem="O8Y-xJ-WsS" firstAttribute="leading" secondItem="jP1-b9-09y" secondAttribute="trailing" constant="10" id="89C-G4-69C"/>
+                                                            <constraint firstItem="neH-mf-SI2" firstAttribute="centerY" secondItem="LVc-Jc-rWF" secondAttribute="centerY" id="9eT-RD-hYO"/>
                                                             <constraint firstItem="aTY-Mz-OaQ" firstAttribute="centerX" secondItem="jP1-b9-09y" secondAttribute="centerX" id="Ctf-Qd-JrT"/>
                                                             <constraint firstAttribute="bottom" secondItem="aTY-Mz-OaQ" secondAttribute="bottom" id="cpg-Ir-Mp6"/>
                                                             <constraint firstItem="aTY-Mz-OaQ" firstAttribute="top" secondItem="LVc-Jc-rWF" secondAttribute="top" id="e0G-99-tM2"/>
                                                             <constraint firstItem="aTY-Mz-OaQ" firstAttribute="width" secondItem="aTY-Mz-OaQ" secondAttribute="height" multiplier="1:1" id="g4d-iz-bmX"/>
+                                                            <constraint firstAttribute="trailing" secondItem="neH-mf-SI2" secondAttribute="trailing" constant="54" id="g6F-bZ-fey"/>
                                                             <constraint firstItem="jP1-b9-09y" firstAttribute="leading" secondItem="LVc-Jc-rWF" secondAttribute="leading" constant="21" id="hxg-KB-il1"/>
                                                             <constraint firstItem="jP1-b9-09y" firstAttribute="centerY" secondItem="LVc-Jc-rWF" secondAttribute="centerY" id="ksj-zk-F3v"/>
                                                             <constraint firstItem="O8Y-xJ-WsS" firstAttribute="centerY" secondItem="LVc-Jc-rWF" secondAttribute="centerY" id="nX7-AX-C0P"/>
@@ -243,12 +277,23 @@
                                                                 <rect key="frame" x="15" y="0.0" width="37" height="37"/>
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                             </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4V8-MH-7A3">
+                                                                <rect key="frame" x="280" y="0.0" width="40" height="37"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="40" id="Fbw-rp-A40"/>
+                                                                    <constraint firstAttribute="height" constant="37" id="V2O-fy-ofy"/>
+                                                                </constraints>
+                                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                <state key="normal" image="chevron.right"/>
+                                                            </button>
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstItem="E48-9K-I8o" firstAttribute="centerX" secondItem="0lH-WL-UuR" secondAttribute="centerX" id="2h1-Rj-XaX"/>
+                                                            <constraint firstAttribute="trailing" secondItem="4V8-MH-7A3" secondAttribute="trailing" constant="54" id="42t-k4-ThB"/>
                                                             <constraint firstItem="gQN-Yw-Zqd" firstAttribute="leading" secondItem="0lH-WL-UuR" secondAttribute="trailing" constant="10" id="ABY-8t-fM1"/>
                                                             <constraint firstAttribute="height" constant="37" id="N5w-IX-p2r"/>
+                                                            <constraint firstItem="4V8-MH-7A3" firstAttribute="centerY" secondItem="Vpk-hU-5ff" secondAttribute="centerY" id="SBq-g0-dwO"/>
                                                             <constraint firstItem="0lH-WL-UuR" firstAttribute="leading" secondItem="Vpk-hU-5ff" secondAttribute="leading" constant="21" id="UcD-Lu-k1k"/>
                                                             <constraint firstAttribute="bottom" secondItem="E48-9K-I8o" secondAttribute="bottom" id="XbF-Y2-v4w"/>
                                                             <constraint firstItem="gQN-Yw-Zqd" firstAttribute="centerY" secondItem="Vpk-hU-5ff" secondAttribute="centerY" id="aY0-gZ-vwv"/>
@@ -400,6 +445,7 @@
                         <outlet property="agreeAllButton" destination="4s0-To-hrD" id="OtW-7z-BG5"/>
                         <outlet property="agreeAllImageView" destination="183-i3-oq3" id="dUq-4V-OoJ"/>
                         <outlet property="agreeLabel" destination="PM7-xx-86r" id="r6v-zb-ZOM"/>
+                        <outlet property="agreementFoldButton" destination="acq-Os-G9k" id="EDY-hN-CFw"/>
                         <outlet property="agreementView" destination="Ubp-5R-qmT" id="cxj-Yw-TTb"/>
                         <outlet property="backButton" destination="Vw7-k5-yW9" id="dUU-YG-8lc"/>
                         <outlet property="bottomView" destination="u3L-s8-VYW" id="ird-25-20B"/>
@@ -409,6 +455,7 @@
                         <outlet property="mainLabel" destination="Qz5-R8-gle" id="6Qj-X0-yuZ"/>
                         <outlet property="marketingButton" destination="E48-9K-I8o" id="wi2-m8-DBF"/>
                         <outlet property="marketingImageView" destination="0lH-WL-UuR" id="Qnf-pR-xPT"/>
+                        <outlet property="marketingView" destination="Vpk-hU-5ff" id="5sU-KC-WHT"/>
                         <outlet property="nameContainer" destination="wES-51-QbL" id="pDR-Yq-4SA"/>
                         <outlet property="nameTextField" destination="Ta6-PQ-idc" id="8Po-KL-lb6"/>
                         <outlet property="nameView" destination="yrj-7G-buh" id="1ag-iP-E8G"/>
@@ -417,10 +464,13 @@
                         <outlet property="phoneTextField" destination="6da-eC-1e2" id="1H0-Lc-y08"/>
                         <outlet property="privacyButton" destination="aTY-Mz-OaQ" id="bgV-5K-CBO"/>
                         <outlet property="privacyImageView" destination="jP1-b9-09y" id="S8f-Uu-Eoe"/>
+                        <outlet property="privacyView" destination="LVc-Jc-rWF" id="DmU-Hw-gNI"/>
+                        <outlet property="spaceView" destination="5ih-dB-QYe" id="Hou-ro-ubK"/>
                         <outlet property="topSpace" destination="eEF-6f-MHo" id="nhP-ZT-7mi"/>
                         <outlet property="twoLabel" destination="oYh-0k-x77" id="aUc-a0-dGI"/>
                         <outlet property="usageButton" destination="yAg-Wc-yF8" id="eXV-7Y-EWM"/>
                         <outlet property="usageImageView" destination="JH0-RV-duw" id="0Bx-Oc-gjb"/>
+                        <outlet property="usageView" destination="DtI-iF-rEE" id="kEV-Bg-dQY"/>
                         <outlet property="viewModel" destination="s0Z-7n-5qa" id="9kB-Nd-8xg"/>
                     </connections>
                 </viewController>
@@ -668,6 +718,8 @@
     <resources>
         <image name="authCheckUnselected" width="25" height="25"/>
         <image name="chevron.left" catalog="system" width="96" height="128"/>
+        <image name="chevron.right" width="7" height="13"/>
+        <image name="chevron.up" width="16" height="9"/>
         <image name="mainLogo" width="221" height="67"/>
         <namedColor name="Black">
             <color red="0.18823529411764706" green="0.18823529411764706" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

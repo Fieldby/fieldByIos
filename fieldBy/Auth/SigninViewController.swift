@@ -46,7 +46,7 @@ class SigninViewController: UIViewController {
         
         signinButton.rx.tap
             .subscribe(onNext: { [unowned self] in
-                self.pushPhoneVC()
+                UITest()
             })
             .disposed(by: rx.disposeBag)
     }
@@ -56,5 +56,13 @@ class SigninViewController: UIViewController {
         guard let vc = storyboard?.instantiateViewController(withIdentifier: "phoneVC") as? PhoneViewController else { return }
         self.navigationController?.pushViewController(vc, animated: true)
         
+    }
+    
+    //UI Test
+    
+    private func UITest() {
+        let vc = MainTabBarController()
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true)
     }
 }
