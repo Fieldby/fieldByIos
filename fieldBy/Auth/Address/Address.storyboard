@@ -50,37 +50,53 @@
                                 <rect key="frame" x="20" y="223" width="374" height="56"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="건물, 지번 또는 도로명 검색" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="btF-ME-adr">
-                                        <rect key="frame" x="16" y="13" width="342" height="30"/>
+                                        <rect key="frame" x="16" y="13" width="308" height="30"/>
                                         <color key="textColor" name="Black"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="tel"/>
                                     </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8JV-4M-9te">
+                                        <rect key="frame" x="339" y="17" width="20" height="22"/>
+                                        <color key="tintColor" systemColor="systemGrayColor"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="xmark.circle" catalog="system"/>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" name="LightGray"/>
                                 <constraints>
                                     <constraint firstItem="btF-ME-adr" firstAttribute="centerY" secondItem="Eot-wf-gxu" secondAttribute="centerY" id="1Dx-MX-ZpU"/>
                                     <constraint firstItem="btF-ME-adr" firstAttribute="top" secondItem="Eot-wf-gxu" secondAttribute="top" constant="13" id="9UW-qC-HOt"/>
+                                    <constraint firstAttribute="trailing" secondItem="8JV-4M-9te" secondAttribute="trailing" constant="15" id="WeP-rq-mdF"/>
                                     <constraint firstAttribute="height" constant="56" id="eVq-Yx-vCc"/>
-                                    <constraint firstAttribute="trailing" secondItem="btF-ME-adr" secondAttribute="trailing" constant="16" id="mxd-bv-A1b"/>
+                                    <constraint firstAttribute="trailing" secondItem="btF-ME-adr" secondAttribute="trailing" constant="50" id="mxd-bv-A1b"/>
+                                    <constraint firstItem="8JV-4M-9te" firstAttribute="centerY" secondItem="Eot-wf-gxu" secondAttribute="centerY" id="q7L-XA-WJC"/>
                                     <constraint firstItem="btF-ME-adr" firstAttribute="leading" secondItem="Eot-wf-gxu" secondAttribute="leading" constant="16" id="vol-63-qhi"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Yr-m0-e28">
                                 <rect key="frame" x="20" y="297" width="374" height="56"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="건물, 지번 또는 도로명 검색" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MLT-nZ-HZN">
-                                        <rect key="frame" x="16" y="13" width="342" height="30"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="상세주소" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MLT-nZ-HZN">
+                                        <rect key="frame" x="16" y="13" width="308" height="30"/>
                                         <color key="textColor" name="Black"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="tel"/>
                                     </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9I5-6f-zyl">
+                                        <rect key="frame" x="339" y="17" width="20" height="22"/>
+                                        <color key="tintColor" systemColor="systemGrayColor"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="xmark.circle" catalog="system"/>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" name="LightGray"/>
                                 <constraints>
+                                    <constraint firstItem="9I5-6f-zyl" firstAttribute="centerY" secondItem="7Yr-m0-e28" secondAttribute="centerY" id="GXo-TJ-MW1"/>
                                     <constraint firstItem="MLT-nZ-HZN" firstAttribute="centerY" secondItem="7Yr-m0-e28" secondAttribute="centerY" id="PSG-ML-ESQ"/>
-                                    <constraint firstAttribute="trailing" secondItem="MLT-nZ-HZN" secondAttribute="trailing" constant="16" id="S6Y-9N-Xa8"/>
+                                    <constraint firstAttribute="trailing" secondItem="MLT-nZ-HZN" secondAttribute="trailing" constant="50" id="S6Y-9N-Xa8"/>
                                     <constraint firstItem="MLT-nZ-HZN" firstAttribute="top" secondItem="7Yr-m0-e28" secondAttribute="top" constant="13" id="bPO-JW-mM3"/>
                                     <constraint firstItem="MLT-nZ-HZN" firstAttribute="leading" secondItem="7Yr-m0-e28" secondAttribute="leading" constant="16" id="hq0-wH-AIx"/>
+                                    <constraint firstAttribute="trailing" secondItem="9I5-6f-zyl" secondAttribute="trailing" constant="15" id="iYp-Jb-eeo"/>
                                     <constraint firstAttribute="height" constant="56" id="sjc-99-0TB"/>
                                 </constraints>
                             </view>
@@ -149,6 +165,13 @@
                                                     <color key="textColor" name="Black"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cu5-Ep-Lp8">
+                                                    <rect key="frame" x="20" y="241" width="374" height="1"/>
+                                                    <color key="backgroundColor" red="0.57647058823529407" green="0.57647058823529407" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="Nwt-dN-C0b"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="iUm-J5-inu" firstAttribute="top" secondItem="o3L-Lt-vp6" secondAttribute="bottom" constant="21.5" id="8k5-S4-Q83"/>
@@ -156,9 +179,12 @@
                                                 <constraint firstItem="0en-tP-WsK" firstAttribute="centerY" secondItem="o3L-Lt-vp6" secondAttribute="centerY" id="B6I-3L-Fi5"/>
                                                 <constraint firstItem="iUm-J5-inu" firstAttribute="centerX" secondItem="o3L-Lt-vp6" secondAttribute="centerX" id="BNJ-8c-9is"/>
                                                 <constraint firstItem="0en-tP-WsK" firstAttribute="leading" secondItem="o3L-Lt-vp6" secondAttribute="trailing" constant="12" id="Y8v-H7-166"/>
+                                                <constraint firstAttribute="bottom" secondItem="Cu5-Ep-Lp8" secondAttribute="bottom" id="aIl-KH-8F0"/>
+                                                <constraint firstAttribute="trailing" secondItem="Cu5-Ep-Lp8" secondAttribute="trailing" constant="20" id="bG5-ke-4mq"/>
                                                 <constraint firstItem="o3L-Lt-vp6" firstAttribute="top" secondItem="cUQ-UD-Yn2" secondAttribute="bottom" constant="9" id="c8l-Oc-tjo"/>
                                                 <constraint firstItem="cUQ-UD-Yn2" firstAttribute="top" secondItem="bzj-o8-4YI" secondAttribute="top" constant="20" id="lQG-Ih-dxZ"/>
                                                 <constraint firstItem="o3L-Lt-vp6" firstAttribute="leading" secondItem="bzj-o8-4YI" secondAttribute="leading" constant="36" id="q18-wt-NnX"/>
+                                                <constraint firstItem="Cu5-Ep-Lp8" firstAttribute="leading" secondItem="bzj-o8-4YI" secondAttribute="leading" constant="20" id="uOx-v0-qJe"/>
                                                 <constraint firstItem="cUQ-UD-Yn2" firstAttribute="leading" secondItem="bzj-o8-4YI" secondAttribute="leading" constant="36" id="z6i-uI-mVV"/>
                                                 <constraint firstItem="qzh-ct-CPP" firstAttribute="leading" secondItem="iUm-J5-inu" secondAttribute="trailing" constant="12" id="zTC-eo-GiN"/>
                                             </constraints>
@@ -229,8 +255,12 @@
                     </view>
                     <connections>
                         <outlet property="addrContainerView" destination="Eot-wf-gxu" id="Rd5-If-SBW"/>
+                        <outlet property="addrResetButton" destination="8JV-4M-9te" id="3sJ-gd-9jX"/>
                         <outlet property="addressTextField" destination="btF-ME-adr" id="Vu5-wd-RhR"/>
                         <outlet property="bottomView" destination="FfQ-oe-mJ0" id="zzF-7i-2dl"/>
+                        <outlet property="detailAddrContainer" destination="7Yr-m0-e28" id="y2r-pR-6bL"/>
+                        <outlet property="detailResetButton" destination="9I5-6f-zyl" id="u0d-cs-FSd"/>
+                        <outlet property="detailTextField" destination="MLT-nZ-HZN" id="Oah-e8-wMT"/>
                         <outlet property="indicator" destination="nQG-FH-QJJ" id="e6Y-eD-bSZ"/>
                         <outlet property="searchButton" destination="2W4-Q2-hrm" id="9c6-xX-oPq"/>
                         <outlet property="tableView" destination="M0F-jO-RD8" id="Cwt-E6-TQ3"/>
@@ -242,9 +272,37 @@
             </objects>
             <point key="canvasLocation" x="-23.188405797101453" y="101.78571428571428"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="gDI-Dj-Gp7">
+            <objects>
+                <viewController id="4ln-Ob-8Oa" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="7A0-1J-9rp">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e4y-z8-coE">
+                                <rect key="frame" x="21" y="65" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="PMs-dr-Zcc"/>
+                                    <constraint firstAttribute="height" constant="50" id="XDp-Kp-EFN"/>
+                                </constraints>
+                                <color key="tintColor" name="Black"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="chevron.left" catalog="system"/>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Igf-FH-noR"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OfU-Mj-Ekx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="851" y="102"/>
+        </scene>
     </scenes>
     <resources>
         <image name="chevron.left" catalog="system" width="96" height="128"/>
+        <image name="xmark.circle" catalog="system" width="128" height="121"/>
         <namedColor name="Black">
             <color red="0.18823529411764706" green="0.18823529411764706" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -256,6 +314,9 @@
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGrayColor">
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

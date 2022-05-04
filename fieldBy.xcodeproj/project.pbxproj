@@ -14,6 +14,7 @@
 		D106B0AF281EA2A400E6CCFA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D106B0AD281EA2A400E6CCFA /* Main.storyboard */; };
 		D106B0B1281EA2A500E6CCFA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D106B0B0281EA2A500E6CCFA /* Assets.xcassets */; };
 		D106B0B4281EA2A500E6CCFA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D106B0B2281EA2A500E6CCFA /* LaunchScreen.storyboard */; };
+		D10EFF502822213000AA3F9F /* InstagramViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D10EFF4F2822213000AA3F9F /* InstagramViewController.swift */; };
 		D11FD9AE281F6D50008AE32A /* PhoneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11FD9AD281F6D50008AE32A /* PhoneViewModel.swift */; };
 		D11FD9B1281F74A5008AE32A /* CheckNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11FD9B0281F74A5008AE32A /* CheckNumberViewController.swift */; };
 		D1329DF3281FF2AD00760DDA /* CommonViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1329DF2281FF2AD00760DDA /* CommonViews.swift */; };
@@ -44,6 +45,7 @@
 		D106B0B0281EA2A500E6CCFA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D106B0B3281EA2A500E6CCFA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D106B0B5281EA2A500E6CCFA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D10EFF4F2822213000AA3F9F /* InstagramViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramViewController.swift; sourceTree = "<group>"; };
 		D11FD9AD281F6D50008AE32A /* PhoneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneViewModel.swift; sourceTree = "<group>"; };
 		D11FD9B0281F74A5008AE32A /* CheckNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckNumberViewController.swift; sourceTree = "<group>"; };
 		D1329DF2281FF2AD00760DDA /* CommonViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonViews.swift; sourceTree = "<group>"; };
@@ -128,6 +130,14 @@
 			path = fieldBy;
 			sourceTree = "<group>";
 		};
+		D10EFF4E2822210700AA3F9F /* Instagram */ = {
+			isa = PBXGroup;
+			children = (
+				D10EFF4F2822213000AA3F9F /* InstagramViewController.swift */,
+			);
+			path = Instagram;
+			sourceTree = "<group>";
+		};
 		D11FD9AC281F6D44008AE32A /* Phone */ = {
 			isa = PBXGroup;
 			children = (
@@ -207,6 +217,7 @@
 				D1A99CC4282113C500E414E4 /* CeritificationFailed */,
 				D11FD9AF281F7474008AE32A /* Check */,
 				D1A99CC728211B9B00E414E4 /* Address */,
+				D10EFF4E2822210700AA3F9F /* Instagram */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -371,6 +382,7 @@
 				D15391C928210A4900E12140 /* CommonBackendType.swift in Sources */,
 				D1AA5CBC281EAF1A00279CC8 /* PhoneViewController.swift in Sources */,
 				D106B0A8281EA2A400E6CCFA /* AppDelegate.swift in Sources */,
+				D10EFF502822213000AA3F9F /* InstagramViewController.swift in Sources */,
 				D1329DF3281FF2AD00760DDA /* CommonViews.swift in Sources */,
 				D106B0AA281EA2A400E6CCFA /* SceneDelegate.swift in Sources */,
 			);

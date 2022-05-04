@@ -6,6 +6,9 @@
 //
 
 import UIKit
+import RxSwift
+import NSObject_Rx
+import RxCocoa
 
 class AddressViewController: UIViewController {
 
@@ -13,9 +16,18 @@ class AddressViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var addrContainerView: UIView!
     @IBOutlet weak var addressTextField: UITextField!
+    @IBOutlet weak var addrResetButton: UIButton!
+    
+    
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var indicator: UIActivityIndicatorView!
+    @IBOutlet weak var detailResetButton: UIButton!
+    
+    @IBOutlet weak var detailAddrContainer: UIView!
+    @IBOutlet weak var detailTextField: UITextField!
+    
+    private var editingStatus = EditingStatus.addr
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -36,6 +48,7 @@ class AddressViewController: UIViewController {
         
         tableView.rx.setDelegate(self)
             .disposed(by: rx.disposeBag)
+        addressTextField.delegate = self
         makeUI()
         bind()
     }
@@ -45,6 +58,11 @@ class AddressViewController: UIViewController {
         addrContainerView.layer.cornerRadius = 13
         addrContainerView.layer.borderWidth = 1
         addrContainerView.layer.borderColor = UIColor.main.cgColor
+        
+        detailAddrContainer.isHidden = true
+        detailAddrContainer.layer.cornerRadius = 13
+        detailAddrContainer.layer.borderWidth = 1
+        detailAddrContainer.layer.borderColor = UIColor.main.cgColor
     }
     
     private func bind() {
@@ -59,20 +77,60 @@ class AddressViewController: UIViewController {
         
         searchButton.rx.tap
             .subscribe(onNext: { [unowned self] in
-                indicator.isHidden = false
-                indicator.startAnimating()
-                addressTextField.resignFirstResponder()
-                viewModel.search(keyword: addressTextField.text ?? "") { [unowned  self] in
-                    indicator.stopAnimating()
-                    indicator.isHidden = true
+                switch editingStatus {
+                case .addr:
+                    indicator.isHidden = false
+                    indicator.startAnimating()
+                    addressTextField.resignFirstResponder()
+                    viewModel.search(keyword: addressTextField.text ?? "") { [unowned  self] in
+                        indicator.stopAnimating()
+                        indicator.isHidden = true
+                    }
+                case .detail:
+                    break
                 }
+                
+
             })
             .disposed(by: rx.disposeBag)
         
+        Observable.combineLatest(tableView.rx.modelSelected(Juso.self), tableView.rx.itemSelected)
+            .subscribe(onNext: { [unowned self] juso, idx in
+                tableView.deselectRow(at: idx, animated: true)
+                addressTextField.text = juso.roadAddr
+                detailAddr()
+            })
+            .disposed(by: rx.disposeBag)
         
+        addrResetButton.rx.tap
+            .subscribe(onNext: { [unowned self] in
+                addressTextField.text = nil
+            })
+            .disposed(by: rx.disposeBag)
         
+        detailResetButton.rx.tap
+            .subscribe(onNext: { [unowned self] in
+                detailTextField.text = nil
+            })
+            .disposed(by: rx.disposeBag)
         
-        
+    }
+    
+    private func detailAddr() {
+        addrResetButton.isHidden = true
+        addrContainerView.layer.borderWidth = 0
+        tableView.isHidden = true
+        detailAddrContainer.isHidden = false
+        editingStatus = .detail
+    }
+    
+    private func reSearchAddr() {
+        addrResetButton.isHidden = false
+        tableView.isHidden = false
+        addrContainerView.layer.borderWidth = 1
+        detailAddrContainer.isHidden = true
+        detailTextField.text = nil
+        editingStatus = .addr
     }
     
     @objc func keyboardWillShowNotification(_ notification: Notification) {
@@ -94,11 +152,23 @@ class AddressViewController: UIViewController {
         self.bottomView.transform = .identity
     }
 
+    enum EditingStatus {
+        case addr
+        case detail
+    }
 
 }
 
 extension AddressViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 120
+    }
+}
+
+extension AddressViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == addressTextField && editingStatus == .detail {
+            reSearchAddr()
+        }
     }
 }
