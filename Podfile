@@ -7,6 +7,8 @@ target 'fieldBy' do
 
   # Pods for fieldBy
 
+
+  pod 'FBSDKLoginKit'
   pod 'PanModal'
   pod 'SnapKit'
   pod 'Then'
