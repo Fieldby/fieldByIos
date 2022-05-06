@@ -6,11 +6,30 @@
 //
 
 import UIKit
+import SnapKit
+import Then
 
 class MainTabBarController: UITabBarController {
 
+    private var bottomView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        bottomView = UIView().then {
+            $0.backgroundColor = .white
+            $0.layer.cornerRadius = 25
+            $0.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        }
+        view.addSubview(bottomView)
+        bottomView.snp.makeConstraints {
+            $0.height.equalTo(25)
+            $0.leading.equalTo(-2)
+            $0.trailing.equalTo(2)
+            $0.bottom.equalTo(tabBar.snp.top)
+        }
+        
 
         
         let campaignSB = UIStoryboard(name: "Campaign", bundle: nil)
@@ -36,6 +55,9 @@ class MainTabBarController: UITabBarController {
         tabBar.backgroundColor = .white
         tabBar.tintColor = .main
         tabBar.unselectedItemTintColor = .black
+        
+        
+
         
         viewControllers = [
             UINavigationController(rootViewController: campaignVC),

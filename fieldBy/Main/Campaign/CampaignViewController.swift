@@ -9,11 +9,20 @@ import UIKit
 
 class CampaignViewController: UIViewController {
 
+    @IBOutlet weak var topView: UIView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        makeUI()
     }
     
+    private func makeUI() {
+        topView.layer.cornerRadius = 27
+        topView.layer.maskedCorners = [.layerMaxXMaxYCorner]
+        topView.addGrayShadow(color: .lightGray, opacity: 0.2, radius: 3)
+
+    }
 
 }

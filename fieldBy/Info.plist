@@ -4,5 +4,20 @@
 <dict>
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb961000821281028</string>
+			</array>
+		</dict>
+	</array>
+	<key>FacebookAppID</key>
+	<string>961000821281028</string>
+	<key>FacebookClientToken</key>
+	<string>35c40713c9a997bb966c317569eca4df</string>
+	<key>FacebookDisplayName</key>
+	<string>FieldByIos</string>
 </dict>
 </plist>

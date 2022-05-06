@@ -16,9 +16,40 @@
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gradient" translatesAutoresizingMaskIntoConstraints="NO" id="n9K-UQ-LUy">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="afb-Zs-kxQ">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="smallLogo" translatesAutoresizingMaskIntoConstraints="NO" id="eY2-nx-bHT">
+                                        <rect key="frame" x="27" y="49" width="32" height="36"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="eY2-nx-bHT" firstAttribute="leading" secondItem="afb-Zs-kxQ" secondAttribute="leading" constant="27" id="5Qs-eg-SzR"/>
+                                    <constraint firstAttribute="bottom" secondItem="eY2-nx-bHT" secondAttribute="bottom" constant="15" id="WWi-88-e2Q"/>
+                                    <constraint firstAttribute="height" constant="100" id="wYc-CT-iQC"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="v0i-W8-Xez"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="n9K-UQ-LUy" secondAttribute="bottom" id="9ub-Xv-2eQ"/>
+                            <constraint firstItem="n9K-UQ-LUy" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="SvW-FI-ieg"/>
+                            <constraint firstAttribute="trailing" secondItem="n9K-UQ-LUy" secondAttribute="trailing" id="WmN-EU-dOo"/>
+                            <constraint firstItem="afb-Zs-kxQ" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="aY6-DB-LrA"/>
+                            <constraint firstItem="afb-Zs-kxQ" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="dn9-hR-RiJ"/>
+                            <constraint firstItem="afb-Zs-kxQ" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="grl-qg-g9c"/>
+                            <constraint firstItem="n9K-UQ-LUy" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="xtm-ri-Uj1"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="topView" destination="afb-Zs-kxQ" id="LIX-QP-zSu"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -26,6 +57,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="gradient" width="390" height="678"/>
+        <image name="smallLogo" width="32" height="36"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
