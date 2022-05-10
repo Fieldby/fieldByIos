@@ -10,7 +10,7 @@ import RxCocoa
 import NSObject_Rx
 import Alamofire
 
-class CommonBackendType {
+class CommonBackendType: NSObject {
     
     static let baseUrl = "https://fieldby-12c23-default-rtdb.asia-southeast1.firebasedatabase.app"
 

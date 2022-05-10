@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+	</array>
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>
 	<key>CFBundleURLTypes</key>
@@ -9,15 +13,15 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb961000821281028</string>
+				<string>fb680555059873566</string>
 			</array>
 		</dict>
 	</array>
 	<key>FacebookAppID</key>
-	<string>961000821281028</string>
+	<string>680555059873566</string>
 	<key>FacebookClientToken</key>
-	<string>35c40713c9a997bb966c317569eca4df</string>
+	<string>709d27ff6ef331a2e6cc8a12916fc64e</string>
 	<key>FacebookDisplayName</key>
-	<string>FieldByIos</string>
+	<string>필드바이</string>
 </dict>
 </plist>

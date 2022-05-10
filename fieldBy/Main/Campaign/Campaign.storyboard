@@ -6,6 +6,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -34,26 +35,84 @@
                                     <constraint firstAttribute="height" constant="100" id="wYc-CT-iQC"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xrk-iP-4gX" customClass="FSPagerView" customModule="FSPagerView">
+                                <rect key="frame" x="0.0" y="120" width="414" height="608"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                            <collectionView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="2ML-ZM-aU9">
+                                <rect key="frame" x="0.0" y="132" width="414" height="628"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="1fL-O0-A71">
+                                    <size key="itemSize" width="340" height="571"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="campaignCell" id="hh4-7F-oGn" customClass="CampaignCollectionViewCell" customModule="fieldBy" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28.5" width="340" height="571"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="NL3-Zv-taF">
+                                            <rect key="frame" x="0.0" y="0.0" width="340" height="571"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CPA-rN-RR1">
+                                                    <rect key="frame" x="10" y="0.0" width="320" height="521"/>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="CPA-rN-RR1" firstAttribute="centerX" secondItem="NL3-Zv-taF" secondAttribute="centerX" id="2SY-Gf-qxh"/>
+                                                <constraint firstItem="CPA-rN-RR1" firstAttribute="top" secondItem="NL3-Zv-taF" secondAttribute="top" id="BDU-Qr-rhY"/>
+                                                <constraint firstAttribute="bottom" secondItem="CPA-rN-RR1" secondAttribute="bottom" constant="50" id="OQ4-ve-6s6"/>
+                                                <constraint firstAttribute="trailing" secondItem="CPA-rN-RR1" secondAttribute="trailing" constant="10" id="T6J-e3-6vt"/>
+                                                <constraint firstItem="CPA-rN-RR1" firstAttribute="leading" secondItem="NL3-Zv-taF" secondAttribute="leading" constant="10" id="Zhh-fm-JfL"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="340" height="571"/>
+                                        <connections>
+                                            <outlet property="mainImage" destination="CPA-rN-RR1" id="7tv-AA-9tF"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ddC-ke-Iwu" userLabel="BarView">
+                                <rect key="frame" x="35" y="808" width="344" height="4"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="4" id="g7G-Oj-52P"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="v0i-W8-Xez"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="v0i-W8-Xez" firstAttribute="trailing" secondItem="2ML-ZM-aU9" secondAttribute="trailing" id="8SR-8d-Rho"/>
                             <constraint firstAttribute="bottom" secondItem="n9K-UQ-LUy" secondAttribute="bottom" id="9ub-Xv-2eQ"/>
+                            <constraint firstItem="v0i-W8-Xez" firstAttribute="trailing" secondItem="xrk-iP-4gX" secondAttribute="trailing" id="Qdy-9U-LAc"/>
+                            <constraint firstItem="2ML-ZM-aU9" firstAttribute="top" secondItem="afb-Zs-kxQ" secondAttribute="bottom" constant="32" id="Ra0-Tz-Fwj"/>
                             <constraint firstItem="n9K-UQ-LUy" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="SvW-FI-ieg"/>
+                            <constraint firstItem="xrk-iP-4gX" firstAttribute="top" secondItem="afb-Zs-kxQ" secondAttribute="bottom" constant="20" id="UOH-ES-VNb"/>
+                            <constraint firstItem="ddC-ke-Iwu" firstAttribute="top" secondItem="xrk-iP-4gX" secondAttribute="bottom" constant="80" id="UrL-d6-CB0"/>
                             <constraint firstAttribute="trailing" secondItem="n9K-UQ-LUy" secondAttribute="trailing" id="WmN-EU-dOo"/>
                             <constraint firstItem="afb-Zs-kxQ" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="aY6-DB-LrA"/>
                             <constraint firstItem="afb-Zs-kxQ" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="dn9-hR-RiJ"/>
+                            <constraint firstItem="ddC-ke-Iwu" firstAttribute="centerX" secondItem="v0i-W8-Xez" secondAttribute="centerX" id="eZo-Gq-wkF"/>
+                            <constraint firstItem="ddC-ke-Iwu" firstAttribute="leading" secondItem="v0i-W8-Xez" secondAttribute="leading" constant="35" id="gox-fy-pQP"/>
                             <constraint firstItem="afb-Zs-kxQ" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="grl-qg-g9c"/>
+                            <constraint firstItem="v0i-W8-Xez" firstAttribute="bottom" secondItem="ddC-ke-Iwu" secondAttribute="bottom" constant="50" id="mhn-ac-ibk"/>
+                            <constraint firstItem="ddC-ke-Iwu" firstAttribute="top" secondItem="2ML-ZM-aU9" secondAttribute="bottom" constant="48" id="qrW-e5-fH6"/>
+                            <constraint firstItem="2ML-ZM-aU9" firstAttribute="leading" secondItem="v0i-W8-Xez" secondAttribute="leading" id="uGq-RC-tcn"/>
+                            <constraint firstItem="xrk-iP-4gX" firstAttribute="leading" secondItem="v0i-W8-Xez" secondAttribute="leading" id="xNA-6z-ivG"/>
                             <constraint firstItem="n9K-UQ-LUy" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="xtm-ri-Uj1"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="mainCollectionView" destination="2ML-ZM-aU9" id="oLz-mr-u9O"/>
                         <outlet property="topView" destination="afb-Zs-kxQ" id="LIX-QP-zSu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-23" y="74"/>
+            <point key="canvasLocation" x="-23.188405797101453" y="73.660714285714278"/>
         </scene>
     </scenes>
     <resources>

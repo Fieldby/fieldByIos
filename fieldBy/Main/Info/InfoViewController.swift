@@ -8,56 +8,71 @@
 import UIKit
 import FBSDKLoginKit
 import SnapKit
+import RxSwift
+import RxCocoa
+import NSObject_Rx
+import Kingfisher
 
 class InfoViewController: UIViewController {
 
+    @IBOutlet weak var collectionView: UICollectionView!
+    
+    
+    let testSubject = BehaviorSubject<[Datum]>(value: [])
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Add a custom login button to your app
+        let loginButton = UIButton(type: .custom)
+        loginButton.backgroundColor = .darkGray
+        loginButton.frame = CGRect(x: 0, y: 0, width: 180, height: 40)
+        loginButton.center = view.center
+        loginButton.setTitle("My Login Button", for: .normal)
 
-        let loginButton = FBLoginButton()
-            .then {
-                $0.backgroundColor = .black
-            }
-        loginButton.delegate = self
-        
+        // Handle clicks on the button
+        loginButton.addTarget(self, action: #selector(loginButtonClicked), for: .touchUpInside)
+
         view.addSubview(loginButton)
-        loginButton.snp.makeConstraints {
-            $0.width.height.equalTo(300)
-            $0.centerX.centerY.equalToSuperview()
-        }
         
+        
+        
+        testSubject
+            .bind(to: collectionView.rx.items(cellIdentifier: testCell.id, cellType: testCell.self)) { idx, data, cell in
+                let url = URL(string: data.mediaURL)
+
+                cell.imageView.kf.setImage(with: url)
+            }
+            .disposed(by: rx.disposeBag)
+        
+        
+        collectionView.rx.setDelegate(self)
+            .disposed(by: rx.disposeBag)
+    }
+    
+    // Once the button is clicked, show the login dialog
+    @objc func loginButtonClicked() {
+                
+        InstagramManager.test2()
+            .subscribe { data in
+                self.testSubject.onNext(data.data)
+            } onError: { err in
+                print(err)
+            }
+            .disposed(by: rx.disposeBag)
+
+            
     }
     
 }
 
-extension InfoViewController: LoginButtonDelegate {
-    func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
-        if let error = error {
-          print(error.localizedDescription)
-          return
-        }
-        
-        guard let result = result else {
-            return
-        }
-        
-        if result.isCancelled {
-            print("취소!")
-            
-            return
-        }
-        
-        print(result.token)
-       
-        
-        
-        return
-        
+extension InfoViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
     }
-    
-    func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
-        print("로그아웃")
-    }
-    
+}
+
+class testCell: UICollectionViewCell {
+    static let id = "testCell"
+    @IBOutlet weak var imageView: UIImageView!
     
 }

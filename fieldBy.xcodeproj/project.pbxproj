@@ -19,7 +19,9 @@
 		D11FD9B1281F74A5008AE32A /* CheckNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11FD9B0281F74A5008AE32A /* CheckNumberViewController.swift */; };
 		D1329DF3281FF2AD00760DDA /* CommonViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1329DF2281FF2AD00760DDA /* CommonViews.swift */; };
 		D15391C928210A4900E12140 /* CommonBackendType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15391C828210A4900E12140 /* CommonBackendType.swift */; };
+		D171E9DC2827D57D005FE939 /* CampaignCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D171E9DB2827D57D005FE939 /* CampaignCollectionViewCell.swift */; };
 		D180FA7F281FF48E0004FECF /* CheckNumberViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D180FA7E281FF48E0004FECF /* CheckNumberViewModel.swift */; };
+		D199F3872827C2B200E3F892 /* InstagramManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D199F3862827C2B200E3F892 /* InstagramManager.swift */; };
 		D19A9DAB2822C4C700552C15 /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19A9DAA2822C4C700552C15 /* View+.swift */; };
 		D1A99CC328210FB300E414E4 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A99CC228210FB300E414E4 /* AuthManager.swift */; };
 		D1A99CC6282113D600E414E4 /* CertiFailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A99CC5282113D600E414E4 /* CertiFailedViewController.swift */; };
@@ -42,6 +44,7 @@
 		D1C89EEB2822B70300DAA2F4 /* ProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C89EEA2822B70300DAA2F4 /* ProgressViewController.swift */; };
 		D1C89EED2822B70F00DAA2F4 /* Info.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1C89EEC2822B70F00DAA2F4 /* Info.storyboard */; };
 		D1C89EEF2822B71500DAA2F4 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C89EEE2822B71500DAA2F4 /* InfoViewController.swift */; };
+		D1EA5D9F282535E7000E35A0 /* MyUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1EA5D9E282535E7000E35A0 /* MyUserModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,7 +73,9 @@
 		D11FD9B0281F74A5008AE32A /* CheckNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckNumberViewController.swift; sourceTree = "<group>"; };
 		D1329DF2281FF2AD00760DDA /* CommonViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonViews.swift; sourceTree = "<group>"; };
 		D15391C828210A4900E12140 /* CommonBackendType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonBackendType.swift; sourceTree = "<group>"; };
+		D171E9DB2827D57D005FE939 /* CampaignCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignCollectionViewCell.swift; sourceTree = "<group>"; };
 		D180FA7E281FF48E0004FECF /* CheckNumberViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckNumberViewModel.swift; sourceTree = "<group>"; };
+		D199F3862827C2B200E3F892 /* InstagramManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramManager.swift; sourceTree = "<group>"; };
 		D19A9DAA2822C4C700552C15 /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
 		D1A99CC228210FB300E414E4 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		D1A99CC5282113D600E414E4 /* CertiFailedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertiFailedViewController.swift; sourceTree = "<group>"; };
@@ -94,6 +99,7 @@
 		D1C89EEA2822B70300DAA2F4 /* ProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewController.swift; sourceTree = "<group>"; };
 		D1C89EEC2822B70F00DAA2F4 /* Info.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Info.storyboard; sourceTree = "<group>"; };
 		D1C89EEE2822B71500DAA2F4 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		D1EA5D9E282535E7000E35A0 /* MyUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyUserModel.swift; sourceTree = "<group>"; };
 		E8B21A1856005D1A76BCE0CE /* Pods-fieldBy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fieldBy.debug.xcconfig"; path = "Target Support Files/Pods-fieldBy/Pods-fieldBy.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -209,8 +215,17 @@
 			children = (
 				D15391C828210A4900E12140 /* CommonBackendType.swift */,
 				D1A99CC228210FB300E414E4 /* AuthManager.swift */,
+				D199F3862827C2B200E3F892 /* InstagramManager.swift */,
 			);
 			path = Backend;
+			sourceTree = "<group>";
+		};
+		D171E9DA2827D53F005FE939 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				D171E9DB2827D57D005FE939 /* CampaignCollectionViewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		D1A99CC4282113C500E414E4 /* CeritificationFailed */ = {
@@ -236,6 +251,7 @@
 			isa = PBXGroup;
 			children = (
 				D1A99CCD28211F2500E414E4 /* Juso.swift */,
+				D1EA5D9E282535E7000E35A0 /* MyUserModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -306,6 +322,7 @@
 		D1C89EE12822B6AC00DAA2F4 /* Campaign */ = {
 			isa = PBXGroup;
 			children = (
+				D171E9DA2827D53F005FE939 /* Cell */,
 				D1C89EE42822B6E200DAA2F4 /* Campaign.storyboard */,
 				D1C89EE62822B6EE00DAA2F4 /* CampaignViewController.swift */,
 			);
@@ -486,6 +503,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D180FA7F281FF48E0004FECF /* CheckNumberViewModel.swift in Sources */,
+				D199F3872827C2B200E3F892 /* InstagramManager.swift in Sources */,
 				D1A99CC328210FB300E414E4 /* AuthManager.swift in Sources */,
 				D11FD9B1281F74A5008AE32A /* CheckNumberViewController.swift in Sources */,
 				D1C89EEB2822B70300DAA2F4 /* ProgressViewController.swift in Sources */,
@@ -503,8 +521,10 @@
 				D1A99CC6282113D600E414E4 /* CertiFailedViewController.swift in Sources */,
 				D15391C928210A4900E12140 /* CommonBackendType.swift in Sources */,
 				D1C89EE02822B65C00DAA2F4 /* MainTabBarController.swift in Sources */,
+				D1EA5D9F282535E7000E35A0 /* MyUserModel.swift in Sources */,
 				D1AA5CBC281EAF1A00279CC8 /* PhoneViewController.swift in Sources */,
 				D106B0A8281EA2A400E6CCFA /* AppDelegate.swift in Sources */,
+				D171E9DC2827D57D005FE939 /* CampaignCollectionViewCell.swift in Sources */,
 				D10EFF502822213000AA3F9F /* InstagramViewController.swift in Sources */,
 				D1329DF3281FF2AD00760DDA /* CommonViews.swift in Sources */,
 				D106B0AA281EA2A400E6CCFA /* SceneDelegate.swift in Sources */,

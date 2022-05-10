@@ -44,6 +44,47 @@ class AuthManager: CommonBackendType {
         }
     }
     
+    static func fbPage() {
+        
+        //https://graph.instagram.com/refresh_access_token
+        //?grant_type=ig_refresh_token
+        //&access_token={단기토큰}
+        
+        
+//        let path = "https://graph.facebook.com/v13.0/me?access_token=\(MyUserModel.shared.token)"
+        
+//        let path = "https://graph.facebook.com/\(MyUserModel.shared.faceId)?fields=id,name,email,picture&access_token=\(MyUserModel.shared.token)"
+//        let path = "https://graph.instagram.com/refresh_access_token?grant_type=ig_refresh_token&access_token=\(MyUserModel.shared.igToken)"
+//        let path = "https://graph.instagram.com/me?fields=id,caption&access_token=\(MyUserModel.shared.longToken)"
+        let path = "https://api.instagram.com/oauth/authorize?"
+        
+        
+//        let path = "https://graph.facebook.com/v13.0/\(MyUserModel.shared.faceId)?fields=instagram_business_account&access_token=\(MyUserModel.shared.token)"
+
+        
+        AF.request(path, method: .get)
+            .responseString { response in
+                switch response.result {
+                case .success(let str):
+                    
+                    print(str)
+                    
+                    
+                    
+                case .failure(let err):
+                    print(err)
+                }
+            }
+        
+    }
+    
+    static func instagramBasic() {
+       
+    }
+    
+    
+    
+    
     private static func toJson<T: Decodable>(object: Any) -> T? {
         if let jsonData = try? JSONSerialization.data(withJSONObject: object) {
             let decoder = JSONDecoder()
