@@ -252,6 +252,7 @@ class PhoneViewController: UIViewController {
         viewModel.presentCheckNumberVC = { [unowned self] in
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "checknumberVC") as! CheckNumberViewController
             vc.topVC = self
+            vc.phoneNumber = phoneTextField.text!
             self.presentPanModal(vc)
         }
         

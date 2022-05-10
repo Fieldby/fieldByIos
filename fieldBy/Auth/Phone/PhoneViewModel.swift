@@ -8,6 +8,7 @@
 import RxSwift
 import RxCocoa
 import NSObject_Rx
+import FirebaseAuth
 
 class PhoneViewModel: NSObject {
     let numberSubject = BehaviorSubject<String>(value: "")
@@ -67,7 +68,5 @@ class PhoneViewModel: NSObject {
 
 
     }
-    
-    
-    
+
 }

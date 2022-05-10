@@ -25,6 +25,8 @@ class CheckNumberViewController: UIViewController {
     
     @IBOutlet var viewModel: CheckNumberViewModel!
     var topVC: PhoneViewController!
+    var phoneNumber: String!
+    
     
     private var isKeyboardLoaded = false
         
@@ -58,11 +60,14 @@ class CheckNumberViewController: UIViewController {
     }
     
     private func bind() {
+        
         requestButton.rx.tap
             .subscribe(onNext: { [unowned self] in
                 requestButton.isHidden = true
                 codeView.isHidden = false
                 codeTextField.becomeFirstResponder()
+                
+                viewModel.verify(phoneNumber: phoneNumber)
                 
             })
             .disposed(by: rx.disposeBag)

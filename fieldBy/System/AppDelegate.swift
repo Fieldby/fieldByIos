@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         FirebaseApp.configure()
         
+        Auth.auth().languageCode = "kr"
         
         // Initialize Facebook SDK
         FBSDKCoreKit.ApplicationDelegate.shared.application(

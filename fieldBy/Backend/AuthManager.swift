@@ -44,6 +44,17 @@ class AuthManager: CommonBackendType {
         }
     }
     
+    static func saveInfo(number: String, uuid: String) -> Completable {
+        return Completable.create() { completable in
+            
+            
+            
+            
+            
+            return Disposables.create()
+        }
+    }
+    
     static func fbPage() {
         
         //https://graph.instagram.com/refresh_access_token
@@ -77,12 +88,6 @@ class AuthManager: CommonBackendType {
             }
         
     }
-    
-    static func instagramBasic() {
-       
-    }
-    
-    
     
     
     private static func toJson<T: Decodable>(object: Any) -> T? {
