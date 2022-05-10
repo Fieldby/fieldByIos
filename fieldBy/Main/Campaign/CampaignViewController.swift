@@ -9,18 +9,23 @@ import UIKit
 import RxSwift
 import RxCocoa
 import NSObject_Rx
+import FSPagerView
 
 class CampaignViewController: UIViewController {
 
     @IBOutlet weak var topView: UIView!
-    @IBOutlet weak var mainCollectionView: UICollectionView!
+    @IBOutlet weak var pagerView: FSPagerView!
+    
     
     let testSubject = BehaviorSubject<[Datum]>(value: [])
-    private var showingIndex = 0
     
+    var dataList: [Datum] = []
+        
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        pagerView.dataSource = self
+        pagerView.delegate = self
         makeUI()
         bind()
     }
@@ -29,13 +34,14 @@ class CampaignViewController: UIViewController {
         topView.layer.cornerRadius = 27
         topView.layer.maskedCorners = [.layerMaxXMaxYCorner]
         topView.addGrayShadow(color: .lightGray, opacity: 0.2, radius: 3)
-        
-        mainCollectionView.backgroundColor = .none
     }
     
     private func bind() {
-        mainCollectionView.rx.setDelegate(self)
-            .disposed(by: rx.disposeBag)
+        
+        pagerView.transformer = FSPagerViewTransformer(type: .linear)
+        pagerView.itemSize = CGSize(width: 300, height: 450)
+        pagerView.isInfinite = true
+
         
         InstagramManager.test2()
             .subscribe { data in
@@ -44,24 +50,44 @@ class CampaignViewController: UIViewController {
                 print(err)
             }
             .disposed(by: rx.disposeBag)
+
+        pagerView.register(pagerCell.self, forCellWithReuseIdentifier: pagerCell.reuseId)
         
         testSubject
-            .bind(to: mainCollectionView.rx.items(cellIdentifier: CampaignCollectionViewCell.reuseId, cellType: CampaignCollectionViewCell.self)) { idx, data, cell in
-                let url = URL(string: data.mediaURL)
-                cell.mainImage.kf.setImage(with: url)
-                
-
-            }
+            .subscribe(onNext: { [unowned self] array in
+                dataList = array
+                pagerView.reloadData()
+            })
+            .disposed(by: rx.disposeBag)
         
         
     }
 
 }
 
+extension CampaignViewController: FSPagerViewDelegate, FSPagerViewDataSource {
+    
+    func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
+        let cell = pagerView.dequeueReusableCell(withReuseIdentifier: pagerCell.reuseId, at: index) as! pagerCell
 
-extension CampaignViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width-70, height: collectionView.frame.height)
+        let url = URL(string: dataList[index].mediaURL)
+        
+        cell.imageView?.kf.setImage(with: url)
+        
+        return cell
+        
         
     }
+    
+    func numberOfItems(in pagerView: FSPagerView) -> Int {
+        
+        return dataList.count
+    }
+    
+    
 }
+
+class pagerCell: FSPagerViewCell {
+    static let reuseId = "pagerCell"
+}
+
