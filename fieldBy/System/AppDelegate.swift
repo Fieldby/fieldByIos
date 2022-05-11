@@ -24,8 +24,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             didFinishLaunchingWithOptions: launchOptions
         )
         
-        MyUserModel.shared.uuid = Auth.auth().currentUser?.uid
+        if let user = Auth.auth().currentUser {
+            //MARK: 유저 정보 불러오기
+            MyUserModel.shared.uuid = user.uid
+            toMain()
+        } else {
+            toAuth()
+        }
         
+
         
         
         
@@ -33,7 +40,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
 
     }
+    
+    func toMain() {
+        window?.rootViewController = MainTabBarController()
+        window?.makeKeyAndVisible()
+    }
 
+    func toAuth() {
+        let vc = UIStoryboard(name: "Auth", bundle: nil).instantiateViewController(withIdentifier: "signinVC") as! SigninViewController
+        let nav = UINavigationController(rootViewController: vc)
+        window?.rootViewController = nav
+        window?.makeKeyAndVisible()
+    }
 
 }
 
