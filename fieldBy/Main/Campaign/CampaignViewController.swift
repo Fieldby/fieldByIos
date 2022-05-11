@@ -15,7 +15,9 @@ class CampaignViewController: UIViewController {
 
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var pagerView: FSPagerView!
+    @IBOutlet weak var barCollectionView: UICollectionView!
     
+    private var showingIndexSubject = BehaviorSubject<Int>(value: 0)
     
     let testSubject = BehaviorSubject<[Datum]>(value: [])
     
@@ -26,6 +28,10 @@ class CampaignViewController: UIViewController {
 
         pagerView.dataSource = self
         pagerView.delegate = self
+        
+        barCollectionView.rx.setDelegate(self)
+            .disposed(by: rx.disposeBag)
+        
         makeUI()
         bind()
     }
@@ -34,6 +40,8 @@ class CampaignViewController: UIViewController {
         topView.layer.cornerRadius = 27
         topView.layer.maskedCorners = [.layerMaxXMaxYCorner]
         topView.addGrayShadow(color: .lightGray, opacity: 0.2, radius: 3)
+        
+        barCollectionView.backgroundColor = .none
     }
     
     private func bind() {
@@ -61,6 +69,26 @@ class CampaignViewController: UIViewController {
             .disposed(by: rx.disposeBag)
         
         
+        testSubject
+            .bind(to: barCollectionView.rx.items(cellIdentifier: "barCell", cellType: BarCell.self)) { [unowned self] idx, data, cell in
+                
+                cell.contentView.backgroundColor = .none
+
+                showingIndexSubject
+                    .subscribe(onNext: { [unowned cell] index in
+                        if index == idx {
+                            cell.mainView.backgroundColor = .white
+                        } else {
+                            cell.mainView.backgroundColor = .none
+                        }
+                        
+                    })
+                    .disposed(by: self.rx.disposeBag)
+                
+            }
+            .disposed(by: rx.disposeBag)
+
+        
     }
 
 }
@@ -84,7 +112,18 @@ extension CampaignViewController: FSPagerViewDelegate, FSPagerViewDataSource {
         return dataList.count
     }
     
+    func pagerView(_ pagerView: FSPagerView, willDisplay cell: FSPagerViewCell, forItemAt index: Int) {
+        showingIndexSubject.onNext(index)
+        
+    }
     
+}
+
+extension CampaignViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        return CGSize(width: collectionView.frame.width/CGFloat(dataList.count), height: collectionView.frame.height)
+    }
 }
 
 class pagerCell: FSPagerViewCell {

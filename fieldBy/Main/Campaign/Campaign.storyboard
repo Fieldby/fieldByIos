@@ -6,6 +6,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -39,9 +40,49 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ddC-ke-Iwu" userLabel="BarView">
                                 <rect key="frame" x="35" y="808" width="344" height="4"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <subviews>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Pf1-ZI-9tC">
+                                        <rect key="frame" x="0.0" y="0.0" width="344" height="4"/>
+                                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="sM9-nn-cjy">
+                                            <size key="itemSize" width="129" height="1"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                        <cells>
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="barCell" id="R9g-QN-YcO" customClass="BarCell" customModule="fieldBy" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="129" height="1"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="WBW-Lx-m5Z">
+                                                    <rect key="frame" x="0.0" y="0.0" width="129" height="1"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hrf-fA-Hhi">
+                                                            <rect key="frame" x="0.0" y="0.0" width="129" height="1"/>
+                                                        </view>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="bottom" secondItem="Hrf-fA-Hhi" secondAttribute="bottom" id="B4R-JC-EhL"/>
+                                                        <constraint firstItem="Hrf-fA-Hhi" firstAttribute="leading" secondItem="WBW-Lx-m5Z" secondAttribute="leading" id="HtZ-GM-UkD"/>
+                                                        <constraint firstItem="Hrf-fA-Hhi" firstAttribute="top" secondItem="WBW-Lx-m5Z" secondAttribute="top" id="nGd-Ga-3aq"/>
+                                                        <constraint firstAttribute="trailing" secondItem="Hrf-fA-Hhi" secondAttribute="trailing" id="nvd-T3-VEB"/>
+                                                    </constraints>
+                                                </collectionViewCellContentView>
+                                                <size key="customSize" width="129" height="1"/>
+                                                <connections>
+                                                    <outlet property="mainView" destination="Hrf-fA-Hhi" id="IIG-3X-o4c"/>
+                                                </connections>
+                                            </collectionViewCell>
+                                        </cells>
+                                    </collectionView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="Pf1-ZI-9tC" firstAttribute="top" secondItem="ddC-ke-Iwu" secondAttribute="top" id="3L0-ms-Nar"/>
+                                    <constraint firstAttribute="bottom" secondItem="Pf1-ZI-9tC" secondAttribute="bottom" id="DVd-2j-Q8N"/>
+                                    <constraint firstItem="Pf1-ZI-9tC" firstAttribute="leading" secondItem="ddC-ke-Iwu" secondAttribute="leading" id="Tqs-R5-dDD"/>
                                     <constraint firstAttribute="height" constant="4" id="g7G-Oj-52P"/>
+                                    <constraint firstAttribute="trailing" secondItem="Pf1-ZI-9tC" secondAttribute="trailing" id="rWy-Dt-aCt"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -65,6 +106,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="barCollectionView" destination="Pf1-ZI-9tC" id="32M-cI-2Qw"/>
                         <outlet property="pagerView" destination="xrk-iP-4gX" id="b2s-d9-5Uq"/>
                         <outlet property="topView" destination="afb-Zs-kxQ" id="LIX-QP-zSu"/>
                     </connections>
