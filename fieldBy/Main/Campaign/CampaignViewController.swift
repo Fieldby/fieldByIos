@@ -16,6 +16,10 @@ class CampaignViewController: UIViewController {
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var pagerView: FSPagerView!
     @IBOutlet weak var barCollectionView: UICollectionView!
+    @IBOutlet weak var infoView: UIView!
+    @IBOutlet weak var missionButton: UIButton!
+    
+    
     
     private var showingIndexSubject = BehaviorSubject<Int>(value: 0)
     
@@ -42,12 +46,17 @@ class CampaignViewController: UIViewController {
         topView.addGrayShadow(color: .lightGray, opacity: 0.2, radius: 3)
         
         barCollectionView.backgroundColor = .none
+        
+        infoView.layer.cornerRadius = 21
+        infoView.addGrayShadow(color: .lightGray, opacity: 0.15, radius: 3)
+        
+        missionButton.layer.cornerRadius = 10
     }
     
     private func bind() {
         
         pagerView.transformer = FSPagerViewTransformer(type: .linear)
-        pagerView.itemSize = CGSize(width: 300, height: 450)
+        pagerView.itemSize = CGSize(width: UIScreen.main.bounds.width-65, height: 450)
         pagerView.isInfinite = true
 
         
@@ -89,6 +98,8 @@ class CampaignViewController: UIViewController {
             .disposed(by: rx.disposeBag)
 
         
+        
+        
     }
 
 }
@@ -101,6 +112,10 @@ extension CampaignViewController: FSPagerViewDelegate, FSPagerViewDataSource {
         let url = URL(string: dataList[index].mediaURL)
         
         cell.imageView?.kf.setImage(with: url)
+        cell.layer.masksToBounds = true
+        cell.layer.cornerRadius = 21
+        
+        cell.imageView?.addGrayShadow(color: .lightGray, opacity: 0.15, radius: 3)
         
         return cell
         
