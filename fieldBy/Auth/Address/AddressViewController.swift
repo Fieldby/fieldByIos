@@ -29,6 +29,8 @@ class AddressViewController: UIViewController {
     
     private var editingStatus = EditingStatus.addr
     
+    private var juso: Juso!
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -78,6 +80,7 @@ class AddressViewController: UIViewController {
             .disposed(by: rx.disposeBag)
         
         searchButton.rx.tap
+            .throttle(.seconds(2), latest: false, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [unowned self] in
                 switch editingStatus {
                 case .addr:
@@ -96,6 +99,7 @@ class AddressViewController: UIViewController {
         
         Observable.combineLatest(tableView.rx.modelSelected(Juso.self), tableView.rx.itemSelected)
             .subscribe(onNext: { [unowned self] juso, idx in
+                self.juso = juso
                 tableView.deselectRow(at: idx, animated: true)
                 addressTextField.text = juso.roadAddr
                 detailAddr()
@@ -103,12 +107,14 @@ class AddressViewController: UIViewController {
             .disposed(by: rx.disposeBag)
         
         addrResetButton.rx.tap
+            .throttle(.seconds(2), latest: false, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [unowned self] in
                 addressTextField.text = nil
             })
             .disposed(by: rx.disposeBag)
         
         detailResetButton.rx.tap
+            .throttle(.seconds(2), latest: false, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [unowned self] in
                 detailTextField.text = nil
             })
@@ -154,6 +160,8 @@ class AddressViewController: UIViewController {
     }
 
     private func pushInstaVC() {
+        
+        AuthManager.saveAddressInfo(juso: juso, detail: detailTextField.text!)
         let vc = storyboard?.instantiateViewController(withIdentifier: "instagramVC") as! InstagramViewController
         self.navigationController?.pushViewController(vc, animated: true)
     }

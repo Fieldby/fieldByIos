@@ -9,6 +9,7 @@ import RxSwift
 import RxCocoa
 import NSObject_Rx
 import Alamofire
+import Firebase
 
 class AuthManager: CommonBackendType {
     static let certificatedNumberPath = "/certificatedNumberList"
@@ -44,15 +45,14 @@ class AuthManager: CommonBackendType {
         }
     }
     
-    static func saveInfo(number: String, uuid: String) -> Completable {
-        return Completable.create() { completable in
-            
-            
-            
-            
-            
-            return Disposables.create()
-        }
+    
+    static func saveInfo(key: String, value: Any) -> Completable {
+        return simplePost(path: "/Users/\(MyUserModel.shared.uuid ?? "")/\(key)", body: value)
+    }
+    
+    static func saveAddressInfo(juso: Juso, detail: String) {
+        Database.database().reference().child("Users").child(MyUserModel.shared.uuid).child("address").setValue(["zipNo": juso.zipNo, "roadAddr": juso.roadAddr, "jibunAddr": juso.jibunAddr])
+        Database.database().reference().child("Users").child(MyUserModel.shared.uuid).child("address/detail").setValue(detail)
     }
     
     static func fbPage() {

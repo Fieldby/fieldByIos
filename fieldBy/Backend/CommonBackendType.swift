@@ -9,6 +9,7 @@ import RxSwift
 import RxCocoa
 import NSObject_Rx
 import Alamofire
+import FirebaseDatabase
 
 class CommonBackendType: NSObject {
     
@@ -81,6 +82,43 @@ class CommonBackendType: NSObject {
         }
     }
     
+    static func simplePost(path: String, body: Any) -> Completable {
+        return Completable.create() { completable in
+            
+            let fullPath = Database.database().reference().child(path)
+                        
+            fullPath.setValue(body) { error, ref in
+                if let error = error {
+                    print(error)
+                    completable(.error(error))
+                } else {
+                    print(ref)
+                    completable(.completed)
+                }
+            }
+            
+            return Disposables.create()
+        }
+    }
+    
+    static func objectPost(path: String, body: Encodable) -> Completable {
+        return Completable.create() { completable in
+            
+            let fullPath = Database.database().reference().child(path)
+            
+            fullPath.setValue(body) { error, ref in
+                if let error = error {
+                    print(error)
+                    completable(.error(error))
+                } else {
+                    print(ref)
+                    completable(.completed)
+                }
+            }
+            
+            return Disposables.create()
+        }
+    }
     
     
 }

@@ -65,8 +65,14 @@ class PhoneViewModel: NSObject {
             .map { list, number -> Bool in
                 return list.contains(number)
             }
-
-
+    }
+    
+    func saveName(name: String) -> Completable {
+        return AuthManager.saveInfo(key: "name", value: name)
+    }
+    
+    func saveAgreement(bool: Bool) -> Completable {
+        return AuthManager.saveInfo(key: "marketingAgreement", value: bool)
     }
 
 }

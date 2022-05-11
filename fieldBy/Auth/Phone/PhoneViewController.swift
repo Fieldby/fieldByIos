@@ -136,6 +136,7 @@ class PhoneViewController: UIViewController {
             .disposed(by: rx.disposeBag)
         
         certificationButton.rx.tap
+            .throttle(.seconds(3), latest: false, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [unowned self] in
                 switch editingStatus {
                 case .number:
@@ -226,9 +227,24 @@ class PhoneViewController: UIViewController {
             .disposed(by: rx.disposeBag)
         
         finalButton.rx.tap
+            .throttle(.seconds(3), latest: false, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [unowned self] in
-                let vc = UIStoryboard(name: "Address", bundle: nil).instantiateViewController(withIdentifier: "addressVC") as! AddressViewController
-                self.navigationController?.pushViewController(vc, animated: true)
+                indicator.isHidden = false
+                indicator.startAnimating()
+                
+                viewModel.saveAgreement(bool: marketing)
+                    .subscribe { [unowned self] in
+                        let vc = UIStoryboard(name: "Address", bundle: nil).instantiateViewController(withIdentifier: "addressVC") as! AddressViewController
+                        indicator.isHidden = true
+                        indicator.stopAnimating()
+                        self.navigationController?.pushViewController(vc, animated: true)
+                        
+                    } onError: { [unowned self] error in
+                        indicator.isHidden = true
+                        indicator.stopAnimating()
+                        print(error)
+                    }
+                    .disposed(by: rx.disposeBag)
             })
             .disposed(by: rx.disposeBag)
         
@@ -337,15 +353,33 @@ class PhoneViewController: UIViewController {
     }
     
     private func startAgreement() {
-        nameTextField.resignFirstResponder()
-        nameTextField.isUserInteractionEnabled = false
-        UIView.animate(withDuration: 0.3) { [unowned self] in
-            bottomView.isHidden = true
-            agreeLabel.isHidden = false
-            agreementView.isHidden = false
-            topSpace.isHidden = true
-            finalButton.isHidden = false
-        }
+        indicator.startAnimating()
+        indicator.isHidden = false
+        viewModel.saveName(name: nameTextField.text!)
+            .subscribe { [unowned self] in
+                
+                indicator.stopAnimating()
+                indicator.isHidden = true
+                
+                nameTextField.resignFirstResponder()
+                nameTextField.isUserInteractionEnabled = false
+                UIView.animate(withDuration: 0.3) { [unowned self] in
+                    bottomView.isHidden = true
+                    agreeLabel.isHidden = false
+                    agreementView.isHidden = false
+                    topSpace.isHidden = true
+                    finalButton.isHidden = false
+                }
+                
+            } onError: { [unowned self] error in
+                indicator.stopAnimating()
+                indicator.isHidden = true
+                print(error)
+            }
+            .disposed(by: rx.disposeBag)
+
+        
+
     }
 
     func startWritingName() {

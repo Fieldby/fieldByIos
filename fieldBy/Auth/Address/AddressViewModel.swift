@@ -28,7 +28,5 @@ class AddressViewModel: NSObject {
             }
             .disposed(by: rx.disposeBag)
 
-        
     }
-    
 }

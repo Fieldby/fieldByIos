@@ -48,6 +48,7 @@ class SigninViewController: UIViewController {
             .subscribe(onNext: { [unowned self] in
 //                UITest()
                 pushPhoneVC()
+
             })
             .disposed(by: rx.disposeBag)
     }

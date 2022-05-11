@@ -17,14 +17,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
-        
-        Auth.auth().languageCode = "kr"
-        
+                
         // Initialize Facebook SDK
         FBSDKCoreKit.ApplicationDelegate.shared.application(
             application,
             didFinishLaunchingWithOptions: launchOptions
         )
+        
+        MyUserModel.shared.uuid = Auth.auth().currentUser?.uid
+        
+        
+        
+        
+        
         return true
 
     }

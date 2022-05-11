@@ -62,13 +62,22 @@ class CheckNumberViewController: UIViewController {
     private func bind() {
         
         requestButton.rx.tap
+            .throttle(.seconds(3), latest: false, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [unowned self] in
                 requestButton.isHidden = true
                 codeView.isHidden = false
                 codeTextField.becomeFirstResponder()
+
                 
-                viewModel.verify(phoneNumber: phoneNumber)
-                
+                //MARK: 살릴것
+//                viewModel.verify(phoneNumber: phoneNumber)
+//                    .subscribe {
+//                        print("complete")
+//                    } onError: { err in
+//                        print(err)
+//                    }
+//                    .disposed(by: rx.disposeBag)
+
             })
             .disposed(by: rx.disposeBag)
         
@@ -92,10 +101,24 @@ class CheckNumberViewController: UIViewController {
             .disposed(by: rx.disposeBag)
         
         nextButton.rx.tap
+            .throttle(.seconds(3), latest: false, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [unowned self] in
-                self.dismiss(animated: true) {
+                
+                //MARK: 지울 것
+                dismiss(animated: true) {
                     self.topVC.startWritingName()
                 }
+                
+                
+//                viewModel.login(sixCode: codeTextField.text!, phoneNumber: phoneNumber)
+//                    .subscribe { [unowned self] in
+//                        dismiss(animated: true) {
+//                            self.topVC.startWritingName()
+//                        }
+//                    } onError: { [unowned self] error in
+//                        presentAlert(message: "인증번호가 올바르지 않습니다.")
+//                    }
+//                    .disposed(by: rx.disposeBag)
             })
             .disposed(by: rx.disposeBag)
     }

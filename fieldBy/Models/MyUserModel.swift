@@ -24,5 +24,11 @@ class MyUserModel {
     var igId: String = "5381764598542961"
     var name: String = "Tom"
     
+    var uuid: String!
+    
+    
+    
+    
+    
     
 }

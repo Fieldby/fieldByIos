@@ -24,26 +24,60 @@ class CheckNumberViewModel: NSObject {
             .disposed(by: rx.disposeBag)
     }
     
-    func verify(phoneNumber: String) {
-        PhoneAuthProvider.provider()
-            .verifyPhoneNumber("+82\(phoneNumber)", uiDelegate: nil) { [unowned self] verificationID, error in
-                if let error = error {
-                    print(error)
+    func verify(phoneNumber: String) -> Completable {
+        
+        return Completable.create() { completable in
+            
+            PhoneAuthProvider.provider()
+                .verifyPhoneNumber("+82\(phoneNumber)", uiDelegate: nil) { [unowned self] verificationID, error in
+                    if let error = error {
+                        completable(.error(error))
+                    }
+                    
+                    if let verificationID = verificationID {
+                        self.verifId = verificationID
+                        completable(.completed)
+                    }
                 }
-                verifId = verificationID
-            }
+
+            return Disposables.create()
+        }
+
     }
     
-    func login(sixCode: String) {
-        let credential = PhoneAuthProvider.provider().credential(withVerificationID: verifId ?? "", verificationCode: sixCode)
+    func login(sixCode: String, phoneNumber: String) -> Completable {
         
-        Auth.auth().signIn(with: credential) { result, error in
-            if let error = error {
-                print(error)
+        return Completable.create() { [unowned self] completable in
+            guard let verifId = verifId else {
+                return Disposables.create()
             }
+
             
-            print("로그인 성공")
+            let credential = PhoneAuthProvider.provider().credential(withVerificationID: verifId, verificationCode: sixCode)
+            
+            Auth.auth().signIn(with: credential) { [unowned self] result, error in
+                if let error = error {
+                    print(error)
+                    completable(.error(error))
+                }
+                
+                if let result = result {
+                    MyUserModel.shared.uuid = result.user.uid
+                    
+                    AuthManager.saveInfo(key: "phoneNumber", value: phoneNumber)
+                        .subscribe {
+                            completable(.completed)
+                        } onError: { error in
+                            completable(.error(error))
+                        }
+                        .disposed(by: rx.disposeBag)
+                }
+
+            }
+
+            return Disposables.create()
         }
+
     }
 
     
