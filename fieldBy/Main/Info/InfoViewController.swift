@@ -22,57 +22,58 @@ class InfoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Add a custom login button to your app
-        let loginButton = UIButton(type: .custom)
-        loginButton.backgroundColor = .darkGray
-        loginButton.frame = CGRect(x: 0, y: 0, width: 180, height: 40)
-        loginButton.center = view.center
-        loginButton.setTitle("My Login Button", for: .normal)
 
-        // Handle clicks on the button
-        loginButton.addTarget(self, action: #selector(loginButtonClicked), for: .touchUpInside)
+        let facebookLoginButton = UIButton(type: .custom)
+        facebookLoginButton.backgroundColor = .blue
+        facebookLoginButton.setTitle("Facebook Login", for: .normal)
+        facebookLoginButton.frame = CGRect(x: 0, y: 0, width: 180, height: 40)
+        facebookLoginButton.center = view.center
+        view.addSubview(facebookLoginButton)
+        
+        facebookLoginButton.addTarget(self, action: #selector(clickFacebookLogin), for: .touchUpInside)
 
-        view.addSubview(loginButton)
-        
-        
-        
-        testSubject
-            .bind(to: collectionView.rx.items(cellIdentifier: testCell.id, cellType: testCell.self)) { idx, data, cell in
-                let url = URL(string: data.mediaURL)
-
-                cell.imageView.kf.setImage(with: url)
-            }
-            .disposed(by: rx.disposeBag)
-        
-        
-        collectionView.rx.setDelegate(self)
-            .disposed(by: rx.disposeBag)
     }
     
-    // Once the button is clicked, show the login dialog
-    @objc func loginButtonClicked() {
-                
-        InstagramManager.test2()
-            .subscribe { data in
-                self.testSubject.onNext(data.data)
-            } onError: { err in
-                print(err)
+    @IBAction
+    func clickFacebookLogin() {
+        let manager = LoginManager()
+        manager.logIn(permissions: ["public_profile", "instagram_basic", "pages_show_list"], from: self) { result, error in
+            if let error = error {
+                print("Process error: \(error)")
+                return
             }
-            .disposed(by: rx.disposeBag)
+            guard let result = result else {
+                print("No Result")
+                return
+            }
+            if result.isCancelled {
+                print("Login Cancelled")
+                return
+            }
 
+            MyUserModel.shared.fbToken = result.token!.tokenString
+            print("token: \(result.token?.tokenString)")
+            print("granted: \(result.grantedPermissions)")
+            print("declined: \(result.declinedPermissions)")
             
-    }
+            
+            InstagramManager.getPages(token: result.token!.tokenString)
     
-}
-
-extension InfoViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
+            // result properties
+            //  - token : 액세스 토큰
+            //  - isCancelled : 사용자가 로그인을 취소했는지 여부
+            //  - grantedPermissions : 부여 된 권한 집합
+            //  - declinedPermissions : 거부 된 권한 집합
+        }
+        
+        
+        
     }
-}
 
-class testCell: UICollectionViewCell {
-    static let id = "testCell"
-    @IBOutlet weak var imageView: UIImageView!
+    @IBAction func click(_ sender: Any) {
+        InstagramManager.test2()
+
+        
+    }
     
 }

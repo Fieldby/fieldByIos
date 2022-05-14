@@ -48,7 +48,7 @@ class SigninViewController: UIViewController {
             .subscribe(onNext: { [unowned self] in
 //                UITest()
                 pushPhoneVC()
-
+//                codeTest()
             })
             .disposed(by: rx.disposeBag)
     }
@@ -66,5 +66,10 @@ class SigninViewController: UIViewController {
         let vc = MainTabBarController()
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true)
+    }
+    
+    private func codeTest() {
+
+
     }
 }

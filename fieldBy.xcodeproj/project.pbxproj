@@ -14,7 +14,6 @@
 		D106B0AF281EA2A400E6CCFA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D106B0AD281EA2A400E6CCFA /* Main.storyboard */; };
 		D106B0B1281EA2A500E6CCFA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D106B0B0281EA2A500E6CCFA /* Assets.xcassets */; };
 		D106B0B4281EA2A500E6CCFA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D106B0B2281EA2A500E6CCFA /* LaunchScreen.storyboard */; };
-		D10EFF502822213000AA3F9F /* InstagramViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D10EFF4F2822213000AA3F9F /* InstagramViewController.swift */; };
 		D11FD9AE281F6D50008AE32A /* PhoneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11FD9AD281F6D50008AE32A /* PhoneViewModel.swift */; };
 		D11FD9B1281F74A5008AE32A /* CheckNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11FD9B0281F74A5008AE32A /* CheckNumberViewController.swift */; };
 		D1329DF3281FF2AD00760DDA /* CommonViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1329DF2281FF2AD00760DDA /* CommonViews.swift */; };
@@ -36,6 +35,9 @@
 		D1AA5CB7281EA50700279CC8 /* SigninViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AA5CB6281EA50700279CC8 /* SigninViewController.swift */; };
 		D1AA5CBA281EAEAD00279CC8 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AA5CB9281EAEAD00279CC8 /* Color+.swift */; };
 		D1AA5CBC281EAF1A00279CC8 /* PhoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AA5CBB281EAF1A00279CC8 /* PhoneViewController.swift */; };
+		D1B8EB8C282FC20800576970 /* UserInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1B8EB8B282FC20800576970 /* UserInfo.storyboard */; };
+		D1B8EB8E282FC21300576970 /* UserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B8EB8D282FC21300576970 /* UserInfoViewController.swift */; };
+		D1B8EB90282FC21A00576970 /* UserInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B8EB8F282FC21A00576970 /* UserInfoViewModel.swift */; };
 		D1C89ED72822B3E900DAA2F4 /* fieldByUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C89ED62822B3E900DAA2F4 /* fieldByUITests.swift */; };
 		D1C89ED92822B3E900DAA2F4 /* fieldByUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C89ED82822B3E900DAA2F4 /* fieldByUITestsLaunchTests.swift */; };
 		D1C89EE02822B65C00DAA2F4 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C89EDF2822B65C00DAA2F4 /* MainTabBarController.swift */; };
@@ -46,6 +48,11 @@
 		D1C89EED2822B70F00DAA2F4 /* Info.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1C89EEC2822B70F00DAA2F4 /* Info.storyboard */; };
 		D1C89EEF2822B71500DAA2F4 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C89EEE2822B71500DAA2F4 /* InfoViewController.swift */; };
 		D1EA5D9F282535E7000E35A0 /* MyUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1EA5D9E282535E7000E35A0 /* MyUserModel.swift */; };
+		D1ED9E13282D1A9100855641 /* CampaignManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1ED9E12282D1A9100855641 /* CampaignManager.swift */; };
+		D1FC0800282D2982006ED153 /* CampaignViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1FC07FF282D2982006ED153 /* CampaignViewModel.swift */; };
+		D1FC0803282D3FE8006ED153 /* DetailCampaignViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1FC0802282D3FE8006ED153 /* DetailCampaignViewController.swift */; };
+		D1FC0805282D3FF2006ED153 /* DetailCampaignViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1FC0804282D3FF2006ED153 /* DetailCampaignViewModel.swift */; };
+		D1FC080A282D443C006ED153 /* CampaignModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1FC0809282D443C006ED153 /* CampaignModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,7 +76,6 @@
 		D106B0B0281EA2A500E6CCFA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D106B0B3281EA2A500E6CCFA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D106B0B5281EA2A500E6CCFA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D10EFF4F2822213000AA3F9F /* InstagramViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramViewController.swift; sourceTree = "<group>"; };
 		D11155E5282A650300C9ECA1 /* fieldBy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = fieldBy.entitlements; sourceTree = "<group>"; };
 		D11FD9AD281F6D50008AE32A /* PhoneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneViewModel.swift; sourceTree = "<group>"; };
 		D11FD9B0281F74A5008AE32A /* CheckNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckNumberViewController.swift; sourceTree = "<group>"; };
@@ -92,6 +98,9 @@
 		D1AA5CB6281EA50700279CC8 /* SigninViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninViewController.swift; sourceTree = "<group>"; };
 		D1AA5CB9281EAEAD00279CC8 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
 		D1AA5CBB281EAF1A00279CC8 /* PhoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneViewController.swift; sourceTree = "<group>"; };
+		D1B8EB8B282FC20800576970 /* UserInfo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UserInfo.storyboard; sourceTree = "<group>"; };
+		D1B8EB8D282FC21300576970 /* UserInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewController.swift; sourceTree = "<group>"; };
+		D1B8EB8F282FC21A00576970 /* UserInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewModel.swift; sourceTree = "<group>"; };
 		D1C89ED42822B3E900DAA2F4 /* fieldByUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = fieldByUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1C89ED62822B3E900DAA2F4 /* fieldByUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fieldByUITests.swift; sourceTree = "<group>"; };
 		D1C89ED82822B3E900DAA2F4 /* fieldByUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fieldByUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -103,6 +112,11 @@
 		D1C89EEC2822B70F00DAA2F4 /* Info.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Info.storyboard; sourceTree = "<group>"; };
 		D1C89EEE2822B71500DAA2F4 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		D1EA5D9E282535E7000E35A0 /* MyUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyUserModel.swift; sourceTree = "<group>"; };
+		D1ED9E12282D1A9100855641 /* CampaignManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignManager.swift; sourceTree = "<group>"; };
+		D1FC07FF282D2982006ED153 /* CampaignViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignViewModel.swift; sourceTree = "<group>"; };
+		D1FC0802282D3FE8006ED153 /* DetailCampaignViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCampaignViewController.swift; sourceTree = "<group>"; };
+		D1FC0804282D3FF2006ED153 /* DetailCampaignViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCampaignViewModel.swift; sourceTree = "<group>"; };
+		D1FC0809282D443C006ED153 /* CampaignModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignModel.swift; sourceTree = "<group>"; };
 		E8B21A1856005D1A76BCE0CE /* Pods-fieldBy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fieldBy.debug.xcconfig"; path = "Target Support Files/Pods-fieldBy/Pods-fieldBy.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -180,14 +194,6 @@
 			path = fieldBy;
 			sourceTree = "<group>";
 		};
-		D10EFF4E2822210700AA3F9F /* Instagram */ = {
-			isa = PBXGroup;
-			children = (
-				D10EFF4F2822213000AA3F9F /* InstagramViewController.swift */,
-			);
-			path = Instagram;
-			sourceTree = "<group>";
-		};
 		D11FD9AC281F6D44008AE32A /* Phone */ = {
 			isa = PBXGroup;
 			children = (
@@ -220,6 +226,7 @@
 				D15391C828210A4900E12140 /* CommonBackendType.swift */,
 				D1A99CC228210FB300E414E4 /* AuthManager.swift */,
 				D199F3862827C2B200E3F892 /* InstagramManager.swift */,
+				D1ED9E12282D1A9100855641 /* CampaignManager.swift */,
 			);
 			path = Backend;
 			sourceTree = "<group>";
@@ -254,6 +261,7 @@
 		D1A99CCC28211F1F00E414E4 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				D1FC0806282D442B006ED153 /* Campaign */,
 				D1A99CCD28211F2500E414E4 /* Juso.swift */,
 				D1EA5D9E282535E7000E35A0 /* MyUserModel.swift */,
 			);
@@ -271,13 +279,13 @@
 		D1AA5CB2281EA40000279CC8 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				D1AA5CB4281EA41100279CC8 /* Auth.storyboard */,
-				D1AA5CB6281EA50700279CC8 /* SigninViewController.swift */,
 				D11FD9AC281F6D44008AE32A /* Phone */,
 				D1A99CC4282113C500E414E4 /* CeritificationFailed */,
 				D11FD9AF281F7474008AE32A /* Check */,
 				D1A99CC728211B9B00E414E4 /* Address */,
-				D10EFF4E2822210700AA3F9F /* Instagram */,
+				D1B8EB8A282FC1C600576970 /* UserInfo */,
+				D1AA5CB4281EA41100279CC8 /* Auth.storyboard */,
+				D1AA5CB6281EA50700279CC8 /* SigninViewController.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -304,6 +312,16 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		D1B8EB8A282FC1C600576970 /* UserInfo */ = {
+			isa = PBXGroup;
+			children = (
+				D1B8EB8B282FC20800576970 /* UserInfo.storyboard */,
+				D1B8EB8D282FC21300576970 /* UserInfoViewController.swift */,
+				D1B8EB8F282FC21A00576970 /* UserInfoViewModel.swift */,
+			);
+			path = UserInfo;
+			sourceTree = "<group>";
+		};
 		D1B9A10B281FDC8100389BC1 /* System */ = {
 			isa = PBXGroup;
 			children = (
@@ -327,9 +345,11 @@
 		D1C89EE12822B6AC00DAA2F4 /* Campaign */ = {
 			isa = PBXGroup;
 			children = (
+				D1FC0801282D3ED2006ED153 /* Detail */,
 				D171E9DA2827D53F005FE939 /* Cell */,
 				D1C89EE42822B6E200DAA2F4 /* Campaign.storyboard */,
 				D1C89EE62822B6EE00DAA2F4 /* CampaignViewController.swift */,
+				D1FC07FF282D2982006ED153 /* CampaignViewModel.swift */,
 			);
 			path = Campaign;
 			sourceTree = "<group>";
@@ -350,6 +370,23 @@
 				D1C89EEE2822B71500DAA2F4 /* InfoViewController.swift */,
 			);
 			path = Info;
+			sourceTree = "<group>";
+		};
+		D1FC0801282D3ED2006ED153 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				D1FC0802282D3FE8006ED153 /* DetailCampaignViewController.swift */,
+				D1FC0804282D3FF2006ED153 /* DetailCampaignViewModel.swift */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		D1FC0806282D442B006ED153 /* Campaign */ = {
+			isa = PBXGroup;
+			children = (
+				D1FC0809282D443C006ED153 /* CampaignModel.swift */,
+			);
+			path = Campaign;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -440,6 +477,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D1C89EED2822B70F00DAA2F4 /* Info.storyboard in Resources */,
+				D1B8EB8C282FC20800576970 /* UserInfo.storyboard in Resources */,
 				D1AA5CB5281EA41100279CC8 /* Auth.storyboard in Resources */,
 				D19DE9BE282B6C4100904484 /* GoogleService-Info.plist in Resources */,
 				D1A99CCB28211BBC00E414E4 /* Address.storyboard in Resources */,
@@ -508,12 +546,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				D180FA7F281FF48E0004FECF /* CheckNumberViewModel.swift in Sources */,
+				D1B8EB8E282FC21300576970 /* UserInfoViewController.swift in Sources */,
 				D199F3872827C2B200E3F892 /* InstagramManager.swift in Sources */,
 				D1A99CC328210FB300E414E4 /* AuthManager.swift in Sources */,
 				D11FD9B1281F74A5008AE32A /* CheckNumberViewController.swift in Sources */,
+				D1B8EB90282FC21A00576970 /* UserInfoViewModel.swift in Sources */,
 				D16A5FC6282B9AE200A75D9E /* BarCell.swift in Sources */,
 				D16A5FC4282B82F700A75D9E /* ViewController+.swift in Sources */,
 				D1C89EEB2822B70300DAA2F4 /* ProgressViewController.swift in Sources */,
+				D1FC0803282D3FE8006ED153 /* DetailCampaignViewController.swift in Sources */,
+				D1ED9E13282D1A9100855641 /* CampaignManager.swift in Sources */,
 				D19A9DAB2822C4C700552C15 /* View+.swift in Sources */,
 				D1A99CD02821220300E414E4 /* AddressViewModel.swift in Sources */,
 				D1A99CCE28211F2500E414E4 /* Juso.swift in Sources */,
@@ -531,9 +573,11 @@
 				D1EA5D9F282535E7000E35A0 /* MyUserModel.swift in Sources */,
 				D1AA5CBC281EAF1A00279CC8 /* PhoneViewController.swift in Sources */,
 				D106B0A8281EA2A400E6CCFA /* AppDelegate.swift in Sources */,
-				D10EFF502822213000AA3F9F /* InstagramViewController.swift in Sources */,
+				D1FC0805282D3FF2006ED153 /* DetailCampaignViewModel.swift in Sources */,
 				D1329DF3281FF2AD00760DDA /* CommonViews.swift in Sources */,
+				D1FC0800282D2982006ED153 /* CampaignViewModel.swift in Sources */,
 				D106B0AA281EA2A400E6CCFA /* SceneDelegate.swift in Sources */,
+				D1FC080A282D443C006ED153 /* CampaignModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

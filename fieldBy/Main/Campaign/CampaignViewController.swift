@@ -19,6 +19,7 @@ class CampaignViewController: UIViewController {
     @IBOutlet weak var infoView: UIView!
     @IBOutlet weak var missionButton: UIButton!
     
+    @IBOutlet var viewModel: CampaignViewModel!
     
     
     private var showingIndexSubject = BehaviorSubject<Int>(value: 0)
@@ -60,7 +61,7 @@ class CampaignViewController: UIViewController {
         pagerView.isInfinite = true
 
         
-        InstagramManager.test2()
+        InstagramManager.usingTestToken()
             .subscribe { data in
                 self.testSubject.onNext(data.data)
             } onError: { err in
@@ -97,11 +98,16 @@ class CampaignViewController: UIViewController {
             }
             .disposed(by: rx.disposeBag)
 
-        
-        
-        
     }
 
+    private func presentDetailVC(campaignModel: CampaignModel) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: DetailCampaignViewController.storyId) as! DetailCampaignViewController
+        vc.campaignModel = campaignModel
+        
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true)
+        
+    }
 }
 
 extension CampaignViewController: FSPagerViewDelegate, FSPagerViewDataSource {
@@ -130,6 +136,11 @@ extension CampaignViewController: FSPagerViewDelegate, FSPagerViewDataSource {
     func pagerView(_ pagerView: FSPagerView, willDisplay cell: FSPagerViewCell, forItemAt index: Int) {
         showingIndexSubject.onNext(index)
         
+    }
+    
+    func pagerView(_ pagerView: FSPagerView, didSelectItemAt index: Int) {
+        
+        presentDetailVC(campaignModel: dataList[index].toCampaign())
     }
     
 }

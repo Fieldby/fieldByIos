@@ -7,7 +7,7 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb680555059873566</string>
+				<string>fb573051764154148</string>
 			</array>
 		</dict>
 		<dict>
@@ -20,9 +20,9 @@
 		</dict>
 	</array>
 	<key>FacebookAppID</key>
-	<string>680555059873566</string>
+	<string>573051764154148</string>
 	<key>FacebookClientToken</key>
-	<string>709d27ff6ef331a2e6cc8a12916fc64e</string>
+	<string>44dd5edddd1cc10ef3c2c27caaad077f</string>
 	<key>FacebookDisplayName</key>
 	<string>필드바이</string>
 	<key>LSApplicationQueriesSchemes</key>

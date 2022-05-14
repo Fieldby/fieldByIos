@@ -162,7 +162,7 @@ class AddressViewController: UIViewController {
     private func pushInstaVC() {
         
         AuthManager.saveAddressInfo(juso: juso, detail: detailTextField.text!)
-        let vc = storyboard?.instantiateViewController(withIdentifier: "instagramVC") as! InstagramViewController
+        let vc = storyboard?.instantiateViewController(withIdentifier: "userinfoVC") as! UserInfoViewController
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

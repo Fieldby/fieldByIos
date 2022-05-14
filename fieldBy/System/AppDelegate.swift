@@ -24,21 +24,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             didFinishLaunchingWithOptions: launchOptions
         )
         
-        if let user = Auth.auth().currentUser {
-            //MARK: 유저 정보 불러오기
-            MyUserModel.shared.uuid = user.uid
-            toMain()
-        } else {
-            toAuth()
-        }
-        
+//        if let user = Auth.auth().currentUser {
+//            //MARK: 유저 정보 불러오기
+//            MyUserModel.shared.uuid = user.uid
+//            toMain()
+//        } else {
+//            toAuth()
+//        }
 
-        
-        
-        
+        uiTest()
         
         return true
 
+    }
+    
+    func uiTest() {
+        let vc = UIStoryboard(name: "UserInfo", bundle: nil).instantiateViewController(withIdentifier: "userinfoVC") as! UserInfoViewController
+        window?.rootViewController = vc
+        window?.makeKeyAndVisible()
     }
     
     func toMain() {

@@ -13,7 +13,7 @@ import NSObject_Rx
 class InstagramManager: CommonBackendType {
     static let appId = "681817606228494"
     static let redirectUri = "https://hyuwo.notion.site/a7bb0e42d03142c79d2d3de57dd768b7"
-    
+    static let secretCode = "9dc3ba461c6451376051cf5e939d8e60"
     static let token = "IGQVJVZAEVlQVp0eGR6T1l2ZA3Ayem9IdWM5bnFRaFNWZAmwzcEM3c2NRc3pVdmI5UlkzUHpkTVZARWkxoM0RucGlUMGZAIcW00VE5odjdyT0hhTG9LZADc2YXBFenpueTlheXU2R0JqdFNLVWh5VlNpdFZAZAUwZDZD"
     static let longToken = "IGQVJWcXpZALU5udzJZAN3BJUjZAHR1FscFAwd1V1N3JCcVpGajVOX1Q4Tjk4WFVXcVFuRjVnbkNVamJqUGZA1QzRFeHRSQV9YNEtZAR042djgxa0JuTEJzYk5ncGtHM291R1B5MmlnYXNB"
     //https://graph.instagram.com/refresh_access_token
@@ -34,29 +34,41 @@ class InstagramManager: CommonBackendType {
 //        }
 //
 //    }
-
     
-    static func test2() -> Single<InstagramData> {
-
+    static func getPages(token: String) {
+        let url = "https://graph.instagram.com/me/media?&access_token=\(token)"
+        AF.request(url, method: .get).responseString { response in
+            switch response.result {
+            case .success(let str):
+                print(str)
+            case .failure(let err):
+                print(err)
+            }
+        }
+    }
+    
+    static func getLongToken(token: String) {
+        let url = "'https://graph.instagram.com/access_token?grant_type=ig_refresh_token&access_token=\(token)"
+        
+        AF.request(url, method: .get).responseString { response in
+            switch response.result {
+            case .success(let str):
+                print(str)
+            case .failure(let err):
+                print(err)
+            }
+        }
+    }
+    
+    static func usingTestToken() -> Single<InstagramData> {
         return Single.create { observable in
             let url = "https://graph.instagram.com/me/media"
             let params: [String: Any] = ["fields": "id,media_type,media_url,thumbnail_url,username,timestamp",
                                             "access_token": longToken]
             
-//            AF.request(url, method: .get, parameters: params, encoding: URLEncoding.default).responseString { response in
-//                switch response.result {
-//                case .success(let data):
-//                    print(data)
-//                case .failure(let err):
-//                    print(err)
-//                }
-//            }
-            
             AF.request(url, method: .get, parameters: params, encoding: URLEncoding.default).responseData { response in
                 switch response.result {
                 case .success(let data):
-
-                    
                     let data = try! JSONDecoder().decode(InstagramData.self, from: data)
                     observable(.success(data))
 
@@ -71,8 +83,24 @@ class InstagramManager: CommonBackendType {
         }
 
 
+    }
 
+    
+    static func test2()  {
 
+        let url = "https://api.instagram.com/oauth/authorize?client_id=\(appId)"
+
+        
+        AF.request(url, method: .get).responseString { response in
+            switch response.result {
+            case .success(let data):
+                print(data)
+
+            case .failure(let err):
+                print(err)
+
+            }
+        }
 
 
 
@@ -119,6 +147,10 @@ class Datum: Codable {
         self.mediaURL = mediaURL
         self.username = username
         self.timestamp = timestamp
+    }
+    
+    func toCampaign() -> CampaignModel {
+        return CampaignModel(url: mediaURL, brandName: "\(username)", isNew: true)
     }
 }
 
