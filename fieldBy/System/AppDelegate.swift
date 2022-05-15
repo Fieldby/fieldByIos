@@ -32,15 +32,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            toAuth()
 //        }
 
-        toAuth()
-//        uiTest()
+//        toAuth()
+        uiTest()
         
         return true
 
     }
     
     func uiTest() {
-        let vc = UIStoryboard(name: "UserInfo", bundle: nil).instantiateViewController(withIdentifier: "userinfoVC") as! UserInfoViewController
+        let vc = UIStoryboard(name: "UserInfo", bundle: nil).instantiateViewController(withIdentifier: "golfinfoVC") as! GolfInfoViewController
         window?.rootViewController = vc
         window?.makeKeyAndVisible()
     }

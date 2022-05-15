@@ -8,5 +8,7 @@
 import Foundation
 
 class GolfInfoViewModel: NSObject {
-    
+    var strokeIndex: Int?
+    var careerIndex: Int?
+    var roundingIndex: Int?
 }

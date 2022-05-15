@@ -27,6 +27,8 @@ class UserInfoViewModel: NSObject {
     
     var selectedIndex: Int? = nil
     
+    var pushGolfInfoVC: (() -> Void)!
+    
     override init() {
         super.init()
         

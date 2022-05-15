@@ -18,6 +18,7 @@
 		D1121D222830E31500149263 /* GolfInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1121D212830E31500149263 /* GolfInfo.swift */; };
 		D1121D252830E49A00149263 /* GolfInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1121D242830E49A00149263 /* GolfInfoViewController.swift */; };
 		D1121D272830E4A300149263 /* GolfInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1121D262830E4A300149263 /* GolfInfoViewModel.swift */; };
+		D1121D2A2830F3D000149263 /* RoundingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1121D292830F3D000149263 /* RoundingCell.swift */; };
 		D11FD9AE281F6D50008AE32A /* PhoneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11FD9AD281F6D50008AE32A /* PhoneViewModel.swift */; };
 		D11FD9B1281F74A5008AE32A /* CheckNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11FD9B0281F74A5008AE32A /* CheckNumberViewController.swift */; };
 		D1329DF3281FF2AD00760DDA /* CommonViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1329DF2281FF2AD00760DDA /* CommonViews.swift */; };
@@ -84,6 +85,7 @@
 		D1121D212830E31500149263 /* GolfInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GolfInfo.swift; sourceTree = "<group>"; };
 		D1121D242830E49A00149263 /* GolfInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GolfInfoViewController.swift; sourceTree = "<group>"; };
 		D1121D262830E4A300149263 /* GolfInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GolfInfoViewModel.swift; sourceTree = "<group>"; };
+		D1121D292830F3D000149263 /* RoundingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundingCell.swift; sourceTree = "<group>"; };
 		D11FD9AD281F6D50008AE32A /* PhoneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneViewModel.swift; sourceTree = "<group>"; };
 		D11FD9B0281F74A5008AE32A /* CheckNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckNumberViewController.swift; sourceTree = "<group>"; };
 		D1329DF2281FF2AD00760DDA /* CommonViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonViews.swift; sourceTree = "<group>"; };
@@ -209,6 +211,14 @@
 			path = GolfInfo;
 			sourceTree = "<group>";
 		};
+		D1121D282830F3CA00149263 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				D1121D292830F3D000149263 /* RoundingCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		D11FD9AC281F6D44008AE32A /* Phone */ = {
 			isa = PBXGroup;
 			children = (
@@ -331,6 +341,7 @@
 		D1B8EB8A282FC1C600576970 /* UserInfo */ = {
 			isa = PBXGroup;
 			children = (
+				D1121D282830F3CA00149263 /* Cell */,
 				D1121D232830E48D00149263 /* GolfInfo */,
 				D1B8EB8B282FC20800576970 /* UserInfo.storyboard */,
 				D1B8EB8D282FC21300576970 /* UserInfoViewController.swift */,
@@ -570,6 +581,7 @@
 				D1B8EB90282FC21A00576970 /* UserInfoViewModel.swift in Sources */,
 				D16A5FC6282B9AE200A75D9E /* BarCell.swift in Sources */,
 				D16A5FC4282B82F700A75D9E /* ViewController+.swift in Sources */,
+				D1121D2A2830F3D000149263 /* RoundingCell.swift in Sources */,
 				D1C89EEB2822B70300DAA2F4 /* ProgressViewController.swift in Sources */,
 				D1FC0803282D3FE8006ED153 /* DetailCampaignViewController.swift in Sources */,
 				D1ED9E13282D1A9100855641 /* CampaignManager.swift in Sources */,

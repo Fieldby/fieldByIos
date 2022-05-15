@@ -266,7 +266,8 @@ class UserInfoViewController: UIViewController {
                     regionCollectionView.isHidden = false
 
                 case .simpleAddress:
-                    break
+                    viewModel.pushGolfInfoVC()
+                    
                 }
                 
             })
@@ -294,6 +295,11 @@ class UserInfoViewController: UIViewController {
                 }
             })
             .disposed(by: rx.disposeBag)
+        
+        viewModel.pushGolfInfoVC = { [unowned self] in
+            let vc = storyboard?.instantiateViewController(withIdentifier: "golfinfoVC") as! GolfInfoViewController
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
         
     }
     
@@ -343,6 +349,7 @@ class RegionCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         containerView.layer.cornerRadius = 13
+        unselected()
     }
     
     func selected() {
