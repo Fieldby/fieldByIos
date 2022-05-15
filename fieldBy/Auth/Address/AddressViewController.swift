@@ -92,7 +92,7 @@ class AddressViewController: UIViewController {
                         indicator.isHidden = true
                     }
                 case .detail:
-                    pushInstaVC()
+                    pushUserInfoVC()
                 }
             })
             .disposed(by: rx.disposeBag)
@@ -159,10 +159,10 @@ class AddressViewController: UIViewController {
         self.bottomView.transform = .identity
     }
 
-    private func pushInstaVC() {
+    private func pushUserInfoVC() {
         
         AuthManager.saveAddressInfo(juso: juso, detail: detailTextField.text!)
-        let vc = storyboard?.instantiateViewController(withIdentifier: "userinfoVC") as! UserInfoViewController
+        let vc = UIStoryboard(name: "UserInfo", bundle: nil).instantiateViewController(withIdentifier: "userinfoVC") as! UserInfoViewController
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

@@ -45,6 +45,9 @@ class AuthManager: CommonBackendType {
         }
     }
     
+    static func saveUserInfo(key: String, value: Any) {
+        voidPost(path: "Users/\(MyUserModel.shared.uuid!)", key: key, value: value)
+    }
     
     static func saveInfo(key: String, value: Any) -> Completable {
         return simplePost(path: "/Users/\(MyUserModel.shared.uuid ?? "")/\(key)", body: value)

@@ -25,6 +25,8 @@ class UserInfoViewModel: NSObject {
     
     let regions = ["서울", "경기", "인천", "부산", "대구", "울산", "세종", "광주", "강원", "충남", "충북", "경남", "경북", "전남", "전북", "제주"]
     
+    var selectedIndex: Int? = nil
+    
     override init() {
         super.init()
         
@@ -55,6 +57,11 @@ class UserInfoViewModel: NSObject {
             .subscribe(onNext: { [unowned self] nickName, job, birthDay, height in
                 
                 //MARK: 유저 정보 저장
+                AuthManager.saveUserInfo(key: "nickName", value: nickName)
+                AuthManager.saveUserInfo(key: "job", value: job)
+                AuthManager.saveUserInfo(key: "birthDay", value: birthDay)
+                AuthManager.saveUserInfo(key: "height", value: height)
+                AuthManager.saveUserInfo(key: "simpleAddress", value: regions[selectedIndex!])
                 
             })
             .disposed(by: rx.disposeBag)

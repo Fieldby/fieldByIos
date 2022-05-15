@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>958654623001-6gpf1r8i0pigmkmphkeelh6dkgq16n5m.apps.googleusercontent.com</string>
+	<string>513070035696-9a5i17qq07lmoc31ara2ksecs7k6nf6i.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.958654623001-6gpf1r8i0pigmkmphkeelh6dkgq16n5m</string>
+	<string>com.googleusercontent.apps.513070035696-9a5i17qq07lmoc31ara2ksecs7k6nf6i</string>
 	<key>API_KEY</key>
-	<string>AIzaSyBuJyiYtUI_VSEOI2UBq6GibLGfgahpGF4</string>
+	<string>AIzaSyDwJOGmXBHtD-9B8R7isHdNv86lOAkgyMk</string>
 	<key>GCM_SENDER_ID</key>
-	<string>958654623001</string>
+	<string>513070035696</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>shawnApp.fieldBy</string>
 	<key>PROJECT_ID</key>
-	<string>fieldby-12c23</string>
+	<string>fieldby-web</string>
 	<key>STORAGE_BUCKET</key>
-	<string>fieldby-12c23.appspot.com</string>
+	<string>fieldby-web.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:958654623001:ios:1c4673072f4bf1d6c8e988</string>
+	<string>1:513070035696:ios:c9d33db8fc91f462830835</string>
 	<key>DATABASE_URL</key>
-	<string>https://fieldby-12c23-default-rtdb.asia-southeast1.firebasedatabase.app</string>
+	<string>https://fieldby-web-default-rtdb.asia-southeast1.firebasedatabase.app</string>
 </dict>
 </plist>

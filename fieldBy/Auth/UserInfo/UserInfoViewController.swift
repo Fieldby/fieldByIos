@@ -13,6 +13,7 @@ import NSObject_Rx
 class UserInfoViewController: UIViewController {
 
     
+    @IBOutlet weak var mainLabel: UILabel!
     @IBOutlet weak var numberLabel: UILabel!
     
     @IBOutlet weak var heightView: UIView!
@@ -32,16 +33,16 @@ class UserInfoViewController: UIViewController {
     
     @IBOutlet weak var regionCollectionView: UICollectionView!
     
+    @IBOutlet weak var finalButton: UIButton!
     
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var bottomView: UIView!
+    @IBOutlet weak var finalView: UIView!
     
     @IBOutlet var viewModel: UserInfoViewModel!
     
     private let statusRelay = BehaviorRelay<Status>(value: .nickName)
     private var status = Status.nickName
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,9 +72,12 @@ class UserInfoViewController: UIViewController {
         heightContainer.layer.borderWidth = 1
         heightContainer.layer.borderColor = UIColor.main.cgColor
         
+        finalButton.layer.cornerRadius = 13
+        
         bottomView.isHidden = true
         
         regionCollectionView.isHidden = true
+        finalView.isHidden = true
     }
     
     private func bind() {
@@ -164,6 +168,8 @@ class UserInfoViewController: UIViewController {
                     nextButton.setTitle("중복 확인", for: .normal)
                     
                     nickNameTextField.isUserInteractionEnabled = true
+                    
+                    mainLabel.text = "닉네임을 입력해주세요."
 
                 case .job:
                     jobView.isHidden = false
@@ -176,6 +182,8 @@ class UserInfoViewController: UIViewController {
                     
                     nickNameTextField.isUserInteractionEnabled = false
                     
+                    mainLabel.text = "직업을 입력해주세요."
+                    
                 case .birthDay:
                     jobView.isHidden = false
                     birthDayView.isHidden = false
@@ -186,6 +194,8 @@ class UserInfoViewController: UIViewController {
                     
                     jobTextField.isUserInteractionEnabled = false
                     
+                    mainLabel.text = "생년월일을 입력해주세요."
+                    
                 case .height:
                     
                     jobView.isHidden = false
@@ -195,6 +205,16 @@ class UserInfoViewController: UIViewController {
                     numberLabel.text = "(4/5)"
                     
                     birthDayTextField.isUserInteractionEnabled = false
+                    
+                    mainLabel.text = "키를 입력해주세요."
+                    
+                case .simpleAddress:
+                    bottomView.isHidden = true
+                    finalView.isHidden = false
+                    
+                    numberLabel.text = "(5/5)"
+                    
+                    mainLabel.text = "지역을 선택해주세요."
                     
                 }
             })
@@ -214,7 +234,6 @@ class UserInfoViewController: UIViewController {
         nextButton.rx.tap
             .throttle(.seconds(2), latest: false, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [unowned self] in
-                
 
                 switch status {
                 case .nickName:
@@ -241,14 +260,41 @@ class UserInfoViewController: UIViewController {
                     nextButton.isEnabled = false
                     
                 case .height:
-                    
+                    status = .simpleAddress
+                    statusRelay.accept(.simpleAddress)
                     heightTextField.resignFirstResponder()
                     regionCollectionView.isHidden = false
-                    
+
+                case .simpleAddress:
+                    break
                 }
                 
             })
             .disposed(by: rx.disposeBag)
+        
+        regionCollectionView.rx.itemSelected
+            .subscribe(onNext: { [unowned self] index in
+                if let idx = viewModel.selectedIndex {
+                    let cell = regionCollectionView.cellForItem(at: [0, idx]) as! RegionCell
+                    cell.unselected()
+                }
+                
+                let cell = regionCollectionView.cellForItem(at: index) as! RegionCell
+                cell.selected()
+                
+                viewModel.selectedIndex = index.row
+            })
+            .disposed(by: rx.disposeBag)
+        
+        finalButton.rx.tap
+            .throttle(.seconds(3), latest: false, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] in
+                if viewModel.selectedIndex != nil {
+                    viewModel.saveInfo()
+                }
+            })
+            .disposed(by: rx.disposeBag)
+        
     }
     
     enum Status {
@@ -256,6 +302,7 @@ class UserInfoViewController: UIViewController {
         case job
         case birthDay
         case height
+        case simpleAddress
     }
     
     @objc func keyboardWillShowNotification(_ notification: Notification) {
@@ -274,6 +321,7 @@ class UserInfoViewController: UIViewController {
     @objc func keyboardWillHideNotification(_ notification: Notification) {
         bottomView.isHidden = true
         bottomView.transform = .identity
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -297,4 +345,13 @@ class RegionCell: UICollectionViewCell {
         containerView.layer.cornerRadius = 13
     }
     
+    func selected() {
+        containerView.backgroundColor = .main
+        mainLabel.textColor = .white
+    }
+    
+    func unselected() {
+        mainLabel.textColor = UIColor(red: 48, green: 48, blue: 48)
+        containerView.backgroundColor = .fieldByGray
+    }
 }

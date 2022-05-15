@@ -82,6 +82,10 @@ class CommonBackendType: NSObject {
         }
     }
     
+    static func voidPost(path: String, key: String, value: Any) {
+        Database.database().reference().child(path).child(key).setValue(value)
+    }
+    
     static func simplePost(path: String, body: Any) -> Completable {
         return Completable.create() { completable in
             

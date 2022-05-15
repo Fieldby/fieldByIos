@@ -32,7 +32,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            toAuth()
 //        }
 
-        uiTest()
+        toAuth()
+//        uiTest()
         
         return true
 

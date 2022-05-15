@@ -18,6 +18,14 @@
 				<string>app-1-958654623001-ios-1c4673072f4bf1d6c8e988</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.513070035696-9a5i17qq07lmoc31ara2ksecs7k6nf6i</string>
+			</array>
+		</dict>
 	</array>
 	<key>FacebookAppID</key>
 	<string>573051764154148</string>
