@@ -22,6 +22,7 @@
 		D11FD9AE281F6D50008AE32A /* PhoneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11FD9AD281F6D50008AE32A /* PhoneViewModel.swift */; };
 		D11FD9B1281F74A5008AE32A /* CheckNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11FD9B0281F74A5008AE32A /* CheckNumberViewController.swift */; };
 		D1329DF3281FF2AD00760DDA /* CommonViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1329DF2281FF2AD00760DDA /* CommonViews.swift */; };
+		D145BBEC2831E62A009383D8 /* FinalInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D145BBEB2831E62A009383D8 /* FinalInfoViewController.swift */; };
 		D15391C928210A4900E12140 /* CommonBackendType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15391C828210A4900E12140 /* CommonBackendType.swift */; };
 		D16A5FC4282B82F700A75D9E /* ViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16A5FC3282B82F700A75D9E /* ViewController+.swift */; };
 		D16A5FC6282B9AE200A75D9E /* BarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16A5FC5282B9AE200A75D9E /* BarCell.swift */; };
@@ -89,6 +90,7 @@
 		D11FD9AD281F6D50008AE32A /* PhoneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneViewModel.swift; sourceTree = "<group>"; };
 		D11FD9B0281F74A5008AE32A /* CheckNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckNumberViewController.swift; sourceTree = "<group>"; };
 		D1329DF2281FF2AD00760DDA /* CommonViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonViews.swift; sourceTree = "<group>"; };
+		D145BBEB2831E62A009383D8 /* FinalInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalInfoViewController.swift; sourceTree = "<group>"; };
 		D15391C828210A4900E12140 /* CommonBackendType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonBackendType.swift; sourceTree = "<group>"; };
 		D16A5FC3282B82F700A75D9E /* ViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+.swift"; sourceTree = "<group>"; };
 		D16A5FC5282B9AE200A75D9E /* BarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarCell.swift; sourceTree = "<group>"; };
@@ -245,6 +247,14 @@
 			path = Singletons;
 			sourceTree = "<group>";
 		};
+		D145BBEA2831E619009383D8 /* FinalInfo */ = {
+			isa = PBXGroup;
+			children = (
+				D145BBEB2831E62A009383D8 /* FinalInfoViewController.swift */,
+			);
+			path = FinalInfo;
+			sourceTree = "<group>";
+		};
 		D15391C728210A4100E12140 /* Backend */ = {
 			isa = PBXGroup;
 			children = (
@@ -343,6 +353,7 @@
 			children = (
 				D1121D282830F3CA00149263 /* Cell */,
 				D1121D232830E48D00149263 /* GolfInfo */,
+				D145BBEA2831E619009383D8 /* FinalInfo */,
 				D1B8EB8B282FC20800576970 /* UserInfo.storyboard */,
 				D1B8EB8D282FC21300576970 /* UserInfoViewController.swift */,
 				D1B8EB8F282FC21A00576970 /* UserInfoViewModel.swift */,
@@ -586,6 +597,7 @@
 				D1FC0803282D3FE8006ED153 /* DetailCampaignViewController.swift in Sources */,
 				D1ED9E13282D1A9100855641 /* CampaignManager.swift in Sources */,
 				D19A9DAB2822C4C700552C15 /* View+.swift in Sources */,
+				D145BBEC2831E62A009383D8 /* FinalInfoViewController.swift in Sources */,
 				D1A99CD02821220300E414E4 /* AddressViewModel.swift in Sources */,
 				D1A99CCE28211F2500E414E4 /* Juso.swift in Sources */,
 				D1A99CD32821239E00E414E4 /* AddressCell.swift in Sources */,
