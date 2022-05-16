@@ -162,7 +162,7 @@ class AddressViewController: UIViewController {
     private func pushUserInfoVC() {
         
         AuthManager.saveAddressInfo(juso: juso, detail: detailTextField.text!)
-        let vc = UIStoryboard(name: "UserInfo", bundle: nil).instantiateViewController(withIdentifier: "userinfoVC") as! UserInfoViewController
+        let vc = UIStoryboard(name: "UserInfo", bundle: nil).instantiateViewController(withIdentifier: "infostartVC") as! InfoStartViewController
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

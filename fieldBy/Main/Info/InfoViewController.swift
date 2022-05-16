@@ -53,11 +53,11 @@ class InfoViewController: UIViewController {
 
             MyUserModel.shared.fbToken = result.token!.tokenString
             print("token: \(result.token?.tokenString)")
-            print("granted: \(result.grantedPermissions)")
+            print("user: \(result)")
             print("declined: \(result.declinedPermissions)")
             
             
-            InstagramManager.getPages(token: result.token!.tokenString)
+            InstagramManager.getFBInfo(token: result.token!.tokenString)
     
             // result properties
             //  - token : 액세스 토큰

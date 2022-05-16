@@ -266,7 +266,7 @@ class UserInfoViewController: UIViewController {
                     regionCollectionView.isHidden = false
 
                 case .simpleAddress:
-                    viewModel.pushGolfInfoVC()
+                    break
                     
                 }
                 
@@ -292,6 +292,7 @@ class UserInfoViewController: UIViewController {
             .subscribe(onNext: { [unowned self] in
                 if viewModel.selectedIndex != nil {
                     viewModel.saveInfo()
+                    viewModel.pushGolfInfoVC()
                 }
             })
             .disposed(by: rx.disposeBag)

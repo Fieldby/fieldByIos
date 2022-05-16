@@ -58,6 +58,16 @@ class AuthManager: CommonBackendType {
         Database.database().reference().child("Users").child(MyUserModel.shared.uuid).child("address/detail").setValue(detail)
     }
     
+    static func fetchUserInfo() -> Observable<Bool> {
+        Observable.create() { observable in
+            
+            observable.onNext(true)
+            
+            
+            return Disposables.create()
+        }
+    }
+    
     static func fbPage() {
         
         //https://graph.instagram.com/refresh_access_token

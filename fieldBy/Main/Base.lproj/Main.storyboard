@@ -4,6 +4,38 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <scenes/>
+    <scenes>
+        <!--Default View Controller-->
+        <scene sceneID="276-Js-k92">
+            <objects>
+                <viewController storyboardIdentifier="defaultVC" id="2in-kv-LN3" customClass="DefaultViewController" customModule="fieldBy" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="VJv-GW-XJI">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mainLogo" translatesAutoresizingMaskIntoConstraints="NO" id="UhP-z2-KdS">
+                                <rect key="frame" x="96.5" y="414.5" width="221" height="67"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="UhP-z2-KdS" firstAttribute="centerY" secondItem="VJv-GW-XJI" secondAttribute="centerY" id="0QF-dS-sMZ"/>
+                            <constraint firstItem="UhP-z2-KdS" firstAttribute="centerX" secondItem="VJv-GW-XJI" secondAttribute="centerX" id="fLl-jc-hgL"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GGg-aj-d6T" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="279" y="249"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="mainLogo" width="221" height="67"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

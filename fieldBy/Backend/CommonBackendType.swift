@@ -13,7 +13,7 @@ import FirebaseDatabase
 
 class CommonBackendType: NSObject {
     
-    static let baseUrl = "https://fieldby-12c23-default-rtdb.asia-southeast1.firebasedatabase.app"
+    static let baseUrl = "https://fieldby-web-default-rtdb.asia-southeast1.firebasedatabase.app"
 
     static func decode<T: Decodable>(jsonData: Data, type: T.Type) -> T? {
         do {

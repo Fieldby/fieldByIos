@@ -16,11 +16,7 @@ class InstagramManager: CommonBackendType {
     static let secretCode = "9dc3ba461c6451376051cf5e939d8e60"
     static let token = "IGQVJVZAEVlQVp0eGR6T1l2ZA3Ayem9IdWM5bnFRaFNWZAmwzcEM3c2NRc3pVdmI5UlkzUHpkTVZARWkxoM0RucGlUMGZAIcW00VE5odjdyT0hhTG9LZADc2YXBFenpueTlheXU2R0JqdFNLVWh5VlNpdFZAZAUwZDZD"
     static let longToken = "IGQVJWcXpZALU5udzJZAN3BJUjZAHR1FscFAwd1V1N3JCcVpGajVOX1Q4Tjk4WFVXcVFuRjVnbkNVamJqUGZA1QzRFeHRSQV9YNEtZAR042djgxa0JuTEJzYk5ncGtHM291R1B5MmlnYXNB"
-    //https://graph.instagram.com/refresh_access_token
-    //?grant_type=ig_refresh_token
-    //&access_token={단기토큰}
-    
-    
+
 //    static func test() {
 //        let path = "https://graph.instagram.com/refresh_access_token?grant_type=ig_refresh_token&access_token=\(token)"
 //
@@ -35,8 +31,12 @@ class InstagramManager: CommonBackendType {
 //
 //    }
     
-    static func getPages(token: String) {
-        let url = "https://graph.instagram.com/me/media?&access_token=\(token)"
+    
+    //페이지 접근 토큰, 페이지 이름, 페이지 id
+    static func getFBInfo(token: String) {
+        
+        
+        let url = "https://graph.instagram.com/v13.0/me/accounts?fields=access_token,name,id&access_token=\(token)"
         AF.request(url, method: .get).responseString { response in
             switch response.result {
             case .success(let str):
