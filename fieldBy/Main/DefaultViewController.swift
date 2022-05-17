@@ -9,6 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import NSObject_Rx
+import FirebaseAuth
 
 class DefaultViewController: UIViewController {
     
@@ -26,45 +27,45 @@ class DefaultViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        
         checkUserValid()
             .subscribe(onNext: { [unowned self] bool in
-                print(bool)
-                if bool {
-                    toMain()
-                } else {
-//                    toAuth()
-                    uiTest()
-                }
-
+                bool ? toMain() : toAuth()
             })
-            .disposed(by: bag)
+            .disposed(by: rx.disposeBag)
 
     }
     
     private func checkUserValid() -> Observable<Bool> {
         Observable.create() { observable in
             
-            
-            CampaignManager.shared.fetch()
-                .subscribe {
-                    print("good")
-                } onError: { err in
-                    print(err)
-                }
-
-            
-            observable.onNext(true)
-            
-            
+            if let uuid = Auth.auth().currentUser?.uid {
+                
+                AuthManager.shared.fetch(uuid: uuid)
+                    .subscribe {
+                        observable.onNext(true)
+                    } onError: { err in
+                        observable.onNext(false)
+                    }
+            }
             return Disposables.create()
         }
     }
 
     private func toMain() {
-        let vc = MainTabBarController()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true)
+        CampaignManager.shared.fetch()
+            .subscribe { [unowned self] in
+                let vc = MainTabBarController()
+                vc.modalPresentationStyle = .fullScreen
+                present(vc, animated: true)
+            } onError: { [unowned self] error in
+                print(error)
+                let vc = MainTabBarController()
+                vc.modalPresentationStyle = .fullScreen
+                present(vc, animated: true)
+            }
+            .disposed(by: rx.disposeBag)
+
+
     }
 
     private func toAuth() {

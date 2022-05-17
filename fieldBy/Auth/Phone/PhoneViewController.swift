@@ -333,7 +333,7 @@ class PhoneViewController: UIViewController {
             twoLabel.isHidden = true
             bottomView.isHidden = true
         }
-        viewModel.checkNumber()
+        viewModel.checkNumber(number: phoneTextField.text ?? "")
             .subscribe(onNext: { [unowned self] bool in
                 indicator.stopAnimating()
                 indicator.isHidden = true

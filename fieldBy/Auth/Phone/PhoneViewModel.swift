@@ -59,12 +59,9 @@ class PhoneViewModel: NSObject {
             
     }
     
-    func checkNumber() -> Observable<Bool> {
-        
-        return Observable.zip(AuthManager.shared.certificatedNumberList().asObservable(), numberSubject)
-            .map { list, number -> Bool in
-                return list.contains(number)
-            }
+    func checkNumber(number: String) -> Observable<Bool> {
+        return AuthManager.shared.checkNumberValid(number: number)
+
     }
     
     func saveName(name: String) -> Completable {

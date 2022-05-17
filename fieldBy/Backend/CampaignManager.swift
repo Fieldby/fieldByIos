@@ -29,6 +29,7 @@ class CampaignManager: CommonBackendType {
                     campaignArray.append(campaignModel)
                 }
                 campaignArrayRelay.accept(campaignArray)
+                completable(.completed)
             }
                 
             return Disposables.create()

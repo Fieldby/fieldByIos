@@ -27,4 +27,5 @@ struct Juso: Codable {
     var roadAddr: String!
     var jibunAddr: String!
     var zipNo: String!
+    var detail: String?
 }

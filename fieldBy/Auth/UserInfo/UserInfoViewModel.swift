@@ -62,7 +62,7 @@ class UserInfoViewModel: NSObject {
                 AuthManager.saveUserInfo(key: "nickName", value: nickName)
                 AuthManager.saveUserInfo(key: "job", value: job)
                 AuthManager.saveUserInfo(key: "birthDay", value: birthDay)
-                AuthManager.saveUserInfo(key: "height", value: height)
+                AuthManager.saveUserInfo(key: "height", value: Int(height)!)
                 AuthManager.saveUserInfo(key: "simpleAddress", value: regions[selectedIndex!])
                 
             })

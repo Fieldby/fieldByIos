@@ -62,7 +62,7 @@ class CheckNumberViewModel: NSObject {
                 }
                 
                 if let result = result {
-                    MyUserModel.shared.uuid = result.user.uid
+                    AuthManager.shared.userUUID = result.user.uid
                     
                     AuthManager.saveInfo(key: "phoneNumber", value: phoneNumber)
                         .subscribe {

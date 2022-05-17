@@ -50,7 +50,7 @@ class InfoViewController: UIViewController {
                 return
             }
 
-            MyUserModel.shared.fbToken = result.token!.tokenString
+            AuthManager.shared.fbToken = result.token!.tokenString
 //            print("token: \(result.token?.tokenString)")
 //            print("user: \(result.grantedPermissions)")
 //

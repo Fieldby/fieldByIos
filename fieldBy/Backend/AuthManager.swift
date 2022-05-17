@@ -14,12 +14,42 @@ import Firebase
 class AuthManager: CommonBackendType {
     static let shared = AuthManager()
     
+    var myUserModel: MyUserModel?
+    
+    var fbToken: String!
+    var userUUID: String!
     static let certificatedNumberPath = "/certificatedNumberList"
     static private let addressKey = "U01TX0FVVEgyMDIyMDUwMzE3MjM0NDExMjUzMDc="
     
+    func fetch(uuid: String) -> Completable {
+        return Completable.create() { [unowned self] completable in
+            
+            ref.child("users").child(uuid)
+                .observeSingleEvent(of: .value) { [unowned self] dataSnapShot in
+                    if let myUserModel = MyUserModel(data: dataSnapShot) {
+                        self.myUserModel = myUserModel
+                        completable(.completed)
+                    } else {
+                        completable(.error(FetchError.decodingFailed))
+                    }
+                }
+            
+            return Disposables.create()
+        }
+    }
     
-    func certificatedNumberList() -> Single<[String]> {
-        return Single.create() { ob in
+    func checkNumberValid(number: String) -> Observable<Bool> {
+        return Observable.create() { [unowned self] observable in
+            
+            ref.child("certificatedNumberList").child(number)
+                .observeSingleEvent(of: .value) { data in
+                    if let bool = data.value as? Bool {
+                        observable.onNext(bool)
+                    } else {
+                        observable.onNext(false)
+                    }
+                    
+                }
             return Disposables.create()
             
         }
@@ -51,16 +81,16 @@ class AuthManager: CommonBackendType {
     }
     
     static func saveUserInfo(key: String, value: Any) {
-        voidPost(path: "users/\(MyUserModel.shared.uuid!)", key: key, value: value)
+        voidPost(path: "users/\(AuthManager.shared.userUUID!)", key: key, value: value)
     }
     
     static func saveInfo(key: String, value: Any) -> Completable {
-        return simplePost(path: "/Users/\(MyUserModel.shared.uuid ?? "")/\(key)", body: value)
+        return simplePost(path: "/users/\(AuthManager.shared.userUUID!)/\(key)", body: value)
     }
     
     static func saveAddressInfo(juso: Juso, detail: String) {
-        Database.database().reference().child("users").child(MyUserModel.shared.uuid).child("address").setValue(["zipNo": juso.zipNo, "roadAddr": juso.roadAddr, "jibunAddr": juso.jibunAddr])
-        Database.database().reference().child("users").child(MyUserModel.shared.uuid).child("address/detail").setValue(detail)
+        Database.database().reference().child("users").child(AuthManager.shared.userUUID).child("address").setValue(["zipNo": juso.zipNo, "roadAddr": juso.roadAddr, "jibunAddr": juso.jibunAddr])
+        Database.database().reference().child("users").child(AuthManager.shared.userUUID).child("address/detail").setValue(detail)
     }
     
     static func fetchUserInfo() -> Observable<Bool> {
