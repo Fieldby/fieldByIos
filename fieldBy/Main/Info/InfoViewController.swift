@@ -18,8 +18,6 @@ class InfoViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     
     
-    let testSubject = BehaviorSubject<[Datum]>(value: [])
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -33,6 +31,7 @@ class InfoViewController: UIViewController {
         facebookLoginButton.addTarget(self, action: #selector(clickFacebookLogin), for: .touchUpInside)
 
     }
+    
     
     @IBAction
     func clickFacebookLogin() {
@@ -52,12 +51,14 @@ class InfoViewController: UIViewController {
             }
 
             MyUserModel.shared.fbToken = result.token!.tokenString
-            print("token: \(result.token?.tokenString)")
-            print("user: \(result)")
-            print("declined: \(result.declinedPermissions)")
+//            print("token: \(result.token?.tokenString)")
+//            print("user: \(result.grantedPermissions)")
+//
+//            InstagramManager.shared.fetchIGId(token: result.token!.tokenString)
+
+
+
             
-            
-            InstagramManager.getFBInfo(token: result.token!.tokenString)
     
             // result properties
             //  - token : 액세스 토큰
@@ -69,11 +70,11 @@ class InfoViewController: UIViewController {
         
         
     }
+    
+
 
     @IBAction func click(_ sender: Any) {
-        InstagramManager.test2()
 
-        
     }
     
 }

@@ -6,11 +6,19 @@
 //
 
 import FirebaseStorage
+import RxSwift
+import RxCocoa
 
 class CampaignManager: CommonBackendType {
     
-    static func fetch() {
-        
+    static let shared = CampaignManager()
+    
+    func fetch() -> Completable {
+        return Completable.create() { completable in
+         
+            
+            return Disposables.create()
+        }
     }
     
 }

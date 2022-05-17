@@ -46,7 +46,7 @@ class AuthManager: CommonBackendType {
     }
     
     static func saveUserInfo(key: String, value: Any) {
-        voidPost(path: "Users/\(MyUserModel.shared.uuid!)", key: key, value: value)
+        voidPost(path: "users/\(MyUserModel.shared.uuid!)", key: key, value: value)
     }
     
     static func saveInfo(key: String, value: Any) -> Completable {
@@ -54,8 +54,8 @@ class AuthManager: CommonBackendType {
     }
     
     static func saveAddressInfo(juso: Juso, detail: String) {
-        Database.database().reference().child("Users").child(MyUserModel.shared.uuid).child("address").setValue(["zipNo": juso.zipNo, "roadAddr": juso.roadAddr, "jibunAddr": juso.jibunAddr])
-        Database.database().reference().child("Users").child(MyUserModel.shared.uuid).child("address/detail").setValue(detail)
+        Database.database().reference().child("users").child(MyUserModel.shared.uuid).child("address").setValue(["zipNo": juso.zipNo, "roadAddr": juso.roadAddr, "jibunAddr": juso.jibunAddr])
+        Database.database().reference().child("users").child(MyUserModel.shared.uuid).child("address/detail").setValue(detail)
     }
     
     static func fetchUserInfo() -> Observable<Bool> {

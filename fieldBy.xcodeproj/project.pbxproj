@@ -26,6 +26,8 @@
 		D145BBEE2831EABB009383D8 /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = D145BBED2831EABB009383D8 /* Styles.swift */; };
 		D145BBF1283224D2009383D8 /* InfoStartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D145BBF0283224D2009383D8 /* InfoStartViewController.swift */; };
 		D145BBF32832285B009383D8 /* DefaultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D145BBF22832285B009383D8 /* DefaultViewController.swift */; };
+		D14A198C28336C2C00542F2B /* FBInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14A198B28336C2C00542F2B /* FBInfo.swift */; };
+		D14A198F28336D6300542F2B /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14A198E28336D6300542F2B /* Error.swift */; };
 		D15391C928210A4900E12140 /* CommonBackendType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15391C828210A4900E12140 /* CommonBackendType.swift */; };
 		D16A5FC4282B82F700A75D9E /* ViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16A5FC3282B82F700A75D9E /* ViewController+.swift */; };
 		D16A5FC6282B9AE200A75D9E /* BarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16A5FC5282B9AE200A75D9E /* BarCell.swift */; };
@@ -97,6 +99,8 @@
 		D145BBED2831EABB009383D8 /* Styles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
 		D145BBF0283224D2009383D8 /* InfoStartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoStartViewController.swift; sourceTree = "<group>"; };
 		D145BBF22832285B009383D8 /* DefaultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultViewController.swift; sourceTree = "<group>"; };
+		D14A198B28336C2C00542F2B /* FBInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBInfo.swift; sourceTree = "<group>"; };
+		D14A198E28336D6300542F2B /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		D15391C828210A4900E12140 /* CommonBackendType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonBackendType.swift; sourceTree = "<group>"; };
 		D16A5FC3282B82F700A75D9E /* ViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+.swift"; sourceTree = "<group>"; };
 		D16A5FC5282B9AE200A75D9E /* BarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarCell.swift; sourceTree = "<group>"; };
@@ -196,6 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				D11155E5282A650300C9ECA1 /* fieldBy.entitlements */,
+				D14A198D28336D5200542F2B /* Error */,
 				D1A99CCC28211F1F00E414E4 /* Models */,
 				D15391C728210A4100E12140 /* Backend */,
 				D1329DF1281FF2A200760DDA /* Singletons */,
@@ -269,6 +274,40 @@
 			path = InfoStart;
 			sourceTree = "<group>";
 		};
+		D14A198828336BFF00542F2B /* Facebook */ = {
+			isa = PBXGroup;
+			children = (
+				D14A198B28336C2C00542F2B /* FBInfo.swift */,
+			);
+			path = Facebook;
+			sourceTree = "<group>";
+		};
+		D14A198928336C0500542F2B /* Address */ = {
+			isa = PBXGroup;
+			children = (
+				D1A99CCD28211F2500E414E4 /* Juso.swift */,
+			);
+			path = Address;
+			sourceTree = "<group>";
+		};
+		D14A198A28336C1100542F2B /* User */ = {
+			isa = PBXGroup;
+			children = (
+				D145BBED2831EABB009383D8 /* Styles.swift */,
+				D1121D212830E31500149263 /* GolfInfo.swift */,
+				D1EA5D9E282535E7000E35A0 /* MyUserModel.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		D14A198D28336D5200542F2B /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				D14A198E28336D6300542F2B /* Error.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
 		D15391C728210A4100E12140 /* Backend */ = {
 			isa = PBXGroup;
 			children = (
@@ -310,11 +349,10 @@
 		D1A99CCC28211F1F00E414E4 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				D14A198A28336C1100542F2B /* User */,
+				D14A198928336C0500542F2B /* Address */,
+				D14A198828336BFF00542F2B /* Facebook */,
 				D1FC0806282D442B006ED153 /* Campaign */,
-				D1A99CCD28211F2500E414E4 /* Juso.swift */,
-				D1EA5D9E282535E7000E35A0 /* MyUserModel.swift */,
-				D1121D212830E31500149263 /* GolfInfo.swift */,
-				D145BBED2831EABB009383D8 /* Styles.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -610,6 +648,7 @@
 				D16A5FC6282B9AE200A75D9E /* BarCell.swift in Sources */,
 				D16A5FC4282B82F700A75D9E /* ViewController+.swift in Sources */,
 				D1121D2A2830F3D000149263 /* RoundingCell.swift in Sources */,
+				D14A198F28336D6300542F2B /* Error.swift in Sources */,
 				D1C89EEB2822B70300DAA2F4 /* ProgressViewController.swift in Sources */,
 				D1FC0803282D3FE8006ED153 /* DetailCampaignViewController.swift in Sources */,
 				D1ED9E13282D1A9100855641 /* CampaignManager.swift in Sources */,
@@ -622,6 +661,7 @@
 				D1AA5CB7281EA50700279CC8 /* SigninViewController.swift in Sources */,
 				D1AA5CBA281EAEAD00279CC8 /* Color+.swift in Sources */,
 				D1A99CC928211BAE00E414E4 /* AddressViewController.swift in Sources */,
+				D14A198C28336C2C00542F2B /* FBInfo.swift in Sources */,
 				D11FD9AE281F6D50008AE32A /* PhoneViewModel.swift in Sources */,
 				D1121D222830E31500149263 /* GolfInfo.swift in Sources */,
 				D1C89EE72822B6EE00DAA2F4 /* CampaignViewController.swift in Sources */,

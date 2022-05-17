@@ -39,7 +39,7 @@ class DetailCampaignViewController: UIViewController {
 
     private func makeUI() {
         timeStickyContainer.layer.cornerRadius = 14.5
-        isNewContainer.layer.cornerRadius = 14.5
+        isNewContainer.layer.cornerRadius = 9.5
         
         mainScrollView.contentInsetAdjustmentBehavior = .never
     }
