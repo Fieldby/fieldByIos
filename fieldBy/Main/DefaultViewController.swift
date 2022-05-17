@@ -46,6 +46,14 @@ class DefaultViewController: UIViewController {
         Observable.create() { observable in
             
             
+            CampaignManager.shared.fetch()
+                .subscribe {
+                    print("good")
+                } onError: { err in
+                    print(err)
+                }
+
+            
             observable.onNext(true)
             
             

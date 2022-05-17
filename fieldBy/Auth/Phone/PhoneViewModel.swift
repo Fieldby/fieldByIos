@@ -61,7 +61,7 @@ class PhoneViewModel: NSObject {
     
     func checkNumber() -> Observable<Bool> {
         
-        return Observable.zip(AuthManager.certificatedNumberList().asObservable(), numberSubject)
+        return Observable.zip(AuthManager.shared.certificatedNumberList().asObservable(), numberSubject)
             .map { list, number -> Bool in
                 return list.contains(number)
             }

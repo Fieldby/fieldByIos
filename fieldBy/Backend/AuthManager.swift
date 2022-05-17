@@ -12,12 +12,17 @@ import Alamofire
 import Firebase
 
 class AuthManager: CommonBackendType {
+    static let shared = AuthManager()
+    
     static let certificatedNumberPath = "/certificatedNumberList"
     static private let addressKey = "U01TX0FVVEgyMDIyMDUwMzE3MjM0NDExMjUzMDc="
     
     
-    static func certificatedNumberList() -> Single<[String]> {
-        return single(path: certificatedNumberPath, type: [String].self)
+    func certificatedNumberList() -> Single<[String]> {
+        return Single.create() { ob in
+            return Disposables.create()
+            
+        }
     }
     
     static func address(keyword: String) -> Single<JusoResponse> {

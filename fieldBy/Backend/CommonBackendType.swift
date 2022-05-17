@@ -10,19 +10,32 @@ import RxCocoa
 import NSObject_Rx
 import Alamofire
 import FirebaseDatabase
+import FirebaseStorage
 
 class CommonBackendType: NSObject {
     
     static let baseUrl = "https://fieldby-web-default-rtdb.asia-southeast1.firebasedatabase.app"
     
-    static func parseParams(baseUrl: String = baseUrl, path: String, params: [String: Any] = ["print":"pretty"]) -> String {
+    let ref = Database.database().reference()
+    let storageRef = Storage.storage().reference()
+    
+    func parseParams(baseUrl: String = baseUrl, path: String, params: [String: Any] = ["print":"pretty"]) -> String {
         let queryParams = params.map { k, v in "\(k)=\(v)" }.joined(separator: "&")
-        var fullPath = path.hasPrefix("http") ? path : self.baseUrl + path + ".json"
+        var fullPath = path.hasPrefix("http") ? path : baseUrl + path + ".json"
         if !queryParams.isEmpty {
             fullPath += "?" + queryParams
         }
         
         return fullPath
+    }
+    
+    func decode<T: Decodable>(jsonData: Data, type: T.Type) -> T? {
+        do {
+            let data = try JSONDecoder().decode(type.self, from: jsonData)
+            return data
+        } catch {
+            return nil
+        }
     }
     
     static func getRequest(_ url: URL, method: HTTPMethod = .get) -> URLRequest {

@@ -10,6 +10,7 @@ import RxSwift
 import RxCocoa
 import NSObject_Rx
 import FSPagerView
+import FirebaseStorage
 
 class CampaignViewController: UIViewController {
 
@@ -21,6 +22,7 @@ class CampaignViewController: UIViewController {
     
     @IBOutlet var viewModel: CampaignViewModel!
     
+    private var campaignArray: [CampaignModel] = []
     
     private var showingIndexSubject = BehaviorSubject<Int>(value: 0)
 
@@ -56,43 +58,34 @@ class CampaignViewController: UIViewController {
         pagerView.itemSize = CGSize(width: UIScreen.main.bounds.width-65, height: 450)
         pagerView.isInfinite = true
 
-        
-//        InstagramManager.usingTestToken()
-//            .subscribe { data in
-//                self.testSubject.onNext(data.data)
-//            } onError: { err in
-//                print(err)
-//            }
-//            .disposed(by: rx.disposeBag)
-
         pagerView.register(pagerCell.self, forCellWithReuseIdentifier: pagerCell.reuseId)
         
-//        testSubject
-//            .subscribe(onNext: { [unowned self] array in
-//                dataList = array
-//                pagerView.reloadData()
-//            })
-//            .disposed(by: rx.disposeBag)
+        CampaignManager.shared.campaignArrayRelay
+            .subscribe(onNext: { [unowned self] array in
+                campaignArray = array
+                pagerView.reloadData()
+            })
+            .disposed(by: rx.disposeBag)
         
         
-//        testSubject
-//            .bind(to: barCollectionView.rx.items(cellIdentifier: "barCell", cellType: BarCell.self)) { [unowned self] idx, data, cell in
-//
-//                cell.contentView.backgroundColor = .none
-//
-//                showingIndexSubject
-//                    .subscribe(onNext: { [unowned cell] index in
-//                        if index == idx {
-//                            cell.mainView.backgroundColor = .white
-//                        } else {
-//                            cell.mainView.backgroundColor = .none
-//                        }
-//
-//                    })
-//                    .disposed(by: self.rx.disposeBag)
-//
-//            }
-//            .disposed(by: rx.disposeBag)
+        CampaignManager.shared.campaignArrayRelay
+            .bind(to: barCollectionView.rx.items(cellIdentifier: "barCell", cellType: BarCell.self)) { [unowned self] idx, data, cell in
+
+                cell.contentView.backgroundColor = .none
+
+                showingIndexSubject
+                    .subscribe(onNext: { [unowned cell] index in
+                        if index == idx {
+                            cell.mainView.backgroundColor = .white
+                        } else {
+                            cell.mainView.backgroundColor = .none
+                        }
+
+                    })
+                    .disposed(by: self.rx.disposeBag)
+
+            }
+            .disposed(by: rx.disposeBag)
 
     }
 
@@ -111,12 +104,18 @@ extension CampaignViewController: FSPagerViewDelegate, FSPagerViewDataSource {
     func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
         let cell = pagerView.dequeueReusableCell(withReuseIdentifier: pagerCell.reuseId, at: index) as! pagerCell
 
-//        let url = URL(string: dataList[index].mediaURL)
-        
-//        cell.imageView?.kf.setImage(with: url)
+        let model = campaignArray[index]
+
+        Storage.storage().reference().child(model.imageUrl)
+            .downloadURL { url, error in
+                if let url = url {
+                    cell.imageView?.kf.setImage(with: url)
+                }
+            }
+
         cell.layer.masksToBounds = true
         cell.layer.cornerRadius = 21
-        
+        cell.imageView?.contentMode = .scaleToFill
         cell.imageView?.addGrayShadow(color: .lightGray, opacity: 0.15, radius: 3)
         
         return cell
@@ -126,7 +125,7 @@ extension CampaignViewController: FSPagerViewDelegate, FSPagerViewDataSource {
     
     func numberOfItems(in pagerView: FSPagerView) -> Int {
         
-        return 0
+        return campaignArray.count
     }
     
     func pagerView(_ pagerView: FSPagerView, willDisplay cell: FSPagerViewCell, forItemAt index: Int) {
@@ -136,7 +135,7 @@ extension CampaignViewController: FSPagerViewDelegate, FSPagerViewDataSource {
     
     func pagerView(_ pagerView: FSPagerView, didSelectItemAt index: Int) {
         
-//        presentDetailVC(campaignModel: dataList[index].toCampaign())
+        presentDetailVC(campaignModel: campaignArray[index])
     }
     
 }
