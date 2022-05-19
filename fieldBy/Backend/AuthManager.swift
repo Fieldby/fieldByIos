@@ -21,6 +21,8 @@ class AuthManager: CommonBackendType {
     static let certificatedNumberPath = "/certificatedNumberList"
     static private let addressKey = "U01TX0FVVEgyMDIyMDUwMzE3MjM0NDExMjUzMDc="
     
+    var defaultVC: DefaultViewController!
+    
     func fetch(uuid: String) -> Completable {
         return Completable.create() { [unowned self] completable in
             
@@ -156,5 +158,9 @@ class AuthManager: CommonBackendType {
         } else {
           return nil
         }
+    }
+    
+    func logOut() {
+        try! Auth.auth().signOut()
     }
 }

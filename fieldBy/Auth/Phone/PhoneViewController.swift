@@ -382,19 +382,35 @@ class PhoneViewController: UIViewController {
 
     }
 
-    func startWritingName() {
-        phoneTextField.isUserInteractionEnabled = false
+    func startWritingName(uuid: String) {
+        indicator.isHidden = false
+        indicator.startAnimating()
+        
+        AuthManager.shared.fetch(uuid: uuid)
+            .subscribe { [unowned self] in
+                indicator.isHidden = true
+                indicator.stopAnimating()
+                navigationController?.dismiss(animated: true, completion: {
+                    AuthManager.shared.defaultVC.toMain()
+                })
+            } onError: { [unowned self] _ in
+                phoneTextField.isUserInteractionEnabled = false
 
-        nameTextField.becomeFirstResponder()
-        editingStatus = .name
-        certificationButton.isEnabled = false
-        UIView.animate(withDuration: 0.3) { [unowned self] in
-            nameView.isHidden = false
-            mainLabel.text = "본인인증"
-            oneLabel.isHidden = true
-            certificationButton.setTitle("입력 완료", for: .normal)
-            certificationButton.backgroundColor = defaultGrayColor
-        }
+                nameTextField.becomeFirstResponder()
+                editingStatus = .name
+                certificationButton.isEnabled = false
+                UIView.animate(withDuration: 0.3) { [unowned self] in
+                    nameView.isHidden = false
+                    mainLabel.text = "본인인증"
+                    oneLabel.isHidden = true
+                    certificationButton.setTitle("입력 완료", for: .normal)
+                    certificationButton.backgroundColor = defaultGrayColor
+                }
+            }
+            .disposed(by: rx.disposeBag)
+
+        
+
 
     }
     

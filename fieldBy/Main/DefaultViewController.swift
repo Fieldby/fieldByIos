@@ -28,30 +28,55 @@ class DefaultViewController: UIViewController {
         super.viewDidAppear(animated)
         
         checkUserValid()
-            .subscribe(onNext: { [unowned self] bool in
-                bool ? toMain() : toAuth()
+            .subscribe(onNext: { [unowned self] code in
+                if code == 0 {
+                    toMain()
+                } else if code == 1 {
+                    toAuth()
+                } else if code == 2 {
+                    presentAlert(message: "서버 문제입니다. 관계자에게 문의하세요.")
+                }
             })
             .disposed(by: rx.disposeBag)
 
     }
     
-    private func checkUserValid() -> Observable<Bool> {
-        Observable.create() { observable in
+    /*
+     code
+     0 : Success
+     1 : unValid
+     2 : ServerError
+     */
+    
+    private func checkUserValid() -> Observable<Int> {
+        Observable.create() { [unowned self] observable in
             
             if let uuid = Auth.auth().currentUser?.uid {
                 
                 AuthManager.shared.fetch(uuid: uuid)
-                    .subscribe {
-                        observable.onNext(true)
+                    .subscribe { [unowned self] in
+                        CampaignManager.shared.fetch()
+                            .subscribe {
+                                observable.onNext(0)
+                            } onError: { error in
+                                print(error)
+                                observable.onNext(2)
+                            }
+                            .disposed(by: rx.disposeBag)
                     } onError: { err in
-                        observable.onNext(false)
+                        observable.onNext(1)
                     }
+                    .disposed(by: rx.disposeBag)
+                
+            } else {
+                observable.onNext(1)
             }
+            
             return Disposables.create()
         }
     }
 
-    private func toMain() {
+    func toMain() {
         CampaignManager.shared.fetch()
             .subscribe { [unowned self] in
                 let vc = MainTabBarController()
@@ -71,6 +96,8 @@ class DefaultViewController: UIViewController {
     private func toAuth() {
         let vc = UIStoryboard(name: "Auth", bundle: nil).instantiateViewController(withIdentifier: "signinVC") as! SigninViewController
         let nav = UINavigationController(rootViewController: vc)
+        
+        AuthManager.shared.defaultVC = self
         nav.modalPresentationStyle = .fullScreen
         present(nav, animated: false)
         

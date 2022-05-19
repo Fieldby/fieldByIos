@@ -10,6 +10,7 @@ import PanModal
 import RxSwift
 import RxCocoa
 import NSObject_Rx
+import FirebaseAuth
 
 class CheckNumberViewController: UIViewController {
     
@@ -112,8 +113,9 @@ class CheckNumberViewController: UIViewController {
                 
                 viewModel.login(sixCode: codeTextField.text!, phoneNumber: phoneNumber)
                     .subscribe { [unowned self] in
+                        let uuid = Auth.auth().currentUser!.uid
                         dismiss(animated: true) {
-                            self.topVC.startWritingName()
+                            self.topVC.startWritingName(uuid: uuid)
                         }
                     } onError: { [unowned self] error in
                         presentAlert(message: "인증번호가 올바르지 않습니다.")

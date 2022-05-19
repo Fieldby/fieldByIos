@@ -86,6 +86,12 @@ class CampaignViewController: UIViewController {
 
             }
             .disposed(by: rx.disposeBag)
+        
+        missionButton.rx.tap
+            .subscribe(onNext: { [unowned self] in
+                AuthManager.shared.logOut()
+            })
+            .disposed(by: rx.disposeBag)
 
     }
 
