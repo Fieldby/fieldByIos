@@ -691,6 +691,7 @@ DM으로 문의해주세요!</string>
                             </view>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="hT5-3k-MqM">
                                 <rect key="frame" x="188.5" y="434.5" width="37" height="37"/>
+                                <color key="color" name="MainColor"/>
                             </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vf6-Oy-mWy"/>

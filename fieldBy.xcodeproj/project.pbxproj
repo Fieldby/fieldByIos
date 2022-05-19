@@ -19,6 +19,8 @@
 		D1121D252830E49A00149263 /* GolfInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1121D242830E49A00149263 /* GolfInfoViewController.swift */; };
 		D1121D272830E4A300149263 /* GolfInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1121D262830E4A300149263 /* GolfInfoViewModel.swift */; };
 		D1121D2A2830F3D000149263 /* RoundingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1121D292830F3D000149263 /* RoundingCell.swift */; };
+		D11376D528366A4700CFC3D2 /* GuideCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11376D428366A4700CFC3D2 /* GuideCheckViewController.swift */; };
+		D11376D8283673F700CFC3D2 /* GuideFinalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11376D7283673F700CFC3D2 /* GuideFinalViewController.swift */; };
 		D11FD9AE281F6D50008AE32A /* PhoneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11FD9AD281F6D50008AE32A /* PhoneViewModel.swift */; };
 		D11FD9B1281F74A5008AE32A /* CheckNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11FD9B0281F74A5008AE32A /* CheckNumberViewController.swift */; };
 		D1329DF3281FF2AD00760DDA /* CommonViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1329DF2281FF2AD00760DDA /* CommonViews.swift */; };
@@ -103,6 +105,8 @@
 		D1121D242830E49A00149263 /* GolfInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GolfInfoViewController.swift; sourceTree = "<group>"; };
 		D1121D262830E4A300149263 /* GolfInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GolfInfoViewModel.swift; sourceTree = "<group>"; };
 		D1121D292830F3D000149263 /* RoundingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundingCell.swift; sourceTree = "<group>"; };
+		D11376D428366A4700CFC3D2 /* GuideCheckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideCheckViewController.swift; sourceTree = "<group>"; };
+		D11376D7283673F700CFC3D2 /* GuideFinalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideFinalViewController.swift; sourceTree = "<group>"; };
 		D11FD9AD281F6D50008AE32A /* PhoneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneViewModel.swift; sourceTree = "<group>"; };
 		D11FD9B0281F74A5008AE32A /* CheckNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckNumberViewController.swift; sourceTree = "<group>"; };
 		D1329DF2281FF2AD00760DDA /* CommonViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonViews.swift; sourceTree = "<group>"; };
@@ -252,6 +256,22 @@
 				D1121D292830F3D000149263 /* RoundingCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		D11376D328366A3C00CFC3D2 /* Check */ = {
+			isa = PBXGroup;
+			children = (
+				D11376D428366A4700CFC3D2 /* GuideCheckViewController.swift */,
+			);
+			path = Check;
+			sourceTree = "<group>";
+		};
+		D11376D6283673EF00CFC3D2 /* Final */ = {
+			isa = PBXGroup;
+			children = (
+				D11376D7283673F700CFC3D2 /* GuideFinalViewController.swift */,
+			);
+			path = Final;
 			sourceTree = "<group>";
 		};
 		D11FD9AC281F6D44008AE32A /* Phone */ = {
@@ -530,6 +550,8 @@
 		D1EDA1C42834CF850021595E /* Guide */ = {
 			isa = PBXGroup;
 			children = (
+				D11376D6283673EF00CFC3D2 /* Final */,
+				D11376D328366A3C00CFC3D2 /* Check */,
 				D16EC57E2836383100076B4C /* Address */,
 				D16EC57B283633D900076B4C /* Caution */,
 				D16EC579283633C600076B4C /* Start */,
@@ -739,6 +761,7 @@
 				D1A99CD32821239E00E414E4 /* AddressCell.swift in Sources */,
 				D1AA5CB7281EA50700279CC8 /* SigninViewController.swift in Sources */,
 				D1AA5CBA281EAEAD00279CC8 /* Color+.swift in Sources */,
+				D11376D528366A4700CFC3D2 /* GuideCheckViewController.swift in Sources */,
 				D1A99CC928211BAE00E414E4 /* AddressViewController.swift in Sources */,
 				D14A198C28336C2C00542F2B /* FBInfo.swift in Sources */,
 				D18910062833C83A000685E8 /* Date+.swift in Sources */,
@@ -755,6 +778,7 @@
 				D1121D252830E49A00149263 /* GolfInfoViewController.swift in Sources */,
 				D1EA5D9F282535E7000E35A0 /* MyUserModel.swift in Sources */,
 				D1AA5CBC281EAF1A00279CC8 /* PhoneViewController.swift in Sources */,
+				D11376D8283673F700CFC3D2 /* GuideFinalViewController.swift in Sources */,
 				D106B0A8281EA2A400E6CCFA /* AppDelegate.swift in Sources */,
 				D145BBF32832285B009383D8 /* DefaultViewController.swift in Sources */,
 				D14A199128338C9700542F2B /* Dictionary+.swift in Sources */,

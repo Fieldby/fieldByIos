@@ -116,20 +116,20 @@
                                                         <rect key="frame" x="0.0" y="30" width="374" height="37"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="모두 동의합니다" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zl5-82-cfN">
-                                                                <rect key="frame" x="56" y="9.5" width="95" height="18"/>
+                                                                <rect key="frame" x="35" y="9.5" width="95" height="18"/>
                                                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="15"/>
                                                                 <color key="textColor" name="Black"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="authCheckUnselected" translatesAutoresizingMaskIntoConstraints="NO" id="183-i3-oq3">
-                                                                <rect key="frame" x="21" y="6" width="25" height="25"/>
+                                                                <rect key="frame" x="0.0" y="6" width="25" height="25"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="25" id="Fgp-vc-eQQ"/>
                                                                     <constraint firstAttribute="width" constant="25" id="gwB-Zx-itw"/>
                                                                 </constraints>
                                                             </imageView>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4s0-To-hrD">
-                                                                <rect key="frame" x="15" y="0.0" width="37" height="37"/>
+                                                                <rect key="frame" x="-6" y="0.0" width="37" height="37"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" secondItem="4s0-To-hrD" secondAttribute="height" multiplier="1:1" id="dSh-0g-eDb"/>
                                                                 </constraints>
@@ -157,7 +157,7 @@
                                                             <constraint firstAttribute="bottom" secondItem="4s0-To-hrD" secondAttribute="bottom" id="hq4-Dr-ifR"/>
                                                             <constraint firstItem="Zl5-82-cfN" firstAttribute="leading" secondItem="183-i3-oq3" secondAttribute="trailing" constant="10" id="n4v-kW-eXO"/>
                                                             <constraint firstItem="Zl5-82-cfN" firstAttribute="centerY" secondItem="i4Q-rF-oit" secondAttribute="centerY" id="pEW-Pp-KzI"/>
-                                                            <constraint firstItem="183-i3-oq3" firstAttribute="leading" secondItem="i4Q-rF-oit" secondAttribute="leading" constant="21" id="rnT-JO-b9U"/>
+                                                            <constraint firstItem="183-i3-oq3" firstAttribute="leading" secondItem="i4Q-rF-oit" secondAttribute="leading" id="rnT-JO-b9U"/>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5ih-dB-QYe">
@@ -171,20 +171,20 @@
                                                         <rect key="frame" x="0.0" y="97" width="374" height="37"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="필드바이 이용약관 (필수)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WD0-Mn-hwd">
-                                                                <rect key="frame" x="56" y="11.5" width="118" height="14.5"/>
+                                                                <rect key="frame" x="35" y="11.5" width="118" height="14.5"/>
                                                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="12"/>
                                                                 <color key="textColor" name="Black"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="authCheckUnselected" translatesAutoresizingMaskIntoConstraints="NO" id="JH0-RV-duw">
-                                                                <rect key="frame" x="21" y="6" width="25" height="25"/>
+                                                                <rect key="frame" x="0.0" y="6" width="25" height="25"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="25" id="5nP-nN-IC6"/>
                                                                     <constraint firstAttribute="height" constant="25" id="j8e-nY-6GN"/>
                                                                 </constraints>
                                                             </imageView>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yAg-Wc-yF8">
-                                                                <rect key="frame" x="15" y="0.0" width="37" height="37"/>
+                                                                <rect key="frame" x="-6" y="0.0" width="37" height="37"/>
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yd7-1N-0kE">
@@ -205,7 +205,7 @@
                                                             <constraint firstAttribute="bottom" secondItem="yAg-Wc-yF8" secondAttribute="bottom" id="Njd-R6-S7G"/>
                                                             <constraint firstAttribute="height" constant="37" id="T84-HI-lAh"/>
                                                             <constraint firstItem="yAg-Wc-yF8" firstAttribute="width" secondItem="yAg-Wc-yF8" secondAttribute="height" multiplier="1:1" id="bTN-o4-Jb5"/>
-                                                            <constraint firstItem="JH0-RV-duw" firstAttribute="leading" secondItem="DtI-iF-rEE" secondAttribute="leading" constant="21" id="h4v-E6-dLF"/>
+                                                            <constraint firstItem="JH0-RV-duw" firstAttribute="leading" secondItem="DtI-iF-rEE" secondAttribute="leading" id="h4v-E6-dLF"/>
                                                             <constraint firstAttribute="trailing" secondItem="Yd7-1N-0kE" secondAttribute="trailing" constant="54" id="hCc-o0-4yi"/>
                                                             <constraint firstItem="WD0-Mn-hwd" firstAttribute="centerY" secondItem="DtI-iF-rEE" secondAttribute="centerY" id="hN8-dX-Q8y"/>
                                                             <constraint firstItem="yAg-Wc-yF8" firstAttribute="centerX" secondItem="JH0-RV-duw" secondAttribute="centerX" id="mjq-t5-wTG"/>
@@ -216,20 +216,20 @@
                                                         <rect key="frame" x="0.0" y="134" width="374" height="37"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="개인정보 수집 및 이용 방침 (필수)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O8Y-xJ-WsS">
-                                                                <rect key="frame" x="56" y="11.5" width="158.5" height="14.5"/>
+                                                                <rect key="frame" x="35" y="11.5" width="158.5" height="14.5"/>
                                                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="12"/>
                                                                 <color key="textColor" name="Black"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="authCheckUnselected" translatesAutoresizingMaskIntoConstraints="NO" id="jP1-b9-09y">
-                                                                <rect key="frame" x="21" y="6" width="25" height="25"/>
+                                                                <rect key="frame" x="0.0" y="6" width="25" height="25"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="25" id="8PT-AH-2Q0"/>
                                                                     <constraint firstAttribute="width" constant="25" id="ntr-xG-Ghn"/>
                                                                 </constraints>
                                                             </imageView>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aTY-Mz-OaQ">
-                                                                <rect key="frame" x="15" y="0.0" width="37" height="37"/>
+                                                                <rect key="frame" x="-6" y="0.0" width="37" height="37"/>
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="neH-mf-SI2">
@@ -251,7 +251,7 @@
                                                             <constraint firstItem="aTY-Mz-OaQ" firstAttribute="top" secondItem="LVc-Jc-rWF" secondAttribute="top" id="e0G-99-tM2"/>
                                                             <constraint firstItem="aTY-Mz-OaQ" firstAttribute="width" secondItem="aTY-Mz-OaQ" secondAttribute="height" multiplier="1:1" id="g4d-iz-bmX"/>
                                                             <constraint firstAttribute="trailing" secondItem="neH-mf-SI2" secondAttribute="trailing" constant="54" id="g6F-bZ-fey"/>
-                                                            <constraint firstItem="jP1-b9-09y" firstAttribute="leading" secondItem="LVc-Jc-rWF" secondAttribute="leading" constant="21" id="hxg-KB-il1"/>
+                                                            <constraint firstItem="jP1-b9-09y" firstAttribute="leading" secondItem="LVc-Jc-rWF" secondAttribute="leading" id="hxg-KB-il1"/>
                                                             <constraint firstItem="jP1-b9-09y" firstAttribute="centerY" secondItem="LVc-Jc-rWF" secondAttribute="centerY" id="ksj-zk-F3v"/>
                                                             <constraint firstItem="O8Y-xJ-WsS" firstAttribute="centerY" secondItem="LVc-Jc-rWF" secondAttribute="centerY" id="nX7-AX-C0P"/>
                                                             <constraint firstAttribute="height" constant="37" id="tdD-Q9-PDe"/>
@@ -261,20 +261,20 @@
                                                         <rect key="frame" x="0.0" y="171" width="374" height="37"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="신규 캠페인등 알림 수신 동의 (선택)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gQN-Yw-Zqd">
-                                                                <rect key="frame" x="56" y="11.5" width="169" height="14.5"/>
+                                                                <rect key="frame" x="35" y="11.5" width="169" height="14.5"/>
                                                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="12"/>
                                                                 <color key="textColor" name="Black"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="authCheckUnselected" translatesAutoresizingMaskIntoConstraints="NO" id="0lH-WL-UuR">
-                                                                <rect key="frame" x="21" y="6" width="25" height="25"/>
+                                                                <rect key="frame" x="0.0" y="6" width="25" height="25"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="25" id="7Ht-jl-dUb"/>
                                                                     <constraint firstAttribute="height" constant="25" id="Zj0-BP-nKV"/>
                                                                 </constraints>
                                                             </imageView>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E48-9K-I8o">
-                                                                <rect key="frame" x="15" y="0.0" width="37" height="37"/>
+                                                                <rect key="frame" x="-6" y="0.0" width="37" height="37"/>
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4V8-MH-7A3">
@@ -294,7 +294,7 @@
                                                             <constraint firstItem="gQN-Yw-Zqd" firstAttribute="leading" secondItem="0lH-WL-UuR" secondAttribute="trailing" constant="10" id="ABY-8t-fM1"/>
                                                             <constraint firstAttribute="height" constant="37" id="N5w-IX-p2r"/>
                                                             <constraint firstItem="4V8-MH-7A3" firstAttribute="centerY" secondItem="Vpk-hU-5ff" secondAttribute="centerY" id="SBq-g0-dwO"/>
-                                                            <constraint firstItem="0lH-WL-UuR" firstAttribute="leading" secondItem="Vpk-hU-5ff" secondAttribute="leading" constant="21" id="UcD-Lu-k1k"/>
+                                                            <constraint firstItem="0lH-WL-UuR" firstAttribute="leading" secondItem="Vpk-hU-5ff" secondAttribute="leading" id="UcD-Lu-k1k"/>
                                                             <constraint firstAttribute="bottom" secondItem="E48-9K-I8o" secondAttribute="bottom" id="XbF-Y2-v4w"/>
                                                             <constraint firstItem="gQN-Yw-Zqd" firstAttribute="centerY" secondItem="Vpk-hU-5ff" secondAttribute="centerY" id="aY0-gZ-vwv"/>
                                                             <constraint firstItem="E48-9K-I8o" firstAttribute="top" secondItem="Vpk-hU-5ff" secondAttribute="top" id="d6U-X1-nlu"/>

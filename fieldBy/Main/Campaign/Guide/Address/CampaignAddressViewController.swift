@@ -47,4 +47,8 @@ class CampaignAddressViewController: UIViewController {
         detailLabel.text = AuthManager.shared.myUserModel.juso.detail
     }
 
+    @IBAction func next(_ sender: Any) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: GuideCheckViewController.storyId)
+        self.navigationController?.pushViewController(vc!, animated: true)
+    }
 }
