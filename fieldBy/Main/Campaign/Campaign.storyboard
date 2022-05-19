@@ -124,6 +124,57 @@
                                     <constraint firstItem="2GG-dx-LFB" firstAttribute="centerX" secondItem="3OD-R3-B4o" secondAttribute="centerX" id="lbk-iT-7b2"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WJ0-YV-Llr">
+                                <rect key="frame" x="40" y="338" width="334" height="230"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="💡" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3hS-BX-ofu">
+                                        <rect key="frame" x="146.5" y="20" width="41" height="43"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="아직 연결된 미디어가 없어요." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZAA-tl-JNd">
+                                        <rect key="frame" x="64" y="104" width="206" height="22"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="18"/>
+                                        <color key="textColor" name="Black"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="연결하시면 다양한 캠페인 참여가 가능해요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KnC-le-1td">
+                                        <rect key="frame" x="57" y="134" width="220" height="16"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="13"/>
+                                        <color key="textColor" name="Black"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dF3-YR-6Vw">
+                                        <rect key="frame" x="85" y="184" width="164" height="38"/>
+                                        <color key="backgroundColor" name="Black"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="38" id="rej-up-ZOB"/>
+                                            <constraint firstAttribute="width" constant="164" id="vhp-My-tfe"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="15"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="미디어 연결">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="230" id="EAe-97-l3x"/>
+                                    <constraint firstItem="dF3-YR-6Vw" firstAttribute="centerX" secondItem="WJ0-YV-Llr" secondAttribute="centerX" id="HIe-JH-ejE"/>
+                                    <constraint firstItem="ZAA-tl-JNd" firstAttribute="centerY" secondItem="WJ0-YV-Llr" secondAttribute="centerY" id="LU2-H5-Noe"/>
+                                    <constraint firstItem="KnC-le-1td" firstAttribute="top" secondItem="ZAA-tl-JNd" secondAttribute="bottom" constant="8" symbolic="YES" id="UCf-NO-qAU"/>
+                                    <constraint firstAttribute="bottom" secondItem="dF3-YR-6Vw" secondAttribute="bottom" constant="8" id="bmj-2n-Sxh"/>
+                                    <constraint firstItem="KnC-le-1td" firstAttribute="centerX" secondItem="WJ0-YV-Llr" secondAttribute="centerX" id="dOf-Fo-tM9"/>
+                                    <constraint firstItem="ZAA-tl-JNd" firstAttribute="centerX" secondItem="WJ0-YV-Llr" secondAttribute="centerX" id="gqv-PJ-wwp"/>
+                                    <constraint firstItem="3hS-BX-ofu" firstAttribute="centerX" secondItem="WJ0-YV-Llr" secondAttribute="centerX" id="lK9-EZ-WYf"/>
+                                    <constraint firstItem="3hS-BX-ofu" firstAttribute="top" secondItem="WJ0-YV-Llr" secondAttribute="top" constant="20" id="ryz-Z9-KiZ"/>
+                                </constraints>
+                            </view>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="l4S-fa-h2X">
+                                <rect key="frame" x="188.5" y="434.5" width="37" height="37"/>
+                                <color key="color" name="MainColor"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="v0i-W8-Xez"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -131,7 +182,10 @@
                             <constraint firstItem="3OD-R3-B4o" firstAttribute="centerX" secondItem="v0i-W8-Xez" secondAttribute="centerX" id="2DS-Dg-2pg"/>
                             <constraint firstAttribute="bottom" secondItem="n9K-UQ-LUy" secondAttribute="bottom" id="9ub-Xv-2eQ"/>
                             <constraint firstItem="3OD-R3-B4o" firstAttribute="leading" secondItem="v0i-W8-Xez" secondAttribute="leading" constant="42" id="A2P-gi-NIm"/>
+                            <constraint firstItem="WJ0-YV-Llr" firstAttribute="centerY" secondItem="v0i-W8-Xez" secondAttribute="centerY" id="CNH-Z4-47p"/>
+                            <constraint firstItem="l4S-fa-h2X" firstAttribute="centerX" secondItem="v0i-W8-Xez" secondAttribute="centerX" id="OhK-7z-6xK"/>
                             <constraint firstItem="v0i-W8-Xez" firstAttribute="trailing" secondItem="xrk-iP-4gX" secondAttribute="trailing" id="Qdy-9U-LAc"/>
+                            <constraint firstItem="WJ0-YV-Llr" firstAttribute="leading" secondItem="v0i-W8-Xez" secondAttribute="leading" constant="40" id="Qx5-vP-fqZ"/>
                             <constraint firstItem="n9K-UQ-LUy" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="SvW-FI-ieg"/>
                             <constraint firstItem="xrk-iP-4gX" firstAttribute="top" secondItem="afb-Zs-kxQ" secondAttribute="bottom" constant="20" id="UOH-ES-VNb"/>
                             <constraint firstItem="ddC-ke-Iwu" firstAttribute="top" secondItem="xrk-iP-4gX" secondAttribute="bottom" constant="97" id="UrL-d6-CB0"/>
@@ -143,14 +197,20 @@
                             <constraint firstItem="ddC-ke-Iwu" firstAttribute="leading" secondItem="v0i-W8-Xez" secondAttribute="leading" constant="35" id="gox-fy-pQP"/>
                             <constraint firstItem="afb-Zs-kxQ" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="grl-qg-g9c"/>
                             <constraint firstItem="v0i-W8-Xez" firstAttribute="bottom" secondItem="ddC-ke-Iwu" secondAttribute="bottom" constant="50" id="mhn-ac-ibk"/>
+                            <constraint firstItem="l4S-fa-h2X" firstAttribute="centerY" secondItem="v0i-W8-Xez" secondAttribute="centerY" id="tdf-h3-Xfb"/>
                             <constraint firstItem="xrk-iP-4gX" firstAttribute="leading" secondItem="v0i-W8-Xez" secondAttribute="leading" id="xNA-6z-ivG"/>
                             <constraint firstItem="n9K-UQ-LUy" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="xtm-ri-Uj1"/>
+                            <constraint firstItem="WJ0-YV-Llr" firstAttribute="centerX" secondItem="v0i-W8-Xez" secondAttribute="centerX" id="zmr-Ca-JEw"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="barCollectionView" destination="Pf1-ZI-9tC" id="32M-cI-2Qw"/>
+                        <outlet property="barView" destination="ddC-ke-Iwu" id="Omr-hV-H0N"/>
+                        <outlet property="indicator" destination="l4S-fa-h2X" id="dcB-oB-FYZ"/>
                         <outlet property="infoView" destination="3OD-R3-B4o" id="SfO-ah-tyY"/>
+                        <outlet property="mediaButton" destination="dF3-YR-6Vw" id="4Ah-LJ-0tj"/>
                         <outlet property="missionButton" destination="2GG-dx-LFB" id="79r-HZ-fnf"/>
+                        <outlet property="noMediaView" destination="WJ0-YV-Llr" id="SB1-Cp-mUI"/>
                         <outlet property="pagerView" destination="xrk-iP-4gX" id="b2s-d9-5Uq"/>
                         <outlet property="topView" destination="afb-Zs-kxQ" id="LIX-QP-zSu"/>
                         <outlet property="viewModel" destination="2b4-E8-m05" id="JtD-6A-sz5"/>

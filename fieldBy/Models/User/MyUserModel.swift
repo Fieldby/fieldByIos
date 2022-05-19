@@ -26,11 +26,14 @@ class MyUserModel {
     let juso: Juso
     let style: [Style]
     
+    var instagramModel: IGModel?
+    
     
     
     init?(data: DataSnapshot) {
         let value = data.value as! [String: Any]
         
+        self.uuid = data.key
         self.birthDay = value["birthDay"] as! String
         self.career = Career(rawValue: value["career"] as! String)!
         self.height = value["height"] as! Int
@@ -50,6 +53,12 @@ class MyUserModel {
         
         let styleValue = data.childSnapshot(forPath: "styles").value as! [String]
         style = styleValue.map{Style(rawValue: $0)!}
+        
+        let igValue = data.childSnapshot(forPath: "igInfo")
+        if igValue.exists() {
+            instagramModel = IGModel(snapshot: igValue)
+        }
+        
     }
     
     

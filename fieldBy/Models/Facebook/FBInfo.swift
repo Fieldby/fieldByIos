@@ -5,7 +5,7 @@
 //  Created by 박진서 on 2022/05/17.
 //
 
-import Foundation
+import FirebaseDatabase
 
 struct FBInfo: Codable {
     let name, id: String
@@ -21,14 +21,27 @@ struct FBPageInfo: Codable {
 
 // MARK: - InstagramData
 struct IGData: Codable {
-    let instagramBusinessAccount: InstagramBusinessAccount
+    let igModel: IGId
 
     enum CodingKeys: String, CodingKey {
-        case instagramBusinessAccount = "instagram_business_account"
+        case igModel = "instagram_business_account"
     }
 }
 
-// MARK: - InstagramBusinessAccount
-struct InstagramBusinessAccount: Codable {
+struct IGId: Codable {
     let id: String
+}
+
+// MARK: - InstagramBusinessAccount
+struct IGModel: Codable {
+    let id: String
+    let username: String
+    let name: String
+    
+    init(snapshot: DataSnapshot) {
+        let value = snapshot.value as! [String: Any]
+        id = value["id"] as! String
+        username = value["username"] as! String
+        name = value["name"] as! String
+    }
 }

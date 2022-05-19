@@ -11,6 +11,7 @@ import RxCocoa
 import NSObject_Rx
 import FSPagerView
 import FirebaseStorage
+import FBSDKLoginKit
 
 class CampaignViewController: UIViewController {
 
@@ -20,6 +21,12 @@ class CampaignViewController: UIViewController {
     @IBOutlet weak var infoView: UIView!
     @IBOutlet weak var missionButton: UIButton!
     
+    @IBOutlet weak var noMediaView: UIView!
+    @IBOutlet weak var mediaButton: UIButton!
+    
+    
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
+    @IBOutlet weak var barView: UIView!
     @IBOutlet var viewModel: CampaignViewModel!
     
     private var campaignArray: [CampaignModel] = []
@@ -29,17 +36,33 @@ class CampaignViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        indicator.isHidden = true
+        
         pagerView.dataSource = self
         pagerView.delegate = self
         
         barCollectionView.rx.setDelegate(self)
             .disposed(by: rx.disposeBag)
         
-        makeUI()
+        
+        AuthManager.shared.igValidSubject
+            .subscribe(onNext: { [unowned self] bool in
+                if indicator.isAnimating {
+                    indicator.stopAnimating()
+                    indicator.isHidden = true
+                }
+                bool ? makeUI() : hide()
+            })
+            .disposed(by: rx.disposeBag)
+
         bind()
     }
     
     private func makeUI() {
+        infoView.isHidden = false
+        barView.isHidden = false
+        pagerView.isHidden = false
+        
         topView.layer.cornerRadius = 27
         topView.layer.maskedCorners = [.layerMaxXMaxYCorner]
         topView.addGrayShadow(color: .lightGray, opacity: 0.2, radius: 3)
@@ -50,10 +73,21 @@ class CampaignViewController: UIViewController {
         infoView.addGrayShadow(color: .lightGray, opacity: 0.15, radius: 3)
         
         missionButton.layer.cornerRadius = 10
+        noMediaView.isHidden = true
+    }
+    
+    private func hide() {
+        infoView.isHidden = true
+        barView.isHidden = true
+        pagerView.isHidden = true
+        
+        noMediaView.isHidden = false
+        
+        mediaButton.layer.cornerRadius = 10
     }
     
     private func bind() {
-        
+
         pagerView.transformer = FSPagerViewTransformer(type: .linear)
         pagerView.itemSize = CGSize(width: UIScreen.main.bounds.width-65, height: 450)
         pagerView.isInfinite = true
@@ -86,10 +120,12 @@ class CampaignViewController: UIViewController {
 
             }
             .disposed(by: rx.disposeBag)
-        
-        missionButton.rx.tap
+
+        mediaButton.rx.tap
             .subscribe(onNext: { [unowned self] in
-                AuthManager.shared.logOut()
+                indicator.isHidden = false
+                indicator.startAnimating()
+                fbLogin()
             })
             .disposed(by: rx.disposeBag)
 
@@ -105,6 +141,28 @@ class CampaignViewController: UIViewController {
         nav.modalPresentationStyle = .fullScreen
         self.present(nav, animated: true)
         
+    }
+    
+    private func fbLogin() {
+        let manager = LoginManager()
+        manager.logIn(permissions: ["public_profile", "instagram_basic", "pages_show_list"], from: self) { result, error in
+            if let error = error {
+                print("Process error: \(error)")
+                return
+            }
+            guard let result = result else {
+                print("No Result")
+                return
+            }
+            if result.isCancelled {
+                print("Login Cancelled")
+                return
+            }
+
+            AuthManager.shared.fbToken = result.token!.tokenString
+            
+            InstagramManager.shared.fetchIGId(token: result.token!.tokenString)
+        }
     }
 }
 

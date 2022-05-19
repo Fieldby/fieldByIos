@@ -21,6 +21,8 @@ class AuthManager: CommonBackendType {
     static let certificatedNumberPath = "/certificatedNumberList"
     static private let addressKey = "U01TX0FVVEgyMDIyMDUwMzE3MjM0NDExMjUzMDc="
     
+    let igValidSubject = BehaviorSubject<Bool>(value: false)
+    
     var defaultVC: DefaultViewController!
     
     func fetch(uuid: String) -> Completable {
@@ -31,6 +33,7 @@ class AuthManager: CommonBackendType {
                     if dataSnapShot.exists() {
                         if let myUserModel = MyUserModel(data: dataSnapShot) {
                             self.myUserModel = myUserModel
+                            igValidSubject.onNext(myUserModel.instagramModel != nil)
                             completable(.completed)
                         } else {
                             completable(.error(FetchError.decodingFailed))
@@ -44,6 +47,16 @@ class AuthManager: CommonBackendType {
             
             return Disposables.create()
         }
+    }
+    
+    func addIGInfo(igModel: IGModel) {
+        myUserModel.instagramModel = igModel
+        igValidSubject.onNext(true)
+        Database.database().reference().child("users/\(myUserModel.uuid!)/igInfo")
+            .setValue(["id": igModel.id,
+                       "name": igModel.name,
+                       "username": igModel.username])
+
     }
     
     func checkNumberValid(number: String) -> Observable<Bool> {

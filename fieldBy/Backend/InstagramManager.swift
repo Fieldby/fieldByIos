@@ -39,7 +39,14 @@ class InstagramManager: NSObject {
                         
                         instagramId(token: token)
                             .subscribe { [unowned self] in
-                                print(instagramId!)
+                                finalInfo(token: token)
+                                    .subscribe { [unowned self] in
+                                        print("IG 연동 성공")
+                                    } onError: { err in
+                                        print(err)
+                                    }
+                                    .disposed(by: rx.disposeBag)
+
                             } onError: { err in
                                 print(err)
                             }
@@ -123,7 +130,7 @@ class InstagramManager: NSObject {
                     switch response.result {
                     case .success(let data):
                         if let data = decode(jsonData: data, type: IGData.self) {
-                            self.instagramId = data.instagramBusinessAccount.id
+                            self.instagramId = data.igModel.id
                             completable(.completed)
                         } else {
                             completable(.error(FetchError.decodingFailed))
@@ -132,6 +139,30 @@ class InstagramManager: NSObject {
                         completable(.error(error))
                     }
                 }
+            return Disposables.create()
+        }
+    }
+    
+    func finalInfo(token: String) -> Completable {
+        return Completable.create() { [unowned self] completable in
+            let url = "\(graphUrl)\(instagramId!)?fields=name,username&access_token=\(token)"
+            AF.request(url, method: .get)
+                .validate(statusCode: 200..<300)
+                .responseData { [unowned self] response in
+                    switch response.result {
+                    case .success(let data):
+                        if let data = decode(jsonData: data, type: IGModel.self) {
+                            AuthManager.shared.addIGInfo(igModel: data)
+                            completable(.completed)
+                        } else {
+                            completable(.error(FetchError.decodingFailed))
+                        }
+                    case .failure(let error):
+                        completable(.error(error))
+                    }
+                }
+            
+            
             return Disposables.create()
         }
     }
