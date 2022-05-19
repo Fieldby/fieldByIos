@@ -35,4 +35,28 @@ class CampaignManager: CommonBackendType {
             return Disposables.create()
         }
     }
+    
+    func guideImages(campaignModel: CampaignModel) -> Observable<[UIImage]> {
+        return Observable.create() { [unowned self] observable in
+            var images = [UIImage](repeating: UIImage(systemName: "pencil")!, count: campaignModel.guides.count)
+            for i in 0..<campaignModel.guides.count {
+                storageRef.child("campaignImages").child(campaignModel.uuid).child("guideImages").child(campaignModel.guides[i].imageUrl)
+                    .getData(maxSize: 1024 * 1024) { data, error in
+                        if let error = error {
+                            print(error)
+                            observable.onError(FetchError.emptyData)
+                        }
+                        if let data = data {
+                            images[i] = UIImage(data: data)!
+                            
+                            if !images.contains(UIImage(systemName: "pencil")!) {
+                                observable.onNext(images)
+                            }
+                        }
+                    }
+            }
+            
+            return Disposables.create()
+        }
+    }
 }

@@ -8,6 +8,7 @@
 import UIKit
 import Kingfisher
 import FirebaseStorage
+import RxSwift
 
 class DetailCampaignViewController: UIViewController {
 
@@ -50,7 +51,11 @@ class DetailCampaignViewController: UIViewController {
     @IBOutlet weak var applyButton: UIButton!
     @IBOutlet weak var bottomView: UIView!
     
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
+    @IBOutlet var viewModel: DetailCampaignViewModel!
+    
     var campaignModel: CampaignModel!
+    var image: UIImage!
     
     
     override func viewDidLoad() {
@@ -62,6 +67,7 @@ class DetailCampaignViewController: UIViewController {
     
 
     private func makeUI() {
+        indicator.isHidden = true
         timeStickyContainer.layer.cornerRadius = 14.5
         isNewContainer.layer.cornerRadius = 9.5
         dateContainer.layer.cornerRadius = 21
@@ -79,9 +85,7 @@ class DetailCampaignViewController: UIViewController {
     }
     
     private func bind() {
-        if let url = URL(string: campaignModel.imageUrl) {
-            mainImageView.kf.setImage(with: url)
-        }
+        mainImageView.image = image
 
         brandNameLabel.text = campaignModel.brandName
         titleLabel.text = campaignModel.itemModel.name
@@ -95,7 +99,7 @@ class DetailCampaignViewController: UIViewController {
             })
             .disposed(by: rx.disposeBag)
         
-        Storage.storage().reference().child(campaignModel.imageUrl)
+        Storage.storage().reference().child(campaignModel.mainImageUrl)
             .downloadURL { [unowned self] url, error in
                 if let url = url {
                     mainImageView.kf.setImage(with: url)
@@ -113,6 +117,29 @@ class DetailCampaignViewController: UIViewController {
         
         maintainLabel.text = "\(campaignModel.maintain)일"
         leastFeedLabel.text = "\(campaignModel.leastFeed)회"
+        
+        applyButton.rx.tap
+            .throttle(.seconds(3), latest: false, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] in 
+                viewModel.pushGuideVC()
+            })
+            .disposed(by: rx.disposeBag)
+        
+        viewModel.pushGuideVC = { [unowned self] in
+            indicator.isHidden = false
+            indicator.startAnimating()
+            CampaignManager.shared.guideImages(campaignModel: campaignModel)
+                .subscribe(onNext: { [unowned self] guideImages in
+                    
+                    let vc = UIStoryboard(name: "GuideCampaign", bundle: nil).instantiateViewController(withIdentifier: "guidecampaignVC") as! GuideCampaignViewController
+                    vc.campaignModel = campaignModel
+                    vc.guideImages = guideImages
+                    self.navigationController?.pushViewController(vc, animated: true)
+                    indicator.stopAnimating()
+                    indicator.isHidden = true
+                })
+                .disposed(by: rx.disposeBag)
+        }
         
     }
     

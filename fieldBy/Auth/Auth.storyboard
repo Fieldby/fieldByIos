@@ -717,7 +717,7 @@
     </scenes>
     <resources>
         <image name="authCheckUnselected" width="25" height="25"/>
-        <image name="chevron.left" catalog="system" width="32" height="32"/>
+        <image name="chevron.left" catalog="system" width="96" height="128"/>
         <image name="chevron.right" width="7" height="13"/>
         <image name="chevron.up" width="16" height="9"/>
         <image name="mainLogo" width="221" height="67"/>

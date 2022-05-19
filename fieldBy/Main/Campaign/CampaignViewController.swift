@@ -89,12 +89,15 @@ class CampaignViewController: UIViewController {
 
     }
 
-    private func presentDetailVC(campaignModel: CampaignModel) {
+    private func presentDetailVC(campaignModel: CampaignModel, image: UIImage) {
         let vc = storyboard?.instantiateViewController(withIdentifier: DetailCampaignViewController.storyId) as! DetailCampaignViewController
         vc.campaignModel = campaignModel
+        vc.image = image
         
-        vc.modalPresentationStyle = .fullScreen
-        self.present(vc, animated: true)
+        let nav = UINavigationController(rootViewController: vc)
+        nav.navigationBar.isHidden = true
+        nav.modalPresentationStyle = .fullScreen
+        self.present(nav, animated: true)
         
     }
 }
@@ -106,7 +109,7 @@ extension CampaignViewController: FSPagerViewDelegate, FSPagerViewDataSource {
 
         let model = campaignArray[index]
 
-        Storage.storage().reference().child(model.imageUrl)
+        Storage.storage().reference().child(model.mainImageUrl)
             .downloadURL { url, error in
                 if let url = url {
                     cell.imageView?.kf.setImage(with: url)
@@ -135,7 +138,8 @@ extension CampaignViewController: FSPagerViewDelegate, FSPagerViewDataSource {
     
     func pagerView(_ pagerView: FSPagerView, didSelectItemAt index: Int) {
         
-        presentDetailVC(campaignModel: campaignArray[index])
+        pagerView.deselectItem(at: index, animated: true)
+        presentDetailVC(campaignModel: campaignArray[index], image: pagerView.cellForItem(at: index)!.imageView!.image!)
     }
     
 }

@@ -26,12 +26,18 @@ class AuthManager: CommonBackendType {
             
             ref.child("users").child(uuid)
                 .observeSingleEvent(of: .value) { [unowned self] dataSnapShot in
-                    if let myUserModel = MyUserModel(data: dataSnapShot) {
-                        self.myUserModel = myUserModel
-                        completable(.completed)
+                    if dataSnapShot.exists() {
+                        if let myUserModel = MyUserModel(data: dataSnapShot) {
+                            self.myUserModel = myUserModel
+                            completable(.completed)
+                        } else {
+                            completable(.error(FetchError.decodingFailed))
+                        }
                     } else {
-                        completable(.error(FetchError.decodingFailed))
+                        completable(.error(FetchError.emptyData))
                     }
+                    
+
                 }
             
             return Disposables.create()

@@ -24,7 +24,7 @@ extension UIView {
         self.layer.shadowRadius = radius
     }
     
-    func addGrayShadow(color: UIColor = UIColor(red: 238, green: 238, blue: 238), opacity: Float = 1, radius: CGFloat = 5) {
+    func addGrayShadow(color: UIColor = .gray, opacity: Float = 0.15, radius: CGFloat = 3) {
         addShadow(offset: CGSize(width: 2, height: 2), color: color, opacity: opacity, radius: radius)
     }
     
