@@ -16,6 +16,7 @@ class CampaignManager: CommonBackendType {
     static let shared = CampaignManager()
     
     let campaignArrayRelay = BehaviorRelay<[CampaignModel]>(value: [])
+    var campaignArray = [CampaignModel]()
     
     let path = "/campaigns"
     
@@ -29,6 +30,7 @@ class CampaignManager: CommonBackendType {
                     campaignArray.append(campaignModel)
                 }
                 campaignArrayRelay.accept(campaignArray)
+                self.campaignArray = campaignArray
                 completable(.completed)
             }
                 

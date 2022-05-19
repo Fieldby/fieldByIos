@@ -1441,6 +1441,8 @@ DM으로 문의해주세요!</string>
                     </view>
                     <connections>
                         <outlet property="dismissButton" destination="k2j-74-Ay5" id="yya-Vj-FCL"/>
+                        <outlet property="dueDateLabel" destination="G75-61-MDk" id="qo4-aa-r1h"/>
+                        <outlet property="usernameLabel" destination="ugw-Pt-tH3" id="aSI-z9-w3j"/>
                         <outlet property="viewMyCampaignsButton" destination="rKK-4q-EXa" id="Jz1-cZ-ogo"/>
                     </connections>
                 </viewController>

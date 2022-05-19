@@ -20,6 +20,14 @@ extension String {
         return split(separator: "-")[2].map{String($0)}.joined()
     }
     
+    var hour: String {
+        return split(separator: "-")[3].map{String($0)}.joined()
+    }
+    
+    var minute: String {
+        return split(separator: "-")[4].map{String($0)}.joined()
+    }
+    
     var parsedDate: String {
         return "\(month).\(day)"
     }

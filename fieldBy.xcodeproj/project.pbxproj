@@ -21,6 +21,7 @@
 		D1121D2A2830F3D000149263 /* RoundingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1121D292830F3D000149263 /* RoundingCell.swift */; };
 		D11376D528366A4700CFC3D2 /* GuideCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11376D428366A4700CFC3D2 /* GuideCheckViewController.swift */; };
 		D11376D8283673F700CFC3D2 /* GuideFinalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11376D7283673F700CFC3D2 /* GuideFinalViewController.swift */; };
+		D11376DA2836856200CFC3D2 /* CommonGuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11376D92836856200CFC3D2 /* CommonGuideViewController.swift */; };
 		D11FD9AE281F6D50008AE32A /* PhoneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11FD9AD281F6D50008AE32A /* PhoneViewModel.swift */; };
 		D11FD9B1281F74A5008AE32A /* CheckNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11FD9B0281F74A5008AE32A /* CheckNumberViewController.swift */; };
 		D1329DF3281FF2AD00760DDA /* CommonViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1329DF2281FF2AD00760DDA /* CommonViews.swift */; };
@@ -107,6 +108,7 @@
 		D1121D292830F3D000149263 /* RoundingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundingCell.swift; sourceTree = "<group>"; };
 		D11376D428366A4700CFC3D2 /* GuideCheckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideCheckViewController.swift; sourceTree = "<group>"; };
 		D11376D7283673F700CFC3D2 /* GuideFinalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideFinalViewController.swift; sourceTree = "<group>"; };
+		D11376D92836856200CFC3D2 /* CommonGuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonGuideViewController.swift; sourceTree = "<group>"; };
 		D11FD9AD281F6D50008AE32A /* PhoneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneViewModel.swift; sourceTree = "<group>"; };
 		D11FD9B0281F74A5008AE32A /* CheckNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckNumberViewController.swift; sourceTree = "<group>"; };
 		D1329DF2281FF2AD00760DDA /* CommonViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonViews.swift; sourceTree = "<group>"; };
@@ -503,6 +505,7 @@
 			isa = PBXGroup;
 			children = (
 				D1BEE861283625EC00D6076A /* GuideCell.swift */,
+				D11376D92836856200CFC3D2 /* CommonGuideViewController.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -783,6 +786,7 @@
 				D145BBF32832285B009383D8 /* DefaultViewController.swift in Sources */,
 				D14A199128338C9700542F2B /* Dictionary+.swift in Sources */,
 				D14A199328338CA400542F2B /* DataSnapShot+.swift in Sources */,
+				D11376DA2836856200CFC3D2 /* CommonGuideViewController.swift in Sources */,
 				D1121D272830E4A300149263 /* GolfInfoViewModel.swift in Sources */,
 				D1FC0805282D3FF2006ED153 /* DetailCampaignViewModel.swift in Sources */,
 				D1EDA1C82834CF9A0021595E /* GuideCampaignViewController.swift in Sources */,

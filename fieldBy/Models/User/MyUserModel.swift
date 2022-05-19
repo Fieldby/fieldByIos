@@ -26,7 +26,7 @@ class MyUserModel {
     let juso: Juso
     let style: [Style]
     
-    var instagramModel: IGModel?
+    var igModel: IGModel?
     
     
     
@@ -56,7 +56,7 @@ class MyUserModel {
         
         let igValue = data.childSnapshot(forPath: "igInfo")
         if igValue.exists() {
-            instagramModel = IGModel(snapshot: igValue)
+            igModel = IGModel(snapshot: igValue)
         }
         
     }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CampaignAddressViewController: UIViewController {
+class CampaignAddressViewController: CommonGuideViewController {
     static let storyId = "campaignaddressVC"
     
     @IBOutlet weak var roadAddrLabel: UILabel!
@@ -48,7 +48,8 @@ class CampaignAddressViewController: UIViewController {
     }
 
     @IBAction func next(_ sender: Any) {
-        let vc = storyboard?.instantiateViewController(withIdentifier: GuideCheckViewController.storyId)
-        self.navigationController?.pushViewController(vc!, animated: true)
+        let vc = storyboard?.instantiateViewController(withIdentifier: GuideCheckViewController.storyId) as! GuideCheckViewController
+        vc.campaignModel = campaignModel
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }

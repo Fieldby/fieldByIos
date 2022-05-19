@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 import NSObject_Rx
 
-class GuideCampaignViewController: UIViewController {
+class GuideCampaignViewController: CommonGuideViewController {
 
     @IBOutlet weak var backButton: UIButton!
     
@@ -62,7 +62,6 @@ class GuideCampaignViewController: UIViewController {
 
     @IBOutlet var viewModel: GuideCampaignViewModel!
     
-    var campaignModel: CampaignModel!
     var guideImages: [UIImage]!
     
     override func viewDidLoad() {

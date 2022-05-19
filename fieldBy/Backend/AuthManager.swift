@@ -33,7 +33,7 @@ class AuthManager: CommonBackendType {
                     if dataSnapShot.exists() {
                         if let myUserModel = MyUserModel(data: dataSnapShot) {
                             self.myUserModel = myUserModel
-                            igValidSubject.onNext(myUserModel.instagramModel != nil)
+                            igValidSubject.onNext(myUserModel.igModel != nil)
                             completable(.completed)
                         } else {
                             completable(.error(FetchError.decodingFailed))
@@ -50,7 +50,7 @@ class AuthManager: CommonBackendType {
     }
     
     func addIGInfo(igModel: IGModel) {
-        myUserModel.instagramModel = igModel
+        myUserModel.igModel = igModel
         igValidSubject.onNext(true)
         Database.database().reference().child("users/\(myUserModel.uuid!)/igInfo")
             .setValue(["id": igModel.id,

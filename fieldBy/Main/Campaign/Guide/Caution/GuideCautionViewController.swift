@@ -7,14 +7,12 @@
 
 import UIKit
 
-class GuideCautionViewController: UIViewController {
+class GuideCautionViewController: CommonGuideViewController {
 
     static let storyId = "guidecautionVC"
     
     @IBOutlet weak var buttonContainer: UIView!
     @IBOutlet weak var nextButton: UIButton!
-    
-    var campaignModel: CampaignModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,8 +26,9 @@ class GuideCautionViewController: UIViewController {
     
 
     @IBAction func next(_ sender: Any) {
-        let vc = storyboard?.instantiateViewController(withIdentifier: CampaignAddressViewController.storyId)
-        navigationController?.pushViewController(vc!, animated: true)
+        let vc = storyboard?.instantiateViewController(withIdentifier: CampaignAddressViewController.storyId) as! CampaignAddressViewController
+        vc.campaignModel = campaignModel
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func back(_ sender: Any) {

@@ -19,7 +19,17 @@ class CampaignViewController: UIViewController {
     @IBOutlet weak var pagerView: FSPagerView!
     @IBOutlet weak var barCollectionView: UICollectionView!
     @IBOutlet weak var infoView: UIView!
+    
+    @IBOutlet weak var brandNameLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var priceLabel: UILabel!
+    
     @IBOutlet weak var missionButton: UIButton!
+    @IBOutlet weak var isNewContainer: UIView!
+    
+    
+    
+    
     
     @IBOutlet weak var noMediaView: UIView!
     @IBOutlet weak var mediaButton: UIButton!
@@ -29,7 +39,7 @@ class CampaignViewController: UIViewController {
     @IBOutlet weak var barView: UIView!
     @IBOutlet var viewModel: CampaignViewModel!
     
-    private var campaignArray: [CampaignModel] = []
+    private var campaignArray: [CampaignModel] = CampaignManager.shared.campaignArray
     
     private var showingIndexSubject = BehaviorSubject<Int>(value: 0)
 
@@ -65,12 +75,14 @@ class CampaignViewController: UIViewController {
         
         topView.layer.cornerRadius = 27
         topView.layer.maskedCorners = [.layerMaxXMaxYCorner]
-        topView.addGrayShadow(color: .lightGray, opacity: 0.2, radius: 3)
+        topView.addGrayShadow(color: .lightGray, opacity: 0.3, radius: 3)
         
         barCollectionView.backgroundColor = .none
         
         infoView.layer.cornerRadius = 21
-        infoView.addGrayShadow(color: .lightGray, opacity: 0.15, radius: 3)
+        infoView.addGrayShadow(color: .lightGray, opacity: 0.3, radius: 3)
+        
+        isNewContainer.layer.cornerRadius = 9.5
         
         missionButton.layer.cornerRadius = 10
         noMediaView.isHidden = true
@@ -95,14 +107,6 @@ class CampaignViewController: UIViewController {
         pagerView.register(pagerCell.self, forCellWithReuseIdentifier: pagerCell.reuseId)
         
         CampaignManager.shared.campaignArrayRelay
-            .subscribe(onNext: { [unowned self] array in
-                campaignArray = array
-                pagerView.reloadData()
-            })
-            .disposed(by: rx.disposeBag)
-        
-        
-        CampaignManager.shared.campaignArrayRelay
             .bind(to: barCollectionView.rx.items(cellIdentifier: "barCell", cellType: BarCell.self)) { [unowned self] idx, data, cell in
 
                 cell.contentView.backgroundColor = .none
@@ -120,6 +124,15 @@ class CampaignViewController: UIViewController {
 
             }
             .disposed(by: rx.disposeBag)
+        
+        showingIndexSubject
+            .subscribe(onNext: { [unowned self] idx in
+                brandNameLabel.text = campaignArray[idx].brandName
+                titleLabel.text = campaignArray[idx].itemModel.name
+                isNewContainer.isHidden = !campaignArray[idx].isNew
+                priceLabel.text = "\(getComma(price: campaignArray[idx].itemModel.price))원"
+            })
+            .disposed(by: rx.disposeBag)
 
         mediaButton.rx.tap
             .subscribe(onNext: { [unowned self] in
@@ -128,7 +141,8 @@ class CampaignViewController: UIViewController {
                 fbLogin()
             })
             .disposed(by: rx.disposeBag)
-
+        
+        
     }
 
     private func presentDetailVC(campaignModel: CampaignModel, image: UIImage) {
@@ -140,6 +154,15 @@ class CampaignViewController: UIViewController {
         nav.navigationBar.isHidden = true
         nav.modalPresentationStyle = .fullScreen
         self.present(nav, animated: true)
+        
+    }
+    
+    private func getComma(price : Int) -> String {
+        let formatter = NumberFormatter()
+        formatter.locale = NSLocale.current
+        formatter.numberStyle = NumberFormatter.Style.decimal
+        formatter.usesGroupingSeparator = true
+        return formatter.string(from: price as NSNumber) ?? ""
         
     }
     
@@ -194,16 +217,15 @@ extension CampaignViewController: FSPagerViewDelegate, FSPagerViewDataSource {
         
         return campaignArray.count
     }
-    
-    func pagerView(_ pagerView: FSPagerView, willDisplay cell: FSPagerViewCell, forItemAt index: Int) {
-        showingIndexSubject.onNext(index)
-        
-    }
-    
+
     func pagerView(_ pagerView: FSPagerView, didSelectItemAt index: Int) {
         
         pagerView.deselectItem(at: index, animated: true)
         presentDetailVC(campaignModel: campaignArray[index], image: pagerView.cellForItem(at: index)!.imageView!.image!)
+    }
+    
+    func pagerViewWillEndDragging(_ pagerView: FSPagerView, targetIndex: Int) {
+        showingIndexSubject.onNext(targetIndex)
     }
     
 }

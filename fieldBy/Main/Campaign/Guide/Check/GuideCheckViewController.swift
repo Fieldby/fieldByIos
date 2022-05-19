@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 import NSObject_Rx
 
-class GuideCheckViewController: UIViewController {
+class GuideCheckViewController: CommonGuideViewController {
     
     static let storyId = "guidecheckVC"
 
@@ -80,8 +80,9 @@ class GuideCheckViewController: UIViewController {
         
         nextButton.rx.tap
             .subscribe(onNext: { [unowned self] in
-                let vc = storyboard?.instantiateViewController(withIdentifier: GuideFinalViewController.storyId)
-                navigationController?.pushViewController(vc!, animated: true)
+                let vc = storyboard?.instantiateViewController(withIdentifier: GuideFinalViewController.storyId) as! GuideFinalViewController
+                vc.campaignModel = campaignModel
+                navigationController?.pushViewController(vc, animated: true)
             })
             .disposed(by: rx.disposeBag)
     }
