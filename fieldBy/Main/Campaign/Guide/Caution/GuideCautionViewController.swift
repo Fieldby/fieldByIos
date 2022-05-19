@@ -28,7 +28,8 @@ class GuideCautionViewController: UIViewController {
     
 
     @IBAction func next(_ sender: Any) {
-        
+        let vc = storyboard?.instantiateViewController(withIdentifier: CampaignAddressViewController.storyId)
+        navigationController?.pushViewController(vc!, animated: true)
     }
     
     @IBAction func back(_ sender: Any) {

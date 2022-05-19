@@ -34,6 +34,8 @@
 		D16A5FC4282B82F700A75D9E /* ViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16A5FC3282B82F700A75D9E /* ViewController+.swift */; };
 		D16A5FC6282B9AE200A75D9E /* BarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16A5FC5282B9AE200A75D9E /* BarCell.swift */; };
 		D16EC57D283633EE00076B4C /* GuideCautionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16EC57C283633EE00076B4C /* GuideCautionViewController.swift */; };
+		D16EC5802836384000076B4C /* CampaignAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16EC57F2836384000076B4C /* CampaignAddressViewController.swift */; };
+		D16EC5822836385300076B4C /* CampaignAddressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16EC5812836385300076B4C /* CampaignAddressViewModel.swift */; };
 		D180FA7F281FF48E0004FECF /* CheckNumberViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D180FA7E281FF48E0004FECF /* CheckNumberViewModel.swift */; };
 		D18910062833C83A000685E8 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18910052833C83A000685E8 /* Date+.swift */; };
 		D18910082833C8F0000685E8 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18910072833C8F0000685E8 /* String+.swift */; };
@@ -116,6 +118,8 @@
 		D16A5FC3282B82F700A75D9E /* ViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+.swift"; sourceTree = "<group>"; };
 		D16A5FC5282B9AE200A75D9E /* BarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarCell.swift; sourceTree = "<group>"; };
 		D16EC57C283633EE00076B4C /* GuideCautionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideCautionViewController.swift; sourceTree = "<group>"; };
+		D16EC57F2836384000076B4C /* CampaignAddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignAddressViewController.swift; sourceTree = "<group>"; };
+		D16EC5812836385300076B4C /* CampaignAddressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignAddressViewModel.swift; sourceTree = "<group>"; };
 		D180FA7E281FF48E0004FECF /* CheckNumberViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckNumberViewModel.swift; sourceTree = "<group>"; };
 		D18910052833C83A000685E8 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		D18910072833C8F0000685E8 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
@@ -354,6 +358,15 @@
 			path = Caution;
 			sourceTree = "<group>";
 		};
+		D16EC57E2836383100076B4C /* Address */ = {
+			isa = PBXGroup;
+			children = (
+				D16EC57F2836384000076B4C /* CampaignAddressViewController.swift */,
+				D16EC5812836385300076B4C /* CampaignAddressViewModel.swift */,
+			);
+			path = Address;
+			sourceTree = "<group>";
+		};
 		D171E9DA2827D53F005FE939 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -517,6 +530,7 @@
 		D1EDA1C42834CF850021595E /* Guide */ = {
 			isa = PBXGroup;
 			children = (
+				D16EC57E2836383100076B4C /* Address */,
 				D16EC57B283633D900076B4C /* Caution */,
 				D16EC579283633C600076B4C /* Start */,
 				D1BEE860283625DF00D6076A /* Cell */,
@@ -720,6 +734,7 @@
 				D145BBEC2831E62A009383D8 /* FinalInfoViewController.swift in Sources */,
 				D1A99CD02821220300E414E4 /* AddressViewModel.swift in Sources */,
 				D145BBEE2831EABB009383D8 /* Styles.swift in Sources */,
+				D16EC5822836385300076B4C /* CampaignAddressViewModel.swift in Sources */,
 				D1A99CCE28211F2500E414E4 /* Juso.swift in Sources */,
 				D1A99CD32821239E00E414E4 /* AddressCell.swift in Sources */,
 				D1AA5CB7281EA50700279CC8 /* SigninViewController.swift in Sources */,
@@ -730,6 +745,7 @@
 				D11FD9AE281F6D50008AE32A /* PhoneViewModel.swift in Sources */,
 				D1121D222830E31500149263 /* GolfInfo.swift in Sources */,
 				D1C89EE72822B6EE00DAA2F4 /* CampaignViewController.swift in Sources */,
+				D16EC5802836384000076B4C /* CampaignAddressViewController.swift in Sources */,
 				D1C89EEF2822B71500DAA2F4 /* InfoViewController.swift in Sources */,
 				D145BBF1283224D2009383D8 /* InfoStartViewController.swift in Sources */,
 				D106B0AC281EA2A400E6CCFA /* ViewController.swift in Sources */,

@@ -14,7 +14,7 @@ import Firebase
 class AuthManager: CommonBackendType {
     static let shared = AuthManager()
     
-    var myUserModel: MyUserModel?
+    var myUserModel: MyUserModel!
     
     var fbToken: String!
     var userUUID: String!
