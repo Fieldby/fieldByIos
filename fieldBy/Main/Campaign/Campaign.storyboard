@@ -629,8 +629,8 @@ DM으로 문의해주세요!</string>
                                     <constraint firstItem="V4n-gr-nHM" firstAttribute="leading" secondItem="70D-ch-4B6" secondAttribute="leading" constant="20" id="pbP-g7-IbJ"/>
                                 </constraints>
                             </view>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="hT5-3k-MqM">
-                                <rect key="frame" x="197" y="443" width="20" height="20"/>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="hT5-3k-MqM">
+                                <rect key="frame" x="188.5" y="434.5" width="37" height="37"/>
                             </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vf6-Oy-mWy"/>

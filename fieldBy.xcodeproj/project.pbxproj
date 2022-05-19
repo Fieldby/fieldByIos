@@ -340,8 +340,8 @@
 		D16EC579283633C600076B4C /* Start */ = {
 			isa = PBXGroup;
 			children = (
-				D1EDA1C92834CFA30021595E /* GuideCampaignViewModel.swift */,
 				D1EDA1C72834CF9A0021595E /* GuideCampaignViewController.swift */,
+				D1EDA1C92834CFA30021595E /* GuideCampaignViewModel.swift */,
 			);
 			path = Start;
 			sourceTree = "<group>";

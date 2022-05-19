@@ -132,6 +132,18 @@ class GuideCampaignViewController: UIViewController {
         requiredLabel.text = campaignModel.hashTagModel.required
         optionLabel.text = campaignModel.hashTagModel.option
         brandInstagramLabel.text = "@\(campaignModel.brandInstagram)"
+        
+        applyButton.rx.tap
+            .subscribe(onNext: { [unowned self] in
+                viewModel.pushCautionVC()
+            })
+            .disposed(by: rx.disposeBag)
+        
+        viewModel.pushCautionVC = { [unowned self] in
+            let vc = storyboard?.instantiateViewController(withIdentifier: GuideCautionViewController.storyId) as! GuideCautionViewController
+            vc.campaignModel = campaignModel
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     
