@@ -54,9 +54,28 @@ class DetailCampaignViewController: UIViewController {
     @IBOutlet weak var indicator: UIActivityIndicatorView!
     @IBOutlet var viewModel: DetailCampaignViewModel!
     
+    private var timer: Timer?
+    
     var campaignModel: CampaignModel!
     var image: UIImage!
     
+    var timeSubject = BehaviorSubject<String>(value: "")
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        calculateDate()
+
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [unowned self] _ in
+            calculateDate()
+        })
+
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        timer?.invalidate()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,6 +112,11 @@ class DetailCampaignViewController: UIViewController {
         
         isNewContainer.isHidden = !campaignModel.isNew
         
+        timeSubject
+            .observeOn(MainScheduler.asyncInstance)
+            .bind(to: timeLabel.rx.text)
+            .disposed(by: rx.disposeBag)
+        
         backButton.rx.tap
             .subscribe(onNext: { [unowned self] in
                 self.dismiss(animated: true)
@@ -113,7 +137,7 @@ class DetailCampaignViewController: UIViewController {
         
         
         bottomTitleLabel.text = campaignModel.itemModel.name
-        priceLabel.text = getComma(price: campaignModel.itemModel.price)
+        priceLabel.text = getComma(price: campaignModel.itemModel.price) + "원"
         
         maintainLabel.text = "\(campaignModel.maintain)일"
         leastFeedLabel.text = "\(campaignModel.leastFeed)회"
@@ -141,6 +165,13 @@ class DetailCampaignViewController: UIViewController {
                 .disposed(by: rx.disposeBag)
         }
         
+        mainScrollView.rx.didScroll
+            .throttle(.seconds(1), latest: false, scheduler: MainScheduler.asyncInstance)
+            .subscribe(onNext: { [unowned self] in
+                calculateDate()
+            })
+            .disposed(by: rx.disposeBag)
+        
     }
     
     private func getComma(price : Int) -> String {
@@ -150,6 +181,23 @@ class DetailCampaignViewController: UIViewController {
         formatter.usesGroupingSeparator = true
         return formatter.string(from: price as NSNumber) ?? ""
         
+    }
+    
+    private func calculateDate() {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd-HH-mm"
+        
+        let dueDate = dateFormatter.date(from: campaignModel.dueDate)!
+        
+        var diff = Int(dueDate.timeIntervalSince(Date()))
+        
+        let diffHour = diff/3600
+        diff = diff - diffHour*3600
+        
+        let diffMin = diff/60
+        diff = diff - diffMin*60
+        
+        timeSubject.onNext("\(diffHour):\(diffMin):\(diff) 후 마감")
     }
 
     
