@@ -28,13 +28,24 @@ class MyUserModel {
     
     var igModel: IGModel?
     
+    var campaigns: [UserCampaignModel] = []
+    var campaignUuids: [String: Bool] = [:]
+    
     
     
     init?(data: DataSnapshot) {
         let value = data.value as! [String: Any]
         
         self.uuid = data.key
-        self.birthDay = value["birthDay"] as! String
+        
+        
+        let birthDayValue = value["birthDay"] as? String
+        
+        guard let birthDayValue = birthDayValue else {
+            return nil
+        }
+        birthDay = birthDayValue
+        
         self.career = Career(rawValue: value["career"] as! String)!
         self.height = value["height"] as! Int
         self.isPro = value["isPro"] as! Bool
@@ -59,8 +70,53 @@ class MyUserModel {
             igModel = IGModel(snapshot: igValue)
         }
         
+        if let userCampaignValue = data.childSnapshot(forPath: "campaigns").children.allObjects as? [DataSnapshot] {
+            if !userCampaignValue.isEmpty {
+                var temp: [UserCampaignModel] = []
+                
+                for snapshot in userCampaignValue {
+                    let model = UserCampaignModel(snapshot: snapshot)!
+                    temp.append(model)
+                    campaignUuids[model.uuid] = true
+                }
+                campaigns = temp
+            }
+        }
+        
     }
     
+    func appliedCount() -> Int {
+        var count = 0
+        for campaign in campaigns {
+            if campaign.status == .applied {
+                count += 1
+            }
+        }
+        
+        return count
+    }
+    
+    func inProgressCount() -> Int {
+        var count = 0
+        for campaign in campaigns {
+            if campaign.status != .applied && campaign.status != .done {
+                count += 1
+            }
+        }
+        
+        return count
+    }
+    
+    func doneCount() -> Int {
+        var count = 0
+        for campaign in campaigns {
+            if campaign.status == .done {
+                count += 1
+            }
+        }
+        
+        return count
+    }
     
     
 }

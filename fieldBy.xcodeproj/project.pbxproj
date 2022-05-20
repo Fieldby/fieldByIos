@@ -40,6 +40,9 @@
 		D16EC5802836384000076B4C /* CampaignAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16EC57F2836384000076B4C /* CampaignAddressViewController.swift */; };
 		D16EC5822836385300076B4C /* CampaignAddressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16EC5812836385300076B4C /* CampaignAddressViewModel.swift */; };
 		D180FA7F281FF48E0004FECF /* CheckNumberViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D180FA7E281FF48E0004FECF /* CheckNumberViewModel.swift */; };
+		D181C837283750F1008304C5 /* UserCampaignModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D181C836283750F1008304C5 /* UserCampaignModel.swift */; };
+		D181C839283754FB008304C5 /* ProgressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D181C838283754FB008304C5 /* ProgressViewModel.swift */; };
+		D181C83D283758DB008304C5 /* ProgressMainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D181C83C283758DB008304C5 /* ProgressMainCell.swift */; };
 		D18910062833C83A000685E8 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18910052833C83A000685E8 /* Date+.swift */; };
 		D18910082833C8F0000685E8 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18910072833C8F0000685E8 /* String+.swift */; };
 		D199F3872827C2B200E3F892 /* InstagramManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D199F3862827C2B200E3F892 /* InstagramManager.swift */; };
@@ -127,6 +130,9 @@
 		D16EC57F2836384000076B4C /* CampaignAddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignAddressViewController.swift; sourceTree = "<group>"; };
 		D16EC5812836385300076B4C /* CampaignAddressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignAddressViewModel.swift; sourceTree = "<group>"; };
 		D180FA7E281FF48E0004FECF /* CheckNumberViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckNumberViewModel.swift; sourceTree = "<group>"; };
+		D181C836283750F1008304C5 /* UserCampaignModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCampaignModel.swift; sourceTree = "<group>"; };
+		D181C838283754FB008304C5 /* ProgressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewModel.swift; sourceTree = "<group>"; };
+		D181C83C283758DB008304C5 /* ProgressMainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressMainCell.swift; sourceTree = "<group>"; };
 		D18910052833C83A000685E8 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		D18910072833C8F0000685E8 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		D199F3862827C2B200E3F892 /* InstagramManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramManager.swift; sourceTree = "<group>"; };
@@ -340,6 +346,7 @@
 				D145BBED2831EABB009383D8 /* Styles.swift */,
 				D1121D212830E31500149263 /* GolfInfo.swift */,
 				D1EA5D9E282535E7000E35A0 /* MyUserModel.swift */,
+				D181C836283750F1008304C5 /* UserCampaignModel.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -393,6 +400,23 @@
 			isa = PBXGroup;
 			children = (
 				D16A5FC5282B9AE200A75D9E /* BarCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		D181C83A283758C1008304C5 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				D1C89EEA2822B70300DAA2F4 /* ProgressViewController.swift */,
+				D181C838283754FB008304C5 /* ProgressViewModel.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		D181C83B283758CC008304C5 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				D181C83C283758DB008304C5 /* ProgressMainCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -535,8 +559,9 @@
 		D1C89EE22822B6C300DAA2F4 /* Progress */ = {
 			isa = PBXGroup;
 			children = (
+				D181C83B283758CC008304C5 /* Cell */,
+				D181C83A283758C1008304C5 /* Main */,
 				D1C89EE82822B6FC00DAA2F4 /* Progress.storyboard */,
-				D1C89EEA2822B70300DAA2F4 /* ProgressViewController.swift */,
 			);
 			path = Progress;
 			sourceTree = "<group>";
@@ -752,6 +777,8 @@
 				D16EC57D283633EE00076B4C /* GuideCautionViewController.swift in Sources */,
 				D14A198F28336D6300542F2B /* Error.swift in Sources */,
 				D1C89EEB2822B70300DAA2F4 /* ProgressViewController.swift in Sources */,
+				D181C837283750F1008304C5 /* UserCampaignModel.swift in Sources */,
+				D181C839283754FB008304C5 /* ProgressViewModel.swift in Sources */,
 				D1FC0803282D3FE8006ED153 /* DetailCampaignViewController.swift in Sources */,
 				D1ED9E13282D1A9100855641 /* CampaignManager.swift in Sources */,
 				D18910082833C8F0000685E8 /* String+.swift in Sources */,
@@ -771,6 +798,7 @@
 				D11FD9AE281F6D50008AE32A /* PhoneViewModel.swift in Sources */,
 				D1121D222830E31500149263 /* GolfInfo.swift in Sources */,
 				D1C89EE72822B6EE00DAA2F4 /* CampaignViewController.swift in Sources */,
+				D181C83D283758DB008304C5 /* ProgressMainCell.swift in Sources */,
 				D16EC5802836384000076B4C /* CampaignAddressViewController.swift in Sources */,
 				D1C89EEF2822B71500DAA2F4 /* InfoViewController.swift in Sources */,
 				D145BBF1283224D2009383D8 /* InfoStartViewController.swift in Sources */,

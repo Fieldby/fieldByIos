@@ -28,9 +28,6 @@ class CampaignViewController: UIViewController {
     @IBOutlet weak var isNewContainer: UIView!
     
     
-    
-    
-    
     @IBOutlet weak var noMediaView: UIView!
     @IBOutlet weak var mediaButton: UIButton!
     
@@ -168,17 +165,21 @@ class CampaignViewController: UIViewController {
     
     private func fbLogin() {
         let manager = LoginManager()
-        manager.logIn(permissions: ["public_profile", "instagram_basic", "pages_show_list"], from: self) { result, error in
+        manager.logIn(permissions: ["public_profile", "instagram_basic", "pages_show_list"], from: self) { [unowned self] result, error in
             if let error = error {
                 print("Process error: \(error)")
                 return
             }
+            
             guard let result = result else {
                 print("No Result")
                 return
             }
+            
             if result.isCancelled {
                 print("Login Cancelled")
+                indicator.stopAnimating()
+                indicator.isHidden = true
                 return
             }
 
@@ -214,7 +215,6 @@ extension CampaignViewController: FSPagerViewDelegate, FSPagerViewDataSource {
     }
     
     func numberOfItems(in pagerView: FSPagerView) -> Int {
-        
         return campaignArray.count
     }
 

@@ -396,6 +396,9 @@ class PhoneViewController: UIViewController {
             } onError: { [unowned self] _ in
                 phoneTextField.isUserInteractionEnabled = false
 
+                indicator.isHidden = true
+                indicator.stopAnimating()
+                
                 nameTextField.becomeFirstResponder()
                 editingStatus = .name
                 certificationButton.isEnabled = false

@@ -61,14 +61,18 @@ class DetailCampaignViewController: UIViewController {
     
     var timeSubject = BehaviorSubject<String>(value: "")
     
+    var isDone = false
+    
     override func viewWillAppear(_ animated: Bool) {
         
-        calculateDate()
+        
 
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [unowned self] _ in
+        if !isDone {
             calculateDate()
-        })
-
+            timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [unowned self] _ in
+                calculateDate()
+            })
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -104,6 +108,13 @@ class DetailCampaignViewController: UIViewController {
     }
     
     private func bind() {
+        isDone = AuthManager.shared.myUserModel.campaignUuids[campaignModel.uuid] ?? false
+        
+        if isDone {
+            timeStickyContainer.backgroundColor = .main
+            timeLabel.text = "신청 완료!"
+        }
+        
         mainImageView.image = image
 
         brandNameLabel.text = campaignModel.brandName
@@ -112,10 +123,13 @@ class DetailCampaignViewController: UIViewController {
         
         isNewContainer.isHidden = !campaignModel.isNew
         
-        timeSubject
-            .observeOn(MainScheduler.asyncInstance)
-            .bind(to: timeLabel.rx.text)
-            .disposed(by: rx.disposeBag)
+        if !isDone {
+            timeSubject
+                .observeOn(MainScheduler.asyncInstance)
+                .bind(to: timeLabel.rx.text)
+                .disposed(by: rx.disposeBag)
+        }
+
         
         backButton.rx.tap
             .subscribe(onNext: { [unowned self] in
@@ -168,7 +182,9 @@ class DetailCampaignViewController: UIViewController {
         mainScrollView.rx.didScroll
             .throttle(.seconds(1), latest: false, scheduler: MainScheduler.asyncInstance)
             .subscribe(onNext: { [unowned self] in
-                calculateDate()
+                if !isDone {
+                    calculateDate()
+                }
             })
             .disposed(by: rx.disposeBag)
         

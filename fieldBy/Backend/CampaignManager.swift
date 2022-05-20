@@ -61,4 +61,25 @@ class CampaignManager: CommonBackendType {
             return Disposables.create()
         }
     }
+    
+    func fetchByUuid(uuid: String) -> Single<CampaignModel> {
+        return Single.create() { [unowned self] observable in
+         
+            ref.child(path).child(uuid).observeSingleEvent(of: .value) { dataSnapshot in
+                if dataSnapshot.exists() {
+                    if let model = CampaignModel(snapshot: dataSnapshot) {
+                        observable(.success(model))
+                    } else {
+                        observable(.error(FetchError.decodingFailed))
+                    }
+                } else {
+                    observable(.error(FetchError.emptyData))
+                }
+
+            }
+            
+            
+            return Disposables.create()
+        }
+    }
 }
