@@ -32,7 +32,6 @@ class MyUserModel {
     var campaignUuids: [String: Bool] = [:]
     
     
-    
     init?(data: DataSnapshot) {
         let value = data.value as! [String: Any]
         

@@ -55,7 +55,8 @@ class AuthManager: CommonBackendType {
         Database.database().reference().child("users/\(myUserModel.uuid!)/igInfo")
             .setValue(["id": igModel.id,
                        "name": igModel.name,
-                       "username": igModel.username])
+                       "username": igModel.username,
+                       "token": igModel.token])
 
     }
     
@@ -79,6 +80,11 @@ class AuthManager: CommonBackendType {
     func addCampaign(uuid: String) {
         myUserModel.campaignUuids[uuid] = true
         myUserModel.campaigns.append(UserCampaignModel(uuid: uuid, status: .applied))
+    }
+    
+    func refreshToken(token: String) {
+        myUserModel.igModel?.token = token
+        ref.child("users").child(myUserModel.uuid).child("igInfo").child("token").setValue(token)
     }
     
     static func address(keyword: String) -> Single<JusoResponse> {

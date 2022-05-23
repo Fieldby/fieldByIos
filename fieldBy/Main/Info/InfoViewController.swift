@@ -54,12 +54,7 @@ class InfoViewController: UIViewController {
 //            print("token: \(result.token?.tokenString)")
 //            print("user: \(result.grantedPermissions)")
 //
-            InstagramManager.shared.getLongToken(token: AuthManager.shared.fbToken)
-                .subscribe {
-                    print("goo")
-                } onError: { err in
-                    print(err)
-                }
+                
 
 
 
