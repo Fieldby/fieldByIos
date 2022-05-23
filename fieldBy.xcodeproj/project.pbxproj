@@ -43,6 +43,7 @@
 		D181C837283750F1008304C5 /* UserCampaignModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D181C836283750F1008304C5 /* UserCampaignModel.swift */; };
 		D181C839283754FB008304C5 /* ProgressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D181C838283754FB008304C5 /* ProgressViewModel.swift */; };
 		D181C83D283758DB008304C5 /* ProgressMainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D181C83C283758DB008304C5 /* ProgressMainCell.swift */; };
+		D184D4ED283B8F8500BEB184 /* TokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D184D4EC283B8F8500BEB184 /* TokenModel.swift */; };
 		D18910062833C83A000685E8 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18910052833C83A000685E8 /* Date+.swift */; };
 		D18910082833C8F0000685E8 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18910072833C8F0000685E8 /* String+.swift */; };
 		D199F3872827C2B200E3F892 /* InstagramManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D199F3862827C2B200E3F892 /* InstagramManager.swift */; };
@@ -133,6 +134,7 @@
 		D181C836283750F1008304C5 /* UserCampaignModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCampaignModel.swift; sourceTree = "<group>"; };
 		D181C838283754FB008304C5 /* ProgressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewModel.swift; sourceTree = "<group>"; };
 		D181C83C283758DB008304C5 /* ProgressMainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressMainCell.swift; sourceTree = "<group>"; };
+		D184D4EC283B8F8500BEB184 /* TokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenModel.swift; sourceTree = "<group>"; };
 		D18910052833C83A000685E8 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		D18910072833C8F0000685E8 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		D199F3862827C2B200E3F892 /* InstagramManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramManager.swift; sourceTree = "<group>"; };
@@ -344,6 +346,7 @@
 			isa = PBXGroup;
 			children = (
 				D145BBED2831EABB009383D8 /* Styles.swift */,
+				D184D4EC283B8F8500BEB184 /* TokenModel.swift */,
 				D1121D212830E31500149263 /* GolfInfo.swift */,
 				D1EA5D9E282535E7000E35A0 /* MyUserModel.swift */,
 				D181C836283750F1008304C5 /* UserCampaignModel.swift */,
@@ -776,6 +779,7 @@
 				D1121D2A2830F3D000149263 /* RoundingCell.swift in Sources */,
 				D16EC57D283633EE00076B4C /* GuideCautionViewController.swift in Sources */,
 				D14A198F28336D6300542F2B /* Error.swift in Sources */,
+				D184D4ED283B8F8500BEB184 /* TokenModel.swift in Sources */,
 				D1C89EEB2822B70300DAA2F4 /* ProgressViewController.swift in Sources */,
 				D181C837283750F1008304C5 /* UserCampaignModel.swift in Sources */,
 				D181C839283754FB008304C5 /* ProgressViewModel.swift in Sources */,

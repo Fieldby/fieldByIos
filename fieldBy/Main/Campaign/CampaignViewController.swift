@@ -39,6 +39,7 @@ class CampaignViewController: UIViewController {
     private var campaignArray: [CampaignModel] = CampaignManager.shared.campaignArray
     
     private var showingIndexSubject = BehaviorSubject<Int>(value: 0)
+    private var showingIndex = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -128,6 +129,16 @@ class CampaignViewController: UIViewController {
                 titleLabel.text = campaignArray[idx].itemModel.name
                 isNewContainer.isHidden = !campaignArray[idx].isNew
                 priceLabel.text = "\(getComma(price: campaignArray[idx].itemModel.price))원"
+                
+                let uuid = campaignArray[idx].uuid
+                
+                if AuthManager.shared.myUserModel.campaignUuids[uuid] == true {
+                    missionButton.setTitle("신청 완료", for: .normal)
+                    missionButton.backgroundColor = UIColor(red: 48, green: 48, blue: 48)
+                } else {
+                    missionButton.setTitle("신청하기", for: .normal)
+                    missionButton.backgroundColor = .main
+                }
             })
             .disposed(by: rx.disposeBag)
 
@@ -139,7 +150,12 @@ class CampaignViewController: UIViewController {
             })
             .disposed(by: rx.disposeBag)
         
-        
+        missionButton.rx.tap
+            .subscribe(onNext: { [unowned self] in
+                let index = showingIndex
+                presentDetailVC(campaignModel: campaignArray[index], image: pagerView.cellForItem(at: index)!.imageView!.image!)
+            })
+            .disposed(by: rx.disposeBag)
     }
 
     private func presentDetailVC(campaignModel: CampaignModel, image: UIImage) {
@@ -226,6 +242,7 @@ extension CampaignViewController: FSPagerViewDelegate, FSPagerViewDataSource {
     
     func pagerViewWillEndDragging(_ pagerView: FSPagerView, targetIndex: Int) {
         showingIndexSubject.onNext(targetIndex)
+        showingIndex = targetIndex
     }
     
 }

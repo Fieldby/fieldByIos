@@ -14,6 +14,8 @@ import ObjectiveC
 class InstagramManager: NSObject {
     
     static let shared = InstagramManager()
+    var clientId: String = "573051764154148"
+    var clientSecret: String = "21985ea59e1c365b952812ad4669ff9e"
     
     private let graphUrl = "https://graph.facebook.com/v13.0/"
     private var fbId: String!
@@ -26,6 +28,57 @@ class InstagramManager: NSObject {
             return data
         } catch {
             return nil
+        }
+    }
+    
+    func getLongToken(token: String) -> Completable {
+        return Completable.create() { [unowned self] completable in
+            
+            let url = graphUrl + "oauth/access_token?grant_type=fb_exchange_token&client_id=\(clientId)&client_secret=\(clientSecret)&fb_exchange_token=\(token)"
+            
+            AF.request(url, method: .get)
+                .responseData { [unowned self] response in
+                    switch response.result {
+                    case .success(let data):
+                        if let data = decode(jsonData: data, type: TokenModel.self) {
+                            
+                            
+                            refreshLongToken(token: data.accessToken)
+                                .subscribe {
+                                    completable(.completed)
+                                } onError: { err in
+                                    completable(.error(err))
+                                }
+                                .disposed(by: rx.disposeBag)
+
+                        } else {
+                            completable(.error(FetchError.decodingFailed))
+                        }
+                    case .failure(let err):
+                        completable(.error(err))
+                    }
+                }
+
+            return Disposables.create()
+        }
+    }
+    
+    func refreshLongToken(token: String) -> Completable {
+        return Completable.create() { [unowned self] completable in
+            
+            let url = graphUrl + "oauth/refresh_access_token?grant_type=fb_exchange_token&client_id=\(clientId)&fb_exchange_token=\(token)&redirect_uri=https://hyuwo.notion.site/a7bb0e42d03142c79d2d3de57dd768b7"
+            
+            AF.request(url, method: .get)
+                .responseString { response in
+                    switch response.result {
+                    case .success(let str):
+                        print(str)
+                    case .failure(let err):
+                        print(err)
+                    }
+                }
+
+            return Disposables.create()
         }
     }
     

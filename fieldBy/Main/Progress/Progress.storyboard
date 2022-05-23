@@ -514,10 +514,15 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="hVL-YM-HtN">
+                                <rect key="frame" x="197" y="443" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Iw9-J1-CT4"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="hVL-YM-HtN" firstAttribute="centerY" secondItem="Iw9-J1-CT4" secondAttribute="centerY" id="3ro-kM-0Vc"/>
+                            <constraint firstItem="hVL-YM-HtN" firstAttribute="centerX" secondItem="Iw9-J1-CT4" secondAttribute="centerX" id="DG2-4z-efy"/>
                             <constraint firstItem="08z-O7-rGx" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="F7v-5g-qv1"/>
                             <constraint firstItem="PHa-Jj-WIR" firstAttribute="top" secondItem="s5c-kG-Fvu" secondAttribute="bottom" id="OpA-ew-VI4"/>
                             <constraint firstItem="08z-O7-rGx" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="Peg-Ii-y5C"/>
@@ -540,6 +545,7 @@
                         <outlet property="appliedLabel" destination="R5L-v4-Bmf" id="MgW-1L-lGr"/>
                         <outlet property="doneLabel" destination="L2g-hS-7tH" id="IX0-Zb-VrW"/>
                         <outlet property="inProgressLabel" destination="i0m-QW-5TI" id="uqU-ez-ahI"/>
+                        <outlet property="indicator" destination="hVL-YM-HtN" id="ovp-Va-Ihu"/>
                         <outlet property="tableView" destination="ErI-gh-sak" id="o6D-Zf-NRl"/>
                         <outlet property="topView" destination="08z-O7-rGx" id="iVB-uJ-N0o"/>
                         <outlet property="usernameLabel" destination="s5c-kG-Fvu" id="hoE-0z-POz"/>

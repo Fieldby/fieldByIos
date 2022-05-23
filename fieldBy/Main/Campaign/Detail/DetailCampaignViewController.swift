@@ -113,6 +113,7 @@ class DetailCampaignViewController: UIViewController {
         if isDone {
             timeStickyContainer.backgroundColor = .main
             timeLabel.text = "신청 완료!"
+            applyButton.isEnabled = false
         }
         
         mainImageView.image = image

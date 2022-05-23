@@ -76,6 +76,11 @@ class AuthManager: CommonBackendType {
         }
     }
     
+    func addCampaign(uuid: String) {
+        myUserModel.campaignUuids[uuid] = true
+        myUserModel.campaigns.append(UserCampaignModel(uuid: uuid, status: .applied))
+    }
+    
     static func address(keyword: String) -> Single<JusoResponse> {
         return Single.create() { observable in
             let addressBaseUrl = "https://www.juso.go.kr/addrlink/addrLinkApi.do"

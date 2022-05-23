@@ -17,6 +17,10 @@ struct UserCampaignModel: Codable {
         self.status = CampaignStatus(rawValue: value["status"] as! String)!
     }
     
+    init(uuid: String, status: CampaignStatus) {
+        self.uuid = uuid
+        self.status = status
+    }
     
     enum CampaignStatus: String, Codable {
         case applied

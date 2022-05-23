@@ -15,29 +15,36 @@ class ProgressViewModel: NSObject {
     
     override init() {
         super.init()
-        
-        var campaignArray = [(CampaignModel, UserCampaignModel)]()
-        
-        for campaign in AuthManager.shared.myUserModel.campaigns {
+
+    }
+    
+    func fetch() -> Completable {
+        return Completable.create() { [unowned self] completable in
+            var campaignArray = [(CampaignModel, UserCampaignModel)]()
+
+            for campaign in AuthManager.shared.myUserModel.campaigns {
+                
+                CampaignManager.shared.fetchByUuid(uuid: campaign.uuid)
+                    .subscribe { [unowned self] model in
+                        campaignArray.append((model, campaign))
+                        tosShowArray.accept(campaignArray)
+                        
+                        if campaignArray.count == AuthManager.shared.myUserModel.campaigns.count {
+                            completable(.completed)
+                        }
+                    } onError: { err in
+                        completable(.error(err))
+                    }
+                    .disposed(by: rx.disposeBag)
+                
+            }
             
-            CampaignManager.shared.fetchByUuid(uuid: campaign.uuid)
-                .subscribe { [unowned self] model in
-                    campaignArray.append((model, campaign))
-                    var campaign2 = campaign
-                    campaign2.status = .done
-                    campaignArray.append((model, campaign2))
-                    tosShowArray.accept(campaignArray)
-                } onError: { err in
-                    print(err)
-                }
-                .disposed(by: rx.disposeBag)
             
+            
+            
+            return Disposables.create()
         }
-        
-        
-        
-        
-        
+
     }
     
     

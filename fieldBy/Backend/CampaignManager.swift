@@ -82,4 +82,32 @@ class CampaignManager: CommonBackendType {
             return Disposables.create()
         }
     }
+    
+    func save(uuid: String) {
+        let myUid = AuthManager.shared.myUserModel.uuid!
+        
+        ref.child("campaigns/\(uuid)/users").observeSingleEvent(of: .value) { [unowned self] dataSnapShot in
+            if dataSnapShot.exists() {
+                let idx = Int((dataSnapShot.children.allObjects as! [DataSnapshot]).last!.key)!
+                ref.child("campaigns/\(uuid)/users").child("\(idx+1)").setValue(myUid)
+                
+            } else {
+                ref.child("campaigns/\(uuid)/users").child("0").setValue(myUid)
+            }
+
+        }
+        ref.child("users").child(AuthManager.shared.myUserModel.uuid).child("campaigns").child(uuid).child("status").setValue("applied")
+        if let model = model(uuid: uuid) {
+            model.users[myUid] = true
+            campaignArrayRelay.accept(campaignArray)
+        }
+        
+        AuthManager.shared.addCampaign(uuid: uuid)
+        
+        
+    }
+    
+    func model(uuid: String) -> CampaignModel? {
+        return campaignArray.first { $0.uuid == uuid }
+    }
 }

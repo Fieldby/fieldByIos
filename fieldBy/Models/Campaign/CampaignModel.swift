@@ -33,8 +33,11 @@ class CampaignModel: Codable {
     
     let hashTagModel: HashTagModel
     
+    var users: [String: Bool]
+    let sizeNeeded: Bool
     
-    init(url: String, brandUuid: String, isNew: Bool, itemModel: ItemModel, dueDate: String, selectionDate: String, itemDate: String, uploadDate: String, leastFeed: Int, maintain: Int, brandName: String, guides: [GuideModel], uuid: String, brandInstagram: String, hashTagModel: HashTagModel) {
+    
+    init(url: String, brandUuid: String, isNew: Bool, itemModel: ItemModel, dueDate: String, selectionDate: String, itemDate: String, uploadDate: String, leastFeed: Int, maintain: Int, brandName: String, guides: [GuideModel], uuid: String, brandInstagram: String, hashTagModel: HashTagModel, users: [String: Bool], sizeNeeded: Bool) {
         self.mainImageUrl = url
         self.brandUuid = brandUuid
         self.isNew = isNew
@@ -50,6 +53,9 @@ class CampaignModel: Codable {
         self.uuid = uuid
         self.brandInstagram = brandInstagram
         self.hashTagModel = hashTagModel
+        
+        self.users = users
+        self.sizeNeeded = sizeNeeded
     }
     
     init?(snapshot: DataSnapshot) {
@@ -81,6 +87,13 @@ class CampaignModel: Codable {
         
         
         self.hashTagModel = HashTagModel(snapshot: snapshot.childSnapshot(forPath: "hashTags"))!
+        
+        var tempUsers: [String: Bool] = [:]
+        for data in snapshot.childSnapshot(forPath: "users").children.allObjects as! [DataSnapshot] {
+            tempUsers[data.value as! String] = true
+        }
+        self.users = tempUsers
+        self.sizeNeeded = value["sizeNeeded"] as! Bool
     }
     
 }

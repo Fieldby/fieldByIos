@@ -24,22 +24,42 @@ class ProgressViewController: UIViewController {
     
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
     
     
     
     @IBOutlet var viewModel: ProgressViewModel!
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        indicator.isHidden = false
+        indicator.startAnimating()
+        
+        viewModel.fetch()
+            .subscribe { [unowned self] in
+                indicator.isHidden = true
+                indicator.stopAnimating()
+                
+            } onError: { [unowned self] err in
+                print(err)
+                indicator.isHidden = true
+                indicator.stopAnimating()
+            }
+            .disposed(by: rx.disposeBag)
+
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        tableView.rx.setDelegate(self)
-//            .disposed(by: rx.disposeBag)
         makeUI()
         bind()
     }
     
     private func makeUI() {
+        indicator.isHidden = true
         topView.layer.cornerRadius = 27
         topView.layer.maskedCorners = [.layerMaxXMaxYCorner]
         topView.addGrayShadow(color: .lightGray, opacity: 0.3, radius: 3)
@@ -62,12 +82,22 @@ class ProgressViewController: UIViewController {
                 
             }
             .disposed(by: rx.disposeBag)
+        
+        let refreshControl = UIRefreshControl()
+        tableView.refreshControl = refreshControl
+        tableView.refreshControl?.addTarget(self, action: #selector(pullToRefresh(_:)), for: .valueChanged)
+        
     }
 
-}
+    @objc func pullToRefresh(_ sender: Any) {
+        viewModel.fetch()
+            .subscribe { [unowned self] in
+                tableView.refreshControl?.endRefreshing()
+                
+            } onError: { [unowned self] error in
+                print(error)
+                tableView.refreshControl?.endRefreshing()
+            }
 
-//extension ProgressViewController: UITableViewDelegate {
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return CGFloat(350)
-//    }
-//}
+    }
+}

@@ -27,8 +27,8 @@ class GuideFinalViewController: CommonGuideViewController {
         
         dueDateLabel.text = "\(campaignModel.dueDate.month)월 \(campaignModel.dueDate.day)일 \(campaignModel.dueDate.hour)시 \(campaignModel.dueDate.minute)분"
         
-        
-        
+        CampaignManager.shared.save(uuid: campaignModel.uuid)
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
     }
     
     @IBAction func dismiss(_ sender: Any) {
