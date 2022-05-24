@@ -37,6 +37,8 @@ struct IGModel: Codable {
     let id: String
     let username: String
     let name: String
+    let followers: Int
+    let profileUrl: String?
     var token: String?
     
     init(snapshot: DataSnapshot) {
@@ -44,17 +46,25 @@ struct IGModel: Codable {
         id = value["id"] as! String
         username = value["username"] as! String
         name = value["name"] as! String
+        followers = value["followers"] as! Int
+        profileUrl = value["profileUrl"] as? String
         if let token = value["token"] as? String {
             
             _ = InstagramManager.shared.getLongToken(token: token)
                 .subscribe { token in
                     AuthManager.shared.refreshToken(token: token)
-                    
 
                 } onError: { err in
                     print(err)
                 }
 
-        }
+        } 
     }
+    
+    enum CodingKeys: String, CodingKey {
+        case id, username, name
+        case followers = "followers_count"
+        case profileUrl = "profile_picture_url"
+    }
+    
 }

@@ -64,8 +64,6 @@ class DetailCampaignViewController: UIViewController {
     var isDone = false
     
     override func viewWillAppear(_ animated: Bool) {
-        
-        
 
         if !isDone {
             calculateDate()
@@ -159,8 +157,14 @@ class DetailCampaignViewController: UIViewController {
         
         applyButton.rx.tap
             .throttle(.seconds(3), latest: false, scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [unowned self] in 
-                viewModel.pushGuideVC()
+            .subscribe(onNext: { [unowned self] in
+                
+                if AuthManager.shared.myUserModel.igModel == nil {
+                    viewModel.presentPopup()
+                } else {
+                    viewModel.pushGuideVC()
+                }
+
             })
             .disposed(by: rx.disposeBag)
         
@@ -178,6 +182,15 @@ class DetailCampaignViewController: UIViewController {
                     indicator.isHidden = true
                 })
                 .disposed(by: rx.disposeBag)
+        }
+        
+        viewModel.presentPopup = { [unowned self] in
+            
+            let vc = storyboard?.instantiateViewController(withIdentifier: CommonPopupViewController.storyId) as! CommonPopupViewController
+            vc.modalTransitionStyle = .coverVertical
+            vc.content = "캠페인에 지원하려면 인스타그램 채널 연결이 필요합니다. \n연결은 마이페이지에서 진행할 수 있습니다."
+            vc.modalPresentationStyle = .overCurrentContext
+            present(vc, animated: true)
         }
         
         mainScrollView.rx.didScroll

@@ -25,7 +25,7 @@ struct UserCampaignModel: Codable {
     enum CampaignStatus: String, Codable {
         case applied
         case delivering
-        case uploaded
+        case uploading
         case maintaining
         case done
     }

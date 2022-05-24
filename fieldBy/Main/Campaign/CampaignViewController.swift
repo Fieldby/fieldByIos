@@ -27,11 +27,6 @@ class CampaignViewController: UIViewController {
     @IBOutlet weak var missionButton: UIButton!
     @IBOutlet weak var isNewContainer: UIView!
     
-    
-    @IBOutlet weak var noMediaView: UIView!
-    @IBOutlet weak var mediaButton: UIButton!
-    
-    
     @IBOutlet weak var indicator: UIActivityIndicatorView!
     @IBOutlet weak var barView: UIView!
     @IBOutlet var viewModel: CampaignViewModel!
@@ -83,17 +78,12 @@ class CampaignViewController: UIViewController {
         isNewContainer.layer.cornerRadius = 9.5
         
         missionButton.layer.cornerRadius = 10
-        noMediaView.isHidden = true
     }
     
     private func hide() {
         infoView.isHidden = true
         barView.isHidden = true
         pagerView.isHidden = true
-        
-        noMediaView.isHidden = false
-        
-        mediaButton.layer.cornerRadius = 10
     }
     
     private func bind() {
@@ -142,14 +132,6 @@ class CampaignViewController: UIViewController {
             })
             .disposed(by: rx.disposeBag)
 
-        mediaButton.rx.tap
-            .subscribe(onNext: { [unowned self] in
-                indicator.isHidden = false
-                indicator.startAnimating()
-                fbLogin()
-            })
-            .disposed(by: rx.disposeBag)
-        
         missionButton.rx.tap
             .subscribe(onNext: { [unowned self] in
                 let index = showingIndex

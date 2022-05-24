@@ -171,7 +171,7 @@ class InstagramManager: NSObject {
     
     func finalInfo(token: String) -> Completable {
         return Completable.create() { [unowned self] completable in
-            let url = "\(graphUrl)\(instagramId!)?fields=name,username&access_token=\(token)"
+            let url = "\(graphUrl)\(instagramId!)?fields=name,username,profile_picture_url,followers_count&access_token=\(token)"
             AF.request(url, method: .get)
                 .validate(statusCode: 200..<300)
                 .responseData { [unowned self] response in

@@ -89,7 +89,7 @@ class ProgressMainCell: UITableViewCell {
             setApplied()
         case .delivering:
             setDelivery()
-        case .uploaded:
+        case .uploading:
             setUpload()
             
         case .maintaining:
@@ -121,6 +121,12 @@ class ProgressMainCell: UITableViewCell {
         uploadView.isHidden = false
         
         uploadButtonContainer.isHidden = false
+        
+        uploadButton.rx.tap
+            .subscribe(onNext: { [unowned self] in
+                
+            })
+            .disposed(by: rx.disposeBag)
     }
     
     private func setMaintain() {

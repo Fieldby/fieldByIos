@@ -56,7 +56,9 @@ class AuthManager: CommonBackendType {
             .setValue(["id": igModel.id,
                        "name": igModel.name,
                        "username": igModel.username,
-                       "token": igModel.token])
+                       "token": igModel.token!,
+                       "followers": igModel.followers,
+                       "profileUrl": igModel.profileUrl])
 
     }
     

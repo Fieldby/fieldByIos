@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		007C7467FE54FC4D3148B1CE /* Pods_fieldBy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA4D456A8B0CC37E589C7E22 /* Pods_fieldBy.framework */; };
+		D1014760283BB49F00B10F8A /* Upload.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D101475F283BB49F00B10F8A /* Upload.storyboard */; };
+		D1014762283BB4AF00B10F8A /* MediaListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1014761283BB4AF00B10F8A /* MediaListViewController.swift */; };
+		D1014764283BB4E800B10F8A /* MediaListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1014763283BB4E800B10F8A /* MediaListViewModel.swift */; };
 		D106B0A8281EA2A400E6CCFA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D106B0A7281EA2A400E6CCFA /* AppDelegate.swift */; };
 		D106B0AA281EA2A400E6CCFA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D106B0A9281EA2A400E6CCFA /* SceneDelegate.swift */; };
 		D106B0AC281EA2A400E6CCFA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D106B0AB281EA2A400E6CCFA /* ViewController.swift */; };
@@ -29,6 +32,7 @@
 		D145BBEE2831EABB009383D8 /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = D145BBED2831EABB009383D8 /* Styles.swift */; };
 		D145BBF1283224D2009383D8 /* InfoStartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D145BBF0283224D2009383D8 /* InfoStartViewController.swift */; };
 		D145BBF32832285B009383D8 /* DefaultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D145BBF22832285B009383D8 /* DefaultViewController.swift */; };
+		D1462573283CA899008FEB8A /* CommonPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1462572283CA899008FEB8A /* CommonPopupViewController.swift */; };
 		D14A198C28336C2C00542F2B /* FBInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14A198B28336C2C00542F2B /* FBInfo.swift */; };
 		D14A198F28336D6300542F2B /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14A198E28336D6300542F2B /* Error.swift */; };
 		D14A199128338C9700542F2B /* Dictionary+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14A199028338C9700542F2B /* Dictionary+.swift */; };
@@ -96,6 +100,9 @@
 /* Begin PBXFileReference section */
 		687B4805590AC52870DA0137 /* Pods-fieldBy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fieldBy.release.xcconfig"; path = "Target Support Files/Pods-fieldBy/Pods-fieldBy.release.xcconfig"; sourceTree = "<group>"; };
 		AA4D456A8B0CC37E589C7E22 /* Pods_fieldBy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fieldBy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D101475F283BB49F00B10F8A /* Upload.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Upload.storyboard; sourceTree = "<group>"; };
+		D1014761283BB4AF00B10F8A /* MediaListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaListViewController.swift; sourceTree = "<group>"; };
+		D1014763283BB4E800B10F8A /* MediaListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaListViewModel.swift; sourceTree = "<group>"; };
 		D106B0A4281EA2A400E6CCFA /* fieldBy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fieldBy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D106B0A7281EA2A400E6CCFA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D106B0A9281EA2A400E6CCFA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -120,6 +127,7 @@
 		D145BBED2831EABB009383D8 /* Styles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
 		D145BBF0283224D2009383D8 /* InfoStartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoStartViewController.swift; sourceTree = "<group>"; };
 		D145BBF22832285B009383D8 /* DefaultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultViewController.swift; sourceTree = "<group>"; };
+		D1462572283CA899008FEB8A /* CommonPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonPopupViewController.swift; sourceTree = "<group>"; };
 		D14A198B28336C2C00542F2B /* FBInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBInfo.swift; sourceTree = "<group>"; };
 		D14A198E28336D6300542F2B /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		D14A199028338C9700542F2B /* Dictionary+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+.swift"; sourceTree = "<group>"; };
@@ -210,6 +218,16 @@
 				687B4805590AC52870DA0137 /* Pods-fieldBy.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		D101475E283BB49400B10F8A /* Upload */ = {
+			isa = PBXGroup;
+			children = (
+				D101475F283BB49F00B10F8A /* Upload.storyboard */,
+				D1014761283BB4AF00B10F8A /* MediaListViewController.swift */,
+				D1014763283BB4E800B10F8A /* MediaListViewModel.swift */,
+			);
+			path = Upload;
 			sourceTree = "<group>";
 		};
 		D106B09B281EA2A400E6CCFA = {
@@ -324,6 +342,14 @@
 				D145BBF0283224D2009383D8 /* InfoStartViewController.swift */,
 			);
 			path = InfoStart;
+			sourceTree = "<group>";
+		};
+		D1462571283CA891008FEB8A /* Popup */ = {
+			isa = PBXGroup;
+			children = (
+				D1462572283CA899008FEB8A /* CommonPopupViewController.swift */,
+			);
+			path = Popup;
 			sourceTree = "<group>";
 		};
 		D14A198828336BFF00542F2B /* Facebook */ = {
@@ -549,6 +575,7 @@
 		D1C89EE12822B6AC00DAA2F4 /* Campaign */ = {
 			isa = PBXGroup;
 			children = (
+				D1462571283CA891008FEB8A /* Popup */,
 				D1EDA1C42834CF850021595E /* Guide */,
 				D1FC0801282D3ED2006ED153 /* Detail */,
 				D171E9DA2827D53F005FE939 /* Cell */,
@@ -563,6 +590,7 @@
 			isa = PBXGroup;
 			children = (
 				D181C83B283758CC008304C5 /* Cell */,
+				D101475E283BB49400B10F8A /* Upload */,
 				D181C83A283758C1008304C5 /* Main */,
 				D1C89EE82822B6FC00DAA2F4 /* Progress.storyboard */,
 			);
@@ -697,6 +725,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D1C89EED2822B70F00DAA2F4 /* Info.storyboard in Resources */,
+				D1014760283BB49F00B10F8A /* Upload.storyboard in Resources */,
 				D1B8EB8C282FC20800576970 /* UserInfo.storyboard in Resources */,
 				D1AA5CB5281EA41100279CC8 /* Auth.storyboard in Resources */,
 				D1A99CCB28211BBC00E414E4 /* Address.storyboard in Resources */,
@@ -793,12 +822,14 @@
 				D16EC5822836385300076B4C /* CampaignAddressViewModel.swift in Sources */,
 				D1A99CCE28211F2500E414E4 /* Juso.swift in Sources */,
 				D1A99CD32821239E00E414E4 /* AddressCell.swift in Sources */,
+				D1462573283CA899008FEB8A /* CommonPopupViewController.swift in Sources */,
 				D1AA5CB7281EA50700279CC8 /* SigninViewController.swift in Sources */,
 				D1AA5CBA281EAEAD00279CC8 /* Color+.swift in Sources */,
 				D11376D528366A4700CFC3D2 /* GuideCheckViewController.swift in Sources */,
 				D1A99CC928211BAE00E414E4 /* AddressViewController.swift in Sources */,
 				D14A198C28336C2C00542F2B /* FBInfo.swift in Sources */,
 				D18910062833C83A000685E8 /* Date+.swift in Sources */,
+				D1014764283BB4E800B10F8A /* MediaListViewModel.swift in Sources */,
 				D11FD9AE281F6D50008AE32A /* PhoneViewModel.swift in Sources */,
 				D1121D222830E31500149263 /* GolfInfo.swift in Sources */,
 				D1C89EE72822B6EE00DAA2F4 /* CampaignViewController.swift in Sources */,
@@ -814,6 +845,7 @@
 				D1EA5D9F282535E7000E35A0 /* MyUserModel.swift in Sources */,
 				D1AA5CBC281EAF1A00279CC8 /* PhoneViewController.swift in Sources */,
 				D11376D8283673F700CFC3D2 /* GuideFinalViewController.swift in Sources */,
+				D1014762283BB4AF00B10F8A /* MediaListViewController.swift in Sources */,
 				D106B0A8281EA2A400E6CCFA /* AppDelegate.swift in Sources */,
 				D145BBF32832285B009383D8 /* DefaultViewController.swift in Sources */,
 				D14A199128338C9700542F2B /* Dictionary+.swift in Sources */,
