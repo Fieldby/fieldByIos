@@ -33,7 +33,7 @@ class GuideFinalViewController: CommonGuideViewController {
         
         usernameLabel.text = "@\(AuthManager.shared.myUserModel.igModel!.username)님"
         
-        dueDateLabel.text = "\(campaignModel.dueDate.month)월 \(campaignModel.dueDate.day)일 \(campaignModel.dueDate.hour)시 \(campaignModel.dueDate.minute)분"
+        dueDateLabel.text = "\(campaignModel.selectionDate.month)월 \(campaignModel.selectionDate.day)일"
         
         CampaignManager.shared.save(uuid: campaignModel.uuid, size: size, color: color)
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false

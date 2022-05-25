@@ -57,6 +57,7 @@ class GuideCampaignViewController: CommonGuideViewController {
     @IBOutlet weak var buttonView: UIView!
     @IBOutlet weak var applyButton: UIButton!
     
+    @IBOutlet weak var snackBar: UIView!
     
     
 
@@ -78,6 +79,9 @@ class GuideCampaignViewController: CommonGuideViewController {
     }
     
     private func makeUI() {
+        snackBar.layer.cornerRadius = 13
+        snackBar.alpha = 0
+        
         scrollView.contentInsetAdjustmentBehavior = .never
         infoContainer.addGrayShadow()
         topView.addGrayShadow()
@@ -142,6 +146,48 @@ class GuideCampaignViewController: CommonGuideViewController {
             let vc = storyboard?.instantiateViewController(withIdentifier: GuideCautionViewController.storyId) as! GuideCautionViewController
             vc.campaignModel = campaignModel
             self.navigationController?.pushViewController(vc, animated: true)
+        }
+        
+        
+        ftcButton.rx.tap
+            .bind(onNext: { [unowned self] in
+                animateSnackBar()
+                UIPasteboard.general.string = ftcLabel.text
+            })
+            .disposed(by: rx.disposeBag)
+        
+        requiredButton.rx.tap
+            .bind(onNext: { [unowned self] in
+                animateSnackBar()
+                UIPasteboard.general.string = requiredLabel.text
+            })
+            .disposed(by: rx.disposeBag)
+        
+        optionButton.rx.tap
+            .bind(onNext: { [unowned self] in
+                animateSnackBar()
+                UIPasteboard.general.string = optionLabel.text
+            })
+            .disposed(by: rx.disposeBag)
+        
+        brandInstagramButton.rx.tap
+            .bind(onNext: { [unowned self] in
+                animateSnackBar()
+                UIPasteboard.general.string = brandInstagramLabel.text
+            })
+            .disposed(by: rx.disposeBag)
+        
+        
+        
+    }
+    
+    private func animateSnackBar() {
+        UIView.animate(withDuration: 0.5) { [unowned self] in
+            snackBar.alpha = 1
+            
+            UIView.animate(withDuration: 0.5, delay: 2) { [unowned self] in
+                snackBar.alpha = 0
+            }
         }
     }
     

@@ -542,14 +542,34 @@ DM으로 문의해주세요!</string>
                                 <viewLayoutGuide key="contentLayoutGuide" id="Mcg-Ln-ahh"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="yb6-nV-mNv"/>
                             </scrollView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eSl-uB-RQt">
+                                <rect key="frame" x="20" y="792" width="374" height="50"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="클립보드에 복사되었습니다." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xuc-8T-8uE">
+                                        <rect key="frame" x="105.5" y="16" width="163.5" height="18"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="15"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="xuc-8T-8uE" firstAttribute="centerX" secondItem="eSl-uB-RQt" secondAttribute="centerX" id="Nas-Dl-mOF"/>
+                                    <constraint firstAttribute="height" constant="50" id="eMd-ty-Kkh"/>
+                                    <constraint firstItem="xuc-8T-8uE" firstAttribute="centerY" secondItem="eSl-uB-RQt" secondAttribute="centerY" id="uwE-zT-1l0"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Yz6-jY-sxX"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Gfu-QS-Eoc" secondAttribute="trailing" id="1LJ-Lf-D5m"/>
                             <constraint firstAttribute="bottom" secondItem="Gfu-QS-Eoc" secondAttribute="bottom" id="JbF-ZA-0OX"/>
+                            <constraint firstItem="Yz6-jY-sxX" firstAttribute="bottom" secondItem="eSl-uB-RQt" secondAttribute="bottom" constant="20" id="PlY-wI-JV6"/>
                             <constraint firstItem="Gfu-QS-Eoc" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="PtH-8n-fKV"/>
+                            <constraint firstItem="Yz6-jY-sxX" firstAttribute="trailing" secondItem="eSl-uB-RQt" secondAttribute="trailing" constant="20" id="Pxz-wm-E4r"/>
                             <constraint firstItem="Gfu-QS-Eoc" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="p4b-Pm-43P"/>
+                            <constraint firstItem="eSl-uB-RQt" firstAttribute="leading" secondItem="Yz6-jY-sxX" secondAttribute="leading" constant="20" id="vir-tf-hnO"/>
                         </constraints>
                     </view>
                     <connections>
@@ -575,6 +595,7 @@ DM으로 문의해주세요!</string>
                         <outlet property="requiredLabel" destination="T88-qi-YrA" id="wbi-e2-Mhf"/>
                         <outlet property="requiredView" destination="u4T-B8-OVe" id="NEX-ul-6es"/>
                         <outlet property="scrollView" destination="Gfu-QS-Eoc" id="rg8-ED-TPK"/>
+                        <outlet property="snackBar" destination="eSl-uB-RQt" id="bMt-Um-seg"/>
                         <outlet property="topView" destination="jAl-7X-8H7" id="Dn4-Mb-w5z"/>
                         <outlet property="viewModel" destination="W6j-Jy-pO4" id="EbL-xI-xsQ"/>
                     </connections>
