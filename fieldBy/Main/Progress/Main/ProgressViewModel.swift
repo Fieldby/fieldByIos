@@ -22,6 +22,10 @@ class ProgressViewModel: NSObject {
         return Completable.create() { [unowned self] completable in
             var campaignArray = [(CampaignModel, UserCampaignModel)]()
 
+            if campaignArray.isEmpty {
+                completable(.completed)
+            }
+            
             for campaign in AuthManager.shared.myUserModel.campaigns {
                 
                 CampaignManager.shared.fetchByUuid(uuid: campaign.uuid)

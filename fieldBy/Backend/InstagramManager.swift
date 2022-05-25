@@ -56,7 +56,7 @@ class InstagramManager: NSObject {
         }
     }
     
-    func fetchIGId(token: String) {
+    func igLogin(token: String) {
         facebookId(token: token)
             .subscribe { [unowned self] in
                 

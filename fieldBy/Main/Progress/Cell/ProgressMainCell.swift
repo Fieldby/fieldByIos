@@ -46,6 +46,8 @@ class ProgressMainCell: UITableViewCell {
     @IBOutlet weak var uploadButtonContainer: UIView!
     @IBOutlet weak var uploadButton: UIButton!
     
+    @IBOutlet weak var dateContentLabel: UILabel!
+    @IBOutlet weak var desLabel: UILabel!
     
     
     
@@ -68,7 +70,7 @@ class ProgressMainCell: UITableViewCell {
         appliedLabel.isHidden = true
     }
     
-    func bind(campaignModel: CampaignModel, status: UserCampaignModel.CampaignStatus) {
+    func bind(campaignModel: CampaignModel, status: CampaignStatus) {
         
         mainView.addGrayShadow(color: .black, opacity: 1, radius: 3)
         Storage.storage().reference().child(campaignModel.mainImageUrl)
@@ -85,12 +87,14 @@ class ProgressMainCell: UITableViewCell {
         uploadLabel.text = "\(campaignModel.uploadDate.month).\(campaignModel.uploadDate.day)"
         
         switch status {
+        case .unOpened:
+            break
         case .applied:
             setApplied()
         case .delivering:
-            setDelivery()
+            setDelivery(campaignModel)
         case .uploading:
-            setUpload()
+            setUpload(campaignModel)
             
         case .maintaining:
             setMaintain()
@@ -108,19 +112,27 @@ class ProgressMainCell: UITableViewCell {
         guideButton.isHidden = true
     }
     
-    private func setDelivery() {
+    private func setDelivery(_ campaignModel: CampaignModel) {
         progressView.isHidden = false
         deliveryView.isHidden = false
         
+        dateContentLabel.text = "배송기간(~\(campaignModel.itemDate.month).\(campaignModel.itemDate.day))입니다!"
+        desLabel.text = "곧 제품이 배송됩니다"
+        
     }
     
-    private func setUpload() {
+    private func setUpload(_ campaignModel: CampaignModel) {
         deliveryCircle.tintColor = .main
         deliveryBar.backgroundColor = .main
         progressView.isHidden = false
         uploadView.isHidden = false
         
         uploadButtonContainer.isHidden = false
+        
+        
+        dateContentLabel.text = "업로드기간(~\(campaignModel.uploadDate.month).\(campaignModel.uploadDate.day))입니다!"
+        desLabel.text = "가이드에 맞게 컨텐츠를 업로드 해주세요 :)"
+        
         
         uploadButton.rx.tap
             .subscribe(onNext: { [unowned self] in

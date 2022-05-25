@@ -43,6 +43,8 @@
 		D16EC57D283633EE00076B4C /* GuideCautionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16EC57C283633EE00076B4C /* GuideCautionViewController.swift */; };
 		D16EC5802836384000076B4C /* CampaignAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16EC57F2836384000076B4C /* CampaignAddressViewController.swift */; };
 		D16EC5822836385300076B4C /* CampaignAddressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16EC5812836385300076B4C /* CampaignAddressViewModel.swift */; };
+		D17EAA34283E04C1000B8E3C /* GuideSizeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D17EAA33283E04C1000B8E3C /* GuideSizeViewController.swift */; };
+		D17EAA36283E0503000B8E3C /* Size.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D17EAA35283E0503000B8E3C /* Size.storyboard */; };
 		D180FA7F281FF48E0004FECF /* CheckNumberViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D180FA7E281FF48E0004FECF /* CheckNumberViewModel.swift */; };
 		D181C837283750F1008304C5 /* UserCampaignModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D181C836283750F1008304C5 /* UserCampaignModel.swift */; };
 		D181C839283754FB008304C5 /* ProgressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D181C838283754FB008304C5 /* ProgressViewModel.swift */; };
@@ -50,6 +52,7 @@
 		D184D4ED283B8F8500BEB184 /* TokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D184D4EC283B8F8500BEB184 /* TokenModel.swift */; };
 		D18910062833C83A000685E8 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18910052833C83A000685E8 /* Date+.swift */; };
 		D18910082833C8F0000685E8 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18910072833C8F0000685E8 /* String+.swift */; };
+		D197A1F4283E2E4700691053 /* CampaignStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = D197A1F3283E2E4700691053 /* CampaignStatus.swift */; };
 		D199F3872827C2B200E3F892 /* InstagramManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D199F3862827C2B200E3F892 /* InstagramManager.swift */; };
 		D19A9DAB2822C4C700552C15 /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19A9DAA2822C4C700552C15 /* View+.swift */; };
 		D1A99CC328210FB300E414E4 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A99CC228210FB300E414E4 /* AuthManager.swift */; };
@@ -138,6 +141,8 @@
 		D16EC57C283633EE00076B4C /* GuideCautionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideCautionViewController.swift; sourceTree = "<group>"; };
 		D16EC57F2836384000076B4C /* CampaignAddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignAddressViewController.swift; sourceTree = "<group>"; };
 		D16EC5812836385300076B4C /* CampaignAddressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignAddressViewModel.swift; sourceTree = "<group>"; };
+		D17EAA33283E04C1000B8E3C /* GuideSizeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideSizeViewController.swift; sourceTree = "<group>"; };
+		D17EAA35283E0503000B8E3C /* Size.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Size.storyboard; sourceTree = "<group>"; };
 		D180FA7E281FF48E0004FECF /* CheckNumberViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckNumberViewModel.swift; sourceTree = "<group>"; };
 		D181C836283750F1008304C5 /* UserCampaignModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCampaignModel.swift; sourceTree = "<group>"; };
 		D181C838283754FB008304C5 /* ProgressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewModel.swift; sourceTree = "<group>"; };
@@ -145,6 +150,7 @@
 		D184D4EC283B8F8500BEB184 /* TokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenModel.swift; sourceTree = "<group>"; };
 		D18910052833C83A000685E8 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		D18910072833C8F0000685E8 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		D197A1F3283E2E4700691053 /* CampaignStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignStatus.swift; sourceTree = "<group>"; };
 		D199F3862827C2B200E3F892 /* InstagramManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramManager.swift; sourceTree = "<group>"; };
 		D19A9DAA2822C4C700552C15 /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
 		D1A99CC228210FB300E414E4 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
@@ -433,6 +439,15 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		D17EAA32283E04AF000B8E3C /* Size */ = {
+			isa = PBXGroup;
+			children = (
+				D17EAA33283E04C1000B8E3C /* GuideSizeViewController.swift */,
+				D17EAA35283E0503000B8E3C /* Size.storyboard */,
+			);
+			path = Size;
+			sourceTree = "<group>";
+		};
 		D181C83A283758C1008304C5 /* Main */ = {
 			isa = PBXGroup;
 			children = (
@@ -609,6 +624,7 @@
 		D1EDA1C42834CF850021595E /* Guide */ = {
 			isa = PBXGroup;
 			children = (
+				D17EAA32283E04AF000B8E3C /* Size */,
 				D11376D6283673EF00CFC3D2 /* Final */,
 				D11376D328366A3C00CFC3D2 /* Check */,
 				D16EC57E2836383100076B4C /* Address */,
@@ -633,6 +649,7 @@
 			isa = PBXGroup;
 			children = (
 				D1FC0809282D443C006ED153 /* CampaignModel.swift */,
+				D197A1F3283E2E4700691053 /* CampaignStatus.swift */,
 			);
 			path = Campaign;
 			sourceTree = "<group>";
@@ -732,6 +749,7 @@
 				D106B0B4281EA2A500E6CCFA /* LaunchScreen.storyboard in Resources */,
 				D1C89EE52822B6E200DAA2F4 /* Campaign.storyboard in Resources */,
 				D106B0B1281EA2A500E6CCFA /* Assets.xcassets in Resources */,
+				D17EAA36283E0503000B8E3C /* Size.storyboard in Resources */,
 				D1EDA1C62834CF8F0021595E /* GuideCampaign.storyboard in Resources */,
 				D1121D202830D2B000149263 /* GoogleService-Info.plist in Resources */,
 				D106B0AF281EA2A400E6CCFA /* Main.storyboard in Resources */,
@@ -795,6 +813,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D17EAA34283E04C1000B8E3C /* GuideSizeViewController.swift in Sources */,
 				D180FA7F281FF48E0004FECF /* CheckNumberViewModel.swift in Sources */,
 				D1B8EB8E282FC21300576970 /* UserInfoViewController.swift in Sources */,
 				D1BEE862283625EC00D6076A /* GuideCell.swift in Sources */,
@@ -828,6 +847,7 @@
 				D11376D528366A4700CFC3D2 /* GuideCheckViewController.swift in Sources */,
 				D1A99CC928211BAE00E414E4 /* AddressViewController.swift in Sources */,
 				D14A198C28336C2C00542F2B /* FBInfo.swift in Sources */,
+				D197A1F4283E2E4700691053 /* CampaignStatus.swift in Sources */,
 				D18910062833C83A000685E8 /* Date+.swift in Sources */,
 				D1014764283BB4E800B10F8A /* MediaListViewModel.swift in Sources */,
 				D11FD9AE281F6D50008AE32A /* PhoneViewModel.swift in Sources */,

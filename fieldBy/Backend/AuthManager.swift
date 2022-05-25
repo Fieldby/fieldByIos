@@ -79,9 +79,19 @@ class AuthManager: CommonBackendType {
         }
     }
     
-    func addCampaign(uuid: String) {
+    func addCampaign(uuid: String, size: String?, color: String?) {
         myUserModel.campaignUuids[uuid] = true
-        myUserModel.campaigns.append(UserCampaignModel(uuid: uuid, status: .applied))
+        myUserModel.campaigns.append(UserCampaignModel(uuid: uuid, size: size, color: color))
+    }
+    
+    func removeCampaign(uuid: String, completion: @escaping (() -> Void)) {
+        myUserModel.campaignUuids[uuid] = nil
+        if let idx = myUserModel.campaigns.firstIndex(where: {$0.uuid == uuid}) {
+            myUserModel.campaigns.remove(at: idx)
+        }
+        ref.child("users").child(myUserModel.uuid!).child("campaigns").child(uuid).removeValue { _, _ in
+            completion()
+        }
     }
     
     func refreshToken(token: String) {

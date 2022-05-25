@@ -46,19 +46,15 @@ class CampaignViewController: UIViewController {
         
         barCollectionView.rx.setDelegate(self)
             .disposed(by: rx.disposeBag)
-        
-        
-        AuthManager.shared.igValidSubject
-            .subscribe(onNext: { [unowned self] bool in
-                if indicator.isAnimating {
-                    indicator.stopAnimating()
-                    indicator.isHidden = true
-                }
-                bool ? makeUI() : hide()
-            })
-            .disposed(by: rx.disposeBag)
-
+        makeUI()
         bind()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        viewModel.reload()
+        showingIndexSubject.onNext(showingIndex)
     }
     
     private func makeUI() {
@@ -80,12 +76,6 @@ class CampaignViewController: UIViewController {
         missionButton.layer.cornerRadius = 10
     }
     
-    private func hide() {
-        infoView.isHidden = true
-        barView.isHidden = true
-        pagerView.isHidden = true
-    }
-    
     private func bind() {
 
         pagerView.transformer = FSPagerViewTransformer(type: .linear)
@@ -94,7 +84,7 @@ class CampaignViewController: UIViewController {
 
         pagerView.register(pagerCell.self, forCellWithReuseIdentifier: pagerCell.reuseId)
         
-        CampaignManager.shared.campaignArrayRelay
+        viewModel.campaignRelay
             .bind(to: barCollectionView.rx.items(cellIdentifier: "barCell", cellType: BarCell.self)) { [unowned self] idx, data, cell in
 
                 cell.contentView.backgroundColor = .none
@@ -161,32 +151,8 @@ class CampaignViewController: UIViewController {
         
     }
     
-    private func fbLogin() {
-        let manager = LoginManager()
-        manager.logIn(permissions: ["public_profile", "instagram_basic", "pages_show_list"], from: self) { [unowned self] result, error in
-            if let error = error {
-                print("Process error: \(error)")
-                return
-            }
-            
-            guard let result = result else {
-                print("No Result")
-                return
-            }
-            
-            if result.isCancelled {
-                print("Login Cancelled")
-                indicator.stopAnimating()
-                indicator.isHidden = true
-                return
-            }
-
-            AuthManager.shared.fbToken = result.token!.tokenString
-            
-            InstagramManager.shared.fetchIGId(token: result.token!.tokenString)
-        }
-    }
 }
+
 
 extension CampaignViewController: FSPagerViewDelegate, FSPagerViewDataSource {
     

@@ -16,6 +16,9 @@ class CommonPopupViewController: UIViewController {
     
     @IBOutlet weak var containerView: UIView!
     
+    var topVC: UIViewController!
+    var uuid: String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -25,7 +28,24 @@ class CommonPopupViewController: UIViewController {
     }
 
     @IBAction func click(_ sender: Any) {
-        self.dismiss(animated: true)
+        if content.count > 30 {
+            self.dismiss(animated: true)
+        } else {
+            CampaignManager.shared.cancel(uuid: uuid)
+                .subscribe {
+                    self.dismiss(animated: true) {
+                        self.topVC.dismiss(animated: true)
+                    }
+                } onError: { err in
+                    print(err)
+                    self.dismiss(animated: true) {
+                        self.topVC.dismiss(animated: true)
+                    }
+                }
+                .disposed(by: rx.disposeBag)
+
+        }
+        
     }
     
 }

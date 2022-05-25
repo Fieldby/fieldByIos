@@ -80,11 +80,21 @@ class GuideCheckViewController: CommonGuideViewController {
         
         nextButton.rx.tap
             .subscribe(onNext: { [unowned self] in
-                let vc = storyboard?.instantiateViewController(withIdentifier: GuideFinalViewController.storyId) as! GuideFinalViewController
-                vc.campaignModel = campaignModel
-                navigationController?.pushViewController(vc, animated: true)
+                nextAction()
             })
             .disposed(by: rx.disposeBag)
+    }
+    
+    private func nextAction() {
+        if campaignModel.itemModel.option == nil {
+            let vc = storyboard?.instantiateViewController(withIdentifier: GuideFinalViewController.storyId) as! GuideFinalViewController
+            vc.campaignModel = campaignModel
+            navigationController?.pushViewController(vc, animated: true)
+        } else {
+            let vc = UIStoryboard(name: "Size", bundle: nil).instantiateViewController(withIdentifier: "guidesizeVC") as! GuideSizeViewController
+            vc.campaignModel = campaignModel
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     private func messageAgree() {

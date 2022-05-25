@@ -11,5 +11,5 @@ import NSObject_Rx
 
 class DetailCampaignViewModel: NSObject {
     var pushGuideVC: (() -> Void)!
-    var presentPopup: (() -> Void)!
+    var presentPopup: ((String) -> Void)!
 }

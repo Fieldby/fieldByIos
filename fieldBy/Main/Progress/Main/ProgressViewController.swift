@@ -69,15 +69,15 @@ class ProgressViewController: UIViewController {
         usernameLabel.text = "@\(AuthManager.shared.myUserModel.igModel?.username ?? "field_by")"
         
         
-        appliedLabel.text = String(AuthManager.shared.myUserModel.appliedCount()) + "건"
-        inProgressLabel.text = String(AuthManager.shared.myUserModel.inProgressCount()) + "건"
-        
-        doneLabel.text = String(AuthManager.shared.myUserModel.doneCount()) + "건"
+//        appliedLabel.text = String(AuthManager.shared.myUserModel.appliedCount()) + "건"
+//        inProgressLabel.text = String(AuthManager.shared.myUserModel.inProgressCount()) + "건"
+//
+//        doneLabel.text = String(AuthManager.shared.myUserModel.doneCount()) + "건"
         
         viewModel.tosShowArray
             .bind(to: tableView.rx.items(cellIdentifier: ProgressMainCell.reuseId, cellType: ProgressMainCell.self)) { idx, model, cell in
                 
-                cell.bind(campaignModel: model.0, status: model.1.status)
+                cell.bind(campaignModel: model.0, status: model.0.status)
                 
                 
             }

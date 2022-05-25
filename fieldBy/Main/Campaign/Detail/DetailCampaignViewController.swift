@@ -103,6 +103,10 @@ class DetailCampaignViewController: UIViewController {
         bottomView.layer.cornerRadius = 21
         bottomView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         shadowView.layer.cornerRadius = 21
+        
+        if AuthManager.shared.myUserModel.campaignUuids[campaignModel.uuid] == true {
+            applyButton.setTitle("캠페인 취소하기", for: .normal)
+        }
     }
     
     private func bind() {
@@ -111,7 +115,6 @@ class DetailCampaignViewController: UIViewController {
         if isDone {
             timeStickyContainer.backgroundColor = .main
             timeLabel.text = "신청 완료!"
-            applyButton.isEnabled = false
         }
         
         mainImageView.image = image
@@ -159,8 +162,10 @@ class DetailCampaignViewController: UIViewController {
             .throttle(.seconds(3), latest: false, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [unowned self] in
                 
-                if AuthManager.shared.myUserModel.igModel == nil {
-                    viewModel.presentPopup()
+                if AuthManager.shared.myUserModel.campaignUuids[campaignModel.uuid] == true {
+                    viewModel.presentPopup("캠페인 신청이 취소되었습니다.")
+                } else if AuthManager.shared.myUserModel.igModel == nil {
+                    viewModel.presentPopup("캠페인에 지원하려면 인스타그램 채널 연결이 필요합니다. \n연결은 마이페이지에서 진행할 수 있습니다.")
                 } else {
                     viewModel.pushGuideVC()
                 }
@@ -184,11 +189,13 @@ class DetailCampaignViewController: UIViewController {
                 .disposed(by: rx.disposeBag)
         }
         
-        viewModel.presentPopup = { [unowned self] in
+        viewModel.presentPopup = { [unowned self] str in
             
             let vc = storyboard?.instantiateViewController(withIdentifier: CommonPopupViewController.storyId) as! CommonPopupViewController
-            vc.modalTransitionStyle = .coverVertical
-            vc.content = "캠페인에 지원하려면 인스타그램 채널 연결이 필요합니다. \n연결은 마이페이지에서 진행할 수 있습니다."
+            vc.modalTransitionStyle = .crossDissolve
+            vc.content = str
+            vc.topVC = self
+            vc.uuid = campaignModel.uuid
             vc.modalPresentationStyle = .overCurrentContext
             present(vc, animated: true)
         }

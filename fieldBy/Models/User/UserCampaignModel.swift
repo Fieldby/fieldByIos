@@ -9,24 +9,19 @@ import FirebaseDatabase
 
 struct UserCampaignModel: Codable {
     let uuid: String
-    var status: CampaignStatus
+    var size: String?
+    var color: String?
     
     init?(snapshot: DataSnapshot) {
         let value = snapshot.value as! [String: Any]
         self.uuid = snapshot.key
-        self.status = CampaignStatus(rawValue: value["status"] as! String)!
+        self.size = value["size"] as? String
+        self.color = value["color"] as? String
     }
     
-    init(uuid: String, status: CampaignStatus) {
+    init(uuid: String, size: String?, color: String?) {
         self.uuid = uuid
-        self.status = status
-    }
-    
-    enum CampaignStatus: String, Codable {
-        case applied
-        case delivering
-        case uploading
-        case maintaining
-        case done
+        self.size = size
+        self.color = color
     }
 }

@@ -16,6 +16,9 @@ class GuideFinalViewController: CommonGuideViewController {
     @IBOutlet weak var viewMyCampaignsButton: UIButton!
     
     @IBOutlet weak var dueDateLabel: UILabel!
+    
+    var size: String?
+    var color: String?
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +30,7 @@ class GuideFinalViewController: CommonGuideViewController {
         
         dueDateLabel.text = "\(campaignModel.dueDate.month)월 \(campaignModel.dueDate.day)일 \(campaignModel.dueDate.hour)시 \(campaignModel.dueDate.minute)분"
         
-        CampaignManager.shared.save(uuid: campaignModel.uuid)
+        CampaignManager.shared.save(uuid: campaignModel.uuid, size: size, color: color)
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
     }
     

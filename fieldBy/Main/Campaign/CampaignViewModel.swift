@@ -6,7 +6,17 @@
 //
 
 import Foundation
+import RxRelay
 
 class CampaignViewModel: NSObject {
+    
+    let campaignRelay = BehaviorRelay<[CampaignModel]>(value: [])
+    
+    
+    func reload() {
+        CampaignManager.shared.campaignArrayRelay
+            .bind(to: campaignRelay)
+            .disposed(by: rx.disposeBag)
+    }
     
 }

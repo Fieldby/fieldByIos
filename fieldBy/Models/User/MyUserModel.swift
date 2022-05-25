@@ -83,39 +83,4 @@ class MyUserModel {
         }
         
     }
-    
-    func appliedCount() -> Int {
-        var count = 0
-        for campaign in campaigns {
-            if campaign.status == .applied {
-                count += 1
-            }
-        }
-        
-        return count
-    }
-    
-    func inProgressCount() -> Int {
-        var count = 0
-        for campaign in campaigns {
-            if campaign.status != .applied && campaign.status != .done {
-                count += 1
-            }
-        }
-        
-        return count
-    }
-    
-    func doneCount() -> Int {
-        var count = 0
-        for campaign in campaigns {
-            if campaign.status == .done {
-                count += 1
-            }
-        }
-        
-        return count
-    }
-    
-    
 }

@@ -66,4 +66,25 @@ class InfoViewController: UIViewController {
         
         
     }
+    
+    @IBAction func test(_ sender: Any) {
+        let manager = LoginManager()
+        manager.logIn(permissions: ["public_profile", "instagram_basic", "pages_show_list"], from: self) { result, error in
+            if let error = error {
+                print("Process error: \(error)")
+                return
+            }
+            guard let result = result else {
+                print("No Result")
+                return
+            }
+            if result.isCancelled {
+                print("Login Cancelled")
+                return
+            }
+
+            InstagramManager.shared.igLogin(token: result.token!.tokenString)
+
+        }
+    }
 }
