@@ -68,11 +68,27 @@ class ProgressViewController: UIViewController {
     private func bind() {
         usernameLabel.text = "@\(AuthManager.shared.myUserModel.igModel?.username ?? "field_by")"
         
+        viewModel.tosShowArray
+            .map { array -> String in
+                return "\(array.filter { $0.0.status == .applied }.count)건"
+            }
+            .bind(to: appliedLabel.rx.text)
+            .disposed(by: rx.disposeBag)
         
-//        appliedLabel.text = String(AuthManager.shared.myUserModel.appliedCount()) + "건"
-//        inProgressLabel.text = String(AuthManager.shared.myUserModel.inProgressCount()) + "건"
-//
-//        doneLabel.text = String(AuthManager.shared.myUserModel.doneCount()) + "건"
+        viewModel.tosShowArray
+            .map { array -> String in
+                return "\(array.filter { $0.0.status == .done }.count)건"
+            }
+            .bind(to: doneLabel.rx.text)
+            .disposed(by: rx.disposeBag)
+        
+        viewModel.tosShowArray
+            .map { array -> String in
+                return "\(array.filter { $0.0.status != .done && $0.0.status != .applied }.count)건"
+            }
+            .bind(to: inProgressLabel.rx.text)
+            .disposed(by: rx.disposeBag)
+
         
         viewModel.tosShowArray
             .bind(to: tableView.rx.items(cellIdentifier: ProgressMainCell.reuseId, cellType: ProgressMainCell.self)) { idx, model, cell in
@@ -98,6 +114,7 @@ class ProgressViewController: UIViewController {
                 print(error)
                 tableView.refreshControl?.endRefreshing()
             }
+            .disposed(by: rx.disposeBag)
 
     }
 }

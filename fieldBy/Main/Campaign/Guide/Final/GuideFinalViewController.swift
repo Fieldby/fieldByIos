@@ -23,6 +23,11 @@ class GuideFinalViewController: CommonGuideViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        if let token = AuthManager.shared.myUserModel.igModel?.token {
+            InstagramManager.shared.igLogin(token: token)
+        }
+
+        
         dismissButton.layer.cornerRadius = 13
         viewMyCampaignsButton.layer.cornerRadius = 13
         

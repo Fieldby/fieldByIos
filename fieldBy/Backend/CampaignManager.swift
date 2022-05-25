@@ -88,7 +88,7 @@ class CampaignManager: CommonBackendType {
     func save(uuid: String, size: String?, color: String?) {
         let myUid = AuthManager.shared.myUserModel.uuid!
         
-        ref.child("campaigns/\(uuid)/users").child(uuid).setValue(uuid)
+        ref.child("campaigns/\(uuid)/users").child(myUid).setValue(myUid)
         
 //        ref.child("campaigns/\(uuid)/users").observeSingleEvent(of: .value) { [unowned self] dataSnapShot in
 //            if dataSnapShot.exists() {

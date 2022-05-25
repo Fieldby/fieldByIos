@@ -228,13 +228,20 @@ class DetailCampaignViewController: UIViewController {
         
         var diff = Int(dueDate.timeIntervalSince(Date()))
         
-        let diffHour = diff/3600
-        diff = diff - diffHour*3600
-        
-        let diffMin = diff/60
-        diff = diff - diffMin*60
-        
-        timeSubject.onNext("\(diffHour):\(diffMin):\(diff) 후 마감")
+        let diffDay = diff/(3600*24)
+        if diffDay > 0 {
+            timeSubject.onNext("\(diffDay)일 후 마감")
+        } else {
+            
+            let diffHour = diff/3600
+            diff = diff - diffHour*3600
+            
+            let diffMin = diff/60
+            diff = diff - diffMin*60
+            
+            timeSubject.onNext("\(diffHour):\(diffMin):\(diff) 후 마감")
+        }
+
     }
 
     

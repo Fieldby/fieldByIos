@@ -13,6 +13,22 @@ class MainTabBarController: UITabBarController {
 
     private var bottomView: UIView!
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if let igModel = AuthManager.shared.myUserModel.igModel {
+            if let urlStr = igModel.profileUrl {
+                let url = (try! URL(string: urlStr))!
+                let data = try! Data(contentsOf: url)
+                let image = UIImage(data: data)!.resizeImageTo(size: CGSize(width: 25, height: 25))!.roundedImage.withRenderingMode(.alwaysOriginal)
+
+                
+                tabBar.items![2].image = image
+                tabBar.items![2].selectedImage = image
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -29,7 +45,6 @@ class MainTabBarController: UITabBarController {
             $0.trailing.equalTo(2)
             $0.bottom.equalTo(tabBar.snp.top)
         }
-        
 
         
         let campaignSB = UIStoryboard(name: "Campaign", bundle: nil)
@@ -48,9 +63,11 @@ class MainTabBarController: UITabBarController {
         
         let infoSB = UIStoryboard(name: "Info", bundle: nil)
         let infoVC = infoSB.instantiateViewController(withIdentifier: "infoVC") as! InfoViewController
+        
         infoVC.tabBarItem = UITabBarItem(title: "내정보",
                                          image: UIImage(named: "InfoU"),
                                          selectedImage: UIImage(named: "InfoS"))
+
         view.backgroundColor = .white
         tabBar.backgroundColor = .white
         tabBar.tintColor = .main
@@ -64,6 +81,24 @@ class MainTabBarController: UITabBarController {
             UINavigationController(rootViewController: progressVC),
             UINavigationController(rootViewController: infoVC)
         ]
+    }
+    
+    func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage? {
+        let size = image.size
+        let widthRatio  = targetSize.width  / size.width
+        let heightRatio = targetSize.height / size.height
+        var newSize: CGSize
+        if(widthRatio > heightRatio) {
+            newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
+        } else {
+            newSize = CGSize(width: size.width * widthRatio, height: size.height * widthRatio)
+        }
+        let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
+        image.draw(in: rect)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage
     }
     
 

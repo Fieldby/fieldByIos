@@ -26,6 +26,8 @@ class CampaignViewController: UIViewController {
     
     @IBOutlet weak var missionButton: UIButton!
     @IBOutlet weak var isNewContainer: UIView!
+    @IBOutlet weak var timerView: UIView!
+    @IBOutlet weak var timerLabel: UILabel!
     
     @IBOutlet weak var indicator: UIActivityIndicatorView!
     @IBOutlet weak var barView: UIView!
@@ -35,6 +37,8 @@ class CampaignViewController: UIViewController {
     
     private var showingIndexSubject = BehaviorSubject<Int>(value: 0)
     private var showingIndex = 0
+    
+    private var timer: Timer?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,6 +66,7 @@ class CampaignViewController: UIViewController {
         barView.isHidden = false
         pagerView.isHidden = false
         
+        timerView.layer.cornerRadius = 14.5
         topView.layer.cornerRadius = 27
         topView.layer.maskedCorners = [.layerMaxXMaxYCorner]
         topView.addGrayShadow(color: .lightGray, opacity: 0.3, radius: 3)
@@ -105,20 +110,12 @@ class CampaignViewController: UIViewController {
         
         showingIndexSubject
             .subscribe(onNext: { [unowned self] idx in
-                brandNameLabel.text = campaignArray[idx].brandName
-                titleLabel.text = campaignArray[idx].itemModel.name
-                isNewContainer.isHidden = !campaignArray[idx].isNew
-                priceLabel.text = "\(getComma(price: campaignArray[idx].itemModel.price))원"
+                timer?.invalidate()
+                timer = nil
                 
-                let uuid = campaignArray[idx].uuid
+                bindInfoView(model: campaignArray[idx])
                 
-                if AuthManager.shared.myUserModel.campaignUuids[uuid] == true {
-                    missionButton.setTitle("신청 완료", for: .normal)
-                    missionButton.backgroundColor = UIColor(red: 48, green: 48, blue: 48)
-                } else {
-                    missionButton.setTitle("신청하기", for: .normal)
-                    missionButton.backgroundColor = .main
-                }
+                
             })
             .disposed(by: rx.disposeBag)
 
@@ -128,6 +125,30 @@ class CampaignViewController: UIViewController {
                 presentDetailVC(campaignModel: campaignArray[index], image: pagerView.cellForItem(at: index)!.imageView!.image!)
             })
             .disposed(by: rx.disposeBag)
+    }
+    
+    private func bindInfoView(model: CampaignModel) {
+        timerLabel.text = calculateDate(campaignModel: model)
+        brandNameLabel.text = model.brandName
+        titleLabel.text = model.itemModel.name
+        isNewContainer.isHidden = !model.isNew
+        priceLabel.text = "\(getComma(price: model.itemModel.price))원"
+        
+        let uuid = model.uuid
+        
+        if AuthManager.shared.myUserModel.campaignUuids[uuid] == true {
+            missionButton.setTitle("신청 완료", for: .normal)
+            missionButton.backgroundColor = UIColor(red: 48, green: 48, blue: 48)
+        } else {
+            missionButton.setTitle("신청하기", for: .normal)
+            missionButton.backgroundColor = .main
+        }
+        
+        if timer == nil {
+            timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [unowned self] _ in
+                timerLabel.text = calculateDate(campaignModel: model)
+            })
+        }
     }
 
     private func presentDetailVC(campaignModel: CampaignModel, image: UIImage) {
@@ -149,6 +170,29 @@ class CampaignViewController: UIViewController {
         formatter.usesGroupingSeparator = true
         return formatter.string(from: price as NSNumber) ?? ""
         
+    }
+    
+    private func calculateDate(campaignModel: CampaignModel) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd-HH-mm"
+        
+        let dueDate = dateFormatter.date(from: campaignModel.dueDate)!
+        
+        var diff = Int(dueDate.timeIntervalSince(Date()))
+        
+        let diffDay = diff/(3600*24)
+        
+        if diffDay > 0 {
+            return "\(diffDay)일 후 마감"
+        } else {
+            let diffHour = diff/3600
+            diff = diff - diffHour*3600
+            
+            let diffMin = diff/60
+            diff = diff - diffMin*60
+
+            return "\(diffHour):\(diffMin):\(diff) 후 마감"
+        }
     }
     
 }
