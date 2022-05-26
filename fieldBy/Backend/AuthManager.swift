@@ -94,6 +94,15 @@ class AuthManager: CommonBackendType {
         }
     }
     
+    func bestImages(urls: [String]) {
+        for i in 0..<3 {
+            print("@@@@ \(urls[i]). \(i)")
+            
+            ref.child("users").child(myUserModel.uuid).child("bestImages").child("\(i)").setValue(urls[i])
+
+        }
+    }
+    
     func refreshToken(token: String) {
         myUserModel.igModel?.token = token
         ref.child("users").child(myUserModel.uuid).child("igInfo").child("token").setValue(token)
@@ -125,7 +134,7 @@ class AuthManager: CommonBackendType {
     }
     
     static func saveUserInfo(key: String, value: Any) {
-        voidPost(path: "users/\(AuthManager.shared.userUUID!)", key: key, value: value)
+        voidPost(path: "users/\(AuthManager.shared.myUserModel.uuid!)", key: key, value: value)
     }
     
     static func saveInfo(key: String, value: Any) -> Completable {

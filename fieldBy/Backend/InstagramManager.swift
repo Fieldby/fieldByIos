@@ -232,7 +232,7 @@ class InstagramManager: NSObject {
         
     }
     
-    private func getImages(ids: [String]) -> Single<[UIImage?]> {
+    private func getImages(ids: [String]) -> Single<[(UIImage?, String)]> {
         
         return Single.create() { [unowned self] observable in
             
@@ -241,7 +241,7 @@ class InstagramManager: NSObject {
                 return Disposables.create()
             }
             
-            var temp = [UIImage?]()
+            var temp = [(UIImage?, String)]()
             
             for id in ids {
                 let url = "\(graphUrl)\(id)?fields=media_url&access_token=\(igModel.token!)"
@@ -256,19 +256,19 @@ class InstagramManager: NSObject {
                                 let url = try! URL(string: imageData.mediaURL)
                                 let data = try! Data(contentsOf: url!)
                                 let image = UIImage(data: data)
-                                temp.append(image)
+                                temp.append((image, imageData.mediaURL))
                                 if temp.count == ids.count {
                                     observable(.success(temp))
                                 }
                             } else {
-                                temp.append(UIImage(named: "smallLogo")!)
+                                temp.append((UIImage(named: "smallLogo")!, "nil"))
                                 if temp.count == ids.count {
                                     observable(.success(temp))
                                 }
                             }
                         case .failure(let error):
                             print(error)
-                            temp.append(UIImage(named: "smallLogo")!)
+                            temp.append((UIImage(named: "smallLogo")!, "nil"))
                             if temp.count == ids.count {
                                 observable(.success(temp))
                             }
@@ -279,7 +279,7 @@ class InstagramManager: NSObject {
         }
     }
     
-    func fetchImages(completion: @escaping ([UIImage?]) -> ()) {
+    func fetchImages(completion: @escaping ([(UIImage?, String)]) -> ()) {
         feedIds()
             .subscribe { [unowned self] idArray in
                 getImages(ids: idArray)

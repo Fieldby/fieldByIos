@@ -18,16 +18,20 @@ class FeedListViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var button: UIButton!
     
-    private var imageSubject = BehaviorSubject<[UIImage?]>(value: [])
+    private var imageSubject = BehaviorSubject<[(UIImage?, String)]>(value: [])
     private var indexes = [Int]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        
         button.layer.cornerRadius = 13
 
         indicator.isHidden = false
         indicator.startAnimating()
+        
+        button.isEnabled = false
         
         collectionView.rx.setDelegate(self)
             .disposed(by: rx.disposeBag)
@@ -40,10 +44,10 @@ class FeedListViewController: UIViewController {
         }
         
         imageSubject
-            .map { $0.filter { $0 != nil }}
+            .map { $0.filter { $0.0 != nil }}
             .bind(to: collectionView.rx.items(cellIdentifier: FeedCell.reuseId, cellType: FeedCell.self)) { [unowned self] idx, image, cell in
                 
-                cell.mainImageView.image = image
+                cell.mainImageView.image = image.0
             }
             .disposed(by: rx.disposeBag)
         
@@ -51,27 +55,58 @@ class FeedListViewController: UIViewController {
         
         
         collectionView.rx.itemSelected
-            .subscribe(onNext: { [unowned self] idx in
-                let cell = collectionView.cellForItem(at: idx) as! FeedCell
+            .subscribe(onNext: { [unowned self] index in
+                let cell = collectionView.cellForItem(at: index) as! FeedCell
 
                 if cell.isOn {
                     cell.deSelect()
-                    let idx = indexes.firstIndex(of: idx.row)!
+                    let idx = indexes.firstIndex(of: index.row)!
                     indexes.remove(at: idx)
                     
                     button.setTitle("선택 완료(\(indexes.count)/3)", for: .normal)
-
+                    button.isEnabled = false
                 } else {
                     if indexes.count < 3{
                         cell.select()
-                        indexes.append(idx.row)
+                        indexes.append(index.row)
                         button.setTitle("선택 완료(\(indexes.count)/3)", for: .normal)
-
+                        
+                        if indexes.count == 3 {
+                            button.isEnabled = true
+                        } else {
+                            button.isEnabled = false
+                        }
+                        
+                        
                     }
 
                 }
                 
             
+            })
+            .disposed(by: rx.disposeBag)
+        
+        
+        button.rx.tap
+            .subscribe(onNext: { [unowned self] in
+                
+                
+                imageSubject
+                    .map { $0.filter { $0.0 != nil }}
+                    .subscribe(onNext: { [unowned self] imageArray in
+                        
+                        var temp: [String] = []
+                        
+                        for idx in indexes {
+                            temp.append(imageArray[idx].1)
+                        }
+                        
+                        AuthManager.shared.bestImages(urls: temp)
+                    })
+                    .disposed(by: rx.disposeBag)
+                
+                
+                navigationController?.dismiss(animated: true)
             })
             .disposed(by: rx.disposeBag)
         
