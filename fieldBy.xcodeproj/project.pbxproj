@@ -56,6 +56,8 @@
 		D197A1F6283E4D0500691053 /* Image+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D197A1F5283E4D0500691053 /* Image+.swift */; };
 		D199F3872827C2B200E3F892 /* InstagramManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D199F3862827C2B200E3F892 /* InstagramManager.swift */; };
 		D19A9DAB2822C4C700552C15 /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19A9DAA2822C4C700552C15 /* View+.swift */; };
+		D1A29842283F5763000F7D33 /* ApiGuide.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1A29841283F5763000F7D33 /* ApiGuide.storyboard */; };
+		D1A29844283F576F000F7D33 /* ApiGuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A29843283F576F000F7D33 /* ApiGuideViewController.swift */; };
 		D1A99CC328210FB300E414E4 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A99CC228210FB300E414E4 /* AuthManager.swift */; };
 		D1A99CC6282113D600E414E4 /* CertiFailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A99CC5282113D600E414E4 /* CertiFailedViewController.swift */; };
 		D1A99CC928211BAE00E414E4 /* AddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A99CC828211BAE00E414E4 /* AddressViewController.swift */; };
@@ -155,6 +157,8 @@
 		D197A1F5283E4D0500691053 /* Image+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+.swift"; sourceTree = "<group>"; };
 		D199F3862827C2B200E3F892 /* InstagramManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramManager.swift; sourceTree = "<group>"; };
 		D19A9DAA2822C4C700552C15 /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
+		D1A29841283F5763000F7D33 /* ApiGuide.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ApiGuide.storyboard; sourceTree = "<group>"; };
+		D1A29843283F576F000F7D33 /* ApiGuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiGuideViewController.swift; sourceTree = "<group>"; };
 		D1A99CC228210FB300E414E4 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		D1A99CC5282113D600E414E4 /* CertiFailedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertiFailedViewController.swift; sourceTree = "<group>"; };
 		D1A99CC828211BAE00E414E4 /* AddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressViewController.swift; sourceTree = "<group>"; };
@@ -467,6 +471,15 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		D1A29840283F575A000F7D33 /* ApiGuide */ = {
+			isa = PBXGroup;
+			children = (
+				D1A29841283F5763000F7D33 /* ApiGuide.storyboard */,
+				D1A29843283F576F000F7D33 /* ApiGuideViewController.swift */,
+			);
+			path = ApiGuide;
+			sourceTree = "<group>";
+		};
 		D1A99CC4282113C500E414E4 /* CeritificationFailed */ = {
 			isa = PBXGroup;
 			children = (
@@ -618,6 +631,7 @@
 		D1C89EE32822B6D800DAA2F4 /* Info */ = {
 			isa = PBXGroup;
 			children = (
+				D1A29840283F575A000F7D33 /* ApiGuide */,
 				D1C89EEC2822B70F00DAA2F4 /* Info.storyboard */,
 				D1C89EEE2822B71500DAA2F4 /* InfoViewController.swift */,
 			);
@@ -752,6 +766,7 @@
 				D106B0B4281EA2A500E6CCFA /* LaunchScreen.storyboard in Resources */,
 				D1C89EE52822B6E200DAA2F4 /* Campaign.storyboard in Resources */,
 				D106B0B1281EA2A500E6CCFA /* Assets.xcassets in Resources */,
+				D1A29842283F5763000F7D33 /* ApiGuide.storyboard in Resources */,
 				D17EAA36283E0503000B8E3C /* Size.storyboard in Resources */,
 				D1EDA1C62834CF8F0021595E /* GuideCampaign.storyboard in Resources */,
 				D1121D202830D2B000149263 /* GoogleService-Info.plist in Resources */,
@@ -873,6 +888,7 @@
 				D106B0A8281EA2A400E6CCFA /* AppDelegate.swift in Sources */,
 				D145BBF32832285B009383D8 /* DefaultViewController.swift in Sources */,
 				D14A199128338C9700542F2B /* Dictionary+.swift in Sources */,
+				D1A29844283F576F000F7D33 /* ApiGuideViewController.swift in Sources */,
 				D14A199328338CA400542F2B /* DataSnapShot+.swift in Sources */,
 				D11376DA2836856200CFC3D2 /* CommonGuideViewController.swift in Sources */,
 				D1121D272830E4A300149263 /* GolfInfoViewModel.swift in Sources */,

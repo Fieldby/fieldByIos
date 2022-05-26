@@ -128,6 +128,7 @@ class CampaignViewController: UIViewController {
     }
     
     private func bindInfoView(model: CampaignModel) {
+            
         timerLabel.text = calculateDate(campaignModel: model)
         brandNameLabel.text = model.brandName
         titleLabel.text = model.itemModel.name
@@ -179,6 +180,10 @@ class CampaignViewController: UIViewController {
         let dueDate = dateFormatter.date(from: campaignModel.dueDate)!
         
         var diff = Int(dueDate.timeIntervalSince(Date()))
+        
+        if diff < 0 {
+            return "마감"
+        }
         
         let diffDay = diff/(3600*24)
         

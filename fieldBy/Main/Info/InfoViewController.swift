@@ -16,6 +16,7 @@ import Kingfisher
 class InfoViewController: UIViewController {    
     
     @IBOutlet weak var topView: UIView!
+    @IBOutlet weak var normalView: UIView!
     
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var followersCountLabel: UILabel!
@@ -23,6 +24,14 @@ class InfoViewController: UIViewController {
     
     @IBOutlet weak var campaignCounts: UILabel!
     @IBOutlet weak var totalRewardsLabel: UILabel!
+    
+    @IBOutlet weak var noMediaView: UIView!
+    
+    @IBOutlet weak var mediaButton: UIButton!
+    
+    
+    
+    
     
     
     
@@ -39,10 +48,40 @@ class InfoViewController: UIViewController {
         topView.addGrayShadow(color: .lightGray, opacity: 0.3, radius: 3)
         
         profileImageView.layer.cornerRadius = 35
+        
+        mediaButton.layer.cornerRadius = 13
+        
+        noMediaView.isHidden = true
+        normalView.isHidden = true
+        
     }
     
     private func bind() {
         
+        AuthManager.shared.igValidSubject
+            .subscribe(onNext: { [unowned self] bool in
+                if bool {
+                    normalView.isHidden = false
+                    noMediaView.isHidden = true
+                    
+                    bindIGInfo()
+                    
+                } else {
+                    normalView.isHidden = true
+                    noMediaView.isHidden = false
+                    
+                }
+            })
+            .disposed(by: rx.disposeBag)
+        
+
+        
+        
+        
+        
+    }
+    
+    private func bindIGInfo() {
         if let igModel = AuthManager.shared.myUserModel.igModel {
             if let url = igModel.profileUrl {
                 
@@ -55,36 +94,29 @@ class InfoViewController: UIViewController {
             
             campaignCounts.text = "\(AuthManager.shared.myUserModel.campaigns.count)"
             
-            
+            if let urlStr = igModel.profileUrl {
+                let url = (try! URL(string: urlStr))!
+                let data = try! Data(contentsOf: url)
+                let image = UIImage(data: data)!.resizeImageTo(size: CGSize(width: 25, height: 25))!.roundedImage.withRenderingMode(.alwaysOriginal)
+
+                
+                tabBarController!.tabBar.items![2].image = image
+                tabBarController!.tabBar.items![2].selectedImage = image
+            }
             
             
         }
-        
-
-        
-        
-        
-        
     }
     
-    @IBAction func test(_ sender: Any) {
-        let manager = LoginManager()
-        manager.logIn(permissions: ["public_profile", "instagram_basic", "pages_show_list"], from: self) { result, error in
-            if let error = error {
-                print("Process error: \(error)")
-                return
-            }
-            guard let result = result else {
-                print("No Result")
-                return
-            }
-            if result.isCancelled {
-                print("Login Cancelled")
-                return
-            }
-
-            InstagramManager.shared.igLogin(token: result.token!.tokenString)
-
-        }
+    private func apiGuide() {
+        let vc = UIStoryboard(name: "ApiGuide", bundle: nil).instantiateViewController(withIdentifier: ApiGuideViewController.storyId) as! ApiGuideViewController
+        let nav = UINavigationController(rootViewController: vc)
+        nav.navigationBar.isHidden = true
+        nav.modalPresentationStyle = .fullScreen
+        present(nav, animated: true)
+    }
+    
+    @IBAction func test(_ sender: Any) {        
+        apiGuide()
     }
 }

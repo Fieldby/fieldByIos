@@ -28,7 +28,9 @@ class CommonPopupViewController: UIViewController {
     }
 
     @IBAction func click(_ sender: Any) {
-        if content.count > 30 {
+        if content == "마감되었습니다" {
+            self.dismiss(animated: true)
+        } else if content.count > 30 {
             self.dismiss(animated: true)
         } else {
             CampaignManager.shared.cancel(uuid: uuid)

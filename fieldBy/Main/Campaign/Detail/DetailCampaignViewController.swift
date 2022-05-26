@@ -174,19 +174,13 @@ class DetailCampaignViewController: UIViewController {
             .disposed(by: rx.disposeBag)
         
         viewModel.pushGuideVC = { [unowned self] in
-            indicator.isHidden = false
-            indicator.startAnimating()
-            CampaignManager.shared.guideImages(campaignModel: campaignModel)
-                .subscribe(onNext: { [unowned self] guideImages in
-                    
-                    let vc = UIStoryboard(name: "GuideCampaign", bundle: nil).instantiateViewController(withIdentifier: "guidecampaignVC") as! GuideCampaignViewController
-                    vc.campaignModel = campaignModel
-                    vc.guideImages = guideImages
-                    self.navigationController?.pushViewController(vc, animated: true)
-                    indicator.stopAnimating()
-                    indicator.isHidden = true
-                })
-                .disposed(by: rx.disposeBag)
+            if timeLabel.text == "마감" {
+                viewModel.presentPopup("마감되었습니다")
+            } else {
+                indicator.isHidden = false
+                indicator.startAnimating()
+                pushGuideVC()
+            }
         }
         
         viewModel.presentPopup = { [unowned self] str in
@@ -211,6 +205,20 @@ class DetailCampaignViewController: UIViewController {
         
     }
     
+    private func pushGuideVC() {
+        CampaignManager.shared.guideImages(campaignModel: campaignModel)
+            .subscribe(onNext: { [unowned self] guideImages in
+                
+                let vc = UIStoryboard(name: "GuideCampaign", bundle: nil).instantiateViewController(withIdentifier: "guidecampaignVC") as! GuideCampaignViewController
+                vc.campaignModel = campaignModel
+                vc.guideImages = guideImages
+                self.navigationController?.pushViewController(vc, animated: true)
+                indicator.stopAnimating()
+                indicator.isHidden = true
+            })
+            .disposed(by: rx.disposeBag)
+    }
+    
     private func getComma(price : Int) -> String {
         let formatter = NumberFormatter()
         formatter.locale = NSLocale.current
@@ -228,20 +236,23 @@ class DetailCampaignViewController: UIViewController {
         
         var diff = Int(dueDate.timeIntervalSince(Date()))
         
-        let diffDay = diff/(3600*24)
-        if diffDay > 0 {
-            timeSubject.onNext("\(diffDay)일 후 마감")
+        if diff < 0 {
+            timeSubject.onNext("마감")
         } else {
-            
-            let diffHour = diff/3600
-            diff = diff - diffHour*3600
-            
-            let diffMin = diff/60
-            diff = diff - diffMin*60
-            
-            timeSubject.onNext("\(diffHour):\(diffMin):\(diff) 후 마감")
+            let diffDay = diff/(3600*24)
+            if diffDay > 0 {
+                timeSubject.onNext("\(diffDay)일 후 마감")
+            } else {
+                
+                let diffHour = diff/3600
+                diff = diff - diffHour*3600
+                
+                let diffMin = diff/60
+                diff = diff - diffMin*60
+                
+                timeSubject.onNext("\(diffHour):\(diffMin):\(diff) 후 마감")
+            }
         }
-
     }
 
     

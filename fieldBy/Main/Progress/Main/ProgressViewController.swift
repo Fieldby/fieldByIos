@@ -33,6 +33,8 @@ class ProgressViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        usernameLabel.text = "@\(AuthManager.shared.myUserModel.igModel?.username ?? "field_by")"
+        
         indicator.isHidden = false
         indicator.startAnimating()
         
@@ -40,6 +42,7 @@ class ProgressViewController: UIViewController {
             .subscribe { [unowned self] in
                 indicator.isHidden = true
                 indicator.stopAnimating()
+                
                 
             } onError: { [unowned self] err in
                 print(err)
@@ -66,7 +69,7 @@ class ProgressViewController: UIViewController {
     }
     
     private func bind() {
-        usernameLabel.text = "@\(AuthManager.shared.myUserModel.igModel?.username ?? "field_by")"
+
         
         viewModel.tosShowArray
             .map { array -> String in
