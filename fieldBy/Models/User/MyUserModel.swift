@@ -23,7 +23,7 @@ class MyUserModel {
     let roundingFrequency: RoundingCount
     let simpleAddress: String
     let stroke: StrokeAverage
-    let juso: Juso
+    var juso: Juso
     let style: [Style]
     
     var igModel: IGModel?

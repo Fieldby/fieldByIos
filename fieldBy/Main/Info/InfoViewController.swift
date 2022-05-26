@@ -38,6 +38,7 @@ class InfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        navigationController?.navigationBar.isHidden = true
         makeUI()
         bind()
     }
@@ -107,6 +108,14 @@ class InfoViewController: UIViewController {
             
         }
     }
+    
+    @IBAction func editProfile(_ sender: Any) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: EditProfileViewController.storyId) as! EditProfileViewController
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    
+    
     
     private func apiGuide() {
         let vc = UIStoryboard(name: "ApiGuide", bundle: nil).instantiateViewController(withIdentifier: ApiGuideViewController.storyId) as! ApiGuideViewController

@@ -96,8 +96,6 @@ class AuthManager: CommonBackendType {
     
     func bestImages(urls: [String]) {
         for i in 0..<3 {
-            print("@@@@ \(urls[i]). \(i)")
-            
             ref.child("users").child(myUserModel.uuid).child("bestImages").child("\(i)").setValue(urls[i])
 
         }
@@ -142,8 +140,17 @@ class AuthManager: CommonBackendType {
     }
     
     static func saveAddressInfo(juso: Juso, detail: String) {
-        Database.database().reference().child("users").child(AuthManager.shared.userUUID).child("address").setValue(["zipNo": juso.zipNo, "roadAddr": juso.roadAddr, "jibunAddr": juso.jibunAddr])
-        Database.database().reference().child("users").child(AuthManager.shared.userUUID).child("address/detail").setValue(detail)
+        if let myUserModel = AuthManager.shared.myUserModel {
+            myUserModel.juso = juso
+            myUserModel.juso.detail = detail
+            
+            Database.database().reference().child("users").child(AuthManager.shared.myUserModel.uuid).child("address").setValue(["zipNo": juso.zipNo, "roadAddr": juso.roadAddr, "jibunAddr": juso.jibunAddr])
+            Database.database().reference().child("users").child(AuthManager.shared.myUserModel.uuid).child("address/detail").setValue(detail)
+        } else {
+            Database.database().reference().child("users").child(AuthManager.shared.userUUID).child("address").setValue(["zipNo": juso.zipNo, "roadAddr": juso.roadAddr, "jibunAddr": juso.jibunAddr])
+            Database.database().reference().child("users").child(AuthManager.shared.userUUID).child("address/detail").setValue(detail)
+        }
+
     }
     
     static func fetchUserInfo() -> Observable<Bool> {

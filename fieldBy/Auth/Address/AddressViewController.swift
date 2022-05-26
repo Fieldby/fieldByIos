@@ -31,6 +31,8 @@ class AddressViewController: UIViewController {
     
     private var juso: Juso!
     
+    var isChanging: Bool = false
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -38,15 +40,16 @@ class AddressViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShowNotification(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHideNotification(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
    
+        tabBarController?.tabBar.isHidden = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         NotificationCenter.default.removeObserver(self)
+        tabBarController?.tabBar.isHidden = false
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
         tableView.rx.setDelegate(self)
             .disposed(by: rx.disposeBag)
@@ -67,6 +70,10 @@ class AddressViewController: UIViewController {
         detailAddrContainer.layer.borderColor = UIColor.main.cgColor
         
         bottomView.isHidden = true
+        
+        if isChanging {
+            searchButton.setTitle("변경 완료", for: .normal)
+        }
     }
     
     private func bind() {
@@ -92,7 +99,11 @@ class AddressViewController: UIViewController {
                         indicator.isHidden = true
                     }
                 case .detail:
-                    pushUserInfoVC()
+                    if isChanging {
+                        saveAndPop()
+                    } else {
+                        pushUserInfoVC()
+                    }
                 }
             })
             .disposed(by: rx.disposeBag)
@@ -157,6 +168,11 @@ class AddressViewController: UIViewController {
     @objc func keyboardWillHideNotification(_ notification: Notification) {
         self.bottomView.isHidden = true
         self.bottomView.transform = .identity
+    }
+    
+    private func saveAndPop() {
+        AuthManager.saveAddressInfo(juso: juso, detail: detailTextField.text!)
+        navigationController?.popViewController(animated: true)
     }
 
     private func pushUserInfoVC() {
