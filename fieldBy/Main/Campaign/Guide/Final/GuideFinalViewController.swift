@@ -24,7 +24,9 @@ class GuideFinalViewController: CommonGuideViewController {
         super.viewDidLoad()
 
         if let token = AuthManager.shared.myUserModel.igModel?.token {
-            InstagramManager.shared.igLogin(token: token)
+            InstagramManager.shared.igLogin(token: token) {
+                
+            }
         }
 
         

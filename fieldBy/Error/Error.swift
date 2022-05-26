@@ -10,4 +10,5 @@ import Foundation
 enum FetchError: Error {
     case decodingFailed
     case emptyData
+    case tokenError
 }

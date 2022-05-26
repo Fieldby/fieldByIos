@@ -19,11 +19,12 @@ class ApiGuideViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var guideLabel: UILabel!
     
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        indicator.isHidden = true
         collectionView.rx.setDelegate(self)
             .disposed(by: rx.disposeBag)
         
@@ -42,6 +43,9 @@ class ApiGuideViewController: UIViewController {
         self.dismiss(animated: true)
     }
     @IBAction func getMedia(_ sender: Any) {
+        indicator.isHidden = false
+        indicator.startAnimating()
+        
         let manager = LoginManager()
         manager.logIn(permissions: ["public_profile", "instagram_basic", "pages_show_list"], from: self) { result, error in
             if let error = error {
@@ -57,7 +61,12 @@ class ApiGuideViewController: UIViewController {
                 return
             }
             
-            InstagramManager.shared.igLogin(token: result.token!.tokenString)
+            InstagramManager.shared.igLogin(token: result.token!.tokenString) { [unowned self] in
+                indicator.isHidden = true
+                indicator.stopAnimating()
+                let vc = storyboard?.instantiateViewController(withIdentifier: FeedListViewController.storyId) as! FeedListViewController
+                navigationController?.pushViewController(vc, animated: true)
+            }
             
         }
     }

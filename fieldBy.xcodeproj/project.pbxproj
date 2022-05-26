@@ -58,6 +58,8 @@
 		D19A9DAB2822C4C700552C15 /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19A9DAA2822C4C700552C15 /* View+.swift */; };
 		D1A29842283F5763000F7D33 /* ApiGuide.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1A29841283F5763000F7D33 /* ApiGuide.storyboard */; };
 		D1A29844283F576F000F7D33 /* ApiGuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A29843283F576F000F7D33 /* ApiGuideViewController.swift */; };
+		D1A29847283F62AA000F7D33 /* FeedListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A29846283F62AA000F7D33 /* FeedListViewController.swift */; };
+		D1A29849283F69DA000F7D33 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A29848283F69DA000F7D33 /* Media.swift */; };
 		D1A99CC328210FB300E414E4 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A99CC228210FB300E414E4 /* AuthManager.swift */; };
 		D1A99CC6282113D600E414E4 /* CertiFailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A99CC5282113D600E414E4 /* CertiFailedViewController.swift */; };
 		D1A99CC928211BAE00E414E4 /* AddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A99CC828211BAE00E414E4 /* AddressViewController.swift */; };
@@ -159,6 +161,8 @@
 		D19A9DAA2822C4C700552C15 /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
 		D1A29841283F5763000F7D33 /* ApiGuide.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ApiGuide.storyboard; sourceTree = "<group>"; };
 		D1A29843283F576F000F7D33 /* ApiGuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiGuideViewController.swift; sourceTree = "<group>"; };
+		D1A29846283F62AA000F7D33 /* FeedListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedListViewController.swift; sourceTree = "<group>"; };
+		D1A29848283F69DA000F7D33 /* Media.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
 		D1A99CC228210FB300E414E4 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		D1A99CC5282113D600E414E4 /* CertiFailedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertiFailedViewController.swift; sourceTree = "<group>"; };
 		D1A99CC828211BAE00E414E4 /* AddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressViewController.swift; sourceTree = "<group>"; };
@@ -368,6 +372,7 @@
 			isa = PBXGroup;
 			children = (
 				D14A198B28336C2C00542F2B /* FBInfo.swift */,
+				D1A29848283F69DA000F7D33 /* Media.swift */,
 			);
 			path = Facebook;
 			sourceTree = "<group>";
@@ -474,10 +479,19 @@
 		D1A29840283F575A000F7D33 /* ApiGuide */ = {
 			isa = PBXGroup;
 			children = (
+				D1A29845283F62A1000F7D33 /* FeedList */,
 				D1A29841283F5763000F7D33 /* ApiGuide.storyboard */,
 				D1A29843283F576F000F7D33 /* ApiGuideViewController.swift */,
 			);
 			path = ApiGuide;
+			sourceTree = "<group>";
+		};
+		D1A29845283F62A1000F7D33 /* FeedList */ = {
+			isa = PBXGroup;
+			children = (
+				D1A29846283F62AA000F7D33 /* FeedListViewController.swift */,
+			);
+			path = FeedList;
 			sourceTree = "<group>";
 		};
 		D1A99CC4282113C500E414E4 /* CeritificationFailed */ = {
@@ -860,6 +874,7 @@
 				D1A99CCE28211F2500E414E4 /* Juso.swift in Sources */,
 				D1A99CD32821239E00E414E4 /* AddressCell.swift in Sources */,
 				D1462573283CA899008FEB8A /* CommonPopupViewController.swift in Sources */,
+				D1A29849283F69DA000F7D33 /* Media.swift in Sources */,
 				D1AA5CB7281EA50700279CC8 /* SigninViewController.swift in Sources */,
 				D1AA5CBA281EAEAD00279CC8 /* Color+.swift in Sources */,
 				D11376D528366A4700CFC3D2 /* GuideCheckViewController.swift in Sources */,
@@ -877,6 +892,7 @@
 				D197A1F6283E4D0500691053 /* Image+.swift in Sources */,
 				D145BBF1283224D2009383D8 /* InfoStartViewController.swift in Sources */,
 				D106B0AC281EA2A400E6CCFA /* ViewController.swift in Sources */,
+				D1A29847283F62AA000F7D33 /* FeedListViewController.swift in Sources */,
 				D1A99CC6282113D600E414E4 /* CertiFailedViewController.swift in Sources */,
 				D15391C928210A4900E12140 /* CommonBackendType.swift in Sources */,
 				D1C89EE02822B65C00DAA2F4 /* MainTabBarController.swift in Sources */,
