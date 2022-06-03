@@ -15,16 +15,20 @@ class FeedListViewController: UIViewController {
     static let storyId = "feedlistVC"
     @IBOutlet weak var indicator: UIActivityIndicatorView!
     
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var subLabel: UILabel!
+    
+    
+    @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var button: UIButton!
     
-    private var imageSubject = BehaviorSubject<[(UIImage?, String)]>(value: [])
+    private var imageSubject = BehaviorSubject<[(UIImage?, ImageData)]>(value: [])
     private var indexes = [Int]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         
         button.layer.cornerRadius = 13
 
@@ -96,9 +100,8 @@ class FeedListViewController: UIViewController {
                     .subscribe(onNext: { [unowned self] imageArray in
                         
                         var temp: [String] = []
-                        
                         for idx in indexes {
-                            temp.append(imageArray[idx].1)
+                            temp.append(imageArray[idx].1.mediaURL)
                         }
                         
                         AuthManager.shared.bestImages(urls: temp)

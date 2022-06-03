@@ -34,7 +34,20 @@ class ProgressViewModel: NSObject {
                         tosShowArray.accept(campaignArray)
                         
                         if campaignArray.count == AuthManager.shared.myUserModel.campaigns.count {
-                            completable(.completed)
+                            
+                            
+                            
+                            AuthManager.shared.fetchCampaigns()
+                                .subscribe {
+                                    completable(.completed)
+                                }
+                                .disposed(by: rx.disposeBag)
+
+                            
+                            
+                            
+                            
+                            
                         }
                     } onError: { err in
                         completable(.error(err))

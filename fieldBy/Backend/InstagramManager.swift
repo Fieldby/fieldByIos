@@ -60,6 +60,7 @@ class InstagramManager: NSObject {
         facebookId(token: token)
             .subscribe { [unowned self] in
                 
+                print("token \(token)")
                 fbPageId(token: token)
                     .subscribe { [unowned self] in
                         
@@ -70,21 +71,21 @@ class InstagramManager: NSObject {
                                         print("IG 연동 성공")
                                         completion()
                                     } onError: { err in
-                                        print(err)
+                                        print("final\(err)")
                                     }
                                     .disposed(by: rx.disposeBag)
 
                             } onError: { err in
-                                print(err)
+                                print("igId\(err)")
                             }
                             .disposed(by: rx.disposeBag)
 
                     } onError: { err in
-                        print(err)
+                        print("fbpageid\(err)")
                     }
                     .disposed(by: rx.disposeBag)
             } onError: { err in
-                print(err)
+                print("fbid\(err)")
             }
             .disposed(by: rx.disposeBag)
  
@@ -132,6 +133,7 @@ class InstagramManager: NSObject {
                         if let data = decode(jsonData: data, type: FBPageList.self) {
                             if !data.data.isEmpty {
                                 self.fbPageId = data.data.first!.id
+                                print("fbpageid \(self.fbPageId)")
                                 completable(.completed)
                             } else {
                                 completable(.error(FetchError.emptyData))
@@ -158,6 +160,7 @@ class InstagramManager: NSObject {
                     case .success(let data):
                         if let data = decode(jsonData: data, type: IGData.self) {
                             self.instagramId = data.igModel.id
+                            
                             completable(.completed)
                         } else {
                             completable(.error(FetchError.decodingFailed))
@@ -173,6 +176,7 @@ class InstagramManager: NSObject {
     private func finalInfo(token: String) -> Completable {
         return Completable.create() { [unowned self] completable in
             let url = "\(graphUrl)\(instagramId!)?fields=name,username,profile_picture_url,followers_count&access_token=\(token)"
+            
             AF.request(url, method: .get)
                 .validate(statusCode: 200..<300)
                 .responseData { [unowned self] response in
@@ -232,7 +236,7 @@ class InstagramManager: NSObject {
         
     }
     
-    private func getImages(ids: [String]) -> Single<[(UIImage?, String)]> {
+    private func getImages(ids: [String]) -> Single<[(UIImage?, ImageData)]> {
         
         return Single.create() { [unowned self] observable in
             
@@ -241,11 +245,10 @@ class InstagramManager: NSObject {
                 return Disposables.create()
             }
             
-            var temp = [(UIImage?, String)]()
+            var temp = [(UIImage?, ImageData)]()
             
             for id in ids {
-                let url = "\(graphUrl)\(id)?fields=media_url&access_token=\(igModel.token!)"
-
+                let url = "\(graphUrl)\(id)?fields=media_url,timestamp,id&access_token=\(igModel.token!)"
                 
                 AF.request(url, method: .get)
                     .validate(statusCode: 200..<300)
@@ -256,19 +259,20 @@ class InstagramManager: NSObject {
                                 let url = try! URL(string: imageData.mediaURL)
                                 let data = try! Data(contentsOf: url!)
                                 let image = UIImage(data: data)
-                                temp.append((image, imageData.mediaURL))
+                                temp.append((image, imageData))
                                 if temp.count == ids.count {
+                                    temp.sort(by: { $0.1.timestamp > $1.1.timestamp })
                                     observable(.success(temp))
                                 }
                             } else {
-                                temp.append((UIImage(named: "smallLogo")!, "nil"))
+                                temp.append((UIImage(named: "smallLogo")!, ImageData(id: "",mediaURL: "", timestamp: "")))
                                 if temp.count == ids.count {
                                     observable(.success(temp))
                                 }
                             }
                         case .failure(let error):
                             print(error)
-                            temp.append((UIImage(named: "smallLogo")!, "nil"))
+                            temp.append((UIImage(named: "smallLogo")!, ImageData(id: "", mediaURL: "", timestamp: "")))
                             if temp.count == ids.count {
                                 observable(.success(temp))
                             }
@@ -279,7 +283,7 @@ class InstagramManager: NSObject {
         }
     }
     
-    func fetchImages(completion: @escaping ([(UIImage?, String)]) -> ()) {
+    func fetchImages(completion: @escaping ([(UIImage?, ImageData)]) -> ()) {
         feedIds()
             .subscribe { [unowned self] idArray in
                 getImages(ids: idArray)
@@ -297,6 +301,101 @@ class InstagramManager: NSObject {
             }
             .disposed(by: rx.disposeBag)
 
+    }
+    
+    func fetchChildImages(id: String, completion: @escaping ([ImageData]) -> ()) {
+        fetchChildren(id: id)
+            .subscribe { [unowned self] array in
+                fetchUrl(ids: array)
+                    .subscribe { imageArray in
+                        completion(imageArray)
+                    } onError: { err in
+                        print(err)
+                    }
+                    .disposed(by: rx.disposeBag)
+
+            } onError: { err in
+                print(err)
+            }
+            .disposed(by: rx.disposeBag)
+
+    }
+
+    private func fetchChildren(id: String) -> Single<[String]> {
+        return Single.create() { [unowned self] observable in
+            guard let igModel = AuthManager.shared.myUserModel.igModel else {
+                observable(.error(FetchError.tokenError))
+                return Disposables.create()
+            }
+
+            let url = "\(graphUrl)\(id)?fields=children&access_token=\(igModel.token!)"
+            
+            AF.request(url, method: .get)
+                .validate(statusCode: 200..<300)
+                .responseData { [unowned self] response in
+                    switch response.result {
+                    case .success(let data):
+                        if let childrenData = decode(jsonData: data, type: ChildrenData.self) {
+                            var temp = [String]()
+                            for data in childrenData.children.data {
+                                temp.append(data.id)
+                            }
+                            observable(.success(temp))
+                        } else {
+                            if let childId = decode(jsonData: data, type: ChildId.self) {
+                                observable(.success([childId.id]))
+                            }
+                        }
+                    case .failure(let error):
+                        observable(.error(error))
+                    }
+                }
+            
+            return Disposables.create()
+        }
+    }
+    
+    private func fetchUrl(ids: [String]) -> Single<[ImageData]> {
+        return Single.create() { [unowned self] observable in
+            
+            guard let igModel = AuthManager.shared.myUserModel.igModel else {
+                observable(.error(FetchError.tokenError))
+                return Disposables.create()
+            }
+            
+            var temp = [ImageData]()
+            
+            for id in ids {
+                let url = "\(graphUrl)\(id)?fields=media_url,timestamp,id&access_token=\(igModel.token!)"
+                
+                AF.request(url, method: .get)
+                    .validate(statusCode: 200..<300)
+                    .responseData { [unowned self] response in
+                        switch response.result {
+                        case .success(let data):
+                            if let imageData = decode(jsonData: data, type: ImageData.self) {
+                                temp.append(imageData)
+                                if temp.count == ids.count {
+                                    temp.sort(by: { $0.timestamp > $1.timestamp })
+                                    observable(.success(temp))
+                                }
+                            } else {
+                                temp.append(ImageData(id: "", mediaURL: "", timestamp: ""))
+                                if temp.count == ids.count {
+                                    observable(.success(temp))
+                                }
+                            }
+                        case .failure(let error):
+                            print(error)
+                            temp.append(ImageData(id: "", mediaURL: "", timestamp: ""))
+                            if temp.count == ids.count {
+                                observable(.success(temp))
+                            }
+                        }
+                    }
+            }
+            return Disposables.create()
+        }
     }
 }
 

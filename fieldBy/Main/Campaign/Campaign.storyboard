@@ -255,9 +255,40 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fxd-p8-A7w">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="tS8-od-o6L">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="496"/>
-                            </imageView>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Keo-Kz-YFn">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="mainimageCell" id="ODF-JB-RWA" customClass="MainImageCell" customModule="fieldBy" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="KaN-dR-gco">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="A9Q-6Q-Tvu">
+                                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="A9Q-6Q-Tvu" firstAttribute="leading" secondItem="KaN-dR-gco" secondAttribute="leading" id="K3r-Kq-Ebj"/>
+                                                <constraint firstAttribute="trailing" secondItem="A9Q-6Q-Tvu" secondAttribute="trailing" id="KDM-6X-vuD"/>
+                                                <constraint firstItem="A9Q-6Q-Tvu" firstAttribute="top" secondItem="KaN-dR-gco" secondAttribute="top" id="PUt-fL-q8W"/>
+                                                <constraint firstAttribute="bottom" secondItem="A9Q-6Q-Tvu" secondAttribute="bottom" id="cUQ-y1-b33"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <connections>
+                                            <outlet property="mainImageView" destination="A9Q-6Q-Tvu" id="VtR-UZ-tjU"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uke-1C-b2f">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="738"/>
                                 <subviews>
@@ -716,31 +747,31 @@ DM으로 문의해주세요!</string>
                                 </constraints>
                             </view>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="hT5-3k-MqM">
-                                <rect key="frame" x="188.5" y="434.5" width="37" height="37"/>
+                                <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
                                 <color key="color" name="MainColor"/>
                             </activityIndicatorView>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="vf6-Oy-mWy"/>
+                        <viewLayoutGuide key="safeArea" id="NCb-a7-tAf"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="fxd-p8-A7w" firstAttribute="leading" secondItem="47r-HL-dmv" secondAttribute="leading" id="2nM-t8-3lr"/>
                             <constraint firstItem="uke-1C-b2f" firstAttribute="top" secondItem="47r-HL-dmv" secondAttribute="top" id="4DU-uV-PAK"/>
-                            <constraint firstAttribute="trailing" secondItem="fxd-p8-A7w" secondAttribute="trailing" id="6Fw-hE-W83"/>
                             <constraint firstAttribute="trailing" secondItem="uke-1C-b2f" secondAttribute="trailing" id="DDL-Yg-NJ8"/>
                             <constraint firstAttribute="trailing" secondItem="Qnu-6i-rea" secondAttribute="trailing" id="EFb-R0-Ahr"/>
-                            <constraint firstItem="0bx-xE-l0u" firstAttribute="height" secondItem="fxd-p8-A7w" secondAttribute="height" id="JtC-KJ-IhA"/>
+                            <constraint firstAttribute="bottom" secondItem="tS8-od-o6L" secondAttribute="bottom" constant="400" id="GwE-c9-ugc"/>
                             <constraint firstItem="70D-ch-4B6" firstAttribute="leading" secondItem="47r-HL-dmv" secondAttribute="leading" id="No5-3r-poN"/>
+                            <constraint firstItem="tS8-od-o6L" firstAttribute="top" secondItem="47r-HL-dmv" secondAttribute="top" id="Pti-TI-piY"/>
+                            <constraint firstItem="tS8-od-o6L" firstAttribute="leading" secondItem="47r-HL-dmv" secondAttribute="leading" id="aJV-RW-FX3"/>
                             <constraint firstItem="lhs-AO-22I" firstAttribute="top" secondItem="47r-HL-dmv" secondAttribute="top" constant="38" id="anh-Dg-tx8"/>
-                            <constraint firstItem="hT5-3k-MqM" firstAttribute="centerY" secondItem="vf6-Oy-mWy" secondAttribute="centerY" id="bjp-lK-kSE"/>
+                            <constraint firstItem="0bx-xE-l0u" firstAttribute="height" secondItem="tS8-od-o6L" secondAttribute="height" id="auJ-yC-BDz"/>
+                            <constraint firstItem="hT5-3k-MqM" firstAttribute="centerY" secondItem="47r-HL-dmv" secondAttribute="centerY" id="bjp-lK-kSE"/>
                             <constraint firstAttribute="bottom" secondItem="Qnu-6i-rea" secondAttribute="bottom" constant="2" id="cLP-j6-1mx"/>
                             <constraint firstAttribute="bottom" secondItem="70D-ch-4B6" secondAttribute="bottom" id="d8y-eC-ETt"/>
-                            <constraint firstItem="fxd-p8-A7w" firstAttribute="top" secondItem="47r-HL-dmv" secondAttribute="top" id="hk4-9S-7lj"/>
                             <constraint firstItem="lhs-AO-22I" firstAttribute="leading" secondItem="47r-HL-dmv" secondAttribute="leading" constant="10" id="iLQ-Tr-WO5"/>
                             <constraint firstAttribute="trailing" secondItem="70D-ch-4B6" secondAttribute="trailing" id="joQ-xt-s0L"/>
-                            <constraint firstAttribute="bottom" secondItem="fxd-p8-A7w" secondAttribute="bottom" constant="400" id="m6A-Ai-A2N"/>
-                            <constraint firstItem="hT5-3k-MqM" firstAttribute="centerX" secondItem="vf6-Oy-mWy" secondAttribute="centerX" id="r5w-wG-a3k"/>
+                            <constraint firstItem="hT5-3k-MqM" firstAttribute="centerX" secondItem="47r-HL-dmv" secondAttribute="centerX" id="r5w-wG-a3k"/>
                             <constraint firstItem="uke-1C-b2f" firstAttribute="leading" secondItem="47r-HL-dmv" secondAttribute="leading" id="rxW-aj-dzg"/>
                             <constraint firstItem="Qnu-6i-rea" firstAttribute="leading" secondItem="47r-HL-dmv" secondAttribute="leading" id="vzM-B7-bcS"/>
+                            <constraint firstAttribute="trailing" secondItem="tS8-od-o6L" secondAttribute="trailing" id="weo-tf-bdp"/>
                             <constraint firstItem="70D-ch-4B6" firstAttribute="top" secondItem="uke-1C-b2f" secondAttribute="bottom" constant="2" id="xbd-U5-eeZ"/>
                         </constraints>
                     </view>
@@ -751,13 +782,13 @@ DM으로 문의해주세요!</string>
                         <outlet property="bottomTitleLabel" destination="XXY-KH-keq" id="y23-xE-1Yo"/>
                         <outlet property="bottomView" destination="70D-ch-4B6" id="AWw-cf-cnT"/>
                         <outlet property="brandNameLabel" destination="8G2-hf-3Oc" id="WMb-bi-IaP"/>
+                        <outlet property="collectionView" destination="tS8-od-o6L" id="FwU-ep-a5J"/>
                         <outlet property="dateContainer" destination="CoS-e1-9N0" id="Hpg-PG-gDD"/>
                         <outlet property="indicator" destination="hT5-3k-MqM" id="k83-Uk-pRz"/>
                         <outlet property="infoContainer" destination="dV4-29-Q8L" id="UEv-9B-Bf9"/>
                         <outlet property="isNewContainer" destination="iL2-nm-tIg" id="zC8-SP-ZPL"/>
                         <outlet property="itemDateLabel" destination="r7y-nl-nxz" id="PHf-ca-jNU"/>
                         <outlet property="leastFeedLabel" destination="9Pp-NZ-8IR" id="elh-Pv-lk5"/>
-                        <outlet property="mainImageView" destination="fxd-p8-A7w" id="PrX-Sw-Otd"/>
                         <outlet property="mainScrollView" destination="uke-1C-b2f" id="Wnn-pV-zJP"/>
                         <outlet property="maintainLabel" destination="hyr-a9-74X" id="Gxo-zY-xQd"/>
                         <outlet property="priceLabel" destination="2x0-aZ-1W2" id="a1S-U0-6o8"/>
@@ -767,6 +798,7 @@ DM으로 문의해주세요!</string>
                         <outlet property="timeLabel" destination="j9f-bg-pYW" id="4rb-AW-JB8"/>
                         <outlet property="timeStickyContainer" destination="MZ7-31-hCJ" id="mdp-dW-eWF"/>
                         <outlet property="titleLabel" destination="1x1-Hk-gKk" id="hvT-PZ-fXz"/>
+                        <outlet property="transparentView" destination="0bx-xE-l0u" id="3le-uz-uBV"/>
                         <outlet property="uploadDateLabel" destination="DFT-Z6-wPx" id="rkv-kN-D5a"/>
                         <outlet property="viewModel" destination="8p3-Oj-nss" id="seq-91-feV"/>
                     </connections>

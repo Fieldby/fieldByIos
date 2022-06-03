@@ -11,7 +11,7 @@ import Then
 
 class MainTabBarController: UITabBarController {
 
-    private var bottomView: UIView!
+    var bottomView: UIView!
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)

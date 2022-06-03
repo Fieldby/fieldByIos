@@ -69,27 +69,38 @@ class CampaignModel: Codable {
         
         if let imageUrl = value["mainImageUrl"] as? String,
            let brandUuid = value["brandUuid"] as? String,
-           let isNew = value["isNew"] as? Bool {
+           let isNew = value["isNew"] as? Bool,
+           let dueDate = value["dueDate"] as? String,
+           let selectionDate = value["selectionDate"] as? String,
+           let itemDate = value["itemDate"] as? String,
+           let uploadDate = value["uploadDate"] as? String,
+           let leastFeed = value["leastFeed"] as? Int,
+           let maintain = value["maintain"] as? Int,
+           let brandName = value["brandName"] as? String,
+           let brandInstagram = value["brandInstagram"] as? String,
+           let recruitingDate = value["recruitingDate"] as? String
+        {
             self.mainImageUrl = "campaignImages/\(self.uuid)/\(imageUrl)"
             self.brandUuid = brandUuid
             self.isNew = isNew
-            
+            self.dueDate = dueDate
+            self.selectionDate = selectionDate
+            self.itemDate = itemDate
+            self.uploadDate = uploadDate
+            self.leastFeed = leastFeed
+            self.maintain = maintain
+            self.brandName = brandName
+            self.brandInstagram = brandInstagram
+            self.recruitingDate = recruitingDate
         } else {
             return nil
         }
-
-        self.dueDate = value["dueDate"] as! String
-        self.selectionDate = value["selectionDate"] as! String
-        self.itemDate = value["itemDate"] as! String
-        self.uploadDate = value["uploadDate"] as! String
-        self.leastFeed = value["leastFeed"] as! Int
-        self.maintain = value["maintain"] as! Int
-        self.brandName = value["brandName"] as! String
-        self.brandInstagram = value["brandInstagram"] as! String
         
         let itemValue = snapshot.childSnapshot(forPath: "item")
+        if !itemValue.exists() { return nil }
         self.itemModel = ItemModel(snapshot: itemValue)
         
+        if !snapshot.childSnapshot(forPath: "guides").exists() { return nil }
         var tempGuides = [GuideModel]()
         for data in snapshot.childSnapshot(forPath: "guides").children.allObjects as! [DataSnapshot] {
             let guideModel = GuideModel(snapshot: data)!
@@ -97,18 +108,15 @@ class CampaignModel: Codable {
         }
         self.guides = tempGuides
         
-        
+        if !snapshot.childSnapshot(forPath: "hashTags").exists() { return nil }
         self.hashTagModel = HashTagModel(snapshot: snapshot.childSnapshot(forPath: "hashTags"))!
         
         var tempUsers: [String: Bool] = [:]
         for data in snapshot.childSnapshot(forPath: "users").children.allObjects as! [DataSnapshot] {
             tempUsers[data.value as! String] = true
         }
-        self.users = tempUsers
-        self.recruitingDate = value["recruitingDate"] as! String
-        
+        self.users = tempUsers        
         self.status = getStatus()
-        print(self.status)
     }
     
     

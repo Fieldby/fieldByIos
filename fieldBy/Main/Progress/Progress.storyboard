@@ -448,6 +448,9 @@
                                                                     <state key="normal" title="업로드 하기">
                                                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     </state>
+                                                                    <connections>
+                                                                        <action selector="upload:" destination="Yra-4C-L4K" eventType="touchUpInside" id="OIP-Em-qBX"/>
+                                                                    </connections>
                                                                 </button>
                                                             </subviews>
                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>

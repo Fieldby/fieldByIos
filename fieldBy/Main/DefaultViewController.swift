@@ -29,6 +29,8 @@ class DefaultViewController: UIViewController {
         
         checkUserValid()
             .subscribe(onNext: { [unowned self] code in
+                print(code)
+                
                 if code == 0 {
                     toMain()
                 } else if code == 1 {
@@ -48,11 +50,13 @@ class DefaultViewController: UIViewController {
      2 : ServerError
      */
     
+    //MARK: TODO - 고칠 것
+    
     private func checkUserValid() -> Observable<Int> {
         Observable.create() { [unowned self] observable in
             
             if let uuid = Auth.auth().currentUser?.uid {
-                
+
                 AuthManager.shared.fetch(uuid: uuid)
                     .subscribe { [unowned self] in
                         CampaignManager.shared.fetch()
@@ -67,7 +71,7 @@ class DefaultViewController: UIViewController {
                         observable.onNext(1)
                     }
                     .disposed(by: rx.disposeBag)
-                
+
             } else {
                 observable.onNext(1)
             }

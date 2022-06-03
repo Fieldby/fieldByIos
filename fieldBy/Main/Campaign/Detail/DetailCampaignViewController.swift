@@ -9,6 +9,7 @@ import UIKit
 import Kingfisher
 import FirebaseStorage
 import RxSwift
+import RxRelay
 
 class DetailCampaignViewController: UIViewController {
 
@@ -16,6 +17,11 @@ class DetailCampaignViewController: UIViewController {
     
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var mainImageView: UIImageView!
+    
+    @IBOutlet weak var collectionView: UICollectionView!
+    
+    @IBOutlet weak var transparentView: UIView!
+    
     
     @IBOutlet weak var mainScrollView: UIScrollView!
     @IBOutlet weak var timeStickyContainer: UIView!
@@ -57,8 +63,6 @@ class DetailCampaignViewController: UIViewController {
     private var timer: Timer?
     
     var campaignModel: CampaignModel!
-    var image: UIImage!
-    
     var timeSubject = BehaviorSubject<String>(value: "")
     
     var isDone = false
@@ -97,6 +101,7 @@ class DetailCampaignViewController: UIViewController {
         infoContainer.layer.cornerRadius = 21
         infoContainer.addGrayShadow(color: .gray, opacity: 0.15, radius: 3)
         mainScrollView.contentInsetAdjustmentBehavior = .never
+        collectionView.contentInsetAdjustmentBehavior = .never
         
         applyButton.layer.cornerRadius = 13
         
@@ -107,9 +112,16 @@ class DetailCampaignViewController: UIViewController {
         if AuthManager.shared.myUserModel.campaignUuids[campaignModel.uuid] == true {
             applyButton.setTitle("캠페인 취소하기", for: .normal)
         }
+        
+        transparentView.isUserInteractionEnabled = false
     }
     
     private func bind() {
+        viewModel.fetchImage(uuid: campaignModel.uuid)
+        
+        collectionView.rx.setDelegate(self)
+            .disposed(by: rx.disposeBag)
+        
         isDone = AuthManager.shared.myUserModel.campaignUuids[campaignModel.uuid] ?? false
         
         if isDone {
@@ -117,8 +129,6 @@ class DetailCampaignViewController: UIViewController {
             timeLabel.text = "신청 완료!"
         }
         
-        mainImageView.image = image
-
         brandNameLabel.text = campaignModel.brandName
         titleLabel.text = campaignModel.itemModel.name
         subTitleLabel.text = campaignModel.itemModel.description
@@ -139,12 +149,6 @@ class DetailCampaignViewController: UIViewController {
             })
             .disposed(by: rx.disposeBag)
         
-        Storage.storage().reference().child(campaignModel.mainImageUrl)
-            .downloadURL { [unowned self] url, error in
-                if let url = url {
-                    mainImageView.kf.setImage(with: url)
-                }
-            }
         
         selectionDateLabel.text = campaignModel.selectionDate.parsedDate
         itemDateLabel.text = "~\(campaignModel.itemDate.parsedDate)"
@@ -203,6 +207,15 @@ class DetailCampaignViewController: UIViewController {
             })
             .disposed(by: rx.disposeBag)
         
+        viewModel.imageUrlRelay
+            .bind(to: collectionView.rx.items(cellIdentifier: MainImageCell.reuseId, cellType: MainImageCell.self)) { idx, url, cell in
+                cell.mainImageView.kf.indicatorType = .activity
+                cell.mainImageView.kf.setImage(with: url,
+                                               options: [.transition(.fade(0.7)), .forceTransition, .keepCurrentImageWhileLoading])
+            }
+            .disposed(by: rx.disposeBag)
+        
+        
     }
     
     private func pushGuideVC() {
@@ -255,5 +268,19 @@ class DetailCampaignViewController: UIViewController {
         }
     }
 
+    
+}
+
+extension DetailCampaignViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
+    }
+}
+
+class MainImageCell: UICollectionViewCell {
+    static let reuseId = "mainimageCell"
+    @IBOutlet weak var mainImageView: UIImageView!
+    
+    
     
 }

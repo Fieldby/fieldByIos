@@ -162,10 +162,28 @@
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="smallLogo" translatesAutoresizingMaskIntoConstraints="NO" id="Xc8-bS-802">
                                         <rect key="frame" x="27" y="49" width="32" height="36"/>
                                     </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n2Y-19-Lj0">
+                                        <rect key="frame" x="344" y="42" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="VJq-KO-awB"/>
+                                            <constraint firstAttribute="height" constant="50" id="vVj-wh-tXN"/>
+                                        </constraints>
+                                        <color key="tintColor" name="Black"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="bell" catalog="system">
+                                            <color key="titleColor" name="Black"/>
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="21"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="pushNoti:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="NV4-Zw-R5N"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="3ij-8M-VsP"/>
+                                    <constraint firstAttribute="trailing" secondItem="n2Y-19-Lj0" secondAttribute="trailing" constant="20" id="5Xd-B6-C83"/>
+                                    <constraint firstItem="n2Y-19-Lj0" firstAttribute="centerY" secondItem="Xc8-bS-802" secondAttribute="centerY" id="6tq-qd-2JA"/>
                                     <constraint firstAttribute="bottom" secondItem="Xc8-bS-802" secondAttribute="bottom" constant="15" id="MtA-6Q-C6o"/>
                                     <constraint firstItem="Xc8-bS-802" firstAttribute="leading" secondItem="mOw-AO-zjw" secondAttribute="leading" constant="27" id="RT7-Bc-171"/>
                                 </constraints>
@@ -422,13 +440,6 @@
                                     <action selector="addrChange:" destination="0cA-mC-4Uq" eventType="touchUpInside" id="OTU-uz-bnh"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uOI-88-mWa">
-                                <rect key="frame" x="341" y="318" width="53" height="28"/>
-                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="13"/>
-                                <color key="tintColor" name="MainColor"/>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="변경하기&gt;"/>
-                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Xy-xI-9wC">
                                 <rect key="frame" x="152" y="654" width="110" height="28"/>
                                 <subviews>
@@ -442,6 +453,9 @@
                                         <color key="tintColor" name="MainColor"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="로그아웃"/>
+                                        <connections>
+                                            <action selector="logout:" destination="0cA-mC-4Uq" eventType="touchUpInside" id="5Hb-O7-xll"/>
+                                        </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="um2-Th-AKh">
                                         <rect key="frame" x="54.5" y="7" width="1" height="14"/>
@@ -488,7 +502,6 @@
                             <constraint firstItem="cZw-c1-9rU" firstAttribute="leading" secondItem="2qf-dD-cig" secondAttribute="leading" constant="20" id="Nun-cx-mTV"/>
                             <constraint firstItem="o7m-pz-oJP" firstAttribute="centerY" secondItem="jBl-sl-4QO" secondAttribute="centerY" id="PXV-Df-VeG"/>
                             <constraint firstItem="PgE-of-zjX" firstAttribute="centerY" secondItem="W0M-y5-7ny" secondAttribute="centerY" id="UqY-96-apT"/>
-                            <constraint firstItem="uOI-88-mWa" firstAttribute="centerY" secondItem="cat-go-Nnh" secondAttribute="centerY" id="V9u-nW-py6"/>
                             <constraint firstItem="cat-go-Nnh" firstAttribute="leading" secondItem="2qf-dD-cig" secondAttribute="leading" constant="20" id="VbC-nM-iCF"/>
                             <constraint firstItem="2qf-dD-cig" firstAttribute="bottom" secondItem="7Xy-xI-9wC" secondAttribute="bottom" constant="180" id="Xb5-Ld-R6q"/>
                             <constraint firstItem="YSX-An-9OY" firstAttribute="leading" secondItem="2qf-dD-cig" secondAttribute="leading" constant="20" id="XlV-n8-BuZ"/>
@@ -497,7 +510,6 @@
                             <constraint firstItem="Ae2-gL-LVZ" firstAttribute="leading" secondItem="PgE-of-zjX" secondAttribute="leading" id="cGU-mk-1hN"/>
                             <constraint firstItem="jBl-sl-4QO" firstAttribute="leading" secondItem="2qf-dD-cig" secondAttribute="leading" constant="20" id="cIn-B9-A22"/>
                             <constraint firstItem="jBl-sl-4QO" firstAttribute="top" secondItem="uSZ-dd-GGo" secondAttribute="bottom" constant="90" id="cwl-9a-daX"/>
-                            <constraint firstItem="2qf-dD-cig" firstAttribute="trailing" secondItem="uOI-88-mWa" secondAttribute="trailing" constant="20" id="eBg-jy-Q5n"/>
                             <constraint firstItem="PgE-of-zjX" firstAttribute="leading" secondItem="W0M-y5-7ny" secondAttribute="trailing" constant="30" id="eKu-MU-aKE"/>
                             <constraint firstItem="2qf-dD-cig" firstAttribute="trailing" secondItem="o7m-pz-oJP" secondAttribute="trailing" constant="20" id="hSA-u7-4YF"/>
                             <constraint firstItem="Ae2-gL-LVZ" firstAttribute="centerY" secondItem="YSX-An-9OY" secondAttribute="centerY" id="p8M-60-hc3"/>
@@ -519,6 +531,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="bell" catalog="system" width="128" height="124"/>
         <image name="chevron.left" catalog="system" width="96" height="128"/>
         <image name="smallLogo" width="32" height="36"/>
         <namedColor name="Black">

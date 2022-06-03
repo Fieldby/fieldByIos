@@ -40,6 +40,42 @@ class CampaignManager: CommonBackendType {
         }
     }
     
+    func mainImageUrl(campaignUuid: String) -> Single<[URL]> {
+        return Single.create() { [unowned self] observable in
+            
+            
+            storageRef.child("campaignImages").child(campaignUuid).child("mainImages")
+                .listAll { result, error in
+                    if let error = error {
+                        
+                        observable(.error(error))
+
+                    } else {
+                        
+                        var temp = [URL]()
+                        
+                        for i in 0..<result.items.count {
+                            
+                            result.items[i].downloadURL { url, urlError in
+                                if let urlError = urlError {
+                                    observable(.error(urlError))
+                                } else {
+                                    temp.append(url!)
+                                    
+                                    if i == result.items.count-1 {
+                                        observable(.success(temp))
+                                    }
+
+                                }
+                            }
+                        }
+                        
+                    }
+                }
+            return Disposables.create()
+        }
+    }
+    
     func guideImages(campaignModel: CampaignModel) -> Observable<[UIImage]> {
         return Observable.create() { [unowned self] observable in
             var images = [UIImage](repeating: UIImage(systemName: "pencil")!, count: campaignModel.guides.count)
@@ -89,17 +125,6 @@ class CampaignManager: CommonBackendType {
         let myUid = AuthManager.shared.myUserModel.uuid!
         
         ref.child("campaigns/\(uuid)/users").child(myUid).setValue(myUid)
-        
-//        ref.child("campaigns/\(uuid)/users").observeSingleEvent(of: .value) { [unowned self] dataSnapShot in
-//            if dataSnapShot.exists() {
-//                let idx = Int((dataSnapShot.children.allObjects as! [DataSnapshot]).last!.key)!
-//                ref.child("campaigns/\(uuid)/users").child("\(idx+1)").setValue(myUid)
-//
-//            } else {
-//                ref.child("campaigns/\(uuid)/users").child("0").setValue(myUid)
-//            }
-//
-//        }
         ref.child("users").child(AuthManager.shared.myUserModel.uuid).child("campaigns").child(uuid).setValue(["size": size ?? "free", "color": color ?? "free"])
 
         if let model = model(uuid: uuid) {
@@ -108,8 +133,21 @@ class CampaignManager: CommonBackendType {
         }
         
         AuthManager.shared.addCampaign(uuid: uuid, size: size, color: color)
-        
-        
+    }
+    
+    func saveUploadImages(campaignUuid: String, images: [ImageData], index: Int) -> Completable {
+        return Completable.create() { completable in
+            
+            self.ref.child("users").child(AuthManager.shared.myUserModel.uuid).child("campaigns").child(campaignUuid).child("images/\(index)")
+                .setValue(images.map{$0.mediaURL})
+            
+            if let model = AuthManager.shared.myUserModel.campaigns.first(where: {$0.uuid == campaignUuid}) {
+                model.imageArray.append(images.map{$0.mediaURL})
+            }
+
+            completable(.completed)
+            return Disposables.create()
+        }
     }
     
     func model(uuid: String) -> CampaignModel? {

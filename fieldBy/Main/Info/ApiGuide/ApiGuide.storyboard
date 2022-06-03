@@ -37,7 +37,7 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="joS-m4-ZA3">
                                         <rect key="frame" x="20" y="19" width="374" height="56"/>
-                                        <color key="backgroundColor" name="MainColor"/>
+                                        <color key="backgroundColor" red="0.094117647058823528" green="0.46666666666666667" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="56" id="eMn-o3-4QK"/>
                                         </constraints>
@@ -50,13 +50,22 @@
                                             <action selector="getMedia:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="KMY-B9-1oj"/>
                                         </connections>
                                     </button>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="f_logo_RGB-Blue_250" translatesAutoresizingMaskIntoConstraints="NO" id="WmU-IZ-Bdq">
+                                        <rect key="frame" x="20" y="19" width="56" height="56"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="WmU-IZ-Bdq" secondAttribute="height" multiplier="1:1" id="YQL-oV-Ird"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
+                                    <constraint firstItem="WmU-IZ-Bdq" firstAttribute="leading" secondItem="joS-m4-ZA3" secondAttribute="leading" id="5Lu-0u-jp9"/>
                                     <constraint firstItem="joS-m4-ZA3" firstAttribute="centerY" secondItem="WVC-kD-KtM" secondAttribute="centerY" constant="-10" id="LGN-go-dYY"/>
                                     <constraint firstAttribute="height" constant="114" id="Oe9-lz-iv0"/>
                                     <constraint firstItem="joS-m4-ZA3" firstAttribute="leading" secondItem="WVC-kD-KtM" secondAttribute="leading" constant="20" id="SsV-n4-xVX"/>
                                     <constraint firstItem="joS-m4-ZA3" firstAttribute="centerX" secondItem="WVC-kD-KtM" secondAttribute="centerX" id="Zdi-YR-OiL"/>
+                                    <constraint firstItem="WmU-IZ-Bdq" firstAttribute="bottom" secondItem="joS-m4-ZA3" secondAttribute="bottom" id="xdb-0o-V7P"/>
+                                    <constraint firstItem="WmU-IZ-Bdq" firstAttribute="top" secondItem="joS-m4-ZA3" secondAttribute="top" id="yPt-zD-itv"/>
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="WMO-Pt-7A5">
@@ -151,35 +160,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CRK-oK-LOo">
-                                <rect key="frame" x="0.0" y="782" width="414" height="114"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="exW-dU-stt">
-                                        <rect key="frame" x="20" y="19" width="374" height="56"/>
-                                        <color key="backgroundColor" name="MainColor"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="56" id="hJ7-wp-2UU"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="16"/>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="선택 완료(0/3)">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="backButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="XAC-tE-VsQ"/>
-                                            <action selector="getMedia:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="llS-sf-lr9"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstItem="exW-dU-stt" firstAttribute="centerY" secondItem="CRK-oK-LOo" secondAttribute="centerY" constant="-10" id="Ob9-Df-AoL"/>
-                                    <constraint firstItem="exW-dU-stt" firstAttribute="centerX" secondItem="CRK-oK-LOo" secondAttribute="centerX" id="iTY-aL-uPA"/>
-                                    <constraint firstItem="exW-dU-stt" firstAttribute="leading" secondItem="CRK-oK-LOo" secondAttribute="leading" constant="20" id="j3v-14-tqe"/>
-                                    <constraint firstAttribute="height" constant="114" id="sVh-A3-4Z3"/>
-                                </constraints>
-                            </view>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dXx-Ba-qxC">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dXx-Ba-qxC">
                                 <rect key="frame" x="10" y="38" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="5ql-SS-R0P"/>
@@ -193,7 +174,7 @@
                                 </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="jCf-lm-5TE">
-                                <rect key="frame" x="24" y="289.5" width="366" height="492.5"/>
+                                <rect key="frame" x="24" y="289.5" width="366" height="467.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="15" minimumInteritemSpacing="19" id="zWB-Yt-Cj2">
                                     <size key="itemSize" width="128" height="128"/>
@@ -229,6 +210,34 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blur" translatesAutoresizingMaskIntoConstraints="NO" id="6fV-cg-cCf">
                                 <rect key="frame" x="0.0" y="715" width="414" height="67"/>
                             </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CRK-oK-LOo">
+                                <rect key="frame" x="0.0" y="782" width="414" height="114"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="exW-dU-stt">
+                                        <rect key="frame" x="20" y="19" width="374" height="56"/>
+                                        <color key="backgroundColor" name="MainColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="56" id="hJ7-wp-2UU"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="16"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="선택 완료(0/3)">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="backButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="XAC-tE-VsQ"/>
+                                            <action selector="getMedia:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="llS-sf-lr9"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="exW-dU-stt" firstAttribute="centerY" secondItem="CRK-oK-LOo" secondAttribute="centerY" constant="-10" id="Ob9-Df-AoL"/>
+                                    <constraint firstItem="exW-dU-stt" firstAttribute="centerX" secondItem="CRK-oK-LOo" secondAttribute="centerX" id="iTY-aL-uPA"/>
+                                    <constraint firstItem="exW-dU-stt" firstAttribute="leading" secondItem="CRK-oK-LOo" secondAttribute="leading" constant="20" id="j3v-14-tqe"/>
+                                    <constraint firstAttribute="height" constant="114" id="sVh-A3-4Z3"/>
+                                </constraints>
+                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="브랜드에게 본인을 알리기 위해" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VTV-9y-q2t">
                                 <rect key="frame" x="20" y="116" width="217" height="22"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="18"/>
@@ -260,7 +269,7 @@
                             <constraint firstItem="CRK-oK-LOo" firstAttribute="top" secondItem="6fV-cg-cCf" secondAttribute="bottom" id="1Bf-f7-Ztx"/>
                             <constraint firstItem="sfE-sY-FfE" firstAttribute="trailing" secondItem="jCf-lm-5TE" secondAttribute="trailing" constant="24" id="8tG-bW-K9y"/>
                             <constraint firstItem="tNw-AA-Mhi" firstAttribute="top" secondItem="tmg-Tf-HFc" secondAttribute="bottom" constant="22" id="MSR-h0-0NQ"/>
-                            <constraint firstItem="CRK-oK-LOo" firstAttribute="top" secondItem="jCf-lm-5TE" secondAttribute="bottom" id="NRA-Ng-9ng"/>
+                            <constraint firstItem="CRK-oK-LOo" firstAttribute="top" secondItem="jCf-lm-5TE" secondAttribute="bottom" constant="25" id="NRA-Ng-9ng"/>
                             <constraint firstItem="tmg-Tf-HFc" firstAttribute="top" secondItem="VTV-9y-q2t" secondAttribute="bottom" id="OpH-y5-JJG"/>
                             <constraint firstItem="CRK-oK-LOo" firstAttribute="leading" secondItem="4GS-9T-SJi" secondAttribute="leading" id="Tub-so-DfS"/>
                             <constraint firstItem="sfE-sY-FfE" firstAttribute="trailing" secondItem="6fV-cg-cCf" secondAttribute="trailing" id="TyA-fS-wSi"/>
@@ -278,9 +287,12 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backButton" destination="dXx-Ba-qxC" id="VCR-JX-hPe"/>
                         <outlet property="button" destination="exW-dU-stt" id="cBA-cR-q4I"/>
                         <outlet property="collectionView" destination="jCf-lm-5TE" id="Fde-Fc-nZN"/>
                         <outlet property="indicator" destination="Fr3-PK-rIY" id="2Ss-dT-YxG"/>
+                        <outlet property="subLabel" destination="tmg-Tf-HFc" id="J0F-tT-ccm"/>
+                        <outlet property="titleLabel" destination="VTV-9y-q2t" id="tXJ-H8-7f9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tPX-nB-LUj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -292,6 +304,7 @@
         <image name="api1" width="332" height="362"/>
         <image name="blur" width="390" height="67"/>
         <image name="chevron.left" catalog="system" width="96" height="128"/>
+        <image name="f_logo_RGB-Blue_250" width="176.66667175292969" height="176.66667175292969"/>
         <namedColor name="Black">
             <color red="0.18823529411764706" green="0.18823529411764706" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

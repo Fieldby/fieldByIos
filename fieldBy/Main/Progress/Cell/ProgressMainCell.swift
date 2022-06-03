@@ -49,6 +49,7 @@ class ProgressMainCell: UITableViewCell {
     @IBOutlet weak var dateContentLabel: UILabel!
     @IBOutlet weak var desLabel: UILabel!
     
+    var buttonHandler: (() -> Void)!
     
     
     
@@ -70,7 +71,14 @@ class ProgressMainCell: UITableViewCell {
         appliedLabel.isHidden = true
     }
     
-    func bind(campaignModel: CampaignModel, status: CampaignStatus) {
+    func bind(campaignModel: CampaignModel, userModel: UserCampaignModel) {
+                
+        if userModel.imageArray.count != 0 {
+            uploadButton.setTitle("다시 업로드 하기", for: .normal)
+        } else {
+            uploadButton.setTitle("업로드 하기", for: .normal)
+        }
+        
         
         mainView.addGrayShadow(color: .black, opacity: 1, radius: 3)
         Storage.storage().reference().child(campaignModel.mainImageUrl)
@@ -86,7 +94,7 @@ class ProgressMainCell: UITableViewCell {
         deliveryLabel.text = "\(campaignModel.itemDate.month).\(campaignModel.itemDate.day)"
         uploadLabel.text = "\(campaignModel.uploadDate.month).\(campaignModel.uploadDate.day)"
         
-        switch status {
+        switch campaignModel.status {
         case .unOpened:
             break
         case .applied:
@@ -133,12 +141,10 @@ class ProgressMainCell: UITableViewCell {
         dateContentLabel.text = "업로드기간(~\(campaignModel.uploadDate.month).\(campaignModel.uploadDate.day))입니다!"
         desLabel.text = "가이드에 맞게 컨텐츠를 업로드 해주세요 :)"
         
-        
-        uploadButton.rx.tap
-            .subscribe(onNext: { [unowned self] in
-                
-            })
-            .disposed(by: rx.disposeBag)
+    }
+    
+    @IBAction func upload(_ sender: Any) {
+        buttonHandler()
     }
     
     private func setMaintain() {

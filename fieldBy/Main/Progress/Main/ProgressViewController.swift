@@ -40,6 +40,7 @@ class ProgressViewController: UIViewController {
         
         viewModel.fetch()
             .subscribe { [unowned self] in
+                tableView.reloadData()
                 indicator.isHidden = true
                 indicator.stopAnimating()
                 
@@ -56,7 +57,7 @@ class ProgressViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        navigationController?.navigationBar.isHidden = true
         makeUI()
         bind()
     }
@@ -94,11 +95,16 @@ class ProgressViewController: UIViewController {
 
         
         viewModel.tosShowArray
-            .bind(to: tableView.rx.items(cellIdentifier: ProgressMainCell.reuseId, cellType: ProgressMainCell.self)) { idx, model, cell in
+            .bind(to: tableView.rx.items(cellIdentifier: ProgressMainCell.reuseId, cellType: ProgressMainCell.self)) { [unowned self] idx, model, cell in
                 
-                cell.bind(campaignModel: model.0, status: model.0.status)
-                
-                
+                cell.buttonHandler = { [unowned self] in
+                    let vc = UIStoryboard(name: "Upload", bundle: nil).instantiateViewController(withIdentifier: "medialistVC") as! MediaListViewController
+                    vc.modalPresentationStyle = .fullScreen
+                    vc.campaignModel = model.0
+                    self.navigationController?.pushViewController(vc, animated: true)
+                    
+                }
+                cell.bind(campaignModel: model.0, userModel: model.1)
             }
             .disposed(by: rx.disposeBag)
         

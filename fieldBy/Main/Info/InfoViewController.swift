@@ -124,6 +124,15 @@ class InfoViewController: UIViewController {
         nav.modalPresentationStyle = .fullScreen
         present(nav, animated: true)
     }
+    @IBAction func pushNoti(_ sender: Any) {
+        
+        let vc = UIStoryboard(name: "Noti", bundle: nil).instantiateViewController(withIdentifier: "notiVC") as! NotiViewController
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+        
+        
+        
+    }
     
     @IBAction func test(_ sender: Any) {        
         apiGuide()

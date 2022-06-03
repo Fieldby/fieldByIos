@@ -32,6 +32,10 @@ class EditProfileViewController: UIViewController {
         
     }
     
-
+    @IBAction func logout(_ sender: Any) {
+        AuthManager.shared.logOut()
+        self.tabBarController?.dismiss(animated: true)
+    }
+    
 
 }

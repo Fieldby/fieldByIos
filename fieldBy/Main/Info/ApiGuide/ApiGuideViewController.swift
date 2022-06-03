@@ -47,7 +47,7 @@ class ApiGuideViewController: UIViewController {
         indicator.startAnimating()
         
         let manager = LoginManager()
-        manager.logIn(permissions: ["public_profile", "instagram_basic", "pages_show_list"], from: self) { result, error in
+        manager.logIn(permissions: ["public_profile", "instagram_basic", "pages_show_list", "pages_read_engagement"], from: self) { result, error in
             if let error = error {
                 print("Process error: \(error)")
                 return
@@ -60,7 +60,7 @@ class ApiGuideViewController: UIViewController {
                 print("Login Cancelled")
                 return
             }
-            
+                        
             InstagramManager.shared.igLogin(token: result.token!.tokenString) { [unowned self] in
                 indicator.isHidden = true
                 indicator.stopAnimating()

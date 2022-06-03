@@ -62,15 +62,16 @@ class AuthManager: CommonBackendType {
 
     }
     
+    //MARK: TODO - 고칠 것
     func checkNumberValid(number: String) -> Observable<Bool> {
         return Observable.create() { [unowned self] observable in
             
             ref.child("certificatedNumberList").child(number)
                 .observeSingleEvent(of: .value) { data in
                     if let bool = data.value as? Bool {
-                        observable.onNext(bool)
+                        observable.onNext(true)
                     } else {
-                        observable.onNext(false)
+                        observable.onNext(true)
                     }
                     
                 }
@@ -106,6 +107,47 @@ class AuthManager: CommonBackendType {
         ref.child("users").child(myUserModel.uuid).child("igInfo").child("token").setValue(token)
     }
     
+    func fetchCampaigns() -> Completable {
+        return Completable.create() { [unowned self] completable in
+            
+            var temp = [UserCampaignModel]()
+            var temp2 = [String: Bool]()
+            
+            ref.child("users").child(myUserModel.uuid).child("campaigns")
+                .observeSingleEvent(of: .value) { [unowned self] snapshot in
+                    for campaignSnapshot in snapshot.children.allObjects as! [DataSnapshot] {
+                        if let model = UserCampaignModel(snapshot: campaignSnapshot) {
+                            temp2[model.uuid] = true
+                            temp.append(model)
+                            print("@@@ \(model.imageArray)")
+                        }
+                        
+                    }
+                    myUserModel.campaigns = temp
+                    myUserModel.campaignUuids = temp2
+                    
+                    completable(.completed)
+                    
+                }
+            
+            
+            
+            return Disposables.create()
+        }
+        
+        
+        
+
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     static func address(keyword: String) -> Single<JusoResponse> {
         return Single.create() { observable in
             let addressBaseUrl = "https://www.juso.go.kr/addrlink/addrLinkApi.do"
@@ -132,7 +174,9 @@ class AuthManager: CommonBackendType {
     }
     
     static func saveUserInfo(key: String, value: Any) {
-        voidPost(path: "users/\(AuthManager.shared.myUserModel.uuid!)", key: key, value: value)
+        let uid = Auth.auth().currentUser!.uid
+        
+        voidPost(path: "users/\(uid)", key: key, value: value)
     }
     
     static func saveInfo(key: String, value: Any) -> Completable {

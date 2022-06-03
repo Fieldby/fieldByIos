@@ -7,16 +7,29 @@
 
 import FirebaseDatabase
 
-struct UserCampaignModel: Codable {
+class UserCampaignModel: Codable {
     let uuid: String
     var size: String?
     var color: String?
+    var imageArray: [[String]] = [[]]
     
     init?(snapshot: DataSnapshot) {
         let value = snapshot.value as! [String: Any]
         self.uuid = snapshot.key
         self.size = value["size"] as? String
         self.color = value["color"] as? String
+        
+        var temp = [[String]]()
+        
+        if snapshot.childSnapshot(forPath: "images").exists() {
+            
+            for array in snapshot.childSnapshot(forPath: "images").children.allObjects as! [DataSnapshot] {
+                temp.append(array.value as! [String])
+            }
+        }
+
+        self.imageArray = temp
+        
     }
     
     init(uuid: String, size: String?, color: String?) {

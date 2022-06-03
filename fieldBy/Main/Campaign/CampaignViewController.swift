@@ -50,6 +50,7 @@ class CampaignViewController: UIViewController {
         
         barCollectionView.rx.setDelegate(self)
             .disposed(by: rx.disposeBag)
+        
         makeUI()
         bind()
     }
@@ -59,6 +60,13 @@ class CampaignViewController: UIViewController {
         
         viewModel.reload()
         showingIndexSubject.onNext(showingIndex)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        timer?.invalidate()
+        timer = nil
     }
     
     private func makeUI() {
@@ -153,15 +161,15 @@ class CampaignViewController: UIViewController {
     }
 
     private func presentDetailVC(campaignModel: CampaignModel, image: UIImage) {
+        
         let vc = storyboard?.instantiateViewController(withIdentifier: DetailCampaignViewController.storyId) as! DetailCampaignViewController
         vc.campaignModel = campaignModel
-        vc.image = image
         
         let nav = UINavigationController(rootViewController: vc)
         nav.navigationBar.isHidden = true
         nav.modalPresentationStyle = .fullScreen
         self.present(nav, animated: true)
-        
+
     }
     
     private func getComma(price : Int) -> String {
