@@ -11,7 +11,9 @@ import NSObject_Rx
 
 class ProgressViewModel: NSObject {
     
-    let tosShowArray = BehaviorRelay<[(CampaignModel, UserCampaignModel)]>(value: [])
+    let toShowArray = BehaviorRelay<[(CampaignModel, UserCampaignModel)]>(value: [])
+    
+    var showStatus: ((Bool?, CampaignModel) -> ())!
     
     override init() {
         super.init()
@@ -23,6 +25,7 @@ class ProgressViewModel: NSObject {
             var campaignArray = [(CampaignModel, UserCampaignModel)]()
 
             if campaignArray.isEmpty {
+                toShowArray.accept([])
                 completable(.completed)
             }
             
@@ -31,22 +34,15 @@ class ProgressViewModel: NSObject {
                 CampaignManager.shared.fetchByUuid(uuid: campaign.uuid)
                     .subscribe { [unowned self] model in
                         campaignArray.append((model, campaign))
-                        tosShowArray.accept(campaignArray)
+                        toShowArray.accept(campaignArray)
                         
                         if campaignArray.count == AuthManager.shared.myUserModel.campaigns.count {
-                            
-                            
-                            
+
                             AuthManager.shared.fetchCampaigns()
                                 .subscribe {
                                     completable(.completed)
                                 }
                                 .disposed(by: rx.disposeBag)
-
-                            
-                            
-                            
-                            
                             
                         }
                     } onError: { err in
@@ -56,15 +52,11 @@ class ProgressViewModel: NSObject {
                 
             }
             
-            
-            
-            
             return Disposables.create()
         }
 
     }
-    
-    
+
     
     
     

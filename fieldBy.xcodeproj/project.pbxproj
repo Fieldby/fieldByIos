@@ -44,6 +44,8 @@
 		D14A199128338C9700542F2B /* Dictionary+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14A199028338C9700542F2B /* Dictionary+.swift */; };
 		D14A199328338CA400542F2B /* DataSnapShot+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14A199228338CA400542F2B /* DataSnapShot+.swift */; };
 		D15391C928210A4900E12140 /* CommonBackendType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15391C828210A4900E12140 /* CommonBackendType.swift */; };
+		D15D4ADE284CE87000372149 /* CampaignSelectedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15D4ADD284CE87000372149 /* CampaignSelectedViewController.swift */; };
+		D15D4AE0284CE87900372149 /* CampaignUnSelectedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15D4ADF284CE87900372149 /* CampaignUnSelectedViewController.swift */; };
 		D16A5FC4282B82F700A75D9E /* ViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16A5FC3282B82F700A75D9E /* ViewController+.swift */; };
 		D16A5FC6282B9AE200A75D9E /* BarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16A5FC5282B9AE200A75D9E /* BarCell.swift */; };
 		D16EC57D283633EE00076B4C /* GuideCautionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16EC57C283633EE00076B4C /* GuideCautionViewController.swift */; };
@@ -152,6 +154,8 @@
 		D14A199028338C9700542F2B /* Dictionary+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+.swift"; sourceTree = "<group>"; };
 		D14A199228338CA400542F2B /* DataSnapShot+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataSnapShot+.swift"; sourceTree = "<group>"; };
 		D15391C828210A4900E12140 /* CommonBackendType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonBackendType.swift; sourceTree = "<group>"; };
+		D15D4ADD284CE87000372149 /* CampaignSelectedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignSelectedViewController.swift; sourceTree = "<group>"; };
+		D15D4ADF284CE87900372149 /* CampaignUnSelectedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignUnSelectedViewController.swift; sourceTree = "<group>"; };
 		D16A5FC3282B82F700A75D9E /* ViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+.swift"; sourceTree = "<group>"; };
 		D16A5FC5282B9AE200A75D9E /* BarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarCell.swift; sourceTree = "<group>"; };
 		D16EC57C283633EE00076B4C /* GuideCautionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideCautionViewController.swift; sourceTree = "<group>"; };
@@ -454,6 +458,22 @@
 			path = Backend;
 			sourceTree = "<group>";
 		};
+		D15D4ADB284CE84A00372149 /* Selected */ = {
+			isa = PBXGroup;
+			children = (
+				D15D4ADD284CE87000372149 /* CampaignSelectedViewController.swift */,
+			);
+			path = Selected;
+			sourceTree = "<group>";
+		};
+		D15D4ADC284CE84F00372149 /* UnSelected */ = {
+			isa = PBXGroup;
+			children = (
+				D15D4ADF284CE87900372149 /* CampaignUnSelectedViewController.swift */,
+			);
+			path = UnSelected;
+			sourceTree = "<group>";
+		};
 		D16EC579283633C600076B4C /* Start */ = {
 			isa = PBXGroup;
 			children = (
@@ -695,6 +715,8 @@
 		D1EDA1C42834CF850021595E /* Guide */ = {
 			isa = PBXGroup;
 			children = (
+				D15D4ADC284CE84F00372149 /* UnSelected */,
+				D15D4ADB284CE84A00372149 /* Selected */,
 				D17EAA32283E04AF000B8E3C /* Size */,
 				D11376D6283673EF00CFC3D2 /* Final */,
 				D11376D328366A3C00CFC3D2 /* Check */,
@@ -918,6 +940,7 @@
 				D1A29849283F69DA000F7D33 /* Media.swift in Sources */,
 				D1AA5CB7281EA50700279CC8 /* SigninViewController.swift in Sources */,
 				D1AA5CBA281EAEAD00279CC8 /* Color+.swift in Sources */,
+				D15D4ADE284CE87000372149 /* CampaignSelectedViewController.swift in Sources */,
 				D11376D528366A4700CFC3D2 /* GuideCheckViewController.swift in Sources */,
 				D1A99CC928211BAE00E414E4 /* AddressViewController.swift in Sources */,
 				D14A198C28336C2C00542F2B /* FBInfo.swift in Sources */,
@@ -949,6 +972,7 @@
 				D132C12D284094180002785A /* NotiModel.swift in Sources */,
 				D1A29844283F576F000F7D33 /* ApiGuideViewController.swift in Sources */,
 				D14A199328338CA400542F2B /* DataSnapShot+.swift in Sources */,
+				D15D4AE0284CE87900372149 /* CampaignUnSelectedViewController.swift in Sources */,
 				D11376DA2836856200CFC3D2 /* CommonGuideViewController.swift in Sources */,
 				D1121D272830E4A300149263 /* GolfInfoViewModel.swift in Sources */,
 				D1FC0805282D3FF2006ED153 /* DetailCampaignViewModel.swift in Sources */,

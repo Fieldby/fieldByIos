@@ -282,15 +282,18 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backButton" destination="ZUB-Pf-9gs" id="wj8-PQ-TMM"/>
                         <outlet property="colorButton" destination="np0-8I-ZdK" id="2AL-76-G7B"/>
                         <outlet property="colorContainer" destination="2Fx-ZP-YG9" id="ZN1-5A-SrQ"/>
                         <outlet property="colorImage" destination="6jA-9y-NyN" id="y1b-Kv-kgc"/>
+                        <outlet property="colorLabel" destination="YOG-HJ-rHK" id="hFT-La-cda"/>
                         <outlet property="colorTableView" destination="CXY-zZ-8gd" id="7X2-Fv-T7e"/>
                         <outlet property="colorTableViewContainer" destination="PMI-DB-N1T" id="l0P-za-Bsk"/>
                         <outlet property="nextButton" destination="LeG-xE-7pN" id="37t-cO-IcA"/>
                         <outlet property="sizeButton" destination="yMf-1c-BVe" id="6dh-dC-lLS"/>
                         <outlet property="sizeContainer" destination="OTO-SC-8c4" id="EhW-Wc-UDd"/>
                         <outlet property="sizeImage" destination="tCV-sh-5E8" id="aB0-nS-mJU"/>
+                        <outlet property="sizeLabel" destination="5eb-D7-xUn" id="iP0-Hk-gLp"/>
                         <outlet property="sizeTableView" destination="ON2-w1-B2S" id="gxI-GV-eek"/>
                         <outlet property="sizeTableViewContainer" destination="Kad-JE-YPV" id="FSi-cg-v18"/>
                     </connections>

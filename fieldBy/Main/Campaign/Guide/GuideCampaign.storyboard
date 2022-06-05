@@ -1069,6 +1069,13 @@ DM으로 문의해주세요!</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JHU-q9-t1e">
                                 <rect key="frame" x="24" y="632" width="366" height="150"/>
                                 <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MZH-FF-aYw">
+                                        <rect key="frame" x="272" y="-6" width="94" height="28"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="13"/>
+                                        <color key="tintColor" name="MainColor"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="가이드 확인하기 &gt;"/>
+                                    </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="유의사항" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UT4-ee-SDE">
                                         <rect key="frame" x="0.0" y="0.0" width="45" height="16"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="13"/>
@@ -1148,12 +1155,14 @@ DM으로 문의해주세요!</string>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="MZH-FF-aYw" secondAttribute="trailing" id="03j-bz-rXa"/>
                                     <constraint firstItem="wtw-FG-Fca" firstAttribute="leading" secondItem="Yke-FS-bBx" secondAttribute="trailing" constant="8" symbolic="YES" id="08z-ia-RbC"/>
                                     <constraint firstItem="UNs-1G-hZq" firstAttribute="centerX" secondItem="Zgs-pj-bHa" secondAttribute="centerX" id="3F4-pp-wcb"/>
                                     <constraint firstItem="UT4-ee-SDE" firstAttribute="top" secondItem="JHU-q9-t1e" secondAttribute="top" id="71H-Pe-4dc"/>
                                     <constraint firstItem="59X-Lv-hSR" firstAttribute="top" secondItem="Poh-Vz-TdV" secondAttribute="bottom" constant="3" id="94O-x8-OnZ"/>
                                     <constraint firstItem="vWD-y7-qrI" firstAttribute="top" secondItem="59X-Lv-hSR" secondAttribute="bottom" id="9AK-xE-cGL"/>
                                     <constraint firstItem="dm2-o2-RMF" firstAttribute="leading" secondItem="UNs-1G-hZq" secondAttribute="trailing" constant="8" symbolic="YES" id="B7D-Kf-p0r"/>
+                                    <constraint firstItem="MZH-FF-aYw" firstAttribute="centerY" secondItem="UT4-ee-SDE" secondAttribute="centerY" id="DnL-J7-wdi"/>
                                     <constraint firstItem="Plg-SW-cpJ" firstAttribute="leading" secondItem="JHU-q9-t1e" secondAttribute="leading" constant="5" id="H4U-El-YbG"/>
                                     <constraint firstAttribute="height" constant="150" id="MLV-Dk-j88"/>
                                     <constraint firstItem="Yke-FS-bBx" firstAttribute="top" secondItem="UT4-ee-SDE" secondAttribute="bottom" constant="15" id="SFN-NQ-SWm"/>
@@ -1197,27 +1206,33 @@ DM으로 문의해주세요!</string>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="acceptAllArrowButton" destination="rJt-70-5i0" id="cZK-PF-eJM"/>
                         <outlet property="acceptAllButton" destination="8XL-jj-pEp" id="eB0-0V-wUo"/>
                         <outlet property="acceptAllImage" destination="AgI-W1-aRc" id="TRV-SS-dsq"/>
+                        <outlet property="backButton" destination="Itf-e0-hZ9" id="77a-Dm-qyI"/>
                         <outlet property="marketingButton" destination="4Rx-wL-X1h" id="F0N-lZ-wCd"/>
                         <outlet property="marketingImage" destination="oCP-Ff-dTk" id="W8H-Wd-TMb"/>
+                        <outlet property="marketingView" destination="GDn-zK-LDS" id="T27-5q-Mjm"/>
                         <outlet property="messageButton" destination="ajg-oD-htz" id="4O1-SR-TQ1"/>
                         <outlet property="messageImage" destination="YCG-LU-HyC" id="iEM-YO-aEc"/>
+                        <outlet property="messageView" destination="k6w-v2-PcY" id="XhY-G3-XEN"/>
                         <outlet property="nextButton" destination="NnH-ad-AOx" id="wVR-6h-O8n"/>
                         <outlet property="privacyButton" destination="puP-Iv-5P7" id="zP3-TR-zoP"/>
                         <outlet property="privacyImage" destination="753-4H-l4f" id="ydc-CF-kaV"/>
+                        <outlet property="privacyView" destination="V4i-N2-iCD" id="EVP-n3-tch"/>
                         <outlet property="thirdPartyButton" destination="8wt-Mh-wdq" id="OYa-YV-fUe"/>
                         <outlet property="thirdPartyImage" destination="Rko-hM-cas" id="HHU-UY-ops"/>
+                        <outlet property="thirdPartyView" destination="9Hz-ye-2Hy" id="m0b-gO-Oee"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kLy-V9-wCt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="138" y="792"/>
         </scene>
-        <!--View Controller-->
+        <!--Campaign Selected View Controller-->
         <scene sceneID="0Kz-fP-H7b">
             <objects>
-                <viewController id="Obf-WW-icV" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="campaignselectedVC" id="Obf-WW-icV" customClass="CampaignSelectedViewController" customModule="fieldBy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MM0-cw-1RP">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1279,13 +1294,30 @@ DM으로 문의해주세요!</string>
                                     <constraint firstAttribute="bottom" secondItem="Aea-lT-ibe" secondAttribute="bottom" id="qn3-3D-dpN"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L9w-bg-mNL">
+                                <rect key="frame" x="10" y="38" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="4xl-XP-HtZ"/>
+                                    <constraint firstAttribute="height" constant="50" id="z5G-Ae-dJz"/>
+                                </constraints>
+                                <color key="tintColor" name="Black"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="chevron.left" catalog="system"/>
+                                <connections>
+                                    <action selector="back:" destination="h1g-hL-P8s" eventType="touchUpInside" id="bM4-Le-rqb"/>
+                                    <action selector="pop:" destination="P6p-Hb-OEc" eventType="touchUpInside" id="M4b-qR-NEI"/>
+                                    <action selector="pop:" destination="Obf-WW-icV" eventType="touchUpInside" id="xzN-KV-sJY"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="78T-YG-xab"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="L9w-bg-mNL" firstAttribute="leading" secondItem="78T-YG-xab" secondAttribute="leading" constant="10" id="4V7-1t-haf"/>
                             <constraint firstItem="xqO-6W-b9R" firstAttribute="top" secondItem="EE0-Um-jXL" secondAttribute="bottom" constant="2" id="8V1-n3-y4W"/>
                             <constraint firstItem="L46-W8-mfB" firstAttribute="centerY" secondItem="78T-YG-xab" secondAttribute="centerY" constant="-100" id="ARm-hx-8aY"/>
                             <constraint firstItem="EE0-Um-jXL" firstAttribute="top" secondItem="L46-W8-mfB" secondAttribute="bottom" constant="23" id="GUx-D0-RdN"/>
+                            <constraint firstItem="L9w-bg-mNL" firstAttribute="top" secondItem="78T-YG-xab" secondAttribute="top" constant="-6" id="HxN-5z-6L5"/>
                             <constraint firstItem="EE0-Um-jXL" firstAttribute="centerX" secondItem="MM0-cw-1RP" secondAttribute="centerX" id="Po1-7y-all"/>
                             <constraint firstAttribute="trailing" secondItem="Gsd-Tp-bIm" secondAttribute="trailing" id="Y0L-PC-1sx"/>
                             <constraint firstItem="Gsd-Tp-bIm" firstAttribute="leading" secondItem="MM0-cw-1RP" secondAttribute="leading" id="cuF-W2-Odm"/>
@@ -1294,15 +1326,19 @@ DM으로 문의해주세요!</string>
                             <constraint firstItem="xqO-6W-b9R" firstAttribute="centerX" secondItem="MM0-cw-1RP" secondAttribute="centerX" id="u54-nN-HPY"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="guideButton" destination="TMq-pV-FoW" id="ZIt-A8-PPg"/>
+                        <outlet property="mainLabel" destination="EE0-Um-jXL" id="egd-UY-G1O"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lk7-FD-agU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="110" y="1455"/>
         </scene>
-        <!--View Controller-->
+        <!--Campaign Un Selected View Controller-->
         <scene sceneID="Cwt-aC-k2V">
             <objects>
-                <viewController id="yde-XA-s3e" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="campaignunselectedVC" id="yde-XA-s3e" customClass="CampaignUnSelectedViewController" customModule="fieldBy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="woD-m5-8Jp">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1364,6 +1400,22 @@ DM으로 문의해주세요!</string>
                                 <color key="textColor" name="Black"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8cU-iU-Sro">
+                                <rect key="frame" x="10" y="38" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="BzD-YR-1G4"/>
+                                    <constraint firstAttribute="width" constant="50" id="Wvk-Eu-TaF"/>
+                                </constraints>
+                                <color key="tintColor" name="Black"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="chevron.left" catalog="system"/>
+                                <connections>
+                                    <action selector="back:" destination="h1g-hL-P8s" eventType="touchUpInside" id="7Ya-ch-wjz"/>
+                                    <action selector="pop:" destination="P6p-Hb-OEc" eventType="touchUpInside" id="1uW-lI-QyK"/>
+                                    <action selector="pop:" destination="yde-XA-s3e" eventType="touchUpInside" id="7qc-fo-BxE"/>
+                                    <action selector="pop:" destination="Obf-WW-icV" eventType="touchUpInside" id="KkN-bQ-xDG"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="xyw-tx-ndU"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1371,6 +1423,7 @@ DM으로 문의해주세요!</string>
                             <constraint firstItem="LXs-oi-DW3" firstAttribute="centerX" secondItem="xyw-tx-ndU" secondAttribute="centerX" id="5nN-ud-EWZ"/>
                             <constraint firstItem="LXs-oi-DW3" firstAttribute="top" secondItem="tbs-8c-tz1" secondAttribute="bottom" constant="2" id="Bvh-xt-WoG"/>
                             <constraint firstAttribute="trailing" secondItem="YTy-N5-Dit" secondAttribute="trailing" id="GML-xi-U8y"/>
+                            <constraint firstItem="8cU-iU-Sro" firstAttribute="leading" secondItem="xyw-tx-ndU" secondAttribute="leading" constant="10" id="P7T-jH-Qiz"/>
                             <constraint firstItem="tbs-8c-tz1" firstAttribute="centerX" secondItem="xyw-tx-ndU" secondAttribute="centerX" id="PDP-X4-xZv"/>
                             <constraint firstItem="smb-bC-yWv" firstAttribute="centerY" secondItem="xyw-tx-ndU" secondAttribute="centerY" constant="-100" id="Sfd-hf-RWf"/>
                             <constraint firstItem="YTy-N5-Dit" firstAttribute="leading" secondItem="woD-m5-8Jp" secondAttribute="leading" id="cgJ-wU-cUW"/>
@@ -1378,8 +1431,12 @@ DM으로 문의해주세요!</string>
                             <constraint firstAttribute="bottom" secondItem="YTy-N5-Dit" secondAttribute="bottom" id="mIu-U7-nCL"/>
                             <constraint firstItem="tbs-8c-tz1" firstAttribute="centerX" secondItem="woD-m5-8Jp" secondAttribute="centerX" id="sM6-k5-8eJ"/>
                             <constraint firstItem="smb-bC-yWv" firstAttribute="centerX" secondItem="woD-m5-8Jp" secondAttribute="centerX" id="sMj-Lo-Nzh"/>
+                            <constraint firstItem="8cU-iU-Sro" firstAttribute="top" secondItem="xyw-tx-ndU" secondAttribute="top" constant="-6" id="wpv-VA-7Ed"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="popButton" destination="VSo-5J-j2r" id="oNH-y1-ifk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U9Z-yV-PsY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1520,10 +1577,25 @@ DM으로 문의해주세요!</string>
                                     <constraint firstAttribute="bottom" secondItem="tMC-0p-wAq" secondAttribute="bottom" id="sCd-hs-R8x"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="32h-hM-Ldo">
+                                <rect key="frame" x="10" y="38" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="6Zd-4m-adK"/>
+                                    <constraint firstAttribute="height" constant="50" id="cI6-P5-lcz"/>
+                                </constraints>
+                                <color key="tintColor" name="Black"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="chevron.left" catalog="system"/>
+                                <connections>
+                                    <action selector="back:" destination="h1g-hL-P8s" eventType="touchUpInside" id="MAO-M6-nOM"/>
+                                    <action selector="pop:" destination="P6p-Hb-OEc" eventType="touchUpInside" id="APy-DG-fQJ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="R2S-tM-l6k"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="32h-hM-Ldo" firstAttribute="top" secondItem="R2S-tM-l6k" secondAttribute="top" constant="-6" id="5XC-UJ-YuQ"/>
                             <constraint firstItem="YvU-kj-6GI" firstAttribute="leading" secondItem="kjx-EO-Plb" secondAttribute="leading" id="6yj-yZ-hal"/>
                             <constraint firstItem="YF9-CS-vsS" firstAttribute="centerX" secondItem="R2S-tM-l6k" secondAttribute="centerX" id="A9Y-fH-xhp"/>
                             <constraint firstItem="1OC-e9-eg4" firstAttribute="top" secondItem="YF9-CS-vsS" secondAttribute="bottom" constant="5" id="AgX-PG-oAh"/>
@@ -1533,11 +1605,13 @@ DM으로 문의해주세요!</string>
                             <constraint firstItem="Vto-T9-RhW" firstAttribute="centerY" secondItem="R2S-tM-l6k" secondAttribute="centerY" constant="-100" id="aLh-dX-fjH"/>
                             <constraint firstItem="2Og-F7-5eD" firstAttribute="centerX" secondItem="R2S-tM-l6k" secondAttribute="centerX" id="fkS-sP-2VC"/>
                             <constraint firstItem="Vto-T9-RhW" firstAttribute="centerX" secondItem="R2S-tM-l6k" secondAttribute="centerX" id="lal-H4-Uuu"/>
+                            <constraint firstItem="32h-hM-Ldo" firstAttribute="leading" secondItem="R2S-tM-l6k" secondAttribute="leading" constant="10" id="li8-N9-7vW"/>
                             <constraint firstAttribute="bottom" secondItem="YvU-kj-6GI" secondAttribute="bottom" id="qXL-Rb-aYs"/>
                             <constraint firstItem="YF9-CS-vsS" firstAttribute="top" secondItem="2Og-F7-5eD" secondAttribute="bottom" constant="10" id="qn5-bf-pis"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backButton" destination="32h-hM-Ldo" id="uFW-Mx-FWD"/>
                         <outlet property="dismissButton" destination="k2j-74-Ay5" id="yya-Vj-FCL"/>
                         <outlet property="dueDateLabel" destination="G75-61-MDk" id="qo4-aa-r1h"/>
                         <outlet property="usernameLabel" destination="ugw-Pt-tH3" id="aSI-z9-w3j"/>

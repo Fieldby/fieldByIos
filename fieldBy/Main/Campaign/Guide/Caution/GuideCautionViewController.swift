@@ -26,9 +26,7 @@ class GuideCautionViewController: CommonGuideViewController {
     
 
     @IBAction func next(_ sender: Any) {
-        let vc = storyboard?.instantiateViewController(withIdentifier: CampaignAddressViewController.storyId) as! CampaignAddressViewController
-        vc.campaignModel = campaignModel
-        navigationController?.pushViewController(vc, animated: true)
+
     }
     
     @IBAction func back(_ sender: Any) {

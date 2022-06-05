@@ -169,6 +169,23 @@ class CampaignManager: CommonBackendType {
                     completable(.completed)
                 }
             }
+            
+            return Disposables.create()
+        }
+    }
+    
+    func isSelected(uuid: String) -> Single<Bool?> {
+        return Single.create() { [unowned self] observable in
+            
+            ref.child("users").child(AuthManager.shared.myUserModel.uuid).child("campaigns").child(uuid).child("isSelected")
+                .observeSingleEvent(of: .value) { dataSnapShot in
+                    let value = dataSnapShot.value as? Bool
+                    
+                    observable(.success(value))
+                }
+            
+            
+            
             return Disposables.create()
         }
     }

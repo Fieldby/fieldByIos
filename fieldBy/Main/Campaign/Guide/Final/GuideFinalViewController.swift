@@ -15,10 +15,13 @@ class GuideFinalViewController: CommonGuideViewController {
     @IBOutlet weak var dismissButton: UIButton!
     @IBOutlet weak var viewMyCampaignsButton: UIButton!
     
+    @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var dueDateLabel: UILabel!
     
     var size: String?
     var color: String?
+    
+    var isAppling = true
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,16 +40,35 @@ class GuideFinalViewController: CommonGuideViewController {
         
         dueDateLabel.text = "\(campaignModel.selectionDate.month)월 \(campaignModel.selectionDate.day)일"
         
-        CampaignManager.shared.save(uuid: campaignModel.uuid, size: size, color: color)
-        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        if isAppling {
+            CampaignManager.shared.save(uuid: campaignModel.uuid, size: size, color: color)
+            navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+            backButton.isHidden = true
+        } else {
+            backButton.isHidden = false
+        }
+        
+
     }
     
     @IBAction func dismiss(_ sender: Any) {
-        self.navigationController?.dismiss(animated: true)
+        if self.tabBarController != nil {
+            self.navigationController?.popViewController(animated: true)
+        } else {
+            self.navigationController?.dismiss(animated: true)
+        }
     }
     
     @IBAction func viewOthers(_ sender: Any) {
-        self.navigationController?.dismiss(animated: true)
+        if self.tabBarController != nil {
+            self.navigationController?.popViewController(animated: true)
+        } else {
+            self.navigationController?.dismiss(animated: true)
+        }
+        
     }
     
+    @IBAction func pop(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
 }

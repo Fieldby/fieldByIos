@@ -16,6 +16,10 @@ extension UIColor {
     class var fieldByGray: UIColor {
         return UIColor(named: "LightGray")!
     }
+    
+    class var unabled: UIColor {
+        return UIColor(named: "unabled")!
+    }
 }
 
 extension UIColor {

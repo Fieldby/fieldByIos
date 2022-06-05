@@ -26,4 +26,10 @@ class DetailCampaignViewModel: NSObject {
             .disposed(by: rx.disposeBag)
 
     }
+    
+    func helpAction() {
+        if let url = URL(string: "http://pf.kakao.com/_xdxeQzb") {
+            UIApplication.shared.open(url)
+        }
+    }
 }

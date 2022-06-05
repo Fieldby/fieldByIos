@@ -16,7 +16,6 @@ class DetailCampaignViewController: UIViewController {
     static let storyId = "detailcampaignVC"
     
     @IBOutlet weak var backButton: UIButton!
-    @IBOutlet weak var mainImageView: UIImageView!
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -54,6 +53,7 @@ class DetailCampaignViewController: UIViewController {
     @IBOutlet weak var bottomTitleLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     
+    @IBOutlet weak var helpButton: UIButton!
     @IBOutlet weak var applyButton: UIButton!
     @IBOutlet weak var bottomView: UIView!
     
@@ -215,21 +215,19 @@ class DetailCampaignViewController: UIViewController {
             }
             .disposed(by: rx.disposeBag)
         
-        
+        helpButton.rx.tap
+            .subscribe(onNext: { [unowned self] in
+                viewModel.helpAction()
+            })
+            .disposed(by: rx.disposeBag)
     }
     
     private func pushGuideVC() {
-        CampaignManager.shared.guideImages(campaignModel: campaignModel)
-            .subscribe(onNext: { [unowned self] guideImages in
-                
-                let vc = UIStoryboard(name: "GuideCampaign", bundle: nil).instantiateViewController(withIdentifier: "guidecampaignVC") as! GuideCampaignViewController
-                vc.campaignModel = campaignModel
-                vc.guideImages = guideImages
-                self.navigationController?.pushViewController(vc, animated: true)
-                indicator.stopAnimating()
-                indicator.isHidden = true
-            })
-            .disposed(by: rx.disposeBag)
+        let vc = UIStoryboard(name: "GuideCampaign", bundle: nil).instantiateViewController(withIdentifier: "guidecheckVC") as! GuideCheckViewController
+        vc.campaignModel = campaignModel
+        self.navigationController?.pushViewController(vc, animated: true)
+        indicator.stopAnimating()
+        indicator.isHidden = true
     }
     
     private func getComma(price : Int) -> String {

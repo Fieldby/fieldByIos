@@ -14,16 +14,19 @@ class GuideSizeViewController: CommonGuideViewController {
 
     static let storyId = "guidesizeVC"
     
+    @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var sizeContainer: UIView!
     
     @IBOutlet weak var sizeTableViewContainer: UIView!
     @IBOutlet weak var sizeTableView: UITableView!
     @IBOutlet weak var sizeImage: UIImageView!
+    @IBOutlet weak var sizeLabel: UILabel!
     
     @IBOutlet weak var colorContainer: UIView!
     @IBOutlet weak var colorTableViewContainer: UIView!
     @IBOutlet weak var colorTableView: UITableView!
     @IBOutlet weak var colorImage: UIImageView!
+    @IBOutlet weak var colorLabel: UILabel!
     
     @IBOutlet weak var sizeButton: UIButton!
     @IBOutlet weak var colorButton: UIButton!
@@ -49,6 +52,8 @@ class GuideSizeViewController: CommonGuideViewController {
         colorContainer.layer.borderWidth = 1
         
         nextButton.layer.cornerRadius = 13
+        nextButton.isEnabled = false
+        nextButton.backgroundColor = .unabled
         
         sizeTableViewContainer.isHidden = true
         colorTableViewContainer.isHidden = true
@@ -58,6 +63,12 @@ class GuideSizeViewController: CommonGuideViewController {
             .disposed(by: rx.disposeBag)
         
         colorTableView.rx.setDelegate(self)
+            .disposed(by: rx.disposeBag)
+        
+        backButton.rx.tap
+            .subscribe(onNext: { [unowned self] in
+                navigationController?.popViewController(animated: true)
+            })
             .disposed(by: rx.disposeBag)
         
         Observable.just(campaignModel.itemModel.option!.size)
@@ -105,7 +116,10 @@ class GuideSizeViewController: CommonGuideViewController {
         sizeTableView.rx.itemSelected
             .subscribe(onNext: { [unowned self] idx in
                 size = campaignModel.itemModel.option!.size[idx.row]
-                
+                if color != nil {
+                    nextButton.isEnabled = true
+                    nextButton.backgroundColor = .main
+                }
                 UIView.animate(withDuration: 0.2) { [unowned self] in
                     isColorOpened = true
                     colorTableViewContainer.isHidden = false
@@ -116,6 +130,8 @@ class GuideSizeViewController: CommonGuideViewController {
                     sizeImage.image = UIImage(systemName: "chevron.down")
                     
                     colorImage.image = UIImage(systemName: "chevron.up")
+                    
+                    sizeLabel.text = "사이즈: \(size!)"
                 }
                 
             })
@@ -125,20 +141,21 @@ class GuideSizeViewController: CommonGuideViewController {
         colorTableView.rx.itemSelected
             .subscribe(onNext: { [unowned self] idx in
                 color = campaignModel.itemModel.option!.color[idx.row]
+                if size != nil {
+                    nextButton.isEnabled = true
+                    nextButton.backgroundColor = .main
+                }
                 
                 UIView.animate(withDuration: 0.2) { [unowned self] in
                     isColorOpened = false
                     colorTableViewContainer.isHidden = true
                     
                     colorImage.image = UIImage(systemName: "chevron.down")
+                    
+                    colorLabel.text = "색상: \(color!)"
                 }
             })
             .disposed(by: rx.disposeBag)
-        
-        
-        
-        
-        
         
         colorButton.rx.tap
             .throttle(0.5, latest: false, scheduler: MainScheduler.instance)

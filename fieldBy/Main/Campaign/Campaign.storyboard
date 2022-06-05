@@ -721,7 +721,7 @@ DM으로 문의해주세요!</string>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="16"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="가이드 확인하고 신청하기">
+                                        <state key="normal" title="제안하기">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                     </button>
@@ -784,6 +784,7 @@ DM으로 문의해주세요!</string>
                         <outlet property="brandNameLabel" destination="8G2-hf-3Oc" id="WMb-bi-IaP"/>
                         <outlet property="collectionView" destination="tS8-od-o6L" id="FwU-ep-a5J"/>
                         <outlet property="dateContainer" destination="CoS-e1-9N0" id="Hpg-PG-gDD"/>
+                        <outlet property="helpButton" destination="aWl-h8-Ues" id="2I4-ia-uHg"/>
                         <outlet property="indicator" destination="hT5-3k-MqM" id="k83-Uk-pRz"/>
                         <outlet property="infoContainer" destination="dV4-29-Q8L" id="UEv-9B-Bf9"/>
                         <outlet property="isNewContainer" destination="iL2-nm-tIg" id="zC8-SP-ZPL"/>

@@ -72,21 +72,21 @@ class ProgressViewController: UIViewController {
     private func bind() {
 
         
-        viewModel.tosShowArray
+        viewModel.toShowArray
             .map { array -> String in
                 return "\(array.filter { $0.0.status == .applied }.count)건"
             }
             .bind(to: appliedLabel.rx.text)
             .disposed(by: rx.disposeBag)
         
-        viewModel.tosShowArray
+        viewModel.toShowArray
             .map { array -> String in
                 return "\(array.filter { $0.0.status == .done }.count)건"
             }
             .bind(to: doneLabel.rx.text)
             .disposed(by: rx.disposeBag)
         
-        viewModel.tosShowArray
+        viewModel.toShowArray
             .map { array -> String in
                 return "\(array.filter { $0.0.status != .done && $0.0.status != .applied }.count)건"
             }
@@ -94,7 +94,7 @@ class ProgressViewController: UIViewController {
             .disposed(by: rx.disposeBag)
 
         
-        viewModel.tosShowArray
+        viewModel.toShowArray
             .bind(to: tableView.rx.items(cellIdentifier: ProgressMainCell.reuseId, cellType: ProgressMainCell.self)) { [unowned self] idx, model, cell in
                 
                 cell.buttonHandler = { [unowned self] in
@@ -112,6 +112,38 @@ class ProgressViewController: UIViewController {
         tableView.refreshControl = refreshControl
         tableView.refreshControl?.addTarget(self, action: #selector(pullToRefresh(_:)), for: .valueChanged)
         
+        tableView.rx.modelSelected((CampaignModel, UserCampaignModel).self)
+            .subscribe(onNext: { [unowned self] model in
+                if model.0.status == .applied {
+                    indicator.isHidden = false
+                    indicator.startAnimating()
+                    
+                    CampaignManager.shared.isSelected(uuid: model.0.uuid)
+                        .subscribe { [unowned self] bool in
+                            
+                            viewModel.showStatus(bool, model.0)
+                            indicator.isHidden = true
+                            indicator.stopAnimating()
+                        } onError: { [unowned self] _ in
+                            indicator.isHidden = true
+                            indicator.stopAnimating()
+                        }
+                        .disposed(by: rx.disposeBag)
+                }
+            })
+            .disposed(by: rx.disposeBag)
+        
+        viewModel.showStatus = { [unowned self] bool, model in
+            guard let bool = bool else {
+                pushGuideFinalVC(model: model)
+                return
+            }
+            
+            bool ? pushSelectedVC() : pushUnselectedVC()
+            
+        }
+        
+        
     }
 
     @objc func pullToRefresh(_ sender: Any) {
@@ -125,5 +157,22 @@ class ProgressViewController: UIViewController {
             }
             .disposed(by: rx.disposeBag)
 
+    }
+    
+    func pushGuideFinalVC(model: CampaignModel) {
+        let vc = UIStoryboard(name: "GuideCampaign", bundle: nil).instantiateViewController(withIdentifier: "guidefinalVC") as! GuideFinalViewController
+        vc.campaignModel = model
+        vc.isAppling = false
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func pushSelectedVC() {
+        let vc = UIStoryboard(name: "GuideCampaign", bundle: nil).instantiateViewController(withIdentifier: CampaignSelectedViewController.storyId) as! CampaignSelectedViewController
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func pushUnselectedVC() {
+        let vc = UIStoryboard(name: "GuideCampaign", bundle: nil).instantiateViewController(withIdentifier: CampaignUnSelectedViewController.storyId) as! CampaignUnSelectedViewController
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
