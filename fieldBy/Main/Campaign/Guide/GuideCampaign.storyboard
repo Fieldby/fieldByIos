@@ -1309,6 +1309,40 @@ DM으로 문의해주세요!</string>
                                     <action selector="pop:" destination="Obf-WW-icV" eventType="touchUpInside" id="xzN-KV-sJY"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uD2-Gw-Afv">
+                                <rect key="frame" x="20" y="471" width="374" height="56"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="축하합니다 @bmbm_mee님" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jcd-hD-fo6">
+                                        <rect key="frame" x="60" y="10" width="172" height="18"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="15"/>
+                                        <color key="textColor" name="Black"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XVT-6d-4rg">
+                                        <rect key="frame" x="10" y="8" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="O9T-m0-0Vm"/>
+                                            <constraint firstAttribute="height" constant="40" id="mmD-zN-A64"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="제안이 성사되었습니다." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lm8-P9-5na">
+                                        <rect key="frame" x="60" y="30" width="119" height="16"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="13"/>
+                                        <color key="textColor" name="Black"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="jcd-hD-fo6" firstAttribute="top" secondItem="uD2-Gw-Afv" secondAttribute="top" constant="10" id="CRQ-nk-tLN"/>
+                                    <constraint firstAttribute="height" constant="56" id="EBg-ZX-q3s"/>
+                                    <constraint firstItem="XVT-6d-4rg" firstAttribute="centerY" secondItem="uD2-Gw-Afv" secondAttribute="centerY" id="KgY-VK-2Fv"/>
+                                    <constraint firstAttribute="bottom" secondItem="Lm8-P9-5na" secondAttribute="bottom" constant="10" id="Omt-PR-yir"/>
+                                    <constraint firstItem="jcd-hD-fo6" firstAttribute="leading" secondItem="XVT-6d-4rg" secondAttribute="trailing" constant="10" id="SdP-hb-JWA"/>
+                                    <constraint firstItem="XVT-6d-4rg" firstAttribute="leading" secondItem="uD2-Gw-Afv" secondAttribute="leading" constant="10" id="dBi-7C-I3f"/>
+                                    <constraint firstItem="Lm8-P9-5na" firstAttribute="leading" secondItem="XVT-6d-4rg" secondAttribute="trailing" constant="10" id="yCU-uC-GLe"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="78T-YG-xab"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1316,18 +1350,25 @@ DM으로 문의해주세요!</string>
                             <constraint firstItem="L9w-bg-mNL" firstAttribute="leading" secondItem="78T-YG-xab" secondAttribute="leading" constant="10" id="4V7-1t-haf"/>
                             <constraint firstItem="xqO-6W-b9R" firstAttribute="top" secondItem="EE0-Um-jXL" secondAttribute="bottom" constant="2" id="8V1-n3-y4W"/>
                             <constraint firstItem="L46-W8-mfB" firstAttribute="centerY" secondItem="78T-YG-xab" secondAttribute="centerY" constant="-100" id="ARm-hx-8aY"/>
+                            <constraint firstItem="uD2-Gw-Afv" firstAttribute="leading" secondItem="78T-YG-xab" secondAttribute="leading" constant="20" id="G9o-3u-bnD"/>
                             <constraint firstItem="EE0-Um-jXL" firstAttribute="top" secondItem="L46-W8-mfB" secondAttribute="bottom" constant="23" id="GUx-D0-RdN"/>
                             <constraint firstItem="L9w-bg-mNL" firstAttribute="top" secondItem="78T-YG-xab" secondAttribute="top" constant="-6" id="HxN-5z-6L5"/>
                             <constraint firstItem="EE0-Um-jXL" firstAttribute="centerX" secondItem="MM0-cw-1RP" secondAttribute="centerX" id="Po1-7y-all"/>
+                            <constraint firstItem="uD2-Gw-Afv" firstAttribute="centerX" secondItem="78T-YG-xab" secondAttribute="centerX" id="WWn-8C-lJ1"/>
                             <constraint firstAttribute="trailing" secondItem="Gsd-Tp-bIm" secondAttribute="trailing" id="Y0L-PC-1sx"/>
                             <constraint firstItem="Gsd-Tp-bIm" firstAttribute="leading" secondItem="MM0-cw-1RP" secondAttribute="leading" id="cuF-W2-Odm"/>
                             <constraint firstItem="L46-W8-mfB" firstAttribute="centerX" secondItem="MM0-cw-1RP" secondAttribute="centerX" id="cud-21-AeL"/>
                             <constraint firstAttribute="bottom" secondItem="Gsd-Tp-bIm" secondAttribute="bottom" id="drN-Xu-aEz"/>
                             <constraint firstItem="xqO-6W-b9R" firstAttribute="centerX" secondItem="MM0-cw-1RP" secondAttribute="centerX" id="u54-nN-HPY"/>
+                            <constraint firstItem="uD2-Gw-Afv" firstAttribute="top" secondItem="xqO-6W-b9R" secondAttribute="bottom" constant="26" id="wrg-Ms-SEo"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="brandNameLabel" destination="jcd-hD-fo6" id="bm2-gH-eLQ"/>
+                        <outlet property="campaignImageView" destination="XVT-6d-4rg" id="pST-h7-7z5"/>
+                        <outlet property="container" destination="uD2-Gw-Afv" id="Ha9-1v-Egp"/>
                         <outlet property="guideButton" destination="TMq-pV-FoW" id="ZIt-A8-PPg"/>
+                        <outlet property="itemNameLabel" destination="Lm8-P9-5na" id="aMr-Zd-YOo"/>
                         <outlet property="mainLabel" destination="EE0-Um-jXL" id="egd-UY-G1O"/>
                     </connections>
                 </viewController>

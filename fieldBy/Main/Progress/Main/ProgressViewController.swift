@@ -139,7 +139,7 @@ class ProgressViewController: UIViewController {
                 return
             }
             
-            bool ? pushSelectedVC() : pushUnselectedVC()
+            bool ? pushSelectedVC(model: model) : pushUnselectedVC()
             
         }
         
@@ -166,8 +166,9 @@ class ProgressViewController: UIViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    func pushSelectedVC() {
+    func pushSelectedVC(model: CampaignModel) {
         let vc = UIStoryboard(name: "GuideCampaign", bundle: nil).instantiateViewController(withIdentifier: CampaignSelectedViewController.storyId) as! CampaignSelectedViewController
+        vc.campaignModel = model
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
