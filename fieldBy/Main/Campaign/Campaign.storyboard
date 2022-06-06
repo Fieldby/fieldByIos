@@ -89,24 +89,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3OD-R3-B4o">
                                 <rect key="frame" x="42" y="612" width="330" height="169"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lJZ-um-3uq">
-                                        <rect key="frame" x="90" y="-15" width="150" height="29"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Avh-hN-BhA">
-                                                <rect key="frame" x="58" y="5.5" width="34" height="18"/>
-                                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="15"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" name="Red"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="150" id="JWX-5r-tOj"/>
-                                            <constraint firstAttribute="height" constant="29" id="LqY-LK-CF0"/>
-                                            <constraint firstItem="Avh-hN-BhA" firstAttribute="centerY" secondItem="lJZ-um-3uq" secondAttribute="centerY" id="P1v-Xa-6Yn"/>
-                                            <constraint firstItem="Avh-hN-BhA" firstAttribute="centerX" secondItem="lJZ-um-3uq" secondAttribute="centerX" id="r04-fh-MZK"/>
-                                        </constraints>
-                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3ZY-yT-GRe">
                                         <rect key="frame" x="263" y="20.5" width="47" height="19"/>
                                         <subviews>
@@ -191,9 +173,7 @@
                                     <constraint firstAttribute="bottom" secondItem="2GG-dx-LFB" secondAttribute="bottom" constant="11" id="hVS-GV-Cgz"/>
                                     <constraint firstItem="2GG-dx-LFB" firstAttribute="centerX" secondItem="3OD-R3-B4o" secondAttribute="centerX" id="lbk-iT-7b2"/>
                                     <constraint firstItem="2GG-dx-LFB" firstAttribute="top" secondItem="fb1-wG-dL1" secondAttribute="bottom" constant="13" id="qFm-qm-9mZ"/>
-                                    <constraint firstItem="lJZ-um-3uq" firstAttribute="top" secondItem="3OD-R3-B4o" secondAttribute="top" constant="-15" id="rxd-Ie-6yt"/>
                                     <constraint firstItem="fb1-wG-dL1" firstAttribute="centerX" secondItem="3OD-R3-B4o" secondAttribute="centerX" id="yN1-sw-KMt"/>
-                                    <constraint firstItem="lJZ-um-3uq" firstAttribute="centerX" secondItem="3OD-R3-B4o" secondAttribute="centerX" id="z8G-7B-463"/>
                                 </constraints>
                             </view>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="l4S-fa-h2X">
@@ -235,8 +215,6 @@
                         <outlet property="missionButton" destination="2GG-dx-LFB" id="79r-HZ-fnf"/>
                         <outlet property="pagerView" destination="xrk-iP-4gX" id="b2s-d9-5Uq"/>
                         <outlet property="priceLabel" destination="S5m-eO-ptD" id="Cid-iN-NuY"/>
-                        <outlet property="timerLabel" destination="Avh-hN-BhA" id="vOd-PQ-5aa"/>
-                        <outlet property="timerView" destination="lJZ-um-3uq" id="yEF-se-Ld1"/>
                         <outlet property="titleLabel" destination="WQf-Jy-VGw" id="1dS-j6-S61"/>
                         <outlet property="topView" destination="afb-Zs-kxQ" id="LIX-QP-zSu"/>
                         <outlet property="viewModel" destination="2b4-E8-m05" id="JtD-6A-sz5"/>
@@ -619,12 +597,48 @@
                                                                     <constraint firstItem="hyr-a9-74X" firstAttribute="leading" secondItem="7wj-xz-c7l" secondAttribute="trailing" constant="3" id="uk2-1H-Skf"/>
                                                                 </constraints>
                                                             </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AEo-Wc-zRC">
+                                                                <rect key="frame" x="56.5" y="17.5" width="271" height="14.5"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="제안해주셔서 감사합니다! 제안 확정일은 " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vTF-m5-XCU">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="192.5" height="14.5"/>
+                                                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="12"/>
+                                                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5월 15일 " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aho-KI-Beb">
+                                                                        <rect key="frame" x="192.5" y="0.0" width="44" height="14.5"/>
+                                                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="12"/>
+                                                                        <color key="textColor" name="MainColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="입니다!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XuK-0u-Gsx">
+                                                                        <rect key="frame" x="236.5" y="0.0" width="34.5" height="14.5"/>
+                                                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="12"/>
+                                                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                <constraints>
+                                                                    <constraint firstItem="vTF-m5-XCU" firstAttribute="top" secondItem="AEo-Wc-zRC" secondAttribute="top" id="9yo-n0-rNS"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="vTF-m5-XCU" secondAttribute="bottom" id="Gx3-fD-E6O"/>
+                                                                    <constraint firstItem="Aho-KI-Beb" firstAttribute="leading" secondItem="vTF-m5-XCU" secondAttribute="trailing" id="JGX-v1-e6p"/>
+                                                                    <constraint firstItem="XuK-0u-Gsx" firstAttribute="leading" secondItem="Aho-KI-Beb" secondAttribute="trailing" id="P1y-d7-7rC"/>
+                                                                    <constraint firstItem="XuK-0u-Gsx" firstAttribute="centerY" secondItem="vTF-m5-XCU" secondAttribute="centerY" id="awr-wA-Fzn"/>
+                                                                    <constraint firstItem="Aho-KI-Beb" firstAttribute="centerY" secondItem="vTF-m5-XCU" secondAttribute="centerY" id="hBg-Wr-ACz"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="XuK-0u-Gsx" secondAttribute="trailing" id="lht-kf-Sz8"/>
+                                                                    <constraint firstItem="vTF-m5-XCU" firstAttribute="leading" secondItem="AEo-Wc-zRC" secondAttribute="leading" id="tHD-En-UUg"/>
+                                                                </constraints>
+                                                            </view>
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstItem="BxV-EF-9p2" firstAttribute="centerY" secondItem="dV4-29-Q8L" secondAttribute="centerY" id="A9m-XC-Id4"/>
+                                                            <constraint firstItem="AEo-Wc-zRC" firstAttribute="centerY" secondItem="dV4-29-Q8L" secondAttribute="centerY" id="G5O-o1-b17"/>
                                                             <constraint firstAttribute="height" constant="49" id="KVr-2n-RrL"/>
                                                             <constraint firstItem="BxV-EF-9p2" firstAttribute="centerX" secondItem="dV4-29-Q8L" secondAttribute="centerX" id="fQK-lt-Adi"/>
+                                                            <constraint firstItem="AEo-Wc-zRC" firstAttribute="centerX" secondItem="dV4-29-Q8L" secondAttribute="centerX" id="iE4-w4-81H"/>
                                                         </constraints>
                                                     </view>
                                                 </subviews>
@@ -637,7 +651,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zjo-LT-COr">
-                                                <rect key="frame" x="0.0" y="833" width="414" height="167"/>
+                                                <rect key="frame" x="0.0" y="833" width="414" height="100"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bNM-YH-VTk">
                                                         <rect key="frame" x="27" y="14" width="174" height="31.5"/>
@@ -660,7 +674,49 @@ DM으로 문의해주세요!</string>
                                                     <constraint firstItem="bNM-YH-VTk" firstAttribute="leading" secondItem="Zjo-LT-COr" secondAttribute="leading" constant="27" id="EWU-hq-7lI"/>
                                                     <constraint firstAttribute="trailing" secondItem="aWl-h8-Ues" secondAttribute="trailing" constant="14" id="K9w-YS-I8C"/>
                                                     <constraint firstItem="aWl-h8-Ues" firstAttribute="centerY" secondItem="bNM-YH-VTk" secondAttribute="centerY" id="TQD-ME-bv3"/>
+                                                    <constraint firstAttribute="height" constant="100" id="bk3-D9-GSd"/>
                                                     <constraint firstItem="bNM-YH-VTk" firstAttribute="top" secondItem="Zjo-LT-COr" secondAttribute="top" constant="14" id="sYZ-zK-UAb"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="63G-ZO-Vl5">
+                                                <rect key="frame" x="0.0" y="933" width="414" height="67"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="배송지" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yxr-Jg-JmN">
+                                                        <rect key="frame" x="16" y="30" width="34" height="16"/>
+                                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="13"/>
+                                                        <color key="textColor" red="0.46274509800000002" green="0.43529411759999997" blue="0.43529411759999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="khQ-el-6pT">
+                                                        <rect key="frame" x="338" y="24" width="56" height="28"/>
+                                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="13"/>
+                                                        <color key="tintColor" red="0.46274509803921571" green="0.43529411764705883" blue="0.43529411764705883" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal" title="변경하기 &gt;"/>
+                                                    </button>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="인스타그램 | 피드" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5yE-Zk-d3r">
+                                                        <rect key="frame" x="16" y="62" width="82.5" height="14.5"/>
+                                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="12"/>
+                                                        <color key="textColor" name="Black"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="배송지" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="whF-Qh-dPr">
+                                                        <rect key="frame" x="16" y="76.5" width="31.5" height="14.5"/>
+                                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="12"/>
+                                                        <color key="textColor" red="0.46274509800000002" green="0.43529411759999997" blue="0.43529411759999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstItem="5yE-Zk-d3r" firstAttribute="leading" secondItem="63G-ZO-Vl5" secondAttribute="leading" constant="16" id="271-JS-Tr7"/>
+                                                    <constraint firstItem="yxr-Jg-JmN" firstAttribute="leading" secondItem="63G-ZO-Vl5" secondAttribute="leading" constant="16" id="A4D-0R-9VK"/>
+                                                    <constraint firstItem="whF-Qh-dPr" firstAttribute="top" secondItem="5yE-Zk-d3r" secondAttribute="bottom" id="APq-hW-4qR"/>
+                                                    <constraint firstAttribute="trailing" secondItem="khQ-el-6pT" secondAttribute="trailing" constant="20" id="EDQ-ZL-EMG"/>
+                                                    <constraint firstItem="yxr-Jg-JmN" firstAttribute="top" secondItem="63G-ZO-Vl5" secondAttribute="top" constant="30" id="Ugl-Y9-n41"/>
+                                                    <constraint firstItem="khQ-el-6pT" firstAttribute="centerY" secondItem="yxr-Jg-JmN" secondAttribute="centerY" id="pRB-QP-MW7"/>
+                                                    <constraint firstItem="5yE-Zk-d3r" firstAttribute="top" secondItem="yxr-Jg-JmN" secondAttribute="bottom" constant="16" id="spv-hP-lec"/>
+                                                    <constraint firstItem="whF-Qh-dPr" firstAttribute="leading" secondItem="63G-ZO-Vl5" secondAttribute="leading" constant="16" id="xwY-s4-cTI"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
@@ -784,6 +840,9 @@ DM으로 문의해주세요!</string>
                         <outlet property="brandNameLabel" destination="8G2-hf-3Oc" id="WMb-bi-IaP"/>
                         <outlet property="collectionView" destination="tS8-od-o6L" id="FwU-ep-a5J"/>
                         <outlet property="dateContainer" destination="CoS-e1-9N0" id="Hpg-PG-gDD"/>
+                        <outlet property="doneInfoView" destination="AEo-Wc-zRC" id="HQC-zI-DAb"/>
+                        <outlet property="doneSelectionDateLabel" destination="Aho-KI-Beb" id="jQ5-Bm-Ta0"/>
+                        <outlet property="doneView" destination="63G-ZO-Vl5" id="ZnO-zn-41a"/>
                         <outlet property="helpButton" destination="aWl-h8-Ues" id="2I4-ia-uHg"/>
                         <outlet property="indicator" destination="hT5-3k-MqM" id="k83-Uk-pRz"/>
                         <outlet property="infoContainer" destination="dV4-29-Q8L" id="UEv-9B-Bf9"/>
@@ -792,8 +851,12 @@ DM으로 문의해주세요!</string>
                         <outlet property="leastFeedLabel" destination="9Pp-NZ-8IR" id="elh-Pv-lk5"/>
                         <outlet property="mainScrollView" destination="uke-1C-b2f" id="Wnn-pV-zJP"/>
                         <outlet property="maintainLabel" destination="hyr-a9-74X" id="Gxo-zY-xQd"/>
+                        <outlet property="notDoneInfoView" destination="BxV-EF-9p2" id="ckN-bo-JTu"/>
+                        <outlet property="notDoneView" destination="Zjo-LT-COr" id="ClM-xy-1IQ"/>
+                        <outlet property="postNumLabel" destination="whF-Qh-dPr" id="hx0-xb-3Ia"/>
                         <outlet property="priceLabel" destination="2x0-aZ-1W2" id="a1S-U0-6o8"/>
-                        <outlet property="selectionDateLabel" destination="y2Y-Ao-2Jp" id="Wac-jr-hNJ"/>
+                        <outlet property="roadAddrLabel" destination="5yE-Zk-d3r" id="Jad-5c-06I"/>
+                        <outlet property="selectionDateLabel" destination="y2Y-Ao-2Jp" id="Aqm-YT-QRZ"/>
                         <outlet property="shadowView" destination="Qnu-6i-rea" id="l6u-7E-ckZ"/>
                         <outlet property="subTitleLabel" destination="lUF-3p-tih" id="vf8-40-pIv"/>
                         <outlet property="timeLabel" destination="j9f-bg-pYW" id="4rb-AW-JB8"/>

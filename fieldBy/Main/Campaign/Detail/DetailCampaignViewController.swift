@@ -37,6 +37,7 @@ class DetailCampaignViewController: UIViewController {
     @IBOutlet weak var infoContainer: UIView!
     
     @IBOutlet weak var selectionDateLabel: UILabel!
+    @IBOutlet weak var doneSelectionDateLabel: UILabel!
     
     @IBOutlet weak var itemDateLabel: UILabel!
     
@@ -56,6 +57,18 @@ class DetailCampaignViewController: UIViewController {
     @IBOutlet weak var helpButton: UIButton!
     @IBOutlet weak var applyButton: UIButton!
     @IBOutlet weak var bottomView: UIView!
+    
+    @IBOutlet weak var notDoneView: UIView!
+    @IBOutlet weak var notDoneInfoView: UIView!
+    
+    
+    //DoneView
+    @IBOutlet weak var doneInfoView: UIView!
+    @IBOutlet weak var doneView: UIView!
+    @IBOutlet weak var roadAddrLabel: UILabel!
+    @IBOutlet weak var postNumLabel: UILabel!
+    
+    
     
     @IBOutlet weak var indicator: UIActivityIndicatorView!
     @IBOutlet var viewModel: DetailCampaignViewModel!
@@ -109,8 +122,25 @@ class DetailCampaignViewController: UIViewController {
         bottomView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         shadowView.layer.cornerRadius = 21
         
-        if AuthManager.shared.myUserModel.campaignUuids[campaignModel.uuid] == true {
+        isDone = AuthManager.shared.myUserModel.campaignUuids[campaignModel.uuid] ?? false
+        
+        if isDone {
             applyButton.setTitle("캠페인 취소하기", for: .normal)
+            timeStickyContainer.backgroundColor = .main
+            timeLabel.text = "제안 완료!"
+            roadAddrLabel.text = AuthManager.shared.myUserModel.juso.roadAddr
+            postNumLabel.text = AuthManager.shared.myUserModel.juso.zipNo
+            notDoneView.isHidden = true
+            doneView.isHidden = false
+            notDoneInfoView.isHidden = true
+            doneInfoView.isHidden = false
+
+        } else {
+            notDoneView.isHidden = false
+            doneView.isHidden = true
+            
+            notDoneInfoView.isHidden = false
+            doneInfoView.isHidden = true
         }
         
         transparentView.isUserInteractionEnabled = false
@@ -121,13 +151,7 @@ class DetailCampaignViewController: UIViewController {
         
         collectionView.rx.setDelegate(self)
             .disposed(by: rx.disposeBag)
-        
-        isDone = AuthManager.shared.myUserModel.campaignUuids[campaignModel.uuid] ?? false
-        
-        if isDone {
-            timeStickyContainer.backgroundColor = .main
-            timeLabel.text = "신청 완료!"
-        }
+
         
         brandNameLabel.text = campaignModel.brandName
         titleLabel.text = campaignModel.itemModel.name
@@ -151,6 +175,7 @@ class DetailCampaignViewController: UIViewController {
         
         
         selectionDateLabel.text = campaignModel.selectionDate.parsedDate
+        doneSelectionDateLabel.text = campaignModel.selectionDate.parsedDate
         itemDateLabel.text = "~\(campaignModel.itemDate.parsedDate)"
         betweenDateLabel.text = "\(campaignModel.itemDate.parsedDate)~\(campaignModel.uploadDate.parsedDate)"
         uploadDateLabel.text = campaignModel.uploadDate.parsedDate

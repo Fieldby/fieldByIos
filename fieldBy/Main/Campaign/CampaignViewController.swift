@@ -26,8 +26,6 @@ class CampaignViewController: UIViewController {
     
     @IBOutlet weak var missionButton: UIButton!
     @IBOutlet weak var isNewContainer: UIView!
-    @IBOutlet weak var timerView: UIView!
-    @IBOutlet weak var timerLabel: UILabel!
     
     @IBOutlet weak var indicator: UIActivityIndicatorView!
     @IBOutlet weak var barView: UIView!
@@ -74,7 +72,6 @@ class CampaignViewController: UIViewController {
         barView.isHidden = false
         pagerView.isHidden = false
         
-        timerView.layer.cornerRadius = 14.5
         topView.layer.cornerRadius = 27
         topView.layer.maskedCorners = [.layerMaxXMaxYCorner]
         topView.addGrayShadow(color: .lightGray, opacity: 0.3, radius: 3)
@@ -137,7 +134,7 @@ class CampaignViewController: UIViewController {
     
     private func bindInfoView(model: CampaignModel) {
             
-        timerLabel.text = calculateDate(campaignModel: model)
+//        timerLabel.text = calculateDate(campaignModel: model)
         brandNameLabel.text = model.brandName
         titleLabel.text = model.itemModel.name
         isNewContainer.isHidden = !model.isNew
@@ -151,12 +148,6 @@ class CampaignViewController: UIViewController {
         } else {
             missionButton.setTitle("신청하기", for: .normal)
             missionButton.backgroundColor = .main
-        }
-        
-        if timer == nil {
-            timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [unowned self] _ in
-                timerLabel.text = calculateDate(campaignModel: model)
-            })
         }
     }
 
