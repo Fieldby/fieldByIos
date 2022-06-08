@@ -147,7 +147,6 @@ class DetailCampaignViewController: UIViewController {
         isDone = AuthManager.shared.myUserModel.campaignUuids[campaignModel.uuid] ?? false
         
         if isDone {
-            applyButton.setTitle("캠페인 취소하기", for: .normal)
             timeStickyContainer.backgroundColor = .main
             timeLabel.text = "제안 완료!"
             roadAddrLabel.text = AuthManager.shared.myUserModel.juso.roadAddr
@@ -177,6 +176,11 @@ class DetailCampaignViewController: UIViewController {
             doneBottomView.isHidden = true
             shadowView.isHidden = false
             bottomView.isHidden = false
+            
+            if campaignModel.status != .applied {
+                applyButton.isEnabled = false
+                applyButton.backgroundColor = .unabled
+            }
         }
         
     }

@@ -479,13 +479,6 @@ DM으로 문의해주세요!</string>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fT6-0c-iWh">
                                                                 <rect key="frame" x="0.0" y="350" width="414" height="170"/>
                                                                 <subviews>
-                                                                    <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bjw-Xn-ZsE">
-                                                                        <rect key="frame" x="320" y="-6" width="94" height="28"/>
-                                                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="13"/>
-                                                                        <color key="tintColor" name="MainColor"/>
-                                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                                        <state key="normal" title="가이드 확인하기 &gt;"/>
-                                                                    </button>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="유의사항" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uuR-Xh-tpT">
                                                                         <rect key="frame" x="24" y="0.0" width="45" height="16"/>
                                                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="13"/>
@@ -575,10 +568,8 @@ DM으로 문의해주세요!</string>
                                                                     <constraint firstItem="Luk-Rv-Nqx" firstAttribute="top" secondItem="bBd-1W-nnP" secondAttribute="bottom" constant="8" id="Iir-og-DZk"/>
                                                                     <constraint firstItem="bBd-1W-nnP" firstAttribute="top" secondItem="9bm-Uy-8q7" secondAttribute="bottom" constant="3" id="T8e-ix-fza"/>
                                                                     <constraint firstItem="uuR-Xh-tpT" firstAttribute="leading" secondItem="fT6-0c-iWh" secondAttribute="leading" constant="24" id="TW3-Ql-SbW"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="bjw-Xn-ZsE" secondAttribute="trailing" id="UII-wX-PIo"/>
                                                                     <constraint firstItem="0Dg-ct-jzY" firstAttribute="leading" secondItem="7Pv-94-TvI" secondAttribute="trailing" constant="8" symbolic="YES" id="WFK-qk-07Q"/>
                                                                     <constraint firstItem="MiG-NH-5fY" firstAttribute="top" secondItem="7Pv-94-TvI" secondAttribute="bottom" constant="13" id="Wse-PQ-Gb2"/>
-                                                                    <constraint firstItem="bjw-Xn-ZsE" firstAttribute="centerY" secondItem="uuR-Xh-tpT" secondAttribute="centerY" id="X4d-lR-DA1"/>
                                                                     <constraint firstItem="9bm-Uy-8q7" firstAttribute="leading" secondItem="MiG-NH-5fY" secondAttribute="trailing" constant="8" symbolic="YES" id="XGk-9U-F67"/>
                                                                     <constraint firstItem="JPp-gv-aNB" firstAttribute="centerX" secondItem="MiG-NH-5fY" secondAttribute="centerX" id="Yqv-3T-xWg"/>
                                                                     <constraint firstItem="MiG-NH-5fY" firstAttribute="leading" secondItem="fT6-0c-iWh" secondAttribute="leading" constant="29" id="ZWs-ie-1Iu"/>

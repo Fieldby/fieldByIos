@@ -71,7 +71,7 @@ class FeedListViewController: UIViewController {
                     button.isEnabled = false
                 } else {
                     if indexes.count < 3{
-                        cell.select()
+                        cell.select(idx: indexes.count+1)
                         indexes.append(index.row)
                         button.setTitle("선택 완료(\(indexes.count)/3)", for: .normal)
                         
@@ -80,10 +80,11 @@ class FeedListViewController: UIViewController {
                         } else {
                             button.isEnabled = false
                         }
-                        
-                        
                     }
-
+                }
+                for i in 0..<indexes.count {
+                    let cell = collectionView.cellForItem(at: [0, indexes[i]]) as! FeedCell
+                    cell.select(idx: i+1)
                 }
                 
             
@@ -130,23 +131,34 @@ class FeedCell: UICollectionViewCell {
     static let reuseId = "feedCell"
     
     @IBOutlet weak var mainImageView: UIImageView!
+    @IBOutlet weak var numberLabel: UILabel!
     
+    @IBOutlet weak var numberContainer: UIView!
     var isOn: Bool = false
     
     override func awakeFromNib() {
         contentView.layer.borderColor = UIColor.main.cgColor
+        numberContainer.layer.cornerRadius = 10.5
+        numberContainer.isHidden = true
     }
     
-    func select() {
+    func select(idx: Int) {
         isOn = true
         isSelected = true
         contentView.layer.borderWidth = 3
+        
+        numberContainer.isHidden = false
+        numberLabel.text = "\(idx)"
+        
     }
     
     func deSelect() {
         isOn = false
         isSelected = false
         contentView.layer.borderWidth = 0
+        
+        numberContainer.isHidden = true
+
     }
     
 }

@@ -72,7 +72,7 @@ class MediaListViewController: UIViewController {
         collectionView.rx.itemSelected
             .subscribe(onNext: { [unowned self] index in
                 let cell = collectionView.cellForItem(at: index) as! FeedCell
-
+                
                 if cell.isOn {
                     let idx = indexes.firstIndex(of: index.row)!
                     indexes.remove(at: idx)
@@ -83,10 +83,13 @@ class MediaListViewController: UIViewController {
                     if indexes.count < campaignModel.leastFeed {
                         indexes.append(index.row)
                         doneButton.setTitle("선택 완료(\(indexes.count)/\(campaignModel.leastFeed))", for: .normal)
-                        cell.select()
+                        cell.select(idx: indexes.count)
                     }
-                    
-                    
+                }
+                
+                for i in 0..<indexes.count {
+                    let cell = collectionView.cellForItem(at: [0, indexes[i]]) as! FeedCell
+                    cell.select(idx: i+1)
                 }
                 
             })

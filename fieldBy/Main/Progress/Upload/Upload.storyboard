@@ -39,16 +39,38 @@
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="v67-OH-G7z">
                                                     <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                                 </imageView>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i9G-nE-69r">
+                                                    <rect key="frame" x="101" y="6" width="21" height="21"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fje-rb-yMr">
+                                                            <rect key="frame" x="8" y="2.5" width="5" height="16"/>
+                                                            <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="13"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" name="MainColor"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="2nH-dd-QRg"/>
+                                                        <constraint firstAttribute="width" constant="21" id="6Pe-l5-TUI"/>
+                                                        <constraint firstItem="fje-rb-yMr" firstAttribute="centerY" secondItem="i9G-nE-69r" secondAttribute="centerY" id="ESa-Tp-tXk"/>
+                                                        <constraint firstItem="fje-rb-yMr" firstAttribute="centerX" secondItem="i9G-nE-69r" secondAttribute="centerX" id="lzI-9O-f2R"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="v67-OH-G7z" secondAttribute="trailing" id="3Pq-gH-nFa"/>
                                                 <constraint firstAttribute="bottom" secondItem="v67-OH-G7z" secondAttribute="bottom" id="RQu-bc-n3j"/>
+                                                <constraint firstAttribute="trailing" secondItem="i9G-nE-69r" secondAttribute="trailing" constant="6" id="q6d-2i-tay"/>
                                                 <constraint firstItem="v67-OH-G7z" firstAttribute="top" secondItem="D7y-aA-Yfp" secondAttribute="top" id="tz6-ea-44p"/>
                                                 <constraint firstItem="v67-OH-G7z" firstAttribute="leading" secondItem="D7y-aA-Yfp" secondAttribute="leading" id="xas-og-brS"/>
+                                                <constraint firstItem="i9G-nE-69r" firstAttribute="top" secondItem="D7y-aA-Yfp" secondAttribute="top" constant="6" id="zDE-Qe-DPN"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <connections>
                                             <outlet property="mainImageView" destination="v67-OH-G7z" id="vs1-Jv-mJ2"/>
+                                            <outlet property="numberContainer" destination="i9G-nE-69r" id="UOX-of-An2"/>
+                                            <outlet property="numberLabel" destination="fje-rb-yMr" id="Xf8-60-ype"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
