@@ -62,10 +62,9 @@ class CampaignManager: CommonBackendType {
                                 } else {
                                     temp.append(url!)
                                     
-                                    if i == result.items.count-1 {
+                                    if temp.count == result.items.count {
                                         observable(.success(temp))
                                     }
-
                                 }
                             }
                         }

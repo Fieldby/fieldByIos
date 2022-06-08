@@ -101,16 +101,11 @@ class CampaignViewController: UIViewController {
 
                 cell.contentView.backgroundColor = .none
 
-                showingIndexSubject
-                    .subscribe(onNext: { [unowned cell] index in
-                        if index == idx {
-                            cell.mainView.backgroundColor = .white
-                        } else {
-                            cell.mainView.backgroundColor = .none
-                        }
-
-                    })
-                    .disposed(by: self.rx.disposeBag)
+                if idx == showingIndex {
+                    cell.mainView.backgroundColor = .white
+                } else {
+                    cell.mainView.backgroundColor = .none
+                }
 
             }
             .disposed(by: rx.disposeBag)
@@ -121,7 +116,6 @@ class CampaignViewController: UIViewController {
                 timer = nil
                 
                 bindInfoView(model: campaignArray[idx])
-                
                 
             })
             .disposed(by: rx.disposeBag)
@@ -243,14 +237,19 @@ extension CampaignViewController: FSPagerViewDelegate, FSPagerViewDataSource {
     func pagerViewWillEndDragging(_ pagerView: FSPagerView, targetIndex: Int) {
         showingIndexSubject.onNext(targetIndex)
         showingIndex = targetIndex
+        
+        barCollectionView.reloadData()
     }
     
 }
 
 extension CampaignViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if collectionView == barCollectionView {
+            return CGSize(width: collectionView.frame.width / CGFloat(campaignArray.count), height: collectionView.frame.height)
+        }
         
-        return CGSize(width: 100, height: collectionView.frame.height)
+        return CGSize(width: 0, height: 0)
     }
 }
 

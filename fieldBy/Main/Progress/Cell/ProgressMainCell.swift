@@ -115,6 +115,7 @@ class ProgressMainCell: UITableViewCell {
     private func setApplied() {
         progressView.isHidden = true
         appliedLabel.isHidden = false
+        appliedLabel.text = "제안 완료"
         guideButton.isHidden = true
         uploadButtonContainer.isHidden = true
     }

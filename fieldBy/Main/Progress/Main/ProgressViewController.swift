@@ -137,7 +137,7 @@ class ProgressViewController: UIViewController {
                         .subscribe { [unowned self] bool in
                             model.0.getMainImage()
                                 .subscribe { [unowned self] image in
-                                    viewModel.showStatus(bool, model.0, image)
+                                    viewModel.showStatus(bool, model.0)
                                     indicator.isHidden = true
                                     indicator.stopAnimating()
                                 } onError: { [unowned self] err in
@@ -175,9 +175,9 @@ class ProgressViewController: UIViewController {
             })
             .disposed(by: rx.disposeBag)
         
-        viewModel.showStatus = { [unowned self] bool, model, image in
+        viewModel.showStatus = { [unowned self] bool, model in
             guard let bool = bool else {
-                pushGuideFinalVC(model: model, image: image)
+                pushGuideFinalVC(model: model)
                 return
             }
             
@@ -199,10 +199,9 @@ class ProgressViewController: UIViewController {
     }
     
     
-    func pushGuideFinalVC(model: CampaignModel, image: UIImage) {
+    func pushGuideFinalVC(model: CampaignModel) {
         let vc = UIStoryboard(name: "GuideCampaign", bundle: nil).instantiateViewController(withIdentifier: "guidefinalVC") as! GuideFinalViewController
         vc.campaignModel = model
-        vc.campaignImage = image
         vc.isAppling = false
         let nav = UINavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .fullScreen

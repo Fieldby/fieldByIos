@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseStorage
+import RxSwift
 
 class GuideFinalViewController: CommonGuideViewController {
     
@@ -23,7 +24,6 @@ class GuideFinalViewController: CommonGuideViewController {
     var color: String?
     
     var isAppling = true
-    var campaignImage: UIImage!
     
     
     override func viewDidLoad() {
@@ -52,6 +52,21 @@ class GuideFinalViewController: CommonGuideViewController {
             backButton.isHidden = false
         }
         
+        viewMyCampaignsButton
+            .rx.tap
+            .throttle(.seconds(3), latest: false, scheduler: MainScheduler.instance)
+            .bind(onNext: { [unowned self] _ in
+                campaignModel.getMainImage()
+                    .subscribe { [unowned self] image in
+                        presentDetailVC(campaignModel: campaignModel, image: image)
+                    } onError: { err in
+                        print(err)
+                    }
+                    .disposed(by: rx.disposeBag)
+
+            })
+            .disposed(by: rx.disposeBag)
+            
 
     }
     
@@ -66,7 +81,8 @@ class GuideFinalViewController: CommonGuideViewController {
     }
     
     @IBAction func viewDetail(_ sender: Any) {
-        presentDetailVC(campaignModel: campaignModel, image: campaignImage)
+
+        
     }
     
     @IBAction func pop(_ sender: Any) {
