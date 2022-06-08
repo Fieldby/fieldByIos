@@ -71,7 +71,7 @@ class PushManager: Mappable {
         }
     }
     
-    func commonPush(targetToken: String, notiType: NotiType, campaignModel: CampaignModel) {
+    func commonPush(targetToken: String, notiType: NotiType, _ campaignModel: CampaignModel?) {
         let url = self.url
         let header = self.header
         self.to = targetToken
@@ -80,10 +80,19 @@ class PushManager: Mappable {
         case .instagram:
             break
         case .campaignApplied:
-            self.notification.title = "켐페인 신청 알림"
-            self.notification.text = "켐페인 \(campaignModel.itemModel.name)에 신청이 완료되었습니다."
+            
+            self.notification.title = "👍🏻 '\(campaignModel!.title)' 캠페인 신청 완료!"
+            self.notification.text = "'\(campaignModel!.title)'캠페인을 신청하셨습니다!"
             self.data.type = notiType.rawValue
-            self.data.uuid = campaignModel.uuid
+            self.data.uuid = campaignModel!.uuid
+        case .campaignSelected:
+            break
+        case .campaignOpened:
+            break
+        case .itemDelivered:
+            break
+        case .uploadFeed:
+            break
         }
 
         let params = self.toJSON()

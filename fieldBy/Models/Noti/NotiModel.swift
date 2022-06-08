@@ -40,4 +40,8 @@ class NotiModel: Codable {
 enum NotiType: String, Codable {
     case instagram
     case campaignApplied
+    case campaignSelected
+    case campaignOpened
+    case itemDelivered
+    case uploadFeed
 }

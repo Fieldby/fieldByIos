@@ -121,7 +121,7 @@ class GuideCheckViewController: CommonGuideViewController {
             let vc = storyboard?.instantiateViewController(withIdentifier: GuideFinalViewController.storyId) as! GuideFinalViewController
             vc.campaignModel = campaignModel
             
-            PushManager.shared.commonPush(targetToken: AuthManager.shared.myUserModel.fcmToken!, notiType: .campaignApplied, campaignModel: campaignModel)
+            PushManager.shared.commonPush(targetToken: AuthManager.shared.myUserModel.fcmToken!, notiType: .campaignApplied, campaignModel)
             navigationController?.pushViewController(vc, animated: true)
         } else {
             let vc = UIStoryboard(name: "Size", bundle: nil).instantiateViewController(withIdentifier: "guidesizeVC") as! GuideSizeViewController

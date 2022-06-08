@@ -15,6 +15,7 @@ class CampaignModel: Codable {
     let uuid: String
     let mainImageUrl: String
     let guides: [GuideModel]
+    let title: String
     
     let brandUuid: String
     let brandName: String
@@ -40,7 +41,7 @@ class CampaignModel: Codable {
     
     
     
-    init(url: String, brandUuid: String, isNew: Bool, itemModel: ItemModel, dueDate: String, selectionDate: String, itemDate: String, uploadDate: String, leastFeed: Int, maintain: Int, brandName: String, guides: [GuideModel], uuid: String, brandInstagram: String, hashTagModel: HashTagModel, users: [String: Bool], recruitingDate: String, status: CampaignStatus) {
+    init(url: String, brandUuid: String, isNew: Bool, itemModel: ItemModel, dueDate: String, selectionDate: String, itemDate: String, uploadDate: String, leastFeed: Int, maintain: Int, brandName: String, guides: [GuideModel], uuid: String, brandInstagram: String, hashTagModel: HashTagModel, users: [String: Bool], recruitingDate: String, status: CampaignStatus, title: String) {
         self.mainImageUrl = url
         self.brandUuid = brandUuid
         self.isNew = isNew
@@ -60,6 +61,7 @@ class CampaignModel: Codable {
         self.users = users
         self.recruitingDate = recruitingDate
         self.status = status
+        self.title = title
     }
     
     init?(snapshot: DataSnapshot) {
@@ -78,7 +80,8 @@ class CampaignModel: Codable {
            let maintain = value["maintain"] as? String,
            let brandName = value["brandName"] as? String,
            let brandInstagram = value["brandInstagram"] as? String,
-           let recruitingDate = value["recruitingDate"] as? String
+           let recruitingDate = value["recruitingDate"] as? String,
+           let title = value["campaignTitle"] as? String
         {
             self.mainImageUrl = "campaignImages/\(self.uuid)/\(imageUrl)"
             self.brandUuid = brandUuid
@@ -92,6 +95,7 @@ class CampaignModel: Codable {
             self.brandName = brandName
             self.brandInstagram = brandInstagram
             self.recruitingDate = recruitingDate
+            self.title = title
         } else {
             return nil
         }

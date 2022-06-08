@@ -30,16 +30,54 @@ class NotiCell: UITableViewCell {
             contentLabel.text = "원하시는 협찬에 참여하실 수 있게 되었어요! 다양하고 트렌디한 협찬들을 확인하세요."
             
         case .campaignApplied:
-            contentLabel.text = "제안이 성사되면 알려드릴게요."
             if let url = notiModel.url {
                 mainImageView.setImage(url: url)
             }
             
             if let title = notiModel.title {
-                titleLabel.text = "👍🏻 캠페인 \(title)의 제안이 완료되었습니다!"
+                titleLabel.text = "👍🏻 '\(title)' 캠페인 신청 완료!"
+                contentLabel.text = "'\(title)'캠페인을 신청하셨습니다!"
 
             }
             
+        case .campaignSelected:
+            if let url = notiModel.url {
+                mainImageView.setImage(url: url)
+            }
+            
+            if let title = notiModel.title {
+                titleLabel.text = "🎉 '\(title)' 캠페인에 선정되었습니다!"
+                contentLabel.text = "'\(title)' 캠페인에 선정되었습니다. 가이드라인을 확인해보세요!"
+
+            }
+        case .campaignOpened:
+            if let url = notiModel.url {
+                mainImageView.setImage(url: url)
+            }
+            
+            if let title = notiModel.title {
+                titleLabel.text = "👍🏻 '\(title)' 캠페인 오픈!"
+                contentLabel.text = "'\(title)'캠페인을 오픈했습니다. 지금 확인해보세요!"
+
+            }
+        case .itemDelivered:
+            if let url = notiModel.url {
+                mainImageView.setImage(url: url)
+            }
+            
+            if let title = notiModel.title {
+                titleLabel.text = "🚛 '\(title)' 캠페인 상품 발송!"
+                contentLabel.text = "'\(title)' 캠페인 상품이 발송되었습니다!"
+            }
+        case .uploadFeed:
+            if let url = notiModel.url {
+                mainImageView.setImage(url: url)
+            }
+            
+            if let title = notiModel.title {
+                titleLabel.text = "🚛 '\(title)' 캠페인을 업로드 해주세요!"
+                contentLabel.text = "'\(title)' 캠페인 업로드 기간입니다. 가이드에 맞춰 업로드 해주세요!"
+            }
         }
         
     }

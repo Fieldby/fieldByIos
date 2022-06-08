@@ -70,7 +70,7 @@ class NotiManager: CommonBackendType {
         
         campaignModel.getMainImageUrl()
             .subscribe { [unowned self] url in
-                ref.child("users").child(uid).child("noti").child(key).setValue(["type": "campaignApplied", "checked": false, "targetUuid": campaignModel.uuid, "time": Date().notiDate, "title": campaignModel.itemModel.name, "url": url])
+                ref.child("users").child(uid).child("noti").child(key).setValue(["type": "campaignApplied", "checked": false, "targetUuid": campaignModel.uuid, "time": Date().notiDate, "title": campaignModel.title, "url": url])
             } onError: { _ in
                 
             }
