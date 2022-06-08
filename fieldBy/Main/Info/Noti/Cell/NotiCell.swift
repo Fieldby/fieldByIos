@@ -24,6 +24,8 @@ class NotiCell: UITableViewCell {
             titleLabel.text = "🎉 인스타그램 연동이 완료되었습니다!"
             contentLabel.text = "원하시는 협찬에 참여하실 수 있게 되었어요! 다양하고 트렌디한 협찬들을 확인하세요."
             
+            timeLabel.text = notiModel.time.parseKoreanDateTime
+            
         }
         
         

@@ -32,4 +32,7 @@ extension String {
         return "\(month).\(day)"
     }
     
+    var parseKoreanDateTime: String {
+        return "\(month)월 \(day)일 \(hour):\(minute)"
+    }
 }

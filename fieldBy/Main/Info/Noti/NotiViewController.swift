@@ -31,8 +31,6 @@ class NotiViewController: UIViewController {
         
         viewModel.notiArray
             .bind(to: tableView.rx.items(cellIdentifier: NotiCell.reuseId, cellType: NotiCell.self)) { [unowned self] idx, notiModel, cell in
-                
-                print(notiModel.uuid)
                 cell.bind(notiModel: notiModel)
                 
             }
