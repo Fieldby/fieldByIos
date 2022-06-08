@@ -27,6 +27,7 @@
 		D11376DA2836856200CFC3D2 /* CommonGuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11376D92836856200CFC3D2 /* CommonGuideViewController.swift */; };
 		D11FD9AE281F6D50008AE32A /* PhoneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11FD9AD281F6D50008AE32A /* PhoneViewModel.swift */; };
 		D11FD9B1281F74A5008AE32A /* CheckNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11FD9B0281F74A5008AE32A /* CheckNumberViewController.swift */; };
+		D12CFD0328503AF50071A86C /* MainImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12CFD0228503AF50071A86C /* MainImageViewController.swift */; };
 		D1329DF3281FF2AD00760DDA /* CommonViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1329DF2281FF2AD00760DDA /* CommonViews.swift */; };
 		D132C12828407FE50002785A /* NotiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D132C12728407FE50002785A /* NotiViewController.swift */; };
 		D132C12A28407FFE0002785A /* Noti.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D132C12928407FFE0002785A /* Noti.storyboard */; };
@@ -137,6 +138,7 @@
 		D11376D92836856200CFC3D2 /* CommonGuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonGuideViewController.swift; sourceTree = "<group>"; };
 		D11FD9AD281F6D50008AE32A /* PhoneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneViewModel.swift; sourceTree = "<group>"; };
 		D11FD9B0281F74A5008AE32A /* CheckNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckNumberViewController.swift; sourceTree = "<group>"; };
+		D12CFD0228503AF50071A86C /* MainImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainImageViewController.swift; sourceTree = "<group>"; };
 		D1329DF2281FF2AD00760DDA /* CommonViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonViews.swift; sourceTree = "<group>"; };
 		D132C12728407FE50002785A /* NotiViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiViewController.swift; sourceTree = "<group>"; };
 		D132C12928407FFE0002785A /* Noti.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Noti.storyboard; sourceTree = "<group>"; };
@@ -405,6 +407,7 @@
 			isa = PBXGroup;
 			children = (
 				D1462572283CA899008FEB8A /* CommonPopupViewController.swift */,
+				D12CFD0228503AF50071A86C /* MainImageViewController.swift */,
 			);
 			path = Popup;
 			sourceTree = "<group>";
@@ -930,6 +933,7 @@
 				D132C12828407FE50002785A /* NotiViewController.swift in Sources */,
 				D1ED9E13282D1A9100855641 /* CampaignManager.swift in Sources */,
 				D18910082833C8F0000685E8 /* String+.swift in Sources */,
+				D12CFD0328503AF50071A86C /* MainImageViewController.swift in Sources */,
 				D19A9DAB2822C4C700552C15 /* View+.swift in Sources */,
 				D145BBEC2831E62A009383D8 /* FinalInfoViewController.swift in Sources */,
 				D1A99CD02821220300E414E4 /* AddressViewModel.swift in Sources */,

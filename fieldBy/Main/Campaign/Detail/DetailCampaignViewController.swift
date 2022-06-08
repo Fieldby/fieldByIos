@@ -19,6 +19,7 @@ class DetailCampaignViewController: UIViewController {
     @IBOutlet weak var backButton: UIButton!
 
     @IBOutlet weak var transparentView: UIView!
+    @IBOutlet weak var mainImageButton: UIButton!
     
     
     @IBOutlet weak var mainScrollView: UIScrollView!
@@ -178,7 +179,6 @@ class DetailCampaignViewController: UIViewController {
             bottomView.isHidden = false
         }
         
-        transparentView.isUserInteractionEnabled = false
     }
     
     private func bind() {
@@ -304,6 +304,38 @@ class DetailCampaignViewController: UIViewController {
                 viewModel.helpAction()
             })
             .disposed(by: rx.disposeBag)
+        
+        mainImageButton.rx.tap
+            .subscribe(onNext: { [unowned self] in
+                presentImageVC()
+            })
+            .disposed(by: rx.disposeBag)
+    }
+    
+    private func presentImageVC() {
+        indicator.isHidden = false
+        indicator.startAnimating()
+        
+        CampaignManager.shared.mainImageUrl(campaignUuid: campaignModel.uuid)
+            .subscribe { [unowned self] urlArray in
+                let vc = storyboard?.instantiateViewController(withIdentifier: MainImageViewController.storyId) as! MainImageViewController
+                indicator.isHidden = true
+                indicator.stopAnimating()
+                
+                vc.modalPresentationStyle = .fullScreen
+                vc.modalTransitionStyle = .crossDissolve
+                vc.imageRelay.accept(urlArray)
+                self.present(vc, animated: true)
+            } onError: { [unowned self] err in
+                indicator.isHidden = true
+                indicator.stopAnimating()
+                
+                print(err)
+            }
+            .disposed(by: rx.disposeBag)
+
+        
+
     }
     
     private func pushGuideVC() {
