@@ -178,6 +178,14 @@
                                             <action selector="pushNoti:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="NV4-Zw-R5N"/>
                                         </connections>
                                     </button>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="40F-yf-D3x">
+                                        <rect key="frame" x="370" y="55.5" width="7" height="6"/>
+                                        <color key="tintColor" name="Red"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="7" id="Rer-6Z-rj5"/>
+                                            <constraint firstAttribute="width" constant="7" id="fV9-9X-i8z"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
@@ -186,6 +194,8 @@
                                     <constraint firstItem="n2Y-19-Lj0" firstAttribute="centerY" secondItem="Xc8-bS-802" secondAttribute="centerY" id="6tq-qd-2JA"/>
                                     <constraint firstAttribute="bottom" secondItem="Xc8-bS-802" secondAttribute="bottom" constant="15" id="MtA-6Q-C6o"/>
                                     <constraint firstItem="Xc8-bS-802" firstAttribute="leading" secondItem="mOw-AO-zjw" secondAttribute="leading" constant="27" id="RT7-Bc-171"/>
+                                    <constraint firstItem="40F-yf-D3x" firstAttribute="trailing" secondItem="n2Y-19-Lj0" secondAttribute="trailing" constant="-17" id="dve-j8-cH1"/>
+                                    <constraint firstItem="40F-yf-D3x" firstAttribute="top" secondItem="n2Y-19-Lj0" secondAttribute="top" constant="13" id="oUn-rV-Bsm"/>
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="p9l-SO-Wdw">
@@ -352,6 +362,7 @@
                         <outlet property="campaignCounts" destination="clI-SS-vB1" id="Zw7-xl-3Yj"/>
                         <outlet property="followersCountLabel" destination="sNN-di-cmh" id="qaD-jz-TCk"/>
                         <outlet property="mediaButton" destination="cwA-bW-EHp" id="DcX-Hz-HHK"/>
+                        <outlet property="newImageView" destination="40F-yf-D3x" id="VlF-r4-JwR"/>
                         <outlet property="noMediaView" destination="ikj-cQ-4pU" id="zo1-UH-c4I"/>
                         <outlet property="normalView" destination="DIk-Em-xLE" id="lfS-mj-isH"/>
                         <outlet property="profileImageView" destination="swn-B8-WcZ" id="hUh-MW-xX5"/>
@@ -533,12 +544,16 @@
     <resources>
         <image name="bell" catalog="system" width="128" height="124"/>
         <image name="chevron.left" catalog="system" width="96" height="128"/>
+        <image name="circle.fill" catalog="system" width="128" height="121"/>
         <image name="smallLogo" width="32" height="36"/>
         <namedColor name="Black">
             <color red="0.18823529411764706" green="0.18823529411764706" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="MainColor">
             <color red="0.13333333333333333" green="0.72941176470588232" blue="0.6588235294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Red">
+            <color red="0.93725490196078431" green="0.30196078431372547" blue="0.30196078431372547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -126,6 +126,8 @@ class GuideCheckViewController: CommonGuideViewController {
             vc.campaignModel = campaignModel
             navigationController?.pushViewController(vc, animated: true)
         }
+        
+        NotiManager.shared.sendCampaignApplied(campaignModel: campaignModel)
     }
     
     private func messageAgree() {

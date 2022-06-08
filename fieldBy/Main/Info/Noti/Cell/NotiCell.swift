@@ -18,6 +18,7 @@ class NotiCell: UITableViewCell {
     
     
     func bind(notiModel: NotiModel) {
+        NotiManager.shared.read(notiUid: notiModel.uuid)
         
         switch notiModel.type {
         case .instagram:
@@ -26,11 +27,11 @@ class NotiCell: UITableViewCell {
             
             timeLabel.text = notiModel.time.parseKoreanDateTime
             
+        case .campaignApplied:
+            titleLabel.text = "👍🏻 캠페인 제안이 완료되었습니다!"
+            contentLabel.text = "제안이 성사되면 알려드릴게요."
+            
         }
-        
-        
-        
-        
         
     }
 }

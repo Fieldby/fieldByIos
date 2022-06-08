@@ -18,10 +18,9 @@ class NotiViewModel: NSObject {
     }
     
     func fetch() {
-        NotiManager.shared.fetch()
-            .asObservable()
+        NotiManager.shared.notiArray
             .bind(to: notiArray)
             .disposed(by: rx.disposeBag)
-            
+
     }
 }

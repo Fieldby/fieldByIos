@@ -28,4 +28,11 @@ extension Date {
         formatter.dateFormat = "yyyy"
         return Int(formatter.string(from: self))!
     }
+    
+    var notiDate: String {
+        let formatter = DateFormatter()
+        formatter.locale = Locale.current
+        formatter.dateFormat = "yyyy-MM-dd-HH-mm"
+        return formatter.string(from: self)
+    }
 }

@@ -153,6 +153,18 @@ class CampaignModel: Codable {
 
     }
     
+    func getMainImageUrl() -> Single<String> {
+        return Single.create() { [unowned self] observable in
+            Storage.storage().reference().child(mainImageUrl)
+                .downloadURL { url, error in
+                    if let url = url {
+                        observable(.success(url.absoluteString))
+                    }
+                }
+            return Disposables.create()
+        }
+    }
+    
 }
 
 struct ItemModel: Codable {

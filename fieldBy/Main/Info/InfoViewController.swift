@@ -29,6 +29,7 @@ class InfoViewController: UIViewController {
     
     @IBOutlet weak var mediaButton: UIButton!
     
+    @IBOutlet weak var newImageView: UIImageView!
     
     
     
@@ -55,6 +56,7 @@ class InfoViewController: UIViewController {
         noMediaView.isHidden = true
         normalView.isHidden = true
         
+        newImageView.isHidden = true
     }
     
     private func bind() {
@@ -77,7 +79,15 @@ class InfoViewController: UIViewController {
         
 
         
-        
+        NotiManager.shared.notiArray
+            .subscribe(onNext: { [unowned self] notiArray in
+                if !notiArray.isEmpty && notiArray.first!.checked == false {
+                    newImageView.isHidden = false
+                } else {
+                    newImageView.isHidden = true
+                }
+            })
+            .disposed(by: rx.disposeBag)
         
         
     }

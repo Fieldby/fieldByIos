@@ -39,7 +39,10 @@ class NotiViewController: UIViewController {
     }
             
             
-            
+    @IBAction func pop(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
+    }
+    
 
 
 }
