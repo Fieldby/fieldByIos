@@ -24,6 +24,8 @@ class MyUserModel {
     let simpleAddress: String
     let stroke: StrokeAverage
     var juso: Juso
+    var token: String?
+    var fcmToken: String?
     let style: [Style]
     
     var igModel: IGModel?
@@ -66,6 +68,9 @@ class MyUserModel {
         } else {
             return nil
         }
+        
+        self.token = value["token"] as? String
+        self.fcmToken = value["fcmToken"] as? String
         
         if let addressValue = data.childSnapshot(forPath: "address").value as? [String: Any] {
             self.juso = Juso(roadAddr: addressValue["roadAddr"] as! String, jibunAddr: addressValue["jibunAddr"] as! String, zipNo: addressValue["zipNo"] as! String, detail: addressValue["detail"] as! String)

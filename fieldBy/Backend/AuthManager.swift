@@ -17,6 +17,8 @@ class AuthManager: CommonBackendType {
     var myUserModel: MyUserModel!
 
     var mainTabBar: MainTabBarController!
+    
+    var fcmToken: String!
     var fbToken: String!
     var userUUID: String! = "yDWob0CJ5gR3S9LvPlStfTOSctn1"   //MARK: TODO - 지울것
     static let certificatedNumberPath = "/certificatedNumberList"
@@ -34,6 +36,7 @@ class AuthManager: CommonBackendType {
                     if dataSnapShot.exists() {
                         if let myUserModel = MyUserModel(data: dataSnapShot) {
                             self.myUserModel = myUserModel
+                            NotiManager.shared.setToken(token: fcmToken)
                             igValidSubject.onNext(myUserModel.igModel != nil)
                             completable(.completed)
                         } else {

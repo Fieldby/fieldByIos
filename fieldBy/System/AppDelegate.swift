@@ -10,7 +10,7 @@ import Firebase
 import FBSDKCoreKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate {
 
     var window: UIWindow?
 
@@ -28,14 +28,83 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = vc
         window?.makeKeyAndVisible()
 
+        if #available(iOS 10.0, *) {
+          // For iOS 10 display notification (sent via APNS)
+          UNUserNotificationCenter.current().delegate = self
+
+          let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+          UNUserNotificationCenter.current().requestAuthorization(
+            options: authOptions,
+            completionHandler: { _, _ in }
+          )
+        } else {
+          let settings: UIUserNotificationSettings =
+            UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+          application.registerUserNotificationSettings(settings)
+        }
+
+        UIApplication.shared.registerForRemoteNotifications()
+
+        Messaging.messaging().delegate = self
+        
+        Messaging.messaging().token { token, error in
+          if let error = error {
+            print("Error fetching FCM registration token: \(error)")
+          } else if let token = token {
+            print("FCM registration token: \(token)")
+              AuthManager.shared.fcmToken = token
+          }
+        }
+
         
         return true
 
     }
     
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+      print("Firebase registration token: \(String(describing: fcmToken))")
+
+      let dataDict: [String: String] = ["token": fcmToken ?? ""]
+      NotificationCenter.default.post(
+        name: Notification.Name("FCMToken"),
+        object: nil,
+        userInfo: dataDict
+      )
+    }
 
     
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions)
+                                -> Void) {
+        let userInfo = notification.request.content.userInfo
+        
+        print(userInfo)
+        // Change this to your preferred presentation option
+        completionHandler([[.alert, .sound]])
 
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                didReceive response: UNNotificationResponse,
+                                withCompletionHandler completionHandler: @escaping () -> Void) {
+        let userInfo = response.notification.request.content.userInfo
+        print(userInfo)
+        if response.actionIdentifier == UNNotificationDefaultActionIdentifier {
+            
+//            let _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+//                if let _ = self.window?.visibleViewController as? NewHomeViewController {
+//                    self.handleUserInfo(userInfo)
+//                    timer.invalidate()
+//                }
+//            }
+        } else {
+//            handleUserInfo(userInfo)
+
+        }
+        completionHandler()
+
+    }
 
 }
 

@@ -23,6 +23,15 @@ class NotiManager: CommonBackendType {
             .disposed(by: rx.disposeBag)
     }
     
+    func setToken(token: String) {
+        if let token = AuthManager.shared.myUserModel.fcmToken {
+            if token != token {
+                AuthManager.saveUserInfo(key: "fcmToken", value: token)
+            }
+        } else {
+            AuthManager.saveUserInfo(key: "fcmToken", value: token)
+        }
+    }
     
     private func fetch() -> Observable<[NotiModel]> {
         return Observable.create() { [unowned self] observable in
@@ -75,4 +84,8 @@ class NotiManager: CommonBackendType {
         let uid = AuthManager.shared.myUserModel!.uuid!
         ref.child("users").child(uid).child("noti").child(notiUid).child("checked").setValue(true)
     }
+    
+    
+    
+    
 }

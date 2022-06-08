@@ -105,6 +105,8 @@ class FeedListViewController: UIViewController {
                             temp.append(imageArray[idx].mediaURL)
                         }
                         
+                        NotiManager.shared.sendInstagram()
+                        
                         AuthManager.shared.bestImages(urls: temp)
                     })
                     .disposed(by: rx.disposeBag)
