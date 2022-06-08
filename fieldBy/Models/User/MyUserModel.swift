@@ -30,6 +30,7 @@ class MyUserModel {
     
     var campaigns: [UserCampaignModel] = []
     var campaignUuids: [String: Bool] = [:]
+    var selectedCampaigns: [String: Bool] = [:]
     
     
     init?(data: DataSnapshot) {
@@ -77,6 +78,9 @@ class MyUserModel {
                     let model = UserCampaignModel(snapshot: snapshot)!
                     temp.append(model)
                     campaignUuids[model.uuid] = true
+                    if model.isSelected == true {
+                        selectedCampaigns[model.uuid] = true
+                    }
                 }
                 campaigns = temp
             }

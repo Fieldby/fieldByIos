@@ -29,6 +29,8 @@ class CampaignViewController: UIViewController {
     
     @IBOutlet weak var indicator: UIActivityIndicatorView!
     @IBOutlet weak var barView: UIView!
+    @IBOutlet weak var timeLabel: UILabel!
+    
     @IBOutlet var viewModel: CampaignViewModel!
     
     private var campaignArray: [CampaignModel] = CampaignManager.shared.campaignArray
@@ -134,11 +136,11 @@ class CampaignViewController: UIViewController {
     
     private func bindInfoView(model: CampaignModel) {
             
-//        timerLabel.text = calculateDate(campaignModel: model)
         brandNameLabel.text = model.brandName
         titleLabel.text = model.itemModel.name
-        isNewContainer.isHidden = !model.isNew
         priceLabel.text = "\(getComma(price: model.itemModel.price))원"
+        
+        timeLabel.text = calculateDate(campaignModel: model)
         
         let uuid = model.uuid
         
@@ -155,7 +157,7 @@ class CampaignViewController: UIViewController {
         
         let vc = storyboard?.instantiateViewController(withIdentifier: DetailCampaignViewController.storyId) as! DetailCampaignViewController
         vc.campaignModel = campaignModel
-        
+        vc.mainImage = image
         let nav = UINavigationController(rootViewController: vc)
         nav.navigationBar.isHidden = true
         nav.modalPresentationStyle = .fullScreen
@@ -178,24 +180,26 @@ class CampaignViewController: UIViewController {
         
         let dueDate = dateFormatter.date(from: campaignModel.dueDate)!
         
-        var diff = Int(dueDate.timeIntervalSince(Date()))
+        let diff = Int(dueDate.timeIntervalSince(Date()))
         
         if diff < 0 {
+            isNewContainer.backgroundColor = .unabled
+            timeLabel.textColor = .main
             return "마감"
         }
         
         let diffDay = diff/(3600*24)
         
         if diffDay > 0 {
-            return "\(diffDay)일 후 마감"
-        } else {
-            let diffHour = diff/3600
-            diff = diff - diffHour*3600
-            
-            let diffMin = diff/60
-            diff = diff - diffMin*60
 
-            return "\(diffHour):\(diffMin):\(diff) 후 마감"
+            isNewContainer.backgroundColor = .unabled
+            timeLabel.textColor = .main
+            return "D-\(diffDay)"
+        } else {
+            isNewContainer.backgroundColor = UIColor(red: 239, green: 77, blue: 77)
+            timeLabel.textColor = .white
+            
+            return "D-1"
         }
     }
     

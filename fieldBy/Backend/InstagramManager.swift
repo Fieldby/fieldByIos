@@ -14,8 +14,8 @@ import ObjectiveC
 class InstagramManager: NSObject {
     
     static let shared = InstagramManager()
-    var clientId: String = "573051764154148"
-    var clientSecret: String = "21985ea59e1c365b952812ad4669ff9e"
+    var clientId: String = "680555059873566"
+    var clientSecret: String = "0ec06aa0ff8bea756cd49507fc9d6a9d"
     
     private let graphUrl = "https://graph.facebook.com/v13.0/"
     private var fbId: String!
@@ -36,6 +36,17 @@ class InstagramManager: NSObject {
         return Single.create() { [unowned self] observable in
             
             let url = graphUrl + "oauth/access_token?grant_type=fb_exchange_token&client_id=\(clientId)&client_secret=\(clientSecret)&fb_exchange_token=\(token)"
+            
+            AF.request(url, method: .get)
+                .responseString { response in
+                    switch response.result {
+                    case .success(let str):
+                        print("@#@ \(str)")
+                    case .failure(let err):
+                        print("@#@ \(err)")
+                    }
+                }
+            
             
             AF.request(url, method: .get)
                 .responseData { [unowned self] response in
@@ -236,7 +247,7 @@ class InstagramManager: NSObject {
         
     }
     
-    private func getImages(ids: [String]) -> Single<[(UIImage?, ImageData)]> {
+    private func getImages(ids: [String]) -> Single<[ImageData]> {
         
         return Single.create() { [unowned self] observable in
             
@@ -245,10 +256,10 @@ class InstagramManager: NSObject {
                 return Disposables.create()
             }
             
-            var temp = [(UIImage?, ImageData)]()
+            var temp = [ImageData]()
             
             for id in ids {
-                let url = "\(graphUrl)\(id)?fields=media_url,timestamp,id&access_token=\(igModel.token!)"
+                let url = "\(graphUrl)\(id)?fields=media_url,timestamp,id,media_type&access_token=\(igModel.token!)"
                 
                 AF.request(url, method: .get)
                     .validate(statusCode: 200..<300)
@@ -256,23 +267,20 @@ class InstagramManager: NSObject {
                         switch response.result {
                         case .success(let data):
                             if let imageData = decode(jsonData: data, type: ImageData.self) {
-                                let url = try! URL(string: imageData.mediaURL)
-                                let data = try! Data(contentsOf: url!)
-                                let image = UIImage(data: data)
-                                temp.append((image, imageData))
+                                temp.append(imageData)
                                 if temp.count == ids.count {
-                                    temp.sort(by: { $0.1.timestamp > $1.1.timestamp })
+                                    temp.sort(by: { $0.timestamp > $1.timestamp })
                                     observable(.success(temp))
                                 }
                             } else {
-                                temp.append((UIImage(named: "smallLogo")!, ImageData(id: "",mediaURL: "", timestamp: "")))
+                                temp.append(ImageData(id: "",mediaURL: "", timestamp: "", mediaType: .video))
                                 if temp.count == ids.count {
                                     observable(.success(temp))
                                 }
                             }
                         case .failure(let error):
                             print(error)
-                            temp.append((UIImage(named: "smallLogo")!, ImageData(id: "", mediaURL: "", timestamp: "")))
+                            temp.append(ImageData(id: "", mediaURL: "", timestamp: "", mediaType: .video))
                             if temp.count == ids.count {
                                 observable(.success(temp))
                             }
@@ -283,7 +291,7 @@ class InstagramManager: NSObject {
         }
     }
     
-    func fetchImages(completion: @escaping ([(UIImage?, ImageData)]) -> ()) {
+    func fetchImages(completion: @escaping ([ImageData]) -> ()) {
         feedIds()
             .subscribe { [unowned self] idArray in
                 getImages(ids: idArray)
@@ -366,7 +374,7 @@ class InstagramManager: NSObject {
             var temp = [ImageData]()
             
             for id in ids {
-                let url = "\(graphUrl)\(id)?fields=media_url,timestamp,id&access_token=\(igModel.token!)"
+                let url = "\(graphUrl)\(id)?fields=media_url,timestamp,id,media_type&access_token=\(igModel.token!)"
                 
                 AF.request(url, method: .get)
                     .validate(statusCode: 200..<300)
@@ -380,14 +388,14 @@ class InstagramManager: NSObject {
                                     observable(.success(temp))
                                 }
                             } else {
-                                temp.append(ImageData(id: "", mediaURL: "", timestamp: ""))
+                                temp.append(ImageData(id: "", mediaURL: "", timestamp: "", mediaType: .video))
                                 if temp.count == ids.count {
                                     observable(.success(temp))
                                 }
                             }
                         case .failure(let error):
                             print(error)
-                            temp.append(ImageData(id: "", mediaURL: "", timestamp: ""))
+                            temp.append(ImageData(id: "", mediaURL: "", timestamp: "", mediaType: .video))
                             if temp.count == ids.count {
                                 observable(.success(temp))
                             }

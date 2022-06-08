@@ -12,14 +12,13 @@ import NSObject_Rx
 
 class MediaListViewController: UIViewController {
     
-    @IBOutlet weak var indicator: UIActivityIndicatorView!
     @IBOutlet var viewModel: MediaListViewModel!
     @IBOutlet weak var collectionView: UICollectionView!
     
     @IBOutlet weak var doneButton: UIButton!
     
-    private var imageSubject = BehaviorSubject<[(UIImage?, ImageData)]>(value: [])
-    private var imageArray: [(UIImage?, ImageData)] = []
+    private var imageSubject = BehaviorSubject<[ImageData]>(value: [])
+    private var imageArray: [ImageData] = []
     
     var campaignModel: CampaignModel!
     static let storyId = "medialistVC"
@@ -40,10 +39,7 @@ class MediaListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        indicator.isHidden = false
-        indicator.startAnimating()
-        
+
         doneButton.layer.cornerRadius = 13
         
         doneButton.setTitle("선택 완료(0/\(campaignModel.leastFeed))", for: .normal)
@@ -58,17 +54,16 @@ class MediaListViewController: UIViewController {
             .disposed(by: rx.disposeBag)
         
         InstagramManager.shared.fetchImages { [unowned self] imageArray in
-            imageSubject.onNext(imageArray)
-            self.imageArray = imageArray
-            indicator.isHidden = true
-            indicator.stopAnimating()
+            
+            imageSubject.onNext(imageArray.filter { $0.mediaType != .video})
+            self.imageArray = imageArray.filter { $0.mediaType != .video}
+
         }
         
         imageSubject
-            .map { $0.filter { $0.0 != nil }}
             .bind(to: collectionView.rx.items(cellIdentifier: FeedCell.reuseId, cellType: FeedCell.self)) { [unowned self] idx, image, cell in
                 
-                cell.mainImageView.image = image.0
+                cell.mainImageView.setImage(url: image.mediaURL)
             }
             .disposed(by: rx.disposeBag)
         
@@ -99,14 +94,12 @@ class MediaListViewController: UIViewController {
         
         doneButton.rx.tap
             .subscribe(onNext: { [unowned self] in
-                indicator.isHidden = false
-                indicator.startAnimating()
                 
                 var count = Array(repeating: false, count: indexes.count)
                 
                 for i in 0..<indexes.count {
                     
-                    let id = imageArray[indexes[i]].1.id
+                    let id = imageArray[indexes[i]].id
                     
                     InstagramManager.shared.fetchChildImages(id: id) { [unowned self] imageArray in
                         
@@ -115,17 +108,14 @@ class MediaListViewController: UIViewController {
                         CampaignManager.shared.saveUploadImages(campaignUuid: uuid, images: imageArray.sorted(by: {$0.timestamp > $1.timestamp}), index: i)
                             .subscribe { [unowned self] in
                                 print("이미지 업로드 성공")
-                                indicator.isHidden = true
-                                indicator.stopAnimating()
+ 
                                 count[i] = true
                                 if count == Array(repeating: true, count: indexes.count) {
                                     navigationController?.popViewController(animated: true)
                                 }
                                 
                             } onError: { [unowned self] err in
-                                
-                                indicator.isHidden = false
-                                indicator.startAnimating()
+
                                 print(err)
                             }
                             .disposed(by: rx.disposeBag)

@@ -15,4 +15,10 @@ extension UIViewController {
         }))
         self.present(alert, animated: true, completion: nil)
     }
+    
+    func openUrl(url: String) {
+        if let url = URL(string: url) {
+            UIApplication.shared.open(url)
+        }
+    }
 }

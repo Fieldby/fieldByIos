@@ -33,6 +33,8 @@ class MainTabBarController: UITabBarController {
         super.viewDidLoad()
         
         
+        AuthManager.shared.mainTabBar = self
+//        tabBar.isTranslucent = false
         bottomView = UIView().then {
             $0.backgroundColor = .white
             $0.layer.cornerRadius = 25

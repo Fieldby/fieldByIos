@@ -13,7 +13,7 @@ class ProgressViewModel: NSObject {
     
     let toShowArray = BehaviorRelay<[(CampaignModel, UserCampaignModel)]>(value: [])
     
-    var showStatus: ((Bool?, CampaignModel) -> ())!
+    var showStatus: ((Bool?, CampaignModel, UIImage) -> ())!
     
     override init() {
         super.init()

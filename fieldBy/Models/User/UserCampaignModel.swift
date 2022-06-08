@@ -11,6 +11,7 @@ class UserCampaignModel: Codable {
     let uuid: String
     var size: String?
     var color: String?
+    var isSelected: Bool?
     var imageArray: [[String]] = [[]]
     
     init?(snapshot: DataSnapshot) {
@@ -18,6 +19,7 @@ class UserCampaignModel: Codable {
         self.uuid = snapshot.key
         self.size = value["size"] as? String
         self.color = value["color"] as? String
+        self.isSelected = value["isSelected"] as? Bool
         
         var temp = [[String]]()
         

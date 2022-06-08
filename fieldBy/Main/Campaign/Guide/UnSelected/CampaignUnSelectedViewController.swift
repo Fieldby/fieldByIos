@@ -12,34 +12,17 @@ class CampaignUnSelectedViewController: UIViewController {
     static let storyId = "campaignunselectedVC"
     
     @IBOutlet weak var popButton: UIButton!
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        let tabBar = tabBarController as! MainTabBarController
-        
-        tabBar.tabBar.isHidden = true
-        tabBar.bottomView.isHidden = true
-    
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        let tabBar = tabBarController as! MainTabBarController
-        
-        tabBar.tabBar.isHidden = false
-        tabBar.bottomView.isHidden = false
-    }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.isHidden = true
 
         popButton.layer.cornerRadius = 13
         // Do any additional setup after loading the view.
     }
     
     @IBAction func pop(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
+        dismiss(animated: true)
     }
     
     /*

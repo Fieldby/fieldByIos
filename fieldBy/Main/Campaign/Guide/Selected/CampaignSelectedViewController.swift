@@ -18,40 +18,28 @@ class CampaignSelectedViewController: UIViewController {
     @IBOutlet weak var itemNameLabel: UILabel!
     
     
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
     @IBOutlet weak var container: UIView!
+    @IBOutlet weak var detailButton: UIButton!
     
     var campaignModel: CampaignModel!
     
     static let storyId = "campaignselectedVC"
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        let tabBar = tabBarController as! MainTabBarController
-        
-        tabBar.tabBar.isHidden = true
-        tabBar.bottomView.isHidden = true
-    
-        
-        
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        let tabBar = tabBarController as! MainTabBarController
-        
-        tabBar.tabBar.isHidden = false
-        tabBar.bottomView.isHidden = false
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.isHidden = true
+        
+        indicator.isHidden = true
+        
         campaignImageView.layer.cornerRadius = 4
+        guideButton.isEnabled = false
         
         Storage.storage().reference().child(campaignModel.mainImageUrl)
             .downloadURL { [unowned self] url, error in
                 if let url = url {
                     campaignImageView.kf.setImage(with: url)
+                    guideButton.isEnabled = true
                 }
             }
         brandNameLabel.text = campaignModel.brandName
@@ -63,20 +51,49 @@ class CampaignSelectedViewController: UIViewController {
         container.addGrayShadow()
         
         mainLabel.text = "축하합니다 @\(AuthManager.shared.myUserModel.igModel!.username)"
+        
+        guideButton.rx.tap
+            .subscribe(onNext: { [unowned self] in
+                indicator.isHidden = false
+                indicator.startAnimating()
+                
+                CampaignManager.shared.guideImages(campaignModel: campaignModel)
+                    .subscribe(onNext: { [unowned self] images in
+                        let vc = storyboard?.instantiateViewController(withIdentifier: "guidecampaignVC") as! GuideCampaignViewController
+                        vc.guideImages = images
+                        vc.campaignModel = campaignModel
+                        indicator.stopAnimating()
+                        indicator.isHidden = true
+                        navigationController?.pushViewController(vc, animated: true)
+                    })
+                    .disposed(by: rx.disposeBag)
+                
+            })
+            .disposed(by: rx.disposeBag)
+        
+        detailButton.rx.tap
+            .subscribe(onNext: { [unowned self] in
+                self.dismiss(animated: true) { [unowned self] in
+                    presentDetailVC(campaignModel: campaignModel, image: campaignImageView.image!)
+                }
+            })
+            .disposed(by: rx.disposeBag)
     }
     
     @IBAction func pop(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
+        dismiss(animated: true)
     }
     
-    /*
-    // MARK: - Navigation
+    private func presentDetailVC(campaignModel: CampaignModel, image: UIImage) {
+        
+        let vc = UIStoryboard(name: "Campaign", bundle: nil).instantiateViewController(withIdentifier: DetailCampaignViewController.storyId) as! DetailCampaignViewController
+        vc.campaignModel = campaignModel
+        vc.mainImage = image
+        let nav = UINavigationController(rootViewController: vc)
+        nav.navigationBar.isHidden = true
+        nav.modalPresentationStyle = .fullScreen
+        AuthManager.shared.mainTabBar.present(nav, animated: true)
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
     }
-    */
 
 }

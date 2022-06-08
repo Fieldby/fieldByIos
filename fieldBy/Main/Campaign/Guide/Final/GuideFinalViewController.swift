@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseStorage
 
 class GuideFinalViewController: CommonGuideViewController {
     
@@ -22,10 +23,13 @@ class GuideFinalViewController: CommonGuideViewController {
     var color: String?
     
     var isAppling = true
-        
+    var campaignImage: UIImage!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        navigationController?.navigationBar.isHidden = true
+        
         if let token = AuthManager.shared.myUserModel.igModel?.token {
             InstagramManager.shared.igLogin(token: token) {
                 
@@ -55,20 +59,25 @@ class GuideFinalViewController: CommonGuideViewController {
         if self.tabBarController != nil {
             self.navigationController?.popViewController(animated: true)
         } else {
-            self.navigationController?.dismiss(animated: true)
+            self.navigationController?.dismiss(animated: true) { [unowned self] in
+                AuthManager.shared.mainTabBar.selectedIndex = 0
+            }
         }
     }
     
-    @IBAction func viewOthers(_ sender: Any) {
-        if self.tabBarController != nil {
-            self.navigationController?.popViewController(animated: true)
-        } else {
-            self.navigationController?.dismiss(animated: true)
-        }
-        
+    @IBAction func viewDetail(_ sender: Any) {
+        presentDetailVC(campaignModel: campaignModel, image: campaignImage)
     }
     
     @IBAction func pop(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+        self.navigationController?.dismiss(animated: true)
+    }
+    
+    private func presentDetailVC(campaignModel: CampaignModel, image: UIImage) {
+        let vc = UIStoryboard(name: "Campaign", bundle: nil).instantiateViewController(withIdentifier: DetailCampaignViewController.storyId) as! DetailCampaignViewController
+        vc.campaignModel = campaignModel
+        vc.mainImage = image
+        navigationController?.pushViewController(vc, animated: true)
+
     }
 }

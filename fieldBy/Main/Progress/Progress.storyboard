@@ -164,6 +164,9 @@
                                                                     <state key="normal" title="가이드 확인하기&gt;">
                                                                         <color key="titleColor" name="MainColor"/>
                                                                     </state>
+                                                                    <connections>
+                                                                        <action selector="guideTap:" destination="Yra-4C-L4K" eventType="touchUpInside" id="cIr-Bv-gBB"/>
+                                                                    </connections>
                                                                 </button>
                                                             </subviews>
                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>

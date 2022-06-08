@@ -51,7 +51,7 @@ class ProgressMainCell: UITableViewCell {
     
     var buttonHandler: (() -> Void)!
     
-    
+    var guidButtonHandler: (() -> Void)!
     
     
     override func awakeFromNib() {
@@ -83,9 +83,7 @@ class ProgressMainCell: UITableViewCell {
         mainView.addGrayShadow(color: .black, opacity: 1, radius: 3)
         Storage.storage().reference().child(campaignModel.mainImageUrl)
             .downloadURL { [unowned self] url, error in
-                if let url = url {
-                    itemImageView.kf.setImage(with: url)
-                }
+                itemImageView.setImage(url: url!)
             }
         
         brandNameLabel.text = campaignModel.brandName
@@ -118,11 +116,13 @@ class ProgressMainCell: UITableViewCell {
         progressView.isHidden = true
         appliedLabel.isHidden = false
         guideButton.isHidden = true
+        uploadButtonContainer.isHidden = true
     }
     
     private func setDelivery(_ campaignModel: CampaignModel) {
         progressView.isHidden = false
         deliveryView.isHidden = false
+        uploadButtonContainer.isHidden = true
         
         dateContentLabel.text = "배송기간(~\(campaignModel.itemDate.month).\(campaignModel.itemDate.day))입니다!"
         desLabel.text = "곧 제품이 배송됩니다"
@@ -141,6 +141,9 @@ class ProgressMainCell: UITableViewCell {
         dateContentLabel.text = "업로드기간(~\(campaignModel.uploadDate.month).\(campaignModel.uploadDate.day))입니다!"
         desLabel.text = "가이드에 맞게 컨텐츠를 업로드 해주세요 :)"
         
+    }
+    @IBAction func guideTap(_ sender: Any) {
+        guidButtonHandler()
     }
     
     @IBAction func upload(_ sender: Any) {

@@ -14,19 +14,6 @@ class DetailCampaignViewModel: NSObject {
     var pushGuideVC: (() -> Void)!
     var presentPopup: ((String) -> Void)!
     
-    let imageUrlRelay = BehaviorRelay<[URL]>(value: [])
-    
-    func fetchImage(uuid: String) {
-        CampaignManager.shared.mainImageUrl(campaignUuid: uuid)
-            .subscribe { [unowned self] urlArr in
-                imageUrlRelay.accept(urlArr)
-            } onError: { err in
-                print(err)
-            }
-            .disposed(by: rx.disposeBag)
-
-    }
-    
     func helpAction() {
         if let url = URL(string: "http://pf.kakao.com/_xdxeQzb") {
             UIApplication.shared.open(url)

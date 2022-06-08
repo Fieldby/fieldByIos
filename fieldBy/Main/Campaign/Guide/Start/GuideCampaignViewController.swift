@@ -53,10 +53,6 @@ class GuideCampaignViewController: CommonGuideViewController {
     @IBOutlet weak var brandInstagramButton: UIButton!
     @IBOutlet weak var brandView: UIView!
     
-    
-    @IBOutlet weak var buttonView: UIView!
-    @IBOutlet weak var applyButton: UIButton!
-    
     @IBOutlet weak var snackBar: UIView!
     
     
@@ -67,6 +63,8 @@ class GuideCampaignViewController: CommonGuideViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationController?.navigationBar.isHidden = true
 
         setDelegate()
         makeUI()
@@ -99,13 +97,6 @@ class GuideCampaignViewController: CommonGuideViewController {
                 $0!.addGrayShadow()
             }
         
-        applyButton.layer.cornerRadius = 13
-        
-        buttonView.layer.cornerRadius = 21
-        buttonView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        buttonView.layer.borderColor = UIColor.fieldByGray.cgColor
-        buttonView.layer.borderWidth = 1
-        
     }
     
 
@@ -114,7 +105,11 @@ class GuideCampaignViewController: CommonGuideViewController {
         
         backButton.rx.tap
             .subscribe(onNext: { [unowned self] in
-                navigationController?.popViewController(animated: true)
+                if navigationController?.children.count == 1 {
+                    self.dismiss(animated: true)
+                } else {
+                    navigationController?.popViewController(animated: true)
+                }
             })
             .disposed(by: rx.disposeBag)
         
@@ -135,19 +130,6 @@ class GuideCampaignViewController: CommonGuideViewController {
         requiredLabel.text = campaignModel.hashTagModel.required
         optionLabel.text = campaignModel.hashTagModel.option
         brandInstagramLabel.text = "@\(campaignModel.brandInstagram)"
-        
-        applyButton.rx.tap
-            .subscribe(onNext: { [unowned self] in
-                viewModel.pushCautionVC()
-            })
-            .disposed(by: rx.disposeBag)
-        
-        viewModel.pushCautionVC = { [unowned self] in
-            let vc = storyboard?.instantiateViewController(withIdentifier: GuideCautionViewController.storyId) as! GuideCautionViewController
-            vc.campaignModel = campaignModel
-            self.navigationController?.pushViewController(vc, animated: true)
-        }
-        
         
         ftcButton.rx.tap
             .bind(onNext: { [unowned self] in

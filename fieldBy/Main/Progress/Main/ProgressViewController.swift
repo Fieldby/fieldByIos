@@ -15,14 +15,9 @@ class ProgressViewController: UIViewController {
     @IBOutlet weak var topView: UIView!
     
     @IBOutlet weak var usernameLabel: UILabel!
-    
     @IBOutlet weak var appliedLabel: UILabel!
-    
     @IBOutlet weak var inProgressLabel: UILabel!
-    
     @IBOutlet weak var doneLabel: UILabel!
-    
-    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var indicator: UIActivityIndicatorView!
     
@@ -104,6 +99,26 @@ class ProgressViewController: UIViewController {
                     self.navigationController?.pushViewController(vc, animated: true)
                     
                 }
+                
+                cell.guidButtonHandler = { [unowned self] in
+                    indicator.isHidden = false
+                    indicator.startAnimating()
+                    CampaignManager.shared.guideImages(campaignModel: model.0)
+                        .subscribe(onNext: { [unowned self] images in
+                            let vc = UIStoryboard(name: "GuideCampaign", bundle: nil).instantiateViewController(withIdentifier: "guidecampaignVC") as! GuideCampaignViewController
+                            vc.guideImages = images
+                            vc.campaignModel = model.0
+                            
+                            let nav = UINavigationController(rootViewController: vc)
+                            indicator.stopAnimating()
+                            indicator.isHidden = true
+                            nav.modalPresentationStyle = .fullScreen
+                            present(nav, animated: true)
+                        })
+                        .disposed(by: rx.disposeBag)
+                }
+                
+                
                 cell.bind(campaignModel: model.0, userModel: model.1)
             }
             .disposed(by: rx.disposeBag)
@@ -120,30 +135,55 @@ class ProgressViewController: UIViewController {
                     
                     CampaignManager.shared.isSelected(uuid: model.0.uuid)
                         .subscribe { [unowned self] bool in
+                            model.0.getMainImage()
+                                .subscribe { [unowned self] image in
+                                    viewModel.showStatus(bool, model.0, image)
+                                    indicator.isHidden = true
+                                    indicator.stopAnimating()
+                                } onError: { [unowned self] err in
+                                    print(err)
+                                    indicator.isHidden = true
+                                    indicator.stopAnimating()
+                                }
+                                .disposed(by: rx.disposeBag)
+
                             
-                            viewModel.showStatus(bool, model.0)
-                            indicator.isHidden = true
-                            indicator.stopAnimating()
+
                         } onError: { [unowned self] _ in
                             indicator.isHidden = true
                             indicator.stopAnimating()
                         }
                         .disposed(by: rx.disposeBag)
+                } else if model.0.status == .delivering || model.0.status == .uploading || model.0.status == .maintaining {
+                    indicator.isHidden = false
+                    indicator.startAnimating()
+                    CampaignManager.shared.guideImages(campaignModel: model.0)
+                        .subscribe(onNext: { [unowned self] images in
+                            let vc = UIStoryboard(name: "GuideCampaign", bundle: nil).instantiateViewController(withIdentifier: "guidecampaignVC") as! GuideCampaignViewController
+                            vc.guideImages = images
+                            vc.campaignModel = model.0
+                            
+                            let nav = UINavigationController(rootViewController: vc)
+                            indicator.stopAnimating()
+                            indicator.isHidden = true
+                            nav.modalPresentationStyle = .fullScreen
+                            present(nav, animated: true)
+                        })
+                        .disposed(by: rx.disposeBag)
+                    
                 }
             })
             .disposed(by: rx.disposeBag)
         
-        viewModel.showStatus = { [unowned self] bool, model in
+        viewModel.showStatus = { [unowned self] bool, model, image in
             guard let bool = bool else {
-                pushGuideFinalVC(model: model)
+                pushGuideFinalVC(model: model, image: image)
                 return
             }
             
             bool ? pushSelectedVC(model: model) : pushUnselectedVC()
             
         }
-        
-        
     }
 
     @objc func pullToRefresh(_ sender: Any) {
@@ -156,20 +196,25 @@ class ProgressViewController: UIViewController {
                 tableView.refreshControl?.endRefreshing()
             }
             .disposed(by: rx.disposeBag)
-
     }
     
-    func pushGuideFinalVC(model: CampaignModel) {
+    
+    func pushGuideFinalVC(model: CampaignModel, image: UIImage) {
         let vc = UIStoryboard(name: "GuideCampaign", bundle: nil).instantiateViewController(withIdentifier: "guidefinalVC") as! GuideFinalViewController
         vc.campaignModel = model
+        vc.campaignImage = image
         vc.isAppling = false
-        self.navigationController?.pushViewController(vc, animated: true)
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .fullScreen
+        present(nav, animated: true)
     }
     
     func pushSelectedVC(model: CampaignModel) {
         let vc = UIStoryboard(name: "GuideCampaign", bundle: nil).instantiateViewController(withIdentifier: CampaignSelectedViewController.storyId) as! CampaignSelectedViewController
         vc.campaignModel = model
-        self.navigationController?.pushViewController(vc, animated: true)
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .fullScreen
+        present(nav, animated: true)
     }
     
     func pushUnselectedVC() {

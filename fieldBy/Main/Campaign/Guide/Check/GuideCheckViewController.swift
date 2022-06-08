@@ -15,6 +15,7 @@ class GuideCheckViewController: CommonGuideViewController {
     static let storyId = "guidecheckVC"
     @IBOutlet weak var backButton: UIButton!
     
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
     @IBOutlet weak var acceptAllImage: UIImageView!
     @IBOutlet weak var acceptAllButton: UIButton!
     @IBOutlet weak var acceptAllArrowButton: UIButton!
@@ -26,15 +27,8 @@ class GuideCheckViewController: CommonGuideViewController {
     @IBOutlet weak var marketingView: UIView!
     @IBOutlet weak var marketingButton: UIButton!
     @IBOutlet weak var marketingImage: UIImageView!
+    @IBOutlet weak var guideButton: UIButton!
     
-    
-    @IBOutlet weak var thirdPartyView: UIView!
-    @IBOutlet weak var thirdPartyImage: UIImageView!
-    @IBOutlet weak var thirdPartyButton: UIButton!
-    
-    @IBOutlet weak var privacyView: UIView!
-    @IBOutlet weak var privacyButton: UIButton!
-    @IBOutlet weak var privacyImage: UIImageView!
     
     @IBOutlet weak var nextButton: UIButton!
     
@@ -42,13 +36,11 @@ class GuideCheckViewController: CommonGuideViewController {
     
     private var message = false
     private var marketing = false
-    private var thirdParty = false
-    private var privacy = false
-    
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        indicator.isHidden = true
         
         nextButton.isEnabled = false
         nextButton.backgroundColor = .unabled
@@ -80,33 +72,40 @@ class GuideCheckViewController: CommonGuideViewController {
             })
             .disposed(by: rx.disposeBag)
         
-        thirdPartyButton.rx.tap
-            .subscribe(onNext: { [unowned self] in
-                thirdParty ? thirdPartyDisagree() : thirdPartyAgree()
-            })
-            .disposed(by: rx.disposeBag)
-        
-        privacyButton.rx.tap
-            .subscribe(onNext: { [unowned self] in
-                privacy ? privacyDisagree() : privacyAgree()
-            })
-            .disposed(by: rx.disposeBag)
-        
         acceptAllArrowButton
             .rx.tap.subscribe(onNext: { [unowned self] in
                 if messageView.isHidden {
                     UIView.animate(withDuration: 0.3) { [unowned self] in
                         acceptAllArrowButton.setImage(UIImage(named: "chevron.up"), for: .normal)
-                        [messageView, marketingView, thirdPartyView, privacyView]
+                        [messageView, marketingView]
                             .forEach { $0!.isHidden = false }
                     }
                 } else {
                     UIView.animate(withDuration: 0.3) { [unowned self] in
                         acceptAllArrowButton.setImage(UIImage(named: "chevron.down"), for: .normal)
-                        [messageView, marketingView, thirdPartyView, privacyView]
+                        [messageView, marketingView]
                             .forEach { $0!.isHidden = true }
                     }
                 }
+            })
+            .disposed(by: rx.disposeBag)
+        
+        guideButton.rx.tap
+            .subscribe(onNext: { [unowned self] in
+                indicator.isHidden = false
+                indicator.startAnimating()
+                
+                CampaignManager.shared.guideImages(campaignModel: campaignModel)
+                    .subscribe(onNext: { [unowned self] images in
+                        let vc = storyboard?.instantiateViewController(withIdentifier: "guidecampaignVC") as! GuideCampaignViewController
+                        vc.guideImages = images
+                        vc.campaignModel = campaignModel
+                        indicator.stopAnimating()
+                        indicator.isHidden = true
+                        navigationController?.pushViewController(vc, animated: true)
+                    })
+                    .disposed(by: rx.disposeBag)
+                
             })
             .disposed(by: rx.disposeBag)
         
@@ -133,7 +132,7 @@ class GuideCheckViewController: CommonGuideViewController {
         message = true
         messageImage.image = UIImage(named: "authCheckSelected")
         
-        if message, marketing, thirdParty, privacy {
+        if message, marketing {
             agreeAll()
         }
         
@@ -150,7 +149,7 @@ class GuideCheckViewController: CommonGuideViewController {
     private func marketingAgree() {
         marketing = true
         marketingImage.image = UIImage(named: "authCheckSelected")
-        if message, marketing, thirdParty, privacy {
+        if message, marketing {
             agreeAll()
         }
     }
@@ -162,38 +161,7 @@ class GuideCheckViewController: CommonGuideViewController {
             simpleCancel()
         }
     }
-    
-    private func thirdPartyAgree() {
-        thirdParty = true
-        thirdPartyImage.image = UIImage(named: "authCheckSelected")
-        if message, marketing, thirdParty, privacy {
-            agreeAll()
-        }
-    }
-    
-    private func thirdPartyDisagree() {
-        thirdParty = false
-        thirdPartyImage.image = UIImage(named: "authCheckUnselected")
-        if acceptAll {
-            simpleCancel()
-        }
-    }
-    
-    private func privacyAgree() {
-        privacy = true
-        privacyImage.image = UIImage(named: "authCheckSelected")
-        if message, marketing, thirdParty, privacy {
-            agreeAll()
-        }
-    }
-    
-    private func privacyDisagree() {
-        privacy = false
-        privacyImage.image = UIImage(named: "authCheckUnselected")
-        if acceptAll {
-            simpleCancel()
-        }
-    }
+
     
     
     private func agreeAll() {
@@ -205,16 +173,11 @@ class GuideCheckViewController: CommonGuideViewController {
         
         marketingImage.image = UIImage(named: "authCheckSelected")
         marketing = true
-        
-        privacyImage.image = UIImage(named: "authCheckSelected")
-        privacy = true
-        
-        thirdPartyImage.image = UIImage(named: "authCheckSelected")
-        thirdParty = true
+
         
         UIView.animate(withDuration: 0.3) { [unowned self] in
             acceptAllArrowButton.setImage(UIImage(named: "chevron.down"), for: .normal)
-            [messageView, marketingView, thirdPartyView, privacyView]
+            [messageView, marketingView]
                 .forEach { $0!.isHidden = true }
         }
 
@@ -237,21 +200,20 @@ class GuideCheckViewController: CommonGuideViewController {
         
         marketingImage.image = UIImage(named: "authCheckUnselected")
         marketing = false
-        
-        privacyImage.image = UIImage(named: "authCheckUnselected")
-        privacy = false
-        
-        thirdPartyImage.image = UIImage(named: "authCheckUnselected")
-        thirdParty = false
+
         
         UIView.animate(withDuration: 0.3) { [unowned self] in
             acceptAllArrowButton.setImage(UIImage(named: "chevron.up"), for: .normal)
-            [messageView, marketingView, thirdPartyView, privacyView]
+            [messageView, marketingView]
                 .forEach { $0!.isHidden = false }
         }
         
         nextButton.isEnabled = false
         nextButton.backgroundColor = .unabled
     }
-
+    
+    @IBAction func thirdParty(_ sender: Any) {
+        openUrl(url: "https://hyuwo.notion.site/3-c548547717794ec9ae4c524821ecf1d4")
+    }
+    
 }

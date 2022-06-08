@@ -105,11 +105,6 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blur" translatesAutoresizingMaskIntoConstraints="NO" id="qBZ-z8-6xo">
                                 <rect key="frame" x="0.0" y="715" width="414" height="67"/>
                             </imageView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="HOX-8J-lUj">
-                                <rect key="frame" x="197" y="438" width="20" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" name="MainColor"/>
-                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="SsR-hc-yqQ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -136,7 +131,6 @@
                     <connections>
                         <outlet property="collectionView" destination="OI8-Dh-ZBe" id="zsE-2c-4SP"/>
                         <outlet property="doneButton" destination="0yv-hl-d1h" id="1hT-Fy-6BX"/>
-                        <outlet property="indicator" destination="HOX-8J-lUj" id="ekD-R6-qIv"/>
                         <outlet property="viewModel" destination="pAn-5o-jcE" id="Dng-1g-vYS"/>
                     </connections>
                 </viewController>

@@ -15,7 +15,8 @@ class AuthManager: CommonBackendType {
     static let shared = AuthManager()
     
     var myUserModel: MyUserModel!
-    
+
+    var mainTabBar: MainTabBarController!
     var fbToken: String!
     var userUUID: String!
     static let certificatedNumberPath = "/certificatedNumberList"

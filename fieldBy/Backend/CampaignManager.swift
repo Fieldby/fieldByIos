@@ -81,7 +81,7 @@ class CampaignManager: CommonBackendType {
             var images = [UIImage](repeating: UIImage(systemName: "pencil")!, count: campaignModel.guides.count)
             for i in 0..<campaignModel.guides.count {
                 storageRef.child("campaignImages").child(campaignModel.uuid).child("guideImages").child(campaignModel.guides[i].imageUrl)
-                    .getData(maxSize: 1024 * 1024) { data, error in
+                    .getData(maxSize: 4096 * 4096) { data, error in
                         if let error = error {
                             print(error)
                             observable.onError(FetchError.emptyData)
@@ -180,7 +180,7 @@ class CampaignManager: CommonBackendType {
             ref.child("users").child(AuthManager.shared.myUserModel.uuid).child("campaigns").child(uuid).child("isSelected")
                 .observeSingleEvent(of: .value) { dataSnapShot in
                     let value = dataSnapShot.value as? Bool
-                    
+                    AuthManager.shared.myUserModel.selectedCampaigns[uuid] = value
                     observable(.success(value))
                 }
             

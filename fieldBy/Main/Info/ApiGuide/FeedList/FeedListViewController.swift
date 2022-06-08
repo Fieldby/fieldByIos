@@ -23,7 +23,7 @@ class FeedListViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var button: UIButton!
     
-    private var imageSubject = BehaviorSubject<[(UIImage?, ImageData)]>(value: [])
+    private var imageSubject = BehaviorSubject<[ImageData]>(value: [])
     private var indexes = [Int]()
     
     override func viewDidLoad() {
@@ -48,10 +48,10 @@ class FeedListViewController: UIViewController {
         }
         
         imageSubject
-            .map { $0.filter { $0.0 != nil }}
-            .bind(to: collectionView.rx.items(cellIdentifier: FeedCell.reuseId, cellType: FeedCell.self)) { [unowned self] idx, image, cell in
+            .map { $0.filter { $0.mediaType != .video }}
+            .bind(to: collectionView.rx.items(cellIdentifier: FeedCell.reuseId, cellType: FeedCell.self)) { [unowned self] idx, imageData, cell in
                 
-                cell.mainImageView.image = image.0
+                cell.mainImageView.setImage(url: imageData.mediaURL)
             }
             .disposed(by: rx.disposeBag)
         
@@ -96,12 +96,12 @@ class FeedListViewController: UIViewController {
                 
                 
                 imageSubject
-                    .map { $0.filter { $0.0 != nil }}
+                    .map { $0.filter { $0.mediaType != .video }}
                     .subscribe(onNext: { [unowned self] imageArray in
                         
                         var temp: [String] = []
                         for idx in indexes {
-                            temp.append(imageArray[idx].1.mediaURL)
+                            temp.append(imageArray[idx].mediaURL)
                         }
                         
                         AuthManager.shared.bestImages(urls: temp)

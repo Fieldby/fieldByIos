@@ -74,8 +74,8 @@ class CampaignModel: Codable {
            let selectionDate = value["selectionDate"] as? String,
            let itemDate = value["itemDate"] as? String,
            let uploadDate = value["uploadDate"] as? String,
-           let leastFeed = value["leastFeed"] as? Int,
-           let maintain = value["maintain"] as? Int,
+           let leastFeed = value["leastFeed"] as? String,
+           let maintain = value["maintain"] as? String,
            let brandName = value["brandName"] as? String,
            let brandInstagram = value["brandInstagram"] as? String,
            let recruitingDate = value["recruitingDate"] as? String
@@ -87,8 +87,8 @@ class CampaignModel: Codable {
             self.selectionDate = selectionDate
             self.itemDate = itemDate
             self.uploadDate = uploadDate
-            self.leastFeed = leastFeed
-            self.maintain = maintain
+            self.leastFeed = Int(leastFeed)!
+            self.maintain = Int(maintain)!
             self.brandName = brandName
             self.brandInstagram = brandInstagram
             self.recruitingDate = recruitingDate
@@ -140,19 +140,34 @@ class CampaignModel: Codable {
         
     }
     
+    func getMainImage() -> Single<UIImage> {
+        return Single.create() { [unowned self] observable in
+            
+            Storage.storage().reference().child(mainImageUrl)
+                .downloadURL { [unowned self] url, error in
+                    let data = try! Data(contentsOf: url!)
+                    observable(.success(UIImage(data: data)!))
+                }
+            return Disposables.create()
+        }
+
+    }
+    
 }
 
 struct ItemModel: Codable {
     let name: String
     let description: String
     let price: Int
+    let url: String
     let option: ItemOptionModel?
     
     init(snapshot: DataSnapshot) {
         let value = snapshot.value as! [String: Any]
         name = value["name"] as! String
         description = value["description"] as! String
-        price = value["price"] as! Int
+        price = Int(value["price"] as! String)!
+        url = value["url"] as! String
         
         let optionValue = snapshot.childSnapshot(forPath: "option")
         if optionValue.exists() {

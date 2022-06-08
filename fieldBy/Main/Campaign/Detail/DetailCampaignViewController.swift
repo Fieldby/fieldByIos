@@ -15,10 +15,9 @@ class DetailCampaignViewController: UIViewController {
 
     static let storyId = "detailcampaignVC"
     
+    @IBOutlet weak var mainImageView: UIImageView!
     @IBOutlet weak var backButton: UIButton!
-    
-    @IBOutlet weak var collectionView: UICollectionView!
-    
+
     @IBOutlet weak var transparentView: UIView!
     
     
@@ -36,6 +35,7 @@ class DetailCampaignViewController: UIViewController {
     @IBOutlet weak var dateContainer: UIView!
     @IBOutlet weak var infoContainer: UIView!
     
+    @IBOutlet weak var itemUrlButton: UIButton!
     @IBOutlet weak var selectionDateLabel: UILabel!
     @IBOutlet weak var doneSelectionDateLabel: UILabel!
     
@@ -55,6 +55,11 @@ class DetailCampaignViewController: UIViewController {
     @IBOutlet weak var priceLabel: UILabel!
     
     @IBOutlet weak var helpButton: UIButton!
+    
+    @IBOutlet weak var doneBottomView: UIView!
+    
+    @IBOutlet weak var progressButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var applyButton: UIButton!
     @IBOutlet weak var bottomView: UIView!
     
@@ -67,6 +72,7 @@ class DetailCampaignViewController: UIViewController {
     @IBOutlet weak var doneView: UIView!
     @IBOutlet weak var roadAddrLabel: UILabel!
     @IBOutlet weak var postNumLabel: UILabel!
+    @IBOutlet weak var cancelInfoLabel: UILabel!
     
     
     
@@ -75,6 +81,10 @@ class DetailCampaignViewController: UIViewController {
     
     private var timer: Timer?
     
+    private let mainTabBar = AuthManager.shared.mainTabBar
+    
+    private var isSelected = false
+    var mainImage: UIImage!
     var campaignModel: CampaignModel!
     var timeSubject = BehaviorSubject<String>(value: "")
     
@@ -105,6 +115,10 @@ class DetailCampaignViewController: UIViewController {
     
 
     private func makeUI() {
+        if AuthManager.shared.myUserModel.selectedCampaigns[campaignModel.uuid] == true { isSelected = true }
+        
+        mainImageView.image = mainImage
+        
         indicator.isHidden = true
         timeStickyContainer.layer.cornerRadius = 14.5
         isNewContainer.layer.cornerRadius = 9.5
@@ -114,13 +128,20 @@ class DetailCampaignViewController: UIViewController {
         infoContainer.layer.cornerRadius = 21
         infoContainer.addGrayShadow(color: .gray, opacity: 0.15, radius: 3)
         mainScrollView.contentInsetAdjustmentBehavior = .never
-        collectionView.contentInsetAdjustmentBehavior = .never
         
         applyButton.layer.cornerRadius = 13
+        cancelButton.layer.cornerRadius = 13
+        progressButton.layer.cornerRadius = 13
         
         bottomView.layer.cornerRadius = 21
         bottomView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        
+        doneBottomView.isHidden = true
+        
+        
         shadowView.layer.cornerRadius = 21
+        
+        timeStickyContainer.addGrayShadow()
         
         isDone = AuthManager.shared.myUserModel.campaignUuids[campaignModel.uuid] ?? false
         
@@ -134,6 +155,16 @@ class DetailCampaignViewController: UIViewController {
             doneView.isHidden = false
             notDoneInfoView.isHidden = true
             doneInfoView.isHidden = false
+            
+            doneBottomView.isHidden = false
+            shadowView.isHidden = true
+            bottomView.isHidden = true
+            
+            if isSelected {
+                cancelButton.isHidden = true
+                progressButton.setTitle("가이드 확인", for: .normal)
+                cancelInfoLabel.isHidden = true
+            }
 
         } else {
             notDoneView.isHidden = false
@@ -141,23 +172,24 @@ class DetailCampaignViewController: UIViewController {
             
             notDoneInfoView.isHidden = false
             doneInfoView.isHidden = true
+            
+            doneBottomView.isHidden = true
+            shadowView.isHidden = false
+            bottomView.isHidden = false
         }
         
         transparentView.isUserInteractionEnabled = false
     }
     
     private func bind() {
-        viewModel.fetchImage(uuid: campaignModel.uuid)
-        
-        collectionView.rx.setDelegate(self)
-            .disposed(by: rx.disposeBag)
-
         
         brandNameLabel.text = campaignModel.brandName
         titleLabel.text = campaignModel.itemModel.name
         subTitleLabel.text = campaignModel.itemModel.description
         
         isNewContainer.isHidden = !campaignModel.isNew
+        
+        cancelInfoLabel.text = "신청 취소는 \(campaignModel.selectionDate.month)월 \(campaignModel.selectionDate.day)일 전까지만 가능합니다"
         
         if !isDone {
             timeSubject
@@ -175,7 +207,7 @@ class DetailCampaignViewController: UIViewController {
         
         
         selectionDateLabel.text = campaignModel.selectionDate.parsedDate
-        doneSelectionDateLabel.text = campaignModel.selectionDate.parsedDate
+        doneSelectionDateLabel.text = "\(campaignModel.selectionDate.month)월 \(campaignModel.selectionDate.day)일"
         itemDateLabel.text = "~\(campaignModel.itemDate.parsedDate)"
         betweenDateLabel.text = "\(campaignModel.itemDate.parsedDate)~\(campaignModel.uploadDate.parsedDate)"
         uploadDateLabel.text = campaignModel.uploadDate.parsedDate
@@ -191,14 +223,49 @@ class DetailCampaignViewController: UIViewController {
             .throttle(.seconds(3), latest: false, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [unowned self] in
                 
-                if AuthManager.shared.myUserModel.campaignUuids[campaignModel.uuid] == true {
-                    viewModel.presentPopup("캠페인 신청이 취소되었습니다.")
-                } else if AuthManager.shared.myUserModel.igModel == nil {
+                if AuthManager.shared.myUserModel.igModel == nil {
                     viewModel.presentPopup("캠페인에 지원하려면 인스타그램 채널 연결이 필요합니다. \n연결은 마이페이지에서 진행할 수 있습니다.")
                 } else {
                     viewModel.pushGuideVC()
                 }
 
+
+            })
+            .disposed(by: rx.disposeBag)
+        
+        itemUrlButton.rx.tap
+            .subscribe(onNext: { [unowned self] in
+                openUrl(url: campaignModel.itemModel.url)
+            })
+            .disposed(by: rx.disposeBag)
+        
+        cancelButton.rx.tap
+            .subscribe(onNext: { [unowned self] in
+                viewModel.presentPopup("캠페인 신청이 취소되었습니다.")
+            })
+            .disposed(by: rx.disposeBag)
+        
+        progressButton.rx.tap
+            .subscribe(onNext: { [unowned self] in
+                if isSelected {
+                    indicator.isHidden = false
+                    indicator.startAnimating()
+                    
+                    CampaignManager.shared.guideImages(campaignModel: campaignModel)
+                        .subscribe(onNext: { [unowned self] images in
+                            let vc = UIStoryboard(name: "GuideCampaign", bundle: nil).instantiateViewController(withIdentifier: "guidecampaignVC") as! GuideCampaignViewController
+                            vc.guideImages = images
+                            vc.campaignModel = campaignModel
+                            indicator.stopAnimating()
+                            indicator.isHidden = true
+                            navigationController?.pushViewController(vc, animated: true)
+                        })
+                        .disposed(by: rx.disposeBag)
+                } else {
+                    dismiss(animated: true) { [unowned self] in
+                        mainTabBar!.selectedIndex = 1
+                    }
+                }
             })
             .disposed(by: rx.disposeBag)
         
@@ -231,15 +298,7 @@ class DetailCampaignViewController: UIViewController {
                 }
             })
             .disposed(by: rx.disposeBag)
-        
-        viewModel.imageUrlRelay
-            .bind(to: collectionView.rx.items(cellIdentifier: MainImageCell.reuseId, cellType: MainImageCell.self)) { idx, url, cell in
-                cell.mainImageView.kf.indicatorType = .activity
-                cell.mainImageView.kf.setImage(with: url,
-                                               options: [.transition(.fade(0.7)), .forceTransition, .keepCurrentImageWhileLoading])
-            }
-            .disposed(by: rx.disposeBag)
-        
+
         helpButton.rx.tap
             .subscribe(onNext: { [unowned self] in
                 viewModel.helpAction()
@@ -248,6 +307,14 @@ class DetailCampaignViewController: UIViewController {
     }
     
     private func pushGuideVC() {
+        let vc = UIStoryboard(name: "GuideCampaign", bundle: nil).instantiateViewController(withIdentifier: "guidecheckVC") as! GuideCheckViewController
+        vc.campaignModel = campaignModel
+        self.navigationController?.pushViewController(vc, animated: true)
+        indicator.stopAnimating()
+        indicator.isHidden = true
+    }
+    
+    private func pushGuideImageVC() {
         let vc = UIStoryboard(name: "GuideCampaign", bundle: nil).instantiateViewController(withIdentifier: "guidecheckVC") as! GuideCheckViewController
         vc.campaignModel = campaignModel
         self.navigationController?.pushViewController(vc, animated: true)

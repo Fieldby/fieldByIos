@@ -9,6 +9,6 @@ import Foundation
 
 class GuideCampaignViewModel: NSObject {
     
-    var pushCautionVC: (() -> Void)!
+
     
 }

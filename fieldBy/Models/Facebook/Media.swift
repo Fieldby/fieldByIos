@@ -26,11 +26,13 @@ struct ImageData: Codable {
     let id: String
     let mediaURL: String
     let timestamp: String
+    let mediaType: IGMediaType
 
     enum CodingKeys: String, CodingKey {
         case mediaURL = "media_url"
         case timestamp
         case id
+        case mediaType = "media_type"
     }
 }
 
@@ -47,4 +49,10 @@ struct Children: Codable {
 // MARK: - Datum
 struct ChildId: Codable {
     let id: String
+}
+
+enum IGMediaType: String, Codable {
+    case image = "IMAGE"
+    case album = "CAROUSEL_ALBUM"
+    case video = "VIDEO"
 }
