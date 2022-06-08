@@ -411,10 +411,6 @@ class PhoneViewController: UIViewController {
                 }
             }
             .disposed(by: rx.disposeBag)
-
-        
-
-
     }
     
     private func foldAgreement() {
@@ -449,6 +445,17 @@ class PhoneViewController: UIViewController {
         case agreement
     }
     
+    @IBAction func usageTap(_ sender: Any) {
+        openUrl(url: "https://hyuwo.notion.site/f82dd55f687e42c9aa901206d6009800")
+    }
+    
+    @IBAction func privacyTap(_ sender: Any) {
+        openUrl(url: "https://hyuwo.notion.site/234d2a7b6aee4fc7b0146c707391e9f9")
+    }
+    
+    @IBAction func marketingTap(_ sender: Any) {
+        openUrl(url: "https://hyuwo.notion.site/d09a1e7a3f974b2ba1527ce576a33bcd")
+    }
 }
 
 extension PhoneViewController: PanModalPresentable {

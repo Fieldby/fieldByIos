@@ -37,7 +37,7 @@ class NotiManager: CommonBackendType {
                         }
                     }
                     
-                    observable.onNext(temp)
+                    observable.onNext(temp.sorted(by: { $0.time > $1.time }))
                 } else {
                     observable.onNext([])
                 }

@@ -17,6 +17,7 @@
 		D106B0AF281EA2A400E6CCFA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D106B0AD281EA2A400E6CCFA /* Main.storyboard */; };
 		D106B0B1281EA2A500E6CCFA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D106B0B0281EA2A500E6CCFA /* Assets.xcassets */; };
 		D106B0B4281EA2A500E6CCFA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D106B0B2281EA2A500E6CCFA /* LaunchScreen.storyboard */; };
+		D1115EF8285075DE00C5A36B /* IsProViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1115EF7285075DD00C5A36B /* IsProViewController.swift */; };
 		D1121D202830D2B000149263 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D1121D1F2830D2B000149263 /* GoogleService-Info.plist */; };
 		D1121D222830E31500149263 /* GolfInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1121D212830E31500149263 /* GolfInfo.swift */; };
 		D1121D252830E49A00149263 /* GolfInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1121D242830E49A00149263 /* GolfInfoViewController.swift */; };
@@ -128,6 +129,7 @@
 		D106B0B3281EA2A500E6CCFA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D106B0B5281EA2A500E6CCFA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D11155E5282A650300C9ECA1 /* fieldBy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = fieldBy.entitlements; sourceTree = "<group>"; };
+		D1115EF7285075DD00C5A36B /* IsProViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsProViewController.swift; sourceTree = "<group>"; };
 		D1121D1F2830D2B000149263 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D1121D212830E31500149263 /* GolfInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GolfInfo.swift; sourceTree = "<group>"; };
 		D1121D242830E49A00149263 /* GolfInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GolfInfoViewController.swift; sourceTree = "<group>"; };
@@ -301,9 +303,18 @@
 			path = fieldBy;
 			sourceTree = "<group>";
 		};
+		D1115EF6285075D500C5A36B /* isPro */ = {
+			isa = PBXGroup;
+			children = (
+				D1115EF7285075DD00C5A36B /* IsProViewController.swift */,
+			);
+			path = isPro;
+			sourceTree = "<group>";
+		};
 		D1121D232830E48D00149263 /* GolfInfo */ = {
 			isa = PBXGroup;
 			children = (
+				D1115EF6285075D500C5A36B /* isPro */,
 				D1121D242830E49A00149263 /* GolfInfoViewController.swift */,
 				D1121D262830E4A300149263 /* GolfInfoViewModel.swift */,
 			);
@@ -967,6 +978,7 @@
 				D1C89EE02822B65C00DAA2F4 /* MainTabBarController.swift in Sources */,
 				D1121D252830E49A00149263 /* GolfInfoViewController.swift in Sources */,
 				D1EA5D9F282535E7000E35A0 /* MyUserModel.swift in Sources */,
+				D1115EF8285075DE00C5A36B /* IsProViewController.swift in Sources */,
 				D1AA5CBC281EAF1A00279CC8 /* PhoneViewController.swift in Sources */,
 				D11376D8283673F700CFC3D2 /* GuideFinalViewController.swift in Sources */,
 				D1014762283BB4AF00B10F8A /* MediaListViewController.swift in Sources */,

@@ -18,7 +18,7 @@ class AuthManager: CommonBackendType {
 
     var mainTabBar: MainTabBarController!
     var fbToken: String!
-    var userUUID: String!
+    var userUUID: String! = "yDWob0CJ5gR3S9LvPlStfTOSctn1"   //MARK: TODO - 지울것
     static let certificatedNumberPath = "/certificatedNumberList"
     static private let addressKey = "U01TX0FVVEgyMDIyMDUwMzE3MjM0NDExMjUzMDc="
     

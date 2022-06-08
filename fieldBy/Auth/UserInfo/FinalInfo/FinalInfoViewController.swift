@@ -15,14 +15,10 @@ class FinalInfoViewController: UIViewController {
     static let storyId = "finalinfoVC"
     
     
-    @IBOutlet weak var isProView: UILabel!
+    @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var styleView: UIView!
     @IBOutlet weak var yesButton: UIButton!
-    @IBOutlet weak var noButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
-    
-    private var isPro = false
-    private var status = Status.isPro
     
     private var selectedCount = 0
     private var cellViewModel: [Bool] = [Bool](repeating: false, count: Style.allCases.count)
@@ -31,40 +27,21 @@ class FinalInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        collectionView.isHidden = true
-        styleView.isHidden = true
+        backButton.rx.tap
+            .subscribe(onNext: { [unowned self] in
+                navigationController?.popViewController(animated: true)
+            })
+            .disposed(by: rx.disposeBag)
+    
         yesButton.layer.cornerRadius = 13
-        noButton.layer.cornerRadius = 13
         
         yesButton.rx.tap
             .subscribe(onNext: { [unowned self] in
-                if status == .isPro {
-                    isPro = true
-                    status = .style
-                    collectionView.isHidden = false
-                    styleView.isHidden = false
-                    isProView.isHidden = true
-                } else if status == .style {
-                    saveInfo()
-                    navigationController?.dismiss(animated: true)
-                }
+                saveInfo()
+                navigationController?.dismiss(animated: true)
             })
             .disposed(by: rx.disposeBag)
-        
-        
-        noButton.rx.tap
-            .subscribe(onNext: { [unowned self] in
-                if status == .isPro {
-                    isPro = false
-                    status = .style
-                    collectionView.isHidden = false
-                    styleView.isHidden = false
-                    isProView.isHidden = true
-                } else if status == .style {
-                    saveInfo()
-                }
-            })
-            .disposed(by: rx.disposeBag)
+
         
         collectionView.rx.setDelegate(self)
             .disposed(by: rx.disposeBag)
@@ -108,7 +85,6 @@ class FinalInfoViewController: UIViewController {
     }
     
     private func saveInfo() {
-        AuthManager.saveUserInfo(key: "isPro", value: isPro)
         var value: [String: String] = [:]
         var count = 0
         for i in 0..<cellViewModel.count {
@@ -118,12 +94,6 @@ class FinalInfoViewController: UIViewController {
             }
         }
         AuthManager.saveUserInfo(key: "styles", value: value)
-    }
-
-    
-    enum Status {
-        case isPro
-        case style
     }
 
 }

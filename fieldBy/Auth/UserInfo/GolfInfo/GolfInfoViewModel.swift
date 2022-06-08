@@ -12,7 +12,7 @@ class GolfInfoViewModel: NSObject {
     var careerIndex: Int?
     var roundingIndex: Int?
     
-    var pushFinalVC: (() -> Void)!
+    var pushIsProVC: (() -> Void)!
     
     func saveInfo() {
         AuthManager.saveUserInfo(key: "stroke", value: StrokeAverage.allCases[strokeIndex!].rawValue)

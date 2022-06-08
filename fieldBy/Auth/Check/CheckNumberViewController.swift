@@ -23,11 +23,14 @@ class CheckNumberViewController: UIViewController {
     @IBOutlet weak var reRequestButton: UIButton!
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var timeLabel: UILabel!
     
     @IBOutlet var viewModel: CheckNumberViewModel!
     var topVC: PhoneViewController!
     var phoneNumber: String!
     
+    private var timer: Timer?
+    private var count = 0
     
     private var isKeyboardLoaded = false
         
@@ -40,7 +43,28 @@ class CheckNumberViewController: UIViewController {
         makeUI()
         bind()
         
+        
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [unowned self] timer in
+            count += 1
+            let min = (180-count)/60
+            let sec = (180-count)%60
+            
+            timeLabel.text = "\(min):\(sec)"
+            
+            if count > 180 {
+                timer.invalidate()
+            }
+        })
 
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if let timer = timer {
+            timer.invalidate()
+        }
+        
     }
 
     private func makeUI() {
@@ -69,8 +93,6 @@ class CheckNumberViewController: UIViewController {
                 codeView.isHidden = false
                 codeTextField.becomeFirstResponder()
 
-                
-                //MARK: 살릴것
                 viewModel.verify(phoneNumber: phoneNumber)
                     .subscribe {
                         print("complete")
@@ -79,6 +101,23 @@ class CheckNumberViewController: UIViewController {
                     }
                     .disposed(by: rx.disposeBag)
 
+            })
+            .disposed(by: rx.disposeBag)
+        
+        reRequestButton.rx.tap
+            .throttle(.seconds(3), latest: false, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] in
+                requestButton.isHidden = true
+                codeView.isHidden = false
+                codeTextField.becomeFirstResponder()
+                count = 0
+                viewModel.verify(phoneNumber: phoneNumber)
+                    .subscribe {
+                        print("complete")
+                    } onError: { err in
+                        print(err)
+                    }
+                    .disposed(by: rx.disposeBag)
             })
             .disposed(by: rx.disposeBag)
         
@@ -107,7 +146,7 @@ class CheckNumberViewController: UIViewController {
                 
                 //MARK: 지울 것
 //                dismiss(animated: true) {
-//                    self.topVC.startWritingName()
+//                    self.topVC.startWritingName(uuid: "yDWob0CJ5gR3S9LvPlStfTOSctn1")
 //                }
                 
                 

@@ -139,13 +139,13 @@ class GolfInfoViewController: UIViewController {
                     }
                 case .rounding:
                     viewModel.saveInfo()
-                    viewModel.pushFinalVC()
+                    viewModel.pushIsProVC()
                 }
             })
             .disposed(by: rx.disposeBag)
         
-        viewModel.pushFinalVC = { [unowned self] in
-            let vc = storyboard?.instantiateViewController(withIdentifier: FinalInfoViewController.storyId) as! FinalInfoViewController
+        viewModel.pushIsProVC = { [unowned self] in
+            let vc = storyboard?.instantiateViewController(withIdentifier: "isproVC") as! IsProViewController
             navigationController?.pushViewController(vc, animated: true)
         }
         

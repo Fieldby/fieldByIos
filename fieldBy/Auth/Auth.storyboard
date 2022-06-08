@@ -195,6 +195,9 @@
                                                                 </constraints>
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                 <state key="normal" image="chevron.right"/>
+                                                                <connections>
+                                                                    <action selector="usageTap:" destination="0XO-ee-stq" eventType="touchUpInside" id="TDH-vN-DI6"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -240,6 +243,9 @@
                                                                 </constraints>
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                 <state key="normal" image="chevron.right"/>
+                                                                <connections>
+                                                                    <action selector="privacyTap:" destination="0XO-ee-stq" eventType="touchUpInside" id="7av-Hn-Kxn"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -285,6 +291,9 @@
                                                                 </constraints>
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                 <state key="normal" image="chevron.right"/>
+                                                                <connections>
+                                                                    <action selector="marketingTap:" destination="0XO-ee-stq" eventType="touchUpInside" id="6Cw-GE-fX7"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -592,19 +601,27 @@
                                         <rect key="frame" x="0.0" y="0.0" width="271" height="60"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="인증 번호 입력" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZwO-g3-KaO">
-                                                <rect key="frame" x="20" y="13" width="231" height="34"/>
+                                                <rect key="frame" x="20" y="13" width="131" height="34"/>
                                                 <color key="textColor" name="Black"/>
                                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                             </textField>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zW7-bR-I2h">
+                                                <rect key="frame" x="218" y="19" width="38" height="22"/>
+                                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="18"/>
+                                                <color key="textColor" red="0.46274509803921571" green="0.43529411764705883" blue="0.43529411764705883" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" name="LightGray"/>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="ZwO-g3-KaO" secondAttribute="trailing" constant="20" id="Uw1-zT-Rne"/>
+                                            <constraint firstAttribute="trailing" secondItem="ZwO-g3-KaO" secondAttribute="trailing" constant="120" id="Uw1-zT-Rne"/>
                                             <constraint firstItem="ZwO-g3-KaO" firstAttribute="top" secondItem="Aof-fx-0WM" secondAttribute="top" constant="13" id="VFz-Na-Z9f"/>
+                                            <constraint firstAttribute="trailing" secondItem="zW7-bR-I2h" secondAttribute="trailing" constant="15" id="eeQ-VD-keM"/>
                                             <constraint firstAttribute="bottom" secondItem="ZwO-g3-KaO" secondAttribute="bottom" constant="13" id="g0Z-mW-rLG"/>
                                             <constraint firstAttribute="width" secondItem="Aof-fx-0WM" secondAttribute="height" multiplier="253:56" id="kfY-LG-Kcy"/>
                                             <constraint firstItem="ZwO-g3-KaO" firstAttribute="leading" secondItem="Aof-fx-0WM" secondAttribute="leading" constant="20" id="oTl-Xw-P1h"/>
+                                            <constraint firstItem="zW7-bR-I2h" firstAttribute="centerY" secondItem="Aof-fx-0WM" secondAttribute="centerY" id="v9d-bt-9Le"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rKI-7J-FMh">
@@ -688,6 +705,7 @@
                         <outlet property="nextButton" destination="PCx-Oe-lfo" id="hHa-z0-oHS"/>
                         <outlet property="reRequestButton" destination="i3E-WO-ZP0" id="7IM-UV-RDM"/>
                         <outlet property="requestButton" destination="uQb-gR-ynE" id="CjE-Pk-btC"/>
+                        <outlet property="timeLabel" destination="zW7-bR-I2h" id="gc1-rn-qwe"/>
                         <outlet property="viewModel" destination="9bJ-b5-b8w" id="nOt-Ej-7DD"/>
                     </connections>
                 </viewController>
