@@ -174,6 +174,7 @@
                                                 </view>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="0en-tP-WsK" secondAttribute="trailing" constant="20" id="3A5-jf-eOe"/>
                                                 <constraint firstItem="iUm-J5-inu" firstAttribute="top" secondItem="o3L-Lt-vp6" secondAttribute="bottom" constant="21.5" id="8k5-S4-Q83"/>
                                                 <constraint firstItem="qzh-ct-CPP" firstAttribute="centerY" secondItem="iUm-J5-inu" secondAttribute="centerY" id="A8H-5J-QgV"/>
                                                 <constraint firstItem="0en-tP-WsK" firstAttribute="centerY" secondItem="o3L-Lt-vp6" secondAttribute="centerY" id="B6I-3L-Fi5"/>

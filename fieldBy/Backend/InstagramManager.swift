@@ -223,6 +223,16 @@ class InstagramManager: NSObject {
             
             let url = "\(graphUrl)\(igId)?fields=media&access_token=\(igModel.token!)"
             
+            AF.request(url, method: .get)
+                .responseString { response in
+                    switch response.result {
+                    case .success(let str):
+                        print(str)
+                    case .failure(let err):
+                        print(err)
+                    }
+                }
+            
             
             AF.request(url, method: .get)
                 .validate(statusCode: 200..<300)
@@ -236,6 +246,7 @@ class InstagramManager: NSObject {
                             }
                             observable(.success(temp))
                         } else {
+                            print("feedids decodingFailed")
                             observable(.error(FetchError.decodingFailed))
                         }
                     case .failure(let error):

@@ -74,6 +74,7 @@ class DetailCampaignViewController: UIViewController {
     @IBOutlet weak var roadAddrLabel: UILabel!
     @IBOutlet weak var postNumLabel: UILabel!
     @IBOutlet weak var cancelInfoLabel: UILabel!
+    @IBOutlet weak var addressButton: UIButton!
     
     
     
@@ -99,6 +100,12 @@ class DetailCampaignViewController: UIViewController {
                 calculateDate()
             })
         }
+        
+        if let model = AuthManager.shared.myUserModel.campaigns.first(where: { $0.uuid == campaignModel.uuid }) {
+            roadAddrLabel.text = model.juso?.roadAddr ?? AuthManager.shared.myUserModel.juso.roadAddr
+            postNumLabel.text = model.juso?.zipNo ?? AuthManager.shared.myUserModel.juso.zipNo
+        }
+
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -149,8 +156,6 @@ class DetailCampaignViewController: UIViewController {
         if isDone {
             timeStickyContainer.backgroundColor = .main
             timeLabel.text = "제안 완료!"
-            roadAddrLabel.text = AuthManager.shared.myUserModel.juso.roadAddr
-            postNumLabel.text = AuthManager.shared.myUserModel.juso.zipNo
             notDoneView.isHidden = true
             doneView.isHidden = false
             notDoneInfoView.isHidden = true
@@ -312,6 +317,16 @@ class DetailCampaignViewController: UIViewController {
         mainImageButton.rx.tap
             .subscribe(onNext: { [unowned self] in
                 presentImageVC()
+            })
+            .disposed(by: rx.disposeBag)
+        
+        addressButton.rx.tap
+            .subscribe(onNext: { [unowned self] in
+                let vc = UIStoryboard(name: "Address", bundle: nil).instantiateViewController(withIdentifier: "addressVC") as! AddressViewController
+                vc.modalPresentationStyle = .fullScreen
+                vc.isIndividual = true
+                vc.campaignUuid = campaignModel.uuid
+                self.present(vc, animated: true)
             })
             .disposed(by: rx.disposeBag)
     }

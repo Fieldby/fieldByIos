@@ -48,6 +48,12 @@
                                             <rect key="frame" x="0.0" y="0.0" width="346" height="119"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LJM-0o-NGJ">
+                                                    <rect key="frame" x="318" y="0.0" width="18" height="22"/>
+                                                    <color key="tintColor" red="0.46274509803921571" green="0.43529411764705883" blue="0.43529411764705883" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                    <state key="normal" image="xmark" catalog="system"/>
+                                                </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="알림 제목" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hFO-Ra-QUw">
                                                     <rect key="frame" x="0.0" y="10" width="60" height="20"/>
                                                     <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="16"/>
@@ -82,6 +88,7 @@
                                                 </view>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="LJM-0o-NGJ" firstAttribute="top" secondItem="bkZ-pR-SCh" secondAttribute="top" id="03F-vw-MkM"/>
                                                 <constraint firstAttribute="trailing" secondItem="yfG-qX-tJz" secondAttribute="trailing" id="ID9-hy-W62"/>
                                                 <constraint firstItem="yfG-qX-tJz" firstAttribute="leading" secondItem="bkZ-pR-SCh" secondAttribute="leading" id="MzX-wJ-IFA"/>
                                                 <constraint firstAttribute="bottom" secondItem="yfG-qX-tJz" secondAttribute="bottom" id="SN1-zy-Pux"/>
@@ -93,11 +100,13 @@
                                                 <constraint firstItem="hFO-Ra-QUw" firstAttribute="leading" secondItem="bkZ-pR-SCh" secondAttribute="leading" id="ejt-S9-cgs"/>
                                                 <constraint firstItem="qDA-Yw-JE4" firstAttribute="leading" secondItem="bkZ-pR-SCh" secondAttribute="leading" id="j4o-YY-oYS"/>
                                                 <constraint firstItem="Lqb-md-CXi" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="qDA-Yw-JE4" secondAttribute="trailing" constant="10" id="jJ9-1k-QoF"/>
+                                                <constraint firstAttribute="trailing" secondItem="LJM-0o-NGJ" secondAttribute="trailing" constant="10" id="oQG-3a-fho"/>
                                                 <constraint firstItem="qDA-Yw-JE4" firstAttribute="top" secondItem="hFO-Ra-QUw" secondAttribute="bottom" constant="8" symbolic="YES" id="yQR-p9-bCc"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="contentLabel" destination="qDA-Yw-JE4" id="wWJ-u6-xNq"/>
+                                            <outlet property="deleteButton" destination="LJM-0o-NGJ" id="3th-1x-CXJ"/>
                                             <outlet property="mainImageView" destination="Lqb-md-CXi" id="hO8-RD-cHg"/>
                                             <outlet property="timeLabel" destination="Vnt-UY-pqX" id="WdB-hk-4En"/>
                                             <outlet property="titleLabel" destination="hFO-Ra-QUw" id="dZt-JZ-Ygg"/>
@@ -132,6 +141,7 @@
     </scenes>
     <resources>
         <image name="chevron.left" catalog="system" width="96" height="128"/>
+        <image name="xmark" catalog="system" width="128" height="113"/>
         <namedColor name="Black">
             <color red="0.18823529411764706" green="0.18823529411764706" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

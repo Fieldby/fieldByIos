@@ -33,9 +33,19 @@ class EditProfileViewController: UIViewController {
     }
     
     @IBAction func logout(_ sender: Any) {
-        AuthManager.shared.logOut()
-        self.tabBarController?.dismiss(animated: true)
+        let vc = storyboard?.instantiateViewController(withIdentifier: "logoutVC") as! LogoutViewController
+        vc.modalPresentationStyle = .overCurrentContext
+        vc.modalTransitionStyle = .crossDissolve
+        present(vc, animated: true)
     }
     
-
+    @IBAction func signout(_ sender: Any) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: "signoutVC") as! SignoutViewController
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
+    }
+    @IBAction func back(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
+    }
+    
 }

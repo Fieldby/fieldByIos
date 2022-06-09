@@ -197,6 +197,7 @@ class AuthManager: CommonBackendType {
         } else {
             Database.database().reference().child("users").child(AuthManager.shared.userUUID).child("address").setValue(["zipNo": juso.zipNo, "roadAddr": juso.roadAddr, "jibunAddr": juso.jibunAddr])
             Database.database().reference().child("users").child(AuthManager.shared.userUUID).child("address/detail").setValue(detail)
+            Database.database().reference().child("users").child(AuthManager.shared.userUUID).child("reward").setValue("0")
         }
 
     }
@@ -262,5 +263,11 @@ class AuthManager: CommonBackendType {
     
     func logOut() {
         try! Auth.auth().signOut()
+    }
+    
+    func delete(reason: String) {
+        ref.child("users").child(myUserModel.uuid).removeValue()
+        let key = ref.child("letters").childByAutoId().key!
+        ref.child("letters").child(key).setValue(reason)
     }
 }

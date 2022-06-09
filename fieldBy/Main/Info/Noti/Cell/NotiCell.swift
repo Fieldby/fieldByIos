@@ -15,6 +15,7 @@ class NotiCell: UITableViewCell {
     @IBOutlet weak var contentLabel: UILabel!
     @IBOutlet weak var mainImageView: UIImageView!
     @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var deleteButton: UIButton!
     
     override func awakeFromNib() {
         mainImageView.layer.cornerRadius = 7
@@ -80,5 +81,10 @@ class NotiCell: UITableViewCell {
             }
         }
         
+        deleteButton.rx.tap
+            .subscribe(onNext: { 
+                NotiManager.shared.delete(notiUid: notiModel.uuid)
+            })
+            .disposed(by: rx.disposeBag)
     }
 }

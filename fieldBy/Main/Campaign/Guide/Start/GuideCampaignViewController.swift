@@ -173,6 +173,9 @@ class GuideCampaignViewController: CommonGuideViewController {
         }
     }
     
+    @IBAction func kakaoChannel(_ sender: Any) {
+        openUrl(url: "http://pf.kakao.com/_xdxeQzb")
+    }
     
 
 }

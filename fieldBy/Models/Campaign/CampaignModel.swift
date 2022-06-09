@@ -31,7 +31,6 @@ class CampaignModel: Codable {
     let uploadDate: String
     let maintain: Int
     let leastFeed: Int
-
     
     let hashTagModel: HashTagModel
     
@@ -138,6 +137,8 @@ class CampaignModel: Codable {
             return .delivering
         } else if dateStr < uploadDate {
             return .uploading
+        } else if dateStr < getFinishDate() {
+            return .maintaining
         } else {
             return .done
         }
@@ -167,6 +168,15 @@ class CampaignModel: Codable {
                 }
             return Disposables.create()
         }
+    }
+    
+    func getFinishDate() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let startingDate = dateFormatter.date(from: uploadDate)!
+        let finishingDate = Calendar.current.date(byAdding: .day, value: maintain, to: startingDate)!
+        
+        return dateFormatter.string(from: finishingDate)
     }
     
 }

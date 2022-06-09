@@ -31,6 +31,8 @@ class AddressViewController: UIViewController {
     
     private var juso: Juso!
     
+    var campaignUuid: String?
+    var isIndividual = false
     var isChanging: Bool = false
     
     override func viewWillAppear(_ animated: Bool) {
@@ -71,7 +73,7 @@ class AddressViewController: UIViewController {
         
         bottomView.isHidden = true
         
-        if isChanging {
+        if isChanging || isIndividual {
             searchButton.setTitle("변경 완료", for: .normal)
         }
     }
@@ -101,6 +103,8 @@ class AddressViewController: UIViewController {
                 case .detail:
                     if isChanging {
                         saveAndPop()
+                    } else if isIndividual {
+                        saveAndDismiss()
                     } else {
                         pushUserInfoVC()
                     }
@@ -151,6 +155,11 @@ class AddressViewController: UIViewController {
         editingStatus = .addr
     }
     
+    private func saveAndDismiss() {
+        CampaignManager.shared.saveAddress(uid: campaignUuid!, juso: juso, detail: detailTextField.text!)
+        dismiss(animated: true)
+    }
+    
     @objc func keyboardWillShowNotification(_ notification: Notification) {
         guard let userInfo = notification.userInfo,
               let keyboardFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
@@ -178,6 +187,7 @@ class AddressViewController: UIViewController {
     private func pushUserInfoVC() {
         
         AuthManager.saveAddressInfo(juso: juso, detail: detailTextField.text!)
+        
         let vc = UIStoryboard(name: "UserInfo", bundle: nil).instantiateViewController(withIdentifier: "infostartVC") as! InfoStartViewController
         self.navigationController?.pushViewController(vc, animated: true)
     }

@@ -75,6 +75,7 @@ class ProgressMainCell: UITableViewCell {
                 
         if userModel.imageArray.count != 0 {
             uploadButton.setTitle("다시 업로드 하기", for: .normal)
+            
         } else {
             uploadButton.setTitle("업로드 하기", for: .normal)
         }
@@ -89,8 +90,10 @@ class ProgressMainCell: UITableViewCell {
         brandNameLabel.text = campaignModel.brandName
         itemNameLabel.text = campaignModel.itemModel.name
         
-        deliveryLabel.text = "\(campaignModel.itemDate.month).\(campaignModel.itemDate.day)"
-        uploadLabel.text = "\(campaignModel.uploadDate.month).\(campaignModel.uploadDate.day)"
+        deliveryLabel.text = "~\(campaignModel.itemDate.month).\(campaignModel.itemDate.day)"
+        uploadLabel.text = "~\(campaignModel.uploadDate.month).\(campaignModel.uploadDate.day)"
+        
+        maintainLabel.text = "\(dotDate(str: campaignModel.uploadDate))~\(dotDate(str: campaignModel.getFinishDate()))"
         
         switch campaignModel.status {
         case .unOpened:
@@ -100,10 +103,10 @@ class ProgressMainCell: UITableViewCell {
         case .delivering:
             setDelivery(campaignModel)
         case .uploading:
-            setUpload(campaignModel)
+            setUpload(campaignModel, userModel)
             
         case .maintaining:
-            setMaintain()
+            setMaintain(campaignModel)
             
         case .done:
             setDone()
@@ -121,16 +124,19 @@ class ProgressMainCell: UITableViewCell {
     }
     
     private func setDelivery(_ campaignModel: CampaignModel) {
+        
         progressView.isHidden = false
         deliveryView.isHidden = false
         uploadButtonContainer.isHidden = true
+        guideButton.isHidden = false
+        appliedLabel.isHidden = true
         
-        dateContentLabel.text = "배송기간(~\(campaignModel.itemDate.month).\(campaignModel.itemDate.day))입니다!"
+        dateContentLabel.text = "예상 배송기간(~\(campaignModel.itemDate.month).\(campaignModel.itemDate.day))입니다!"
         desLabel.text = "곧 제품이 배송됩니다"
         
     }
     
-    private func setUpload(_ campaignModel: CampaignModel) {
+    private func setUpload(_ campaignModel: CampaignModel, _ userModel: UserCampaignModel) {
         deliveryCircle.tintColor = .main
         deliveryBar.backgroundColor = .main
         progressView.isHidden = false
@@ -138,9 +144,15 @@ class ProgressMainCell: UITableViewCell {
         
         uploadButtonContainer.isHidden = false
         
+        if userModel.imageArray.count != 0 {
+            dateContentLabel.text = "업로드를 완료했습니다!"
+            desLabel.text = "가이드에 맞게 업로드하였는지 다시 한 번 확인해주세요."
+        } else {
+            dateContentLabel.text = "업로드기간(~\(campaignModel.uploadDate.month).\(campaignModel.uploadDate.day))입니다!"
+            desLabel.text = "가이드에 맞게 컨텐츠를 업로드 해주세요 :)"
+        }
         
-        dateContentLabel.text = "업로드기간(~\(campaignModel.uploadDate.month).\(campaignModel.uploadDate.day))입니다!"
-        desLabel.text = "가이드에 맞게 컨텐츠를 업로드 해주세요 :)"
+
         
     }
     @IBAction func guideTap(_ sender: Any) {
@@ -151,13 +163,18 @@ class ProgressMainCell: UITableViewCell {
         buttonHandler()
     }
     
-    private func setMaintain() {
+    private func setMaintain(_ model: CampaignModel) {
         deliveryCircle.tintColor = .main
         deliveryBar.backgroundColor = .main
         uploadCircle.tintColor = .main
         uploadBar.backgroundColor = .main
         progressView.isHidden = false
         maintainView.isHidden = false
+        uploadButtonContainer.isHidden = true
+        
+        dateContentLabel.text = "업로드 유지기간(\(dotDate(str: model.uploadDate))~\(dotDate(str: model.getFinishDate()))) 입니다!"
+        desLabel.text = "업로드 한 콘텐츠를 약속한 기간만큼 유지해주세요"
+        
     }
     
     private func setDone() {
@@ -166,5 +183,9 @@ class ProgressMainCell: UITableViewCell {
         appliedLabel.isHidden = false
         appliedLabel.text = "캠페인 완료"
         appliedLabel.textColor = UIColor(red: 48, green: 48, blue: 48)
+    }
+    
+    private func dotDate(str: String) -> String {
+        return "\(str.month).\(str.day)"
     }
 }

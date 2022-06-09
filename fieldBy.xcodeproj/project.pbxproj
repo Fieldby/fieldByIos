@@ -51,6 +51,8 @@
 		D16A5FC4282B82F700A75D9E /* ViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16A5FC3282B82F700A75D9E /* ViewController+.swift */; };
 		D16A5FC6282B9AE200A75D9E /* BarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16A5FC5282B9AE200A75D9E /* BarCell.swift */; };
 		D16EC57D283633EE00076B4C /* GuideCautionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16EC57C283633EE00076B4C /* GuideCautionViewController.swift */; };
+		D17780C82851D9D500CDB037 /* LogoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D17780C72851D9D500CDB037 /* LogoutViewController.swift */; };
+		D17780CB2851E06A00CDB037 /* SignoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D17780CA2851E06A00CDB037 /* SignoutViewController.swift */; };
 		D17EAA34283E04C1000B8E3C /* GuideSizeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D17EAA33283E04C1000B8E3C /* GuideSizeViewController.swift */; };
 		D17EAA36283E0503000B8E3C /* Size.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D17EAA35283E0503000B8E3C /* Size.storyboard */; };
 		D180FA7F281FF48E0004FECF /* CheckNumberViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D180FA7E281FF48E0004FECF /* CheckNumberViewModel.swift */; };
@@ -164,6 +166,8 @@
 		D16A5FC3282B82F700A75D9E /* ViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+.swift"; sourceTree = "<group>"; };
 		D16A5FC5282B9AE200A75D9E /* BarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarCell.swift; sourceTree = "<group>"; };
 		D16EC57C283633EE00076B4C /* GuideCautionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideCautionViewController.swift; sourceTree = "<group>"; };
+		D17780C72851D9D500CDB037 /* LogoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutViewController.swift; sourceTree = "<group>"; };
+		D17780CA2851E06A00CDB037 /* SignoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignoutViewController.swift; sourceTree = "<group>"; };
 		D17EAA33283E04C1000B8E3C /* GuideSizeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideSizeViewController.swift; sourceTree = "<group>"; };
 		D17EAA35283E0503000B8E3C /* Size.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Size.storyboard; sourceTree = "<group>"; };
 		D180FA7E281FF48E0004FECF /* CheckNumberViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckNumberViewModel.swift; sourceTree = "<group>"; };
@@ -516,6 +520,22 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		D17780C62851D9CE00CDB037 /* Logout */ = {
+			isa = PBXGroup;
+			children = (
+				D17780C72851D9D500CDB037 /* LogoutViewController.swift */,
+			);
+			path = Logout;
+			sourceTree = "<group>";
+		};
+		D17780C92851E06400CDB037 /* Signout */ = {
+			isa = PBXGroup;
+			children = (
+				D17780CA2851E06A00CDB037 /* SignoutViewController.swift */,
+			);
+			path = Signout;
+			sourceTree = "<group>";
+		};
 		D17EAA32283E04AF000B8E3C /* Size */ = {
 			isa = PBXGroup;
 			children = (
@@ -720,6 +740,8 @@
 		D1C89EE32822B6D800DAA2F4 /* Info */ = {
 			isa = PBXGroup;
 			children = (
+				D17780C92851E06400CDB037 /* Signout */,
+				D17780C62851D9CE00CDB037 /* Logout */,
 				D132C12628407FDD0002785A /* Noti */,
 				D18DF963283F811200F143EE /* EditProfile */,
 				D1A29840283F575A000F7D33 /* ApiGuide */,
@@ -939,6 +961,7 @@
 				D1121D2A2830F3D000149263 /* RoundingCell.swift in Sources */,
 				D16EC57D283633EE00076B4C /* GuideCautionViewController.swift in Sources */,
 				D14A198F28336D6300542F2B /* Error.swift in Sources */,
+				D17780C82851D9D500CDB037 /* LogoutViewController.swift in Sources */,
 				D184D4ED283B8F8500BEB184 /* TokenModel.swift in Sources */,
 				D1C89EEB2822B70300DAA2F4 /* ProgressViewController.swift in Sources */,
 				D181C837283750F1008304C5 /* UserCampaignModel.swift in Sources */,
@@ -953,6 +976,7 @@
 				D145BBEC2831E62A009383D8 /* FinalInfoViewController.swift in Sources */,
 				D1A99CD02821220300E414E4 /* AddressViewModel.swift in Sources */,
 				D145BBEE2831EABB009383D8 /* Styles.swift in Sources */,
+				D17780CB2851E06A00CDB037 /* SignoutViewController.swift in Sources */,
 				D1A99CCE28211F2500E414E4 /* Juso.swift in Sources */,
 				D1A99CD32821239E00E414E4 /* AddressCell.swift in Sources */,
 				D1462573283CA899008FEB8A /* CommonPopupViewController.swift in Sources */,

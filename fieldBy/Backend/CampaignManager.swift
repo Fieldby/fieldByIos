@@ -188,4 +188,13 @@ class CampaignManager: CommonBackendType {
             return Disposables.create()
         }
     }
+    
+    func saveAddress(uid: String, juso: Juso, detail: String) {
+        ref.child("users").child(AuthManager.shared.myUserModel.uuid).child("campaigns").child(uid).child("address").setValue(["detail": detail, "jibunAddr": juso.jibunAddr, "roadAddr": juso.roadAddr, "zipNo": juso.zipNo])
+        
+        if let model = AuthManager.shared.myUserModel.campaigns.first(where: {$0.uuid == uid}) {
+            model.juso = juso
+            model.juso?.detail = detail
+        }
+    }
 }

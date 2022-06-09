@@ -32,9 +32,9 @@ class NotiViewController: UIViewController {
         viewModel.notiArray
             .bind(to: tableView.rx.items(cellIdentifier: NotiCell.reuseId, cellType: NotiCell.self)) { [unowned self] idx, notiModel, cell in
                 cell.bind(notiModel: notiModel)
-                
             }
             .disposed(by: rx.disposeBag)
+        
         
     }
             

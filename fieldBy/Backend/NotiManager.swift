@@ -85,7 +85,10 @@ class NotiManager: CommonBackendType {
         ref.child("users").child(uid).child("noti").child(notiUid).child("checked").setValue(true)
     }
     
-    
+    func delete(notiUid: String) {
+        let uid = AuthManager.shared.myUserModel!.uuid!
+        ref.child("users").child(uid).child("noti").child(notiUid).removeValue()
+    }
     
     
 }

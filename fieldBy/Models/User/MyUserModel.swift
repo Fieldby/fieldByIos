@@ -27,6 +27,7 @@ class MyUserModel {
     var token: String?
     var fcmToken: String?
     let style: [Style]
+    var reward: Int
     
     var igModel: IGModel?
     
@@ -41,16 +42,17 @@ class MyUserModel {
         
         if let birthDay = value["birthDay"] as? String,
            let career = value["career"] as? String,
-            let height = value["height"] as? Int,
+           let height = value["height"] as? Int,
            let isPro = value["isPro"] as? Bool,
-            let job = value["job"] as? String,
-            let marketingAgreement = value["marketingAgreement"] as? Bool,
-        let name = value["name"] as? String,
-        let nickName = value["nickName"] as? String,
-        let phoneNumber = value["phoneNumber"] as? String,
-        let roundingFrequency = value["roundingFrequency"] as? String,
-        let simpleAddress = value["simpleAddress"] as? String,
-        let stroke = value["stroke"] as? String {
+           let job = value["job"] as? String,
+           let marketingAgreement = value["marketingAgreement"] as? Bool,
+           let name = value["name"] as? String,
+           let nickName = value["nickName"] as? String,
+           let phoneNumber = value["phoneNumber"] as? String,
+           let roundingFrequency = value["roundingFrequency"] as? String,
+           let simpleAddress = value["simpleAddress"] as? String,
+           let stroke = value["stroke"] as? String,
+           let reward = value["reward"] as? String{
             
             self.birthDay = birthDay
             self.career = Career(rawValue: career)!
@@ -64,6 +66,7 @@ class MyUserModel {
             self.roundingFrequency = RoundingCount(rawValue: roundingFrequency)!
             self.simpleAddress = simpleAddress
             self.stroke = StrokeAverage(rawValue: stroke)!
+            self.reward = Int(reward)!
             
         } else {
             return nil
@@ -72,8 +75,9 @@ class MyUserModel {
         self.token = value["token"] as? String
         self.fcmToken = value["fcmToken"] as? String
         
-        if let addressValue = data.childSnapshot(forPath: "address").value as? [String: Any] {
-            self.juso = Juso(roadAddr: addressValue["roadAddr"] as! String, jibunAddr: addressValue["jibunAddr"] as! String, zipNo: addressValue["zipNo"] as! String, detail: addressValue["detail"] as! String)
+        if data.childSnapshot(forPath: "address").exists() {
+            let datasnapshot = data.childSnapshot(forPath: "address")
+            self.juso = Juso(snapshot: datasnapshot)!
         } else { return nil }
         
         if let styleValue = data.childSnapshot(forPath: "styles").value as? [String] {

@@ -89,6 +89,7 @@ class InfoViewController: UIViewController {
             })
             .disposed(by: rx.disposeBag)
         
+        totalRewardsLabel.text = "\(AuthManager.shared.myUserModel.reward)원"
         
     }
     
@@ -125,6 +126,9 @@ class InfoViewController: UIViewController {
     }
     
     
+    @IBAction func kakaoChannel(_ sender: Any) {
+        openUrl(url: "http://pf.kakao.com/_xdxeQzb")
+    }
     
     
     private func apiGuide() {
@@ -139,12 +143,25 @@ class InfoViewController: UIViewController {
         let vc = UIStoryboard(name: "Noti", bundle: nil).instantiateViewController(withIdentifier: "notiVC") as! NotiViewController
         self.navigationController?.pushViewController(vc, animated: true)
         
-        
-        
-        
     }
     
-    @IBAction func test(_ sender: Any) {        
+    @IBAction func qna(_ sender: Any) {
+        openUrl(url: "https://hyuwo.notion.site/FAQ-f57a2a1fab7d46dabc48d5fa69d77932")
+    }
+    
+    @IBAction func opennotion(_ sender: Any) {
+        openUrl(url: "https://hyuwo.notion.site/b8e080bdb4704c74883b486e4c0610db")
+    }
+    
+    @IBAction func test(_ sender: Any) {
         apiGuide()
+    }
+    
+    @IBAction func alert(_ sender: Any) {
+        guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
+
+        if UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url)
+        }
     }
 }
