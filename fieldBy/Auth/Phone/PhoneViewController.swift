@@ -362,7 +362,6 @@ class PhoneViewController: UIViewController {
                 indicator.isHidden = true
                 
                 nameTextField.resignFirstResponder()
-                nameTextField.isUserInteractionEnabled = false
                 UIView.animate(withDuration: 0.3) { [unowned self] in
                     bottomView.isHidden = true
                     agreeLabel.isHidden = false

@@ -90,6 +90,7 @@ extension ApiGuideViewController: UICollectionViewDelegateFlowLayout {
             roundedIndex = ceil(index)
         }
         let nextX = roundedIndex * cellWidthIncludingSpacing - scrollView.contentInset.left
+        
         offset = CGPoint(x: nextX,
                          y: -scrollView.contentInset.top)
 

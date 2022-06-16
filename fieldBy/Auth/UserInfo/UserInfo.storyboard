@@ -380,6 +380,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backButton" destination="sMp-KD-tfQ" id="ZNQ-9E-cAY"/>
                         <outlet property="birthDayContainer" destination="wv6-kr-zmX" id="NbQ-n7-g3f"/>
                         <outlet property="birthDayTextField" destination="H3V-3j-f9w" id="cKx-GG-lMP"/>
                         <outlet property="birthDayView" destination="kQS-Io-DpF" id="dRF-Jq-mOc"/>
@@ -583,6 +584,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backButton" destination="9AO-9g-Wtu" id="cqd-El-W87"/>
                         <outlet property="collectionView" destination="UPe-V3-W8p" id="uHm-HM-l8U"/>
                         <outlet property="mainLabel" destination="IZv-c9-8Yd" id="IIh-Hh-aDh"/>
                         <outlet property="nextButton" destination="uSb-ip-m1S" id="Nc9-18-ZiH"/>

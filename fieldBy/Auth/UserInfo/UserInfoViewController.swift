@@ -13,6 +13,7 @@ import NSObject_Rx
 class UserInfoViewController: UIViewController {
 
     
+    @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var mainLabel: UILabel!
     @IBOutlet weak var numberLabel: UILabel!
     
@@ -81,6 +82,12 @@ class UserInfoViewController: UIViewController {
     }
     
     private func bind() {
+        
+        backButton.rx.tap
+            .subscribe(onNext: { [unowned self] in
+                self.navigationController?.popViewController(animated: true)
+            })
+            .disposed(by: rx.disposeBag)
         
         nickNameTextField.rx.text.orEmpty
             .bind(to: viewModel.nickNameSubject)
@@ -167,8 +174,6 @@ class UserInfoViewController: UIViewController {
                     
                     nextButton.setTitle("중복 확인", for: .normal)
                     
-                    nickNameTextField.isUserInteractionEnabled = true
-                    
                     mainLabel.text = "닉네임을 입력해주세요."
 
                 case .job:
@@ -180,8 +185,6 @@ class UserInfoViewController: UIViewController {
                     
                     nextButton.setTitle("다음", for: .normal)
                     
-                    nickNameTextField.isUserInteractionEnabled = false
-                    
                     mainLabel.text = "직업을 입력해주세요."
                     
                 case .birthDay:
@@ -192,7 +195,6 @@ class UserInfoViewController: UIViewController {
                     
                     numberLabel.text = "(3/5)"
                     
-                    jobTextField.isUserInteractionEnabled = false
                     
                     mainLabel.text = "생년월일을 입력해주세요."
                     
@@ -203,9 +205,7 @@ class UserInfoViewController: UIViewController {
                     birthDayView.isHidden = false
                     
                     numberLabel.text = "(4/5)"
-                    
-                    birthDayTextField.isUserInteractionEnabled = false
-                    
+                                        
                     mainLabel.text = "키를 입력해주세요."
                     
                 case .simpleAddress:

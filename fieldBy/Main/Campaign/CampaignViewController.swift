@@ -31,6 +31,7 @@ class CampaignViewController: UIViewController {
     @IBOutlet weak var barView: UIView!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var unOpenedLabel: UILabel!
+    @IBOutlet weak var isRaffleView: UIView!
     
     @IBOutlet var viewModel: CampaignViewModel!
     
@@ -85,6 +86,7 @@ class CampaignViewController: UIViewController {
         infoView.addGrayShadow(color: .lightGray, opacity: 0.3, radius: 3)
         
         isNewContainer.layer.cornerRadius = 9.5
+        isRaffleView.layer.cornerRadius = 9.5
         
         missionButton.layer.cornerRadius = 10
     }
@@ -142,6 +144,7 @@ class CampaignViewController: UIViewController {
             missionButton.setTitle("오픈 전", for: .normal)
             unOpenedLabel.isHidden = false
         } else {
+            missionButton.isEnabled = true
             unOpenedLabel.isHidden = true
             brandNameLabel.text = model.brandName
             titleLabel.text = model.itemModel.name
@@ -152,14 +155,14 @@ class CampaignViewController: UIViewController {
             let uuid = model.uuid
             
             if AuthManager.shared.myUserModel.campaignUuids[uuid] == true {
-                missionButton.setTitle("신청 완료", for: .normal)
+                missionButton.setTitle("제안 완료", for: .normal)
                 missionButton.backgroundColor = UIColor(red: 48, green: 48, blue: 48)
             } else {
-                missionButton.setTitle("신청하기", for: .normal)
+                missionButton.setTitle("제안하기", for: .normal)
                 missionButton.backgroundColor = .main
             }
         }
-        
+
     }
 
     private func presentDetailVC(campaignModel: CampaignModel, image: UIImage) {

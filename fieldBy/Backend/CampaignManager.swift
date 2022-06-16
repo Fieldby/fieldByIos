@@ -120,18 +120,19 @@ class CampaignManager: CommonBackendType {
         }
     }
     
-    func save(uuid: String, size: String?, color: String?) {
+    func save(campaignModel: CampaignModel, size: String?, color: String?) {
         let myUid = AuthManager.shared.myUserModel.uuid!
         
-        ref.child("campaigns/\(uuid)/users").child(myUid).setValue(myUid)
-        ref.child("users").child(AuthManager.shared.myUserModel.uuid).child("campaigns").child(uuid).setValue(["size": size ?? "free", "color": color ?? "free"])
+        ref.child("campaigns/\(campaignModel.uuid)/users").child(myUid).setValue(myUid)
+        ref.child("brands").child(campaignModel.brandUuid).child("campaigns").child(campaignModel.uuid).child("users").child(myUid).setValue(myUid)
+        ref.child("users").child(AuthManager.shared.myUserModel.uuid).child("campaigns").child(campaignModel.uuid).setValue(["size": size ?? "free", "color": color ?? "free"])
 
-        if let model = model(uuid: uuid) {
+        if let model = model(uuid: campaignModel.uuid) {
             model.users[myUid] = true
             campaignArrayRelay.accept(campaignArray)
         }
         
-        AuthManager.shared.addCampaign(uuid: uuid, size: size, color: color)
+        AuthManager.shared.addCampaign(uuid: campaignModel.uuid, size: size, color: color)
     }
     
     func saveUploadImages(campaignUuid: String, images: [ImageData], index: Int) -> Completable {
@@ -153,18 +154,19 @@ class CampaignManager: CommonBackendType {
         return campaignArray.first { $0.uuid == uuid }
     }
     
-    func cancel(uuid: String) -> Completable {
+    func cancel(campaignModel: CampaignModel) -> Completable {
         return Completable.create() { [unowned self] completable in
             let myUid = AuthManager.shared.myUserModel.uuid!
-            if let model = model(uuid: uuid) {
+            if let model = model(uuid: campaignModel.uuid) {
                 model.users[myUid] = nil
             }
             
-            ref.child("campaigns").child(uuid).child("users").child(myUid).removeValue() { err, ref in
+            ref.child("brands").child(campaignModel.brandUuid).child("campaigns").child(campaignModel.uuid).child("users").child(myUid).removeValue()
+            ref.child("campaigns").child(campaignModel.uuid).child("users").child(myUid).removeValue() { err, ref in
                 if let err = err {
                     completable(.error(err))
                 }
-                AuthManager.shared.removeCampaign(uuid: uuid) {
+                AuthManager.shared.removeCampaign(uuid: campaignModel.uuid) {
                     completable(.completed)
                 }
             }

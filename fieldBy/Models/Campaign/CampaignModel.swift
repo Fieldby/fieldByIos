@@ -81,6 +81,7 @@ class CampaignModel: Codable {
            let brandInstagram = value["brandInstagram"] as? String,
            let recruitingDate = value["recruitingDate"] as? String,
            let title = value["campaignTitle"] as? String
+            
         {
             self.mainImageUrl = "campaignImages/\(self.uuid)/\(imageUrl)"
             self.brandUuid = brandUuid
@@ -98,7 +99,7 @@ class CampaignModel: Codable {
         } else {
             return nil
         }
-        
+
         let itemValue = snapshot.childSnapshot(forPath: "item")
         if !itemValue.exists() { return nil }
         self.itemModel = ItemModel(snapshot: itemValue)

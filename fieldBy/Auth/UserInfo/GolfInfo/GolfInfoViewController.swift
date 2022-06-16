@@ -13,6 +13,7 @@ import NSObject_Rx
 class GolfInfoViewController: UIViewController {
 
 
+    @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var mainLabel: UILabel!
     @IBOutlet weak var numberLabel: UILabel!
     
@@ -20,9 +21,6 @@ class GolfInfoViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var nextButton: UIButton!
-    
-    
-    
     
     @IBOutlet var viewModel: GolfInfoViewModel!
     
@@ -45,6 +43,12 @@ class GolfInfoViewController: UIViewController {
     }
 
     private func bind() {
+        backButton.rx.tap
+            .subscribe(onNext: { [unowned self] in
+                self.navigationController?.popViewController(animated: true)
+            })
+            .disposed(by: rx.disposeBag)
+        
         collectionView.rx.setDelegate(self)
             .disposed(by: rx.disposeBag)
         

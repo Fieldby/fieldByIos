@@ -21,7 +21,9 @@ class AddressViewModel: NSObject {
     func search(keyword: String, completion: @escaping (() -> ())) {
         AuthManager.address(keyword: keyword)
             .subscribe { [unowned self] response in
-                jusoSubject.onNext(response.results.juso)
+                if let juso = response.results.juso {
+                    jusoSubject.onNext(juso)
+                }
                 completion()
             } onError: { err in
                 print(err)

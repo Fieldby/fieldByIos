@@ -294,7 +294,7 @@ class DetailCampaignViewController: UIViewController {
             vc.modalTransitionStyle = .crossDissolve
             vc.content = str
             vc.topVC = self
-            vc.uuid = campaignModel.uuid
+            vc.campaignModel = campaignModel
             vc.modalPresentationStyle = .overCurrentContext
             present(vc, animated: true)
         }

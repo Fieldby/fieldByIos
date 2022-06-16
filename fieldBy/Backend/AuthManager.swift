@@ -63,6 +63,8 @@ class AuthManager: CommonBackendType {
                        "username": igModel.username,
                        "token": igModel.token!,
                        "followers": igModel.followers,
+                       "follows": igModel.follows,
+                       "mediaCount": igModel.mediaCount,
                        "profileUrl": igModel.profileUrl])
 
     }

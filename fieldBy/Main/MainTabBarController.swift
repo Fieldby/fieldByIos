@@ -29,6 +29,16 @@ class MainTabBarController: UITabBarController {
         }
     }
     
+    func hide() {
+        tabBar.isHidden = true
+        bottomView.isHidden = true
+    }
+    
+    func show() {
+        tabBar.isHidden = false
+        bottomView.isHidden = false
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -75,7 +85,13 @@ class MainTabBarController: UITabBarController {
         tabBar.tintColor = .main
         tabBar.unselectedItemTintColor = .black
         
+        let campaignNav = UINavigationController(rootViewController: campaignVC)
+        let progressNav = UINavigationController(rootViewController: progressVC)
+        let infoNav = UINavigationController(rootViewController: infoVC)
         
+        campaignNav.interactivePopGestureRecognizer?.isEnabled = false
+        progressNav.interactivePopGestureRecognizer?.isEnabled = false
+        infoNav.interactivePopGestureRecognizer?.isEnabled = false
 
         
         viewControllers = [

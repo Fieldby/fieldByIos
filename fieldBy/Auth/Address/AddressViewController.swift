@@ -42,20 +42,22 @@ class AddressViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShowNotification(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHideNotification(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
    
-        tabBarController?.tabBar.isHidden = true
+        AuthManager.shared.mainTabBar.hide()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         NotificationCenter.default.removeObserver(self)
-        tabBarController?.tabBar.isHidden = false
+        AuthManager.shared.mainTabBar.show()
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         tableView.rx.setDelegate(self)
             .disposed(by: rx.disposeBag)
         addressTextField.delegate = self
+        
         makeUI()
         bind()
     }
@@ -79,7 +81,12 @@ class AddressViewController: UIViewController {
     }
     
     private func bind() {
-        
+        if let myUserModel = AuthManager.shared.myUserModel {
+            juso = myUserModel.juso
+            viewModel.search(keyword: juso.jibunAddr) {
+                
+            }
+        }
         
         
         viewModel.jusoSubject
@@ -96,7 +103,7 @@ class AddressViewController: UIViewController {
                     indicator.isHidden = false
                     indicator.startAnimating()
                     addressTextField.resignFirstResponder()
-                    viewModel.search(keyword: addressTextField.text ?? "") { [unowned  self] in
+                    viewModel.search(keyword: addressTextField.text ?? "") { [unowned self] in
                         indicator.stopAnimating()
                         indicator.isHidden = true
                     }
@@ -132,6 +139,20 @@ class AddressViewController: UIViewController {
             .throttle(.seconds(2), latest: false, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [unowned self] in
                 detailTextField.text = nil
+            })
+            .disposed(by: rx.disposeBag)
+        
+        addressTextField.rx.text
+            .orEmpty
+            .subscribe(onNext: { [unowned self] str in
+                if str.contains(" ") {
+                    presentAlert(message: "띄어쓰기 없이 입력해주세요.")
+                    
+                    var array = Array(str).map{String($0)}
+                    array.removeLast()
+                    let newStr = array.joined()
+                    addressTextField.rx.text.onNext(newStr)
+                }
             })
             .disposed(by: rx.disposeBag)
         
@@ -197,6 +218,9 @@ class AddressViewController: UIViewController {
         case detail
     }
 
+    @IBAction func backButton(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
+    }
 }
 
 extension AddressViewController: UITableViewDelegate {

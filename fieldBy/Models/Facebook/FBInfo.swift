@@ -38,6 +38,8 @@ struct IGModel: Codable {
     let username: String
     let name: String
     let followers: Int
+    let follows: Int
+    let mediaCount: Int
     let profileUrl: String?
     var token: String?
     
@@ -47,6 +49,8 @@ struct IGModel: Codable {
         username = value["username"] as! String
         name = value["name"] as! String
         followers = value["followers"] as! Int
+        follows = value["follows"] as! Int
+        mediaCount = value["mediaCount"] as! Int
         profileUrl = value["profileUrl"] as? String
         if let token = value["token"] as? String {
             
@@ -65,6 +69,8 @@ struct IGModel: Codable {
         case id, username, name
         case followers = "followers_count"
         case profileUrl = "profile_picture_url"
+        case follows = "follows_count"
+        case mediaCount = "media_count"
     }
     
 }

@@ -21,6 +21,8 @@ class SigninViewController: UIViewController {
         makeUI()
         animateView()
         bind()
+        
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
     }
     
     private func makeUI() {

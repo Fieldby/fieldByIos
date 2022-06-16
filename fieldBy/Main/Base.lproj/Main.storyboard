@@ -22,8 +22,8 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="UhP-z2-KdS" firstAttribute="centerY" secondItem="VJv-GW-XJI" secondAttribute="centerY" id="0QF-dS-sMZ"/>
-                            <constraint firstItem="UhP-z2-KdS" firstAttribute="centerX" secondItem="VJv-GW-XJI" secondAttribute="centerX" id="fLl-jc-hgL"/>
+                            <constraint firstItem="UhP-z2-KdS" firstAttribute="centerY" secondItem="VJv-GW-XJI" secondAttribute="centerY" id="XeB-sq-Nb5"/>
+                            <constraint firstItem="UhP-z2-KdS" firstAttribute="centerX" secondItem="VJv-GW-XJI" secondAttribute="centerX" id="mJn-Yo-bVZ"/>
                         </constraints>
                     </view>
                 </viewController>
