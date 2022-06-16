@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             application,
             didFinishLaunchingWithOptions: launchOptions
         )
-        
+        Messaging.messaging().delegate = self
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "defaultVC")
         window?.rootViewController = vc
         window?.makeKeyAndVisible()
@@ -33,10 +33,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
           UNUserNotificationCenter.current().delegate = self
 
           let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-          UNUserNotificationCenter.current().requestAuthorization(
-            options: authOptions,
-            completionHandler: { _, _ in }
-          )
+            UNUserNotificationCenter.current().requestAuthorization(options: [.alert,.sound,.badge], completionHandler: { didAllow,Error in
+                if didAllow {
+                    print("Push: 권한 허용")
+                } else {
+                    print("Push: 권한 거부")
+                }
+            })
         } else {
           let settings: UIUserNotificationSettings =
             UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
@@ -45,7 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
         UIApplication.shared.registerForRemoteNotifications()
 
-        Messaging.messaging().delegate = self
+
         
         Messaging.messaging().token { token, error in
           if let error = error {

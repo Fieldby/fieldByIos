@@ -176,6 +176,13 @@
                                     <constraint firstItem="fb1-wG-dL1" firstAttribute="centerX" secondItem="3OD-R3-B4o" secondAttribute="centerX" id="yN1-sw-KMt"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Comming Soon" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QdN-u6-rlC">
+                                <rect key="frame" x="153.5" y="406" width="107.5" height="19.5"/>
+                                <color key="backgroundColor" name="MainColor"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="16"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="l4S-fa-h2X">
                                 <rect key="frame" x="188.5" y="434.5" width="37" height="37"/>
                                 <color key="color" name="MainColor"/>
@@ -187,12 +194,14 @@
                             <constraint firstItem="3OD-R3-B4o" firstAttribute="centerX" secondItem="v0i-W8-Xez" secondAttribute="centerX" id="2DS-Dg-2pg"/>
                             <constraint firstAttribute="bottom" secondItem="n9K-UQ-LUy" secondAttribute="bottom" id="9ub-Xv-2eQ"/>
                             <constraint firstItem="3OD-R3-B4o" firstAttribute="leading" secondItem="v0i-W8-Xez" secondAttribute="leading" constant="42" id="A2P-gi-NIm"/>
+                            <constraint firstItem="QdN-u6-rlC" firstAttribute="centerX" secondItem="xrk-iP-4gX" secondAttribute="centerX" id="OQN-Np-wpT"/>
                             <constraint firstItem="l4S-fa-h2X" firstAttribute="centerX" secondItem="v0i-W8-Xez" secondAttribute="centerX" id="OhK-7z-6xK"/>
                             <constraint firstItem="v0i-W8-Xez" firstAttribute="trailing" secondItem="xrk-iP-4gX" secondAttribute="trailing" id="Qdy-9U-LAc"/>
                             <constraint firstItem="n9K-UQ-LUy" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="SvW-FI-ieg"/>
                             <constraint firstItem="xrk-iP-4gX" firstAttribute="top" secondItem="afb-Zs-kxQ" secondAttribute="bottom" constant="20" id="UOH-ES-VNb"/>
                             <constraint firstItem="ddC-ke-Iwu" firstAttribute="top" secondItem="xrk-iP-4gX" secondAttribute="bottom" constant="97" id="UrL-d6-CB0"/>
                             <constraint firstAttribute="trailing" secondItem="n9K-UQ-LUy" secondAttribute="trailing" id="WmN-EU-dOo"/>
+                            <constraint firstItem="QdN-u6-rlC" firstAttribute="centerY" secondItem="xrk-iP-4gX" secondAttribute="centerY" id="YJJ-dc-nnJ"/>
                             <constraint firstItem="afb-Zs-kxQ" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="aY6-DB-LrA"/>
                             <constraint firstItem="afb-Zs-kxQ" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="dn9-hR-RiJ"/>
                             <constraint firstItem="ddC-ke-Iwu" firstAttribute="centerX" secondItem="v0i-W8-Xez" secondAttribute="centerX" id="eZo-Gq-wkF"/>
@@ -218,6 +227,7 @@
                         <outlet property="timeLabel" destination="vei-lX-k6r" id="HjL-Vq-YIJ"/>
                         <outlet property="titleLabel" destination="WQf-Jy-VGw" id="1dS-j6-S61"/>
                         <outlet property="topView" destination="afb-Zs-kxQ" id="LIX-QP-zSu"/>
+                        <outlet property="unOpenedLabel" destination="QdN-u6-rlC" id="qAa-Q0-mmj"/>
                         <outlet property="viewModel" destination="2b4-E8-m05" id="JtD-6A-sz5"/>
                     </connections>
                 </viewController>

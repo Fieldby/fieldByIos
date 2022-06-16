@@ -30,6 +30,7 @@ class CampaignViewController: UIViewController {
     @IBOutlet weak var indicator: UIActivityIndicatorView!
     @IBOutlet weak var barView: UIView!
     @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var unOpenedLabel: UILabel!
     
     @IBOutlet var viewModel: CampaignViewModel!
     
@@ -129,22 +130,36 @@ class CampaignViewController: UIViewController {
     }
     
     private func bindInfoView(model: CampaignModel) {
+        if model.status == .unOpened {
+            brandNameLabel.text = model.brandName
+            titleLabel.text = model.itemModel.name
+            priceLabel.text = "\(getComma(price: model.itemModel.price))원"
             
-        brandNameLabel.text = model.brandName
-        titleLabel.text = model.itemModel.name
-        priceLabel.text = "\(getComma(price: model.itemModel.price))원"
-        
-        timeLabel.text = calculateDate(campaignModel: model)
-        
-        let uuid = model.uuid
-        
-        if AuthManager.shared.myUserModel.campaignUuids[uuid] == true {
-            missionButton.setTitle("신청 완료", for: .normal)
-            missionButton.backgroundColor = UIColor(red: 48, green: 48, blue: 48)
+            timeLabel.text = "SOON"
+            
+            missionButton.backgroundColor = UIColor(red: 196, green: 243, blue: 238)
+            missionButton.isEnabled = false
+            missionButton.setTitle("오픈 전", for: .normal)
+            unOpenedLabel.isHidden = false
         } else {
-            missionButton.setTitle("신청하기", for: .normal)
-            missionButton.backgroundColor = .main
+            unOpenedLabel.isHidden = true
+            brandNameLabel.text = model.brandName
+            titleLabel.text = model.itemModel.name
+            priceLabel.text = "\(getComma(price: model.itemModel.price))원"
+            
+            timeLabel.text = calculateDate(campaignModel: model)
+            
+            let uuid = model.uuid
+            
+            if AuthManager.shared.myUserModel.campaignUuids[uuid] == true {
+                missionButton.setTitle("신청 완료", for: .normal)
+                missionButton.backgroundColor = UIColor(red: 48, green: 48, blue: 48)
+            } else {
+                missionButton.setTitle("신청하기", for: .normal)
+                missionButton.backgroundColor = .main
+            }
         }
+        
     }
 
     private func presentDetailVC(campaignModel: CampaignModel, image: UIImage) {
@@ -211,6 +226,9 @@ extension CampaignViewController: FSPagerViewDelegate, FSPagerViewDataSource {
             .downloadURL { url, error in
                 if let url = url {
                     cell.imageView?.kf.setImage(with: url)
+                    if model.status == .unOpened {
+                        cell.imageView?.alpha = 0.5
+                    }
                 }
             }
 
@@ -230,8 +248,11 @@ extension CampaignViewController: FSPagerViewDelegate, FSPagerViewDataSource {
 
     func pagerView(_ pagerView: FSPagerView, didSelectItemAt index: Int) {
         
+        if campaignArray[index].status != .unOpened {
+            presentDetailVC(campaignModel: campaignArray[index], image: pagerView.cellForItem(at: index)!.imageView!.image!)
+        }
         pagerView.deselectItem(at: index, animated: true)
-        presentDetailVC(campaignModel: campaignArray[index], image: pagerView.cellForItem(at: index)!.imageView!.image!)
+
     }
     
     func pagerViewWillEndDragging(_ pagerView: FSPagerView, targetIndex: Int) {

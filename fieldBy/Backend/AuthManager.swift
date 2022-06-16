@@ -18,9 +18,9 @@ class AuthManager: CommonBackendType {
 
     var mainTabBar: MainTabBarController!
     
-    var fcmToken: String!
+    var fcmToken: String?
     var fbToken: String!
-    var userUUID: String! = "yDWob0CJ5gR3S9LvPlStfTOSctn1"   //MARK: TODO - 지울것
+    var userUUID: String!  //MARK: TODO - 지울것
     static let certificatedNumberPath = "/certificatedNumberList"
     static private let addressKey = "U01TX0FVVEgyMDIyMDUwMzE3MjM0NDExMjUzMDc="
     
@@ -30,13 +30,14 @@ class AuthManager: CommonBackendType {
     
     func fetch(uuid: String) -> Completable {
         return Completable.create() { [unowned self] completable in
-            
             ref.child("users").child(uuid)
                 .observeSingleEvent(of: .value) { [unowned self] dataSnapShot in
                     if dataSnapShot.exists() {
                         if let myUserModel = MyUserModel(data: dataSnapShot) {
                             self.myUserModel = myUserModel
-                            NotiManager.shared.setToken(token: fcmToken)
+                            if let fcmToken = fcmToken {
+                                NotiManager.shared.setToken(token: fcmToken)
+                            }
                             igValidSubject.onNext(myUserModel.igModel != nil)
                             completable(.completed)
                         } else {
@@ -73,9 +74,9 @@ class AuthManager: CommonBackendType {
             ref.child("certificatedNumberList").child(number)
                 .observeSingleEvent(of: .value) { data in
                     if let bool = data.value as? Bool {
-                        observable.onNext(true)
+                        observable.onNext(bool)
                     } else {
-                        observable.onNext(true)
+                        observable.onNext(false)
                     }
                     
                 }
@@ -123,7 +124,6 @@ class AuthManager: CommonBackendType {
                         if let model = UserCampaignModel(snapshot: campaignSnapshot) {
                             temp2[model.uuid] = true
                             temp.append(model)
-                            print("@@@ \(model.imageArray)")
                         }
                         
                     }

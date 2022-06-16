@@ -146,7 +146,7 @@ class CheckNumberViewController: UIViewController {
                 
                 //MARK: 지울 것
 //                dismiss(animated: true) {
-//                    self.topVC.startWritingName(uuid: "yDWob0CJ5gR3S9LvPlStfTOSctn1")
+//                    self.topVC.startWritingName(uuid: "PuuEsOuWWlg5vIFYnQdVBP9uT6v1")
 //                }
                 
                 

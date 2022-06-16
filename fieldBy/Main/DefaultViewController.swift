@@ -68,11 +68,13 @@ class DefaultViewController: UIViewController {
                             }
                             .disposed(by: rx.disposeBag)
                     } onError: { err in
+                        print(err)
                         observable.onNext(1)
                     }
                     .disposed(by: rx.disposeBag)
 
             } else {
+                print("no Uid")
                 observable.onNext(1)
             }
             
