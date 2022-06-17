@@ -28,11 +28,39 @@
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="smallLogo" translatesAutoresizingMaskIntoConstraints="NO" id="eY2-nx-bHT">
                                         <rect key="frame" x="27" y="49" width="32" height="36"/>
                                     </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CAs-CF-RUa">
+                                        <rect key="frame" x="344" y="42" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="NGt-wo-sbS"/>
+                                            <constraint firstAttribute="height" constant="50" id="oEZ-3J-NEm"/>
+                                        </constraints>
+                                        <color key="tintColor" name="Black"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="bell" catalog="system">
+                                            <color key="titleColor" name="Black"/>
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="21"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="pushNoti:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="w8O-xn-3Jd"/>
+                                        </connections>
+                                    </button>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="I4H-rM-ZCd">
+                                        <rect key="frame" x="370" y="55.5" width="7" height="6"/>
+                                        <color key="tintColor" name="Red"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="7" id="AgK-cr-Sne"/>
+                                            <constraint firstAttribute="width" constant="7" id="aY2-jA-Ovu"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="CAs-CF-RUa" secondAttribute="trailing" constant="20" id="1ID-e2-7jT"/>
+                                    <constraint firstItem="I4H-rM-ZCd" firstAttribute="top" secondItem="CAs-CF-RUa" secondAttribute="top" constant="13" id="4n0-Sl-3GP"/>
                                     <constraint firstItem="eY2-nx-bHT" firstAttribute="leading" secondItem="afb-Zs-kxQ" secondAttribute="leading" constant="27" id="5Qs-eg-SzR"/>
                                     <constraint firstAttribute="bottom" secondItem="eY2-nx-bHT" secondAttribute="bottom" constant="15" id="WWi-88-e2Q"/>
+                                    <constraint firstItem="CAs-CF-RUa" firstAttribute="centerY" secondItem="eY2-nx-bHT" secondAttribute="centerY" id="auU-Fn-qOp"/>
+                                    <constraint firstItem="I4H-rM-ZCd" firstAttribute="trailing" secondItem="CAs-CF-RUa" secondAttribute="trailing" constant="-17" id="o5j-xE-a1O"/>
                                     <constraint firstAttribute="height" constant="100" id="wYc-CT-iQC"/>
                                 </constraints>
                             </view>
@@ -243,6 +271,7 @@
                         <outlet property="isNewContainer" destination="3ZY-yT-GRe" id="58z-9F-q5s"/>
                         <outlet property="isRaffleView" destination="XtD-kr-H2M" id="bxq-QU-b8f"/>
                         <outlet property="missionButton" destination="2GG-dx-LFB" id="79r-HZ-fnf"/>
+                        <outlet property="newImageView" destination="I4H-rM-ZCd" id="C2j-38-iaV"/>
                         <outlet property="pagerView" destination="xrk-iP-4gX" id="b2s-d9-5Uq"/>
                         <outlet property="priceLabel" destination="S5m-eO-ptD" id="Cid-iN-NuY"/>
                         <outlet property="timeLabel" destination="vei-lX-k6r" id="HjL-Vq-YIJ"/>
@@ -1158,7 +1187,9 @@
     </scenes>
     <resources>
         <image name="authCheckSelected" width="25" height="25"/>
+        <image name="bell" catalog="system" width="128" height="124"/>
         <image name="chevron.left" catalog="system" width="96" height="128"/>
+        <image name="circle.fill" catalog="system" width="128" height="121"/>
         <image name="gradient" width="390" height="678"/>
         <image name="smallLogo" width="32" height="36"/>
         <image name="xmark" catalog="system" width="128" height="113"/>

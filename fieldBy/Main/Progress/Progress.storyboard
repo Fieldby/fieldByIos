@@ -24,11 +24,39 @@
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="smallLogo" translatesAutoresizingMaskIntoConstraints="NO" id="Jth-rW-VDZ">
                                         <rect key="frame" x="27" y="49" width="32" height="36"/>
                                     </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KJc-gm-wEh">
+                                        <rect key="frame" x="344" y="42" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="Y6P-M5-Uke"/>
+                                            <constraint firstAttribute="width" constant="50" id="ZK8-cp-tVY"/>
+                                        </constraints>
+                                        <color key="tintColor" name="Black"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="bell" catalog="system">
+                                            <color key="titleColor" name="Black"/>
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="21"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="pushNoti:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="IA4-1T-KkQ"/>
+                                        </connections>
+                                    </button>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Tf7-Br-Ctt">
+                                        <rect key="frame" x="370" y="55.5" width="7" height="6"/>
+                                        <color key="tintColor" name="Red"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="7" id="bJX-jN-B8d"/>
+                                            <constraint firstAttribute="height" constant="7" id="kzr-vR-3bB"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="KJc-gm-wEh" secondAttribute="trailing" constant="20" id="2a1-aI-AjA"/>
                                     <constraint firstAttribute="height" constant="100" id="5Gb-lO-Qk8"/>
                                     <constraint firstAttribute="bottom" secondItem="Jth-rW-VDZ" secondAttribute="bottom" constant="15" id="C5w-Bi-YcD"/>
+                                    <constraint firstItem="Tf7-Br-Ctt" firstAttribute="top" secondItem="KJc-gm-wEh" secondAttribute="top" constant="13" id="OLm-4K-bMU"/>
+                                    <constraint firstItem="KJc-gm-wEh" firstAttribute="centerY" secondItem="Jth-rW-VDZ" secondAttribute="centerY" id="XGg-lD-7Ed"/>
+                                    <constraint firstItem="Tf7-Br-Ctt" firstAttribute="trailing" secondItem="KJc-gm-wEh" secondAttribute="trailing" constant="-17" id="maZ-9m-ucZ"/>
                                     <constraint firstItem="Jth-rW-VDZ" firstAttribute="leading" secondItem="08z-O7-rGx" secondAttribute="leading" constant="27" id="qfH-Jc-F9Q"/>
                                 </constraints>
                             </view>
@@ -548,6 +576,7 @@
                         <outlet property="doneLabel" destination="L2g-hS-7tH" id="IX0-Zb-VrW"/>
                         <outlet property="inProgressLabel" destination="i0m-QW-5TI" id="uqU-ez-ahI"/>
                         <outlet property="indicator" destination="hVL-YM-HtN" id="ovp-Va-Ihu"/>
+                        <outlet property="newImageView" destination="Tf7-Br-Ctt" id="ojv-94-ikM"/>
                         <outlet property="tableView" destination="ErI-gh-sak" id="o6D-Zf-NRl"/>
                         <outlet property="topView" destination="08z-O7-rGx" id="iVB-uJ-N0o"/>
                         <outlet property="usernameLabel" destination="s5c-kG-Fvu" id="hoE-0z-POz"/>
@@ -561,6 +590,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="bell" catalog="system" width="128" height="124"/>
         <image name="circle.fill" catalog="system" width="128" height="121"/>
         <image name="smallLogo" width="32" height="36"/>
         <namedColor name="Black">
@@ -571,6 +601,9 @@
         </namedColor>
         <namedColor name="MainColor">
             <color red="0.13333333333333333" green="0.72941176470588232" blue="0.6588235294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Red">
+            <color red="0.93725490196078431" green="0.30196078431372547" blue="0.30196078431372547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

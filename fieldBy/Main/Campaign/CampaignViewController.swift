@@ -27,6 +27,7 @@ class CampaignViewController: UIViewController {
     @IBOutlet weak var missionButton: UIButton!
     @IBOutlet weak var isNewContainer: UIView!
     
+    @IBOutlet weak var newImageView: UIImageView!
     @IBOutlet weak var indicator: UIActivityIndicatorView!
     @IBOutlet weak var barView: UIView!
     @IBOutlet weak var timeLabel: UILabel!
@@ -92,6 +93,16 @@ class CampaignViewController: UIViewController {
     }
     
     private func bind() {
+        
+        NotiManager.shared.notiArray
+            .subscribe(onNext: { [unowned self] notiArray in
+                if !notiArray.isEmpty && notiArray.first!.checked == false {
+                    newImageView.isHidden = false
+                } else {
+                    newImageView.isHidden = true
+                }
+            })
+            .disposed(by: rx.disposeBag)
 
         pagerView.transformer = FSPagerViewTransformer(type: .linear)
         pagerView.itemSize = CGSize(width: UIScreen.main.bounds.width-65, height: 450)
@@ -213,6 +224,10 @@ class CampaignViewController: UIViewController {
             
             return "D-1"
         }
+    }
+    @IBAction func pushNoti(_ sender: Any) {
+        let vc = UIStoryboard(name: "Noti", bundle: nil).instantiateViewController(withIdentifier: "notiVC") as! NotiViewController
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
 }

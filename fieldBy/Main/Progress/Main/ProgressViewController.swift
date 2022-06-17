@@ -20,6 +20,7 @@ class ProgressViewController: UIViewController {
     @IBOutlet weak var doneLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var indicator: UIActivityIndicatorView!
+    @IBOutlet weak var newImageView: UIImageView!
     
     
     
@@ -66,6 +67,15 @@ class ProgressViewController: UIViewController {
     
     private func bind() {
 
+        NotiManager.shared.notiArray
+            .subscribe(onNext: { [unowned self] notiArray in
+                if !notiArray.isEmpty && notiArray.first!.checked == false {
+                    newImageView.isHidden = false
+                } else {
+                    newImageView.isHidden = true
+                }
+            })
+            .disposed(by: rx.disposeBag)
         
         viewModel.toShowArray
             .map { array -> String in
@@ -206,6 +216,11 @@ class ProgressViewController: UIViewController {
         let nav = UINavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .fullScreen
         present(nav, animated: true)
+    }
+    
+    @IBAction func pushNoti(_ sender: Any) {
+        let vc = UIStoryboard(name: "Noti", bundle: nil).instantiateViewController(withIdentifier: "notiVC") as! NotiViewController
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func pushSelectedVC(model: CampaignModel) {
