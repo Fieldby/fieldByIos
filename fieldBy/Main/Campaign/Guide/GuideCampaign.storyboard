@@ -141,14 +141,23 @@
                                                         <color key="textColor" name="Black"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="터치하여 자세히 볼 수 있습니다." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t3Y-mQ-ycF">
-                                                        <rect key="frame" x="27" y="43" width="125.5" height="12"/>
-                                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="10"/>
-                                                        <color key="textColor" name="Red"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t3Y-mQ-ycF">
+                                                        <rect key="frame" x="27" y="43" width="180" height="24"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="180" id="F0R-oa-ULg"/>
+                                                        </constraints>
+                                                        <attributedString key="attributedText">
+                                                            <fragment content="본 캠페인은 필드바이 자체 진행 캠페인입니다. 사이즈는 XS입니다. [사이즈 교환 가능 건]">
+                                                                <attributes>
+                                                                    <color key="NSColor" name="Red"/>
+                                                                    <font key="NSFont" size="10" name="AppleSDGothicNeo-Regular"/>
+                                                                </attributes>
+                                                            </fragment>
+                                                        </attributedString>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="59s-OS-Olb">
-                                                        <rect key="frame" x="28" y="78" width="358" height="452"/>
+                                                        <rect key="frame" x="28" y="90" width="358" height="440"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="11" minimumInteritemSpacing="11" id="Z5X-9J-SdJ">
                                                             <size key="itemSize" width="167" height="224"/>
@@ -666,6 +675,7 @@
                         <outlet property="ftcLabel" destination="2Qs-03-BXy" id="VoK-jS-ev3"/>
                         <outlet property="ftcView" destination="sw1-KF-ULc" id="G3t-qb-U6c"/>
                         <outlet property="infoContainer" destination="O3b-6g-dWz" id="hvY-fl-Fio"/>
+                        <outlet property="infoLabel" destination="t3Y-mQ-ycF" id="AdW-qh-gwH"/>
                         <outlet property="leastFeedLabel" destination="22U-yN-gOr" id="PZx-nl-JVQ"/>
                         <outlet property="maintainLabel" destination="HD3-p4-NPT" id="wCn-XA-LwL"/>
                         <outlet property="middleView" destination="RZi-KJ-pTo" id="EPa-c4-4Bz"/>

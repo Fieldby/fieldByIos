@@ -180,6 +180,12 @@ class CampaignViewController: UIViewController {
                 missionButton.backgroundColor = .main
             }
         }
+        
+        if model.brandUuid == "aC5LC34JqYeWE7UaD7iITrVdVXe2" {
+            isRaffleView.isHidden = false
+        } else {
+            isRaffleView.isHidden = true
+        }
 
     }
 

@@ -37,6 +37,7 @@ class GuideCampaignViewController: CommonGuideViewController {
      */
     @IBOutlet weak var bottomView: UIView!
     
+    @IBOutlet weak var infoLabel: UILabel!
     @IBOutlet weak var ftcLabel: UILabel!
     @IBOutlet weak var ftcButton: UIButton!
     @IBOutlet weak var ftcView: UIView!
@@ -96,6 +97,12 @@ class GuideCampaignViewController: CommonGuideViewController {
                 $0!.layer.cornerRadius = 6
                 $0!.addGrayShadow()
             }
+        
+        if campaignModel.brandUuid == "aC5LC34JqYeWE7UaD7iITrVdVXe2" {
+            infoLabel.isHidden = false
+        } else {
+            infoLabel.isHidden = true
+        }
         
     }
     
