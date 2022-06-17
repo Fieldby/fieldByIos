@@ -41,7 +41,7 @@
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="21"/>
                                         </state>
                                         <connections>
-                                            <action selector="pushNoti:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="w8O-xn-3Jd"/>
+                                            <action selector="pushNoti:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="6xv-b8-z9G"/>
                                         </connections>
                                     </button>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="I4H-rM-ZCd">

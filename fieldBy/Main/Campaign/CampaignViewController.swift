@@ -45,6 +45,7 @@ class CampaignViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.isHidden = true
 
         indicator.isHidden = true
         
@@ -56,6 +57,11 @@ class CampaignViewController: UIViewController {
         
         makeUI()
         bind()
+    }
+    
+    @IBAction func pushNoti(_ sender: Any) {
+        let vc = UIStoryboard(name: "Noti", bundle: nil).instantiateViewController(withIdentifier: "notiVC") as! NotiViewController
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -140,6 +146,7 @@ class CampaignViewController: UIViewController {
                 presentDetailVC(campaignModel: campaignArray[index], image: pagerView.cellForItem(at: index)!.imageView!.image!)
             })
             .disposed(by: rx.disposeBag)
+        
     }
     
     private func bindInfoView(model: CampaignModel) {
@@ -224,10 +231,6 @@ class CampaignViewController: UIViewController {
             
             return "D-1"
         }
-    }
-    @IBAction func pushNoti(_ sender: Any) {
-        let vc = UIStoryboard(name: "Noti", bundle: nil).instantiateViewController(withIdentifier: "notiVC") as! NotiViewController
-        self.navigationController?.pushViewController(vc, animated: true)
     }
     
 }

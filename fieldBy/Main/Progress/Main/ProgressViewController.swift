@@ -22,9 +22,18 @@ class ProgressViewController: UIViewController {
     @IBOutlet weak var indicator: UIActivityIndicatorView!
     @IBOutlet weak var newImageView: UIImageView!
     
+    @IBOutlet weak var appliedButton: UIButton!
+    @IBOutlet weak var inProgressButton: UIButton!
+    @IBOutlet weak var doneButton: UIButton!
     
     
     @IBOutlet var viewModel: ProgressViewModel!
+    
+    private let statusSubject = BehaviorSubject<Status?>(value: nil)
+    
+    enum Status {
+        case applied, inProgress, done
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -99,7 +108,21 @@ class ProgressViewController: UIViewController {
             .disposed(by: rx.disposeBag)
 
         
-        viewModel.toShowArray
+        Observable.combineLatest(viewModel.toShowArray, statusSubject)
+            .map { array, status -> [(CampaignModel, UserCampaignModel)] in
+                if let status = status {
+                    switch status {
+                    case .applied:
+                        return array.filter({ $0.0.status == .applied })
+                    case .done:
+                        return array.filter({ $0.0.status == .done })
+                    default:
+                        return array.filter({$0.0.status != .applied && $0.0.status != .done })
+                    }
+                } else {
+                    return array
+                }
+            }
             .bind(to: tableView.rx.items(cellIdentifier: ProgressMainCell.reuseId, cellType: ProgressMainCell.self)) { [unowned self] idx, model, cell in
                 
                 cell.buttonHandler = { [unowned self] in
@@ -131,6 +154,24 @@ class ProgressViewController: UIViewController {
                 
                 cell.bind(campaignModel: model.0, userModel: model.1)
             }
+            .disposed(by: rx.disposeBag)
+        
+        appliedButton.rx.tap
+            .subscribe(onNext: { [unowned self] in
+                statusSubject.onNext(.applied)
+            })
+            .disposed(by: rx.disposeBag)
+        
+        inProgressButton.rx.tap
+            .subscribe(onNext: { [unowned self] in
+                statusSubject.onNext(.inProgress)
+            })
+            .disposed(by: rx.disposeBag)
+        
+        doneButton.rx.tap
+            .subscribe(onNext: { [unowned self] in
+                statusSubject.onNext(.done)
+            })
             .disposed(by: rx.disposeBag)
         
         let refreshControl = UIRefreshControl()
