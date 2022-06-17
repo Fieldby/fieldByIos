@@ -84,8 +84,13 @@ class ProgressMainCell: UITableViewCell {
         mainView.addGrayShadow(color: .black, opacity: 1, radius: 3)
         Storage.storage().reference().child(campaignModel.mainImageUrl)
             .downloadURL { [unowned self] url, error in
-                print("@@@ \(url) \(campaignModel.mainImageUrl)")
-                itemImageView.setImage(url: url!)
+                if let url = url {
+                    itemImageView.setImage(url: url)
+                } else {
+                    itemImageView.image = UIImage(named: "mainLogo")
+                }
+                
+
             }
         
         brandNameLabel.text = campaignModel.brandName

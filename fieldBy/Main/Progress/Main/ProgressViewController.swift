@@ -37,6 +37,7 @@ class ProgressViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        statusSubject.onNext(nil)
         
         usernameLabel.text = "@\(AuthManager.shared.myUserModel.igModel?.username ?? "field_by")"
         

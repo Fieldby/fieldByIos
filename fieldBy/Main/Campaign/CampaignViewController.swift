@@ -246,10 +246,13 @@ extension CampaignViewController: FSPagerViewDelegate, FSPagerViewDataSource {
         Storage.storage().reference().child(model.mainImageUrl)
             .downloadURL { url, error in
                 if let url = url {
+                    print("@#@ \(url.absoluteString)")
                     cell.imageView?.kf.setImage(with: url)
                     if model.status == .unOpened {
                         cell.imageView?.alpha = 0.5
                     }
+                } else {
+                    cell.imageView?.image = UIImage(named: "mainLogo")
                 }
             }
 
