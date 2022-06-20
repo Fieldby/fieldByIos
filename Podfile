@@ -7,6 +7,7 @@ target 'fieldBy' do
 
   # Pods for fieldBy
 
+  pod 'Firebase/Analytics'
   pod 'FSPagerView'
   pod 'FBSDKLoginKit'
   pod 'PanModal'

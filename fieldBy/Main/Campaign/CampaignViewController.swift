@@ -250,7 +250,6 @@ extension CampaignViewController: FSPagerViewDelegate, FSPagerViewDataSource {
         let model = campaignArray[index]
 
         let parsedImageName = String(String(model.mainImageUrl.split(separator: ".")[0]).split(separator: "/")[2])
-        cell.imageView?.contentMode = .scaleAspectFill
         if let image = UIImage(named: parsedImageName) {
             cell.imageView?.image = image
         } else {

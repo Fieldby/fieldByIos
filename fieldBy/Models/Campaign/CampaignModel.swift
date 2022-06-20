@@ -148,12 +148,18 @@ class CampaignModel: Codable {
     
     func getMainImage() -> Single<UIImage> {
         return Single.create() { [unowned self] observable in
-            
-            Storage.storage().reference().child(mainImageUrl)
-                .downloadURL { [unowned self] url, error in
-                    let data = try! Data(contentsOf: url!)
-                    observable(.success(UIImage(data: data)!))
-                }
+            let parsedImageName = String(String(mainImageUrl.split(separator: ".")[0]).split(separator: "/")[2])
+
+            if let image = UIImage(named: parsedImageName) {
+                observable(.success(image))
+            } else {
+                Storage.storage().reference().child(mainImageUrl)
+                    .downloadURL { [unowned self] url, error in
+                        let data = try! Data(contentsOf: url!)
+                        observable(.success(UIImage(data: data)!))
+                    }
+            }
+
             return Disposables.create()
         }
 

@@ -49,6 +49,6 @@ class NotiViewController: UIViewController {
 
 extension NotiViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(130)
+        return CGFloat(140)
     }
 }

@@ -8,6 +8,8 @@
 import UIKit
 import Firebase
 import FBSDKCoreKit
+import FirebaseCore
+import FirebaseAnalytics
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate {
