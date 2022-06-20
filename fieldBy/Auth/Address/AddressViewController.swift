@@ -42,12 +42,16 @@ class AddressViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShowNotification(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHideNotification(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
    
-        AuthManager.shared.mainTabBar.hide()
+        if let mainTabBar = AuthManager.shared.mainTabBar {
+            mainTabBar.hide()
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         NotificationCenter.default.removeObserver(self)
-        AuthManager.shared.mainTabBar.show()
+        if let mainTabBar = AuthManager.shared.mainTabBar {
+            mainTabBar.show()
+        }
         
     }
     

@@ -249,18 +249,23 @@ extension CampaignViewController: FSPagerViewDelegate, FSPagerViewDataSource {
 
         let model = campaignArray[index]
 
-        Storage.storage().reference().child(model.mainImageUrl)
-            .downloadURL { url, error in
-                if let url = url {
-                    print("@#@ \(url.absoluteString)")
-                    cell.imageView?.kf.setImage(with: url)
-                    if model.status == .unOpened {
-                        cell.imageView?.alpha = 0.5
+        let parsedImageName = String(String(model.mainImageUrl.split(separator: ".")[0]).split(separator: "/")[2])
+        cell.imageView?.contentMode = .scaleAspectFill
+        if let image = UIImage(named: parsedImageName) {
+            cell.imageView?.image = image
+        } else {
+            Storage.storage().reference().child(model.mainImageUrl)
+                .downloadURL { url, error in
+                    if let url = url {
+                        cell.imageView?.kf.setImage(with: url)
+                        if model.status == .unOpened {
+                            cell.imageView?.alpha = 0.5
+                        }
+                    } else {
+                        cell.imageView?.image = UIImage(named: "mainLogo")
                     }
-                } else {
-                    cell.imageView?.image = UIImage(named: "mainLogo")
                 }
-            }
+        }
 
         cell.layer.masksToBounds = true
         cell.layer.cornerRadius = 21

@@ -14,6 +14,7 @@ import FirebaseAuth
 class DefaultViewController: UIViewController {
     
     let bag = DisposeBag()
+    var isAdmin = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,29 +55,35 @@ class DefaultViewController: UIViewController {
     
     private func checkUserValid() -> Observable<Int> {
         Observable.create() { [unowned self] observable in
-            
-            if let uuid = Auth.auth().currentUser?.uid {
-
-                AuthManager.shared.fetch(uuid: uuid)
-                    .subscribe { [unowned self] in
-                        CampaignManager.shared.fetch()
-                            .subscribe {
-                                observable.onNext(0)
-                            } onError: { error in
-                                print(error)
-                                observable.onNext(2)
-                            }
-                            .disposed(by: rx.disposeBag)
-                    } onError: { err in
-                        print(err)
-                        observable.onNext(1)
-                    }
-                    .disposed(by: rx.disposeBag)
-
+            if isAdmin {
+                observable.onNext(0)
             } else {
-                print("no Uid")
-                observable.onNext(1)
+                if let uuid = Auth.auth().currentUser?.uid {
+
+                    AuthManager.shared.fetch(uuid: uuid)
+                        .subscribe { [unowned self] in
+                            CampaignManager.shared.fetch()
+                                .subscribe {
+                                    observable.onNext(0)
+                                } onError: { error in
+                                    print(error)
+                                    observable.onNext(2)
+                                }
+                                .disposed(by: rx.disposeBag)
+                        } onError: { err in
+                            
+                            print(err)
+                            observable.onNext(1)
+                        }
+                        .disposed(by: rx.disposeBag)
+
+                } else {
+                    print("no Uid")
+                    observable.onNext(1)
+                }
             }
+            
+
             
             return Disposables.create()
         }

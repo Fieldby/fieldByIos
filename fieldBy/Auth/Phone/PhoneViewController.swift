@@ -389,7 +389,9 @@ class PhoneViewController: UIViewController {
             .subscribe { [unowned self] in
                 indicator.isHidden = true
                 indicator.stopAnimating()
+                print("this")
                 navigationController?.dismiss(animated: true, completion: {
+                    AuthManager.shared.defaultVC.isAdmin = true
                     AuthManager.shared.defaultVC.toMain()
                 })
             } onError: { [unowned self] _ in
