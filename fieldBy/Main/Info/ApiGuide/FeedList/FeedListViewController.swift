@@ -55,9 +55,6 @@ class FeedListViewController: UIViewController {
             }
             .disposed(by: rx.disposeBag)
         
-        
-        
-        
         collectionView.rx.itemSelected
             .subscribe(onNext: { [unowned self] index in
                 let cell = collectionView.cellForItem(at: index) as! FeedCell
@@ -102,7 +99,7 @@ class FeedListViewController: UIViewController {
                         
                         var temp: [String] = []
                         for idx in indexes {
-                            temp.append(imageArray[idx].mediaURL)
+                            temp.append(imageArray[idx].id)
                         }
                         
                         NotiManager.shared.sendInstagram()

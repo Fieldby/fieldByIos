@@ -142,7 +142,7 @@ class UserInfoViewController: UIViewController {
                 } else {
                     birthDayContainer.layer.borderWidth = 1
                     
-                    nextButton.isEnabled = false
+                    nextButton.isEnabled = true
                 }
             })
             .disposed(by: rx.disposeBag)
@@ -249,7 +249,7 @@ class UserInfoViewController: UIViewController {
                     jobTextField.resignFirstResponder()
                     birthDayTextField.becomeFirstResponder()
                     
-                    nextButton.isEnabled = false
+                    nextButton.isEnabled = true
                     
                 case .birthDay:
                     status = .height

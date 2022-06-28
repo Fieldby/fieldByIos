@@ -18,7 +18,7 @@ class UserInfoViewModel: NSObject {
     let jobValidSubject = BehaviorSubject<Bool>(value: false)
     
     let birthDaySubject = BehaviorSubject<String>(value: "")
-    let birthDayValidSubject = BehaviorSubject<Bool>(value: false)
+    let birthDayValidSubject = BehaviorSubject<Bool>(value: true)
     
     let heightSubject = BehaviorSubject<String>(value: "")
     let heightValidSubject = BehaviorSubject<Bool>(value: false)
@@ -42,10 +42,10 @@ class UserInfoViewModel: NSObject {
             .bind(to: jobValidSubject)
             .disposed(by: rx.disposeBag)
         
-        birthDaySubject
-            .map { return Int($0) != nil && $0.count == 8 }
-            .bind(to: birthDayValidSubject)
-            .disposed(by: rx.disposeBag)
+//        birthDaySubject
+//            .map { return Int($0) != nil && $0.count == 8 }
+//            .bind(to: birthDayValidSubject)
+//            .disposed(by: rx.disposeBag)
         
         heightSubject
             .map { return Int($0) != nil && 100 < Int($0)! && Int($0)! < 230 }

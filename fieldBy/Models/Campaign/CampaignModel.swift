@@ -83,7 +83,8 @@ class CampaignModel: Codable {
            let title = value["campaignTitle"] as? String
             
         {
-            self.mainImageUrl = "campaignImages/\(self.uuid)/\(imageUrl)"
+            self.title = title
+            self.mainImageUrl = "campaignImages/\(self.title)/\(imageUrl)"
             self.brandUuid = brandUuid
             self.isNew = isNew
             self.dueDate = dueDate
@@ -95,7 +96,6 @@ class CampaignModel: Codable {
             self.brandName = brandName
             self.brandInstagram = brandInstagram
             self.recruitingDate = recruitingDate
-            self.title = title
         } else {
             return nil
         }
@@ -151,15 +151,20 @@ class CampaignModel: Codable {
             let parsedImageName = String(String(mainImageUrl.split(separator: ".")[0]).split(separator: "/")[2])
 
             if let image = UIImage(named: parsedImageName) {
+                print("yes")
                 observable(.success(image))
             } else {
+                print("else")
                 Storage.storage().reference().child(mainImageUrl)
                     .downloadURL { [unowned self] url, error in
-                        let data = try! Data(contentsOf: url!)
-                        observable(.success(UIImage(data: data)!))
+                        if let url = url {
+                            let data = try! Data(contentsOf: url)
+                            observable(.success(UIImage(data: data)!))
+                        } else {
+                            observable(.success(UIImage(named: "mainLogo")!))
+                        }
                     }
             }
-
             return Disposables.create()
         }
 

@@ -27,6 +27,7 @@ class CampaignViewController: UIViewController {
     @IBOutlet weak var missionButton: UIButton!
     @IBOutlet weak var isNewContainer: UIView!
     
+    @IBOutlet weak var priceView: UIView!
     @IBOutlet weak var newImageView: UIImageView!
     @IBOutlet weak var indicator: UIActivityIndicatorView!
     @IBOutlet weak var barView: UIView!
@@ -143,7 +144,18 @@ class CampaignViewController: UIViewController {
         missionButton.rx.tap
             .subscribe(onNext: { [unowned self] in
                 let index = showingIndex
-                presentDetailVC(campaignModel: campaignArray[index], image: pagerView.cellForItem(at: index)!.imageView!.image!)
+                
+                if campaignArray[index].uuid == "-N5EALVGOYpLlZzZqA09" {
+                    openUrl(url: "https://fieldby.notion.site/e390c19f71f842fa94c78194a4faa00c")
+                } else if campaignArray[index].uuid == "-N5ECdjzaPhLTEydEG6u" {
+                    //오픈 예정 캠페인
+                } else if campaignArray[index].uuid == "-N5E7C3YxZ7x4epf_8PY" {
+                    openUrl(url: "https://fieldby.notion.site/GMK-6685de9ac9fc424892462199ffa9fa89")
+                    //골프매거진
+                } else {
+                    presentDetailVC(campaignModel: campaignArray[index], image: pagerView.cellForItem(at: index)!.imageView!.image!)
+                }
+                
             })
             .disposed(by: rx.disposeBag)
         
@@ -175,13 +187,39 @@ class CampaignViewController: UIViewController {
             if AuthManager.shared.myUserModel.campaignUuids[uuid] == true {
                 missionButton.setTitle("제안 완료", for: .normal)
                 missionButton.backgroundColor = UIColor(red: 48, green: 48, blue: 48)
+            } else if model.uuid == "-N5EALVGOYpLlZzZqA09"{
+                missionButton.setTitle("확인하기", for: .normal)
+                missionButton.backgroundColor = .main
+            } else if model.uuid == "-N5ECdjzaPhLTEydEG6u" {
+                missionButton.setTitle("확인하기", for: .normal)
+                missionButton.backgroundColor = .main
             } else {
                 missionButton.setTitle("제안하기", for: .normal)
                 missionButton.backgroundColor = .main
             }
+            
+            if model.uuid == "-N5E7C3YxZ7x4epf_8PY" {
+                timeLabel.text = "레슨"
+                timeLabel.textColor = UIColor(red: 186, green: 171, blue: 34)
+                isNewContainer.backgroundColor = UIColor(red: 243, green: 235, blue: 196)
+                priceView.isHidden = true
+            } else if model.uuid == "-N5EALVGOYpLlZzZqA09" {
+                timeLabel.text = "가이드"
+                timeLabel.textColor = UIColor(red: 255, green: 99, blue: 99)
+                isNewContainer.backgroundColor = UIColor(red: 255, green: 211, blue: 211)
+                priceView.isHidden = true
+            } else if model.uuid == "-N5ECdjzaPhLTEydEG6u" {
+                timeLabel.text = "예정"
+                timeLabel.textColor = UIColor(red: 111, green: 111, blue: 111)
+                isNewContainer.backgroundColor = UIColor(red: 216, green: 216, blue: 216)
+                priceView.isHidden = true
+                missionButton.backgroundColor = .unabled
+            } else {
+                priceView.isHidden = false
+            }
         }
         
-        if model.brandUuid == "aC5LC34JqYeWE7UaD7iITrVdVXe2" {
+        if model.brandUuid == "aC5LC34JqYeWE7UaD7iITrVdVXe2" && model.uuid != "-N5E7C3YxZ7x4epf_8PY" && model.uuid != "-N5EALVGOYpLlZzZqA09" && model.uuid != "-N5ECdjzaPhLTEydEG6u" {
             isRaffleView.isHidden = false
         } else {
             isRaffleView.isHidden = true
@@ -246,12 +284,13 @@ extension CampaignViewController: FSPagerViewDelegate, FSPagerViewDataSource {
     
     func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
         let cell = pagerView.dequeueReusableCell(withReuseIdentifier: pagerCell.reuseId, at: index) as! pagerCell
-
+        cell.imageView?.contentMode = .scaleAspectFit
         let model = campaignArray[index]
 
         let parsedImageName = String(String(model.mainImageUrl.split(separator: ".")[0]).split(separator: "/")[2])
         if let image = UIImage(named: parsedImageName) {
             cell.imageView?.image = image
+                        
         } else {
             Storage.storage().reference().child(model.mainImageUrl)
                 .downloadURL { url, error in
@@ -265,6 +304,8 @@ extension CampaignViewController: FSPagerViewDelegate, FSPagerViewDataSource {
                     }
                 }
         }
+        
+        
 
         cell.layer.masksToBounds = true
         cell.layer.cornerRadius = 21
@@ -281,8 +322,14 @@ extension CampaignViewController: FSPagerViewDelegate, FSPagerViewDataSource {
     }
 
     func pagerView(_ pagerView: FSPagerView, didSelectItemAt index: Int) {
-        
-        if campaignArray[index].status != .unOpened {
+        if campaignArray[index].uuid == "-N5EALVGOYpLlZzZqA09" {
+            openUrl(url: "https://fieldby.notion.site/e390c19f71f842fa94c78194a4faa00c")
+        } else if campaignArray[index].uuid == "-N5ECdjzaPhLTEydEG6u" {
+            //오픈 예정 캠페인
+        } else if campaignArray[index].uuid == "-N5E7C3YxZ7x4epf_8PY" {
+            openUrl(url: "https://fieldby.notion.site/GMK-6685de9ac9fc424892462199ffa9fa89")
+            //골프매거진
+        } else if campaignArray[index].status != .unOpened {
             presentDetailVC(campaignModel: campaignArray[index], image: pagerView.cellForItem(at: index)!.imageView!.image!)
         }
         pagerView.deselectItem(at: index, animated: true)

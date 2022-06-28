@@ -11,7 +11,7 @@ import FirebaseDatabase
 class MyUserModel {
     
     var uuid: String!
-    let birthDay: String
+    let birthDay: String?
     let career: Career
     let height: Int
     let isPro: Bool
@@ -40,8 +40,7 @@ class MyUserModel {
         let value = data.value as! [String: Any]
         self.uuid = data.key
         
-        if let birthDay = value["birthDay"] as? String,
-           let career = value["career"] as? String,
+        if let career = value["career"] as? String,
            let height = value["height"] as? Int,
            let isPro = value["isPro"] as? Bool,
            let job = value["job"] as? String,
@@ -52,9 +51,9 @@ class MyUserModel {
            let roundingFrequency = value["roundingFrequency"] as? String,
            let simpleAddress = value["simpleAddress"] as? String,
            let stroke = value["stroke"] as? String,
-           let reward = value["reward"] as? String{
+           let reward = value["reward"] as? String {
             
-            self.birthDay = birthDay
+            self.birthDay = value["birthDay"] as? String
             self.career = Career(rawValue: career)!
             self.height = height
             self.isPro = isPro

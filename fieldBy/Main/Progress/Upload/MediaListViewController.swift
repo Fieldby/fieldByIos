@@ -108,7 +108,7 @@ class MediaListViewController: UIViewController {
                         
                         let uuid = campaignModel.uuid
                         
-                        CampaignManager.shared.saveUploadImages(campaignUuid: uuid, images: imageArray.sorted(by: {$0.timestamp > $1.timestamp}), index: i)
+                        CampaignManager.shared.saveUploadIds(campaignUuid: uuid, images: imageArray.sorted(by: {$0.timestamp > $1.timestamp}), index: i)
                             .subscribe { [unowned self] in
                                 print("이미지 업로드 성공")
  

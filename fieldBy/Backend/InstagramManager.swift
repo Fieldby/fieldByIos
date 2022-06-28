@@ -144,7 +144,6 @@ class InstagramManager: NSObject {
                         if let data = decode(jsonData: data, type: FBPageList.self) {
                             if !data.data.isEmpty {
                                 self.fbPageId = data.data.first!.id
-                                print("fbpageid \(self.fbPageId)")
                                 completable(.completed)
                             } else {
                                 completable(.error(FetchError.emptyData))
@@ -223,16 +222,16 @@ class InstagramManager: NSObject {
             
             let url = "\(graphUrl)\(igId)?fields=media&access_token=\(igModel.token!)"
             
-            AF.request(url, method: .get)
-                .responseString { response in
-                    switch response.result {
-                    case .success(let str):
-                        print(str)
-                    case .failure(let err):
-                        print(err)
-                    }
-                }
-            
+//            AF.request(url, method: .get)
+//                .responseString { response in
+//                    switch response.result {
+//                    case .success(let str):
+//                        print(str)
+//                    case .failure(let err):
+//                        print(err)
+//                    }
+//                }
+//
             
             AF.request(url, method: .get)
                 .validate(statusCode: 200..<300)
@@ -337,10 +336,11 @@ class InstagramManager: NSObject {
                 print(err)
             }
             .disposed(by: rx.disposeBag)
-
     }
 
-    private func fetchChildren(id: String) -> Single<[String]> {
+    
+    //feed Id -> child Id list
+    func fetchChildren(id: String) -> Single<[String]> {
         return Single.create() { [unowned self] observable in
             guard let igModel = AuthManager.shared.myUserModel.igModel else {
                 observable(.error(FetchError.tokenError))
@@ -376,17 +376,17 @@ class InstagramManager: NSObject {
     
     private func fetchUrl(ids: [String]) -> Single<[ImageData]> {
         return Single.create() { [unowned self] observable in
-            
+
             guard let igModel = AuthManager.shared.myUserModel.igModel else {
                 observable(.error(FetchError.tokenError))
                 return Disposables.create()
             }
-            
+
             var temp = [ImageData]()
-            
+
             for id in ids {
                 let url = "\(graphUrl)\(id)?fields=media_url,timestamp,id,media_type&access_token=\(igModel.token!)"
-                
+
                 AF.request(url, method: .get)
                     .validate(statusCode: 200..<300)
                     .responseData { [unowned self] response in

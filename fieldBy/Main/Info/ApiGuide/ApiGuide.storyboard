@@ -69,12 +69,12 @@
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="WMO-Pt-7A5">
-                                <rect key="frame" x="0.0" y="163" width="414" height="362"/>
+                                <rect key="frame" x="0.0" y="143" width="414" height="362"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="362" id="fau-54-nmk"/>
+                                    <constraint firstAttribute="width" secondItem="WMO-Pt-7A5" secondAttribute="height" multiplier="207:181" id="2QT-Nw-Xww"/>
                                 </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="JqP-yD-U9D">
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="JqP-yD-U9D">
                                     <size key="itemSize" width="415" height="374.5"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -89,7 +89,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="api1" translatesAutoresizingMaskIntoConstraints="NO" id="WgN-nh-32b">
-                                                    <rect key="frame" x="0.0" y="0.0" width="415" height="387"/>
+                                                    <rect key="frame" x="6.5" y="0.0" width="402" height="374.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="WgN-nh-32b" secondAttribute="height" multiplier="415:387" id="2nO-Ek-rFl"/>
                                                     </constraints>
@@ -128,19 +128,20 @@
                         <viewLayoutGuide key="safeArea" id="b2v-xR-Q0e"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="b2v-xR-Q0e" firstAttribute="trailing" secondItem="WMO-Pt-7A5" secondAttribute="trailing" id="5XL-cE-7FO"/>
                             <constraint firstItem="WMO-Pt-7A5" firstAttribute="leading" secondItem="b2v-xR-Q0e" secondAttribute="leading" id="D9Z-cV-R24"/>
                             <constraint firstItem="b2v-xR-Q0e" firstAttribute="trailing" secondItem="zE3-Pc-mw7" secondAttribute="trailing" constant="29" id="JOF-bH-Zbo"/>
-                            <constraint firstItem="WMO-Pt-7A5" firstAttribute="top" secondItem="9j6-1B-njD" secondAttribute="bottom" constant="75" id="JvT-fp-pLQ"/>
+                            <constraint firstItem="WMO-Pt-7A5" firstAttribute="top" secondItem="9j6-1B-njD" secondAttribute="bottom" constant="55" id="JvT-fp-pLQ"/>
                             <constraint firstAttribute="trailing" secondItem="WVC-kD-KtM" secondAttribute="trailing" id="KVc-kT-umq"/>
                             <constraint firstItem="9j6-1B-njD" firstAttribute="top" secondItem="b2v-xR-Q0e" secondAttribute="top" constant="-6" id="Mwe-s5-8BQ"/>
                             <constraint firstItem="zE3-Pc-mw7" firstAttribute="top" secondItem="M0k-e4-Vl8" secondAttribute="bottom" constant="30" id="Yx6-Ff-gDV"/>
                             <constraint firstItem="WVC-kD-KtM" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="Zpk-gy-bqL"/>
+                            <constraint firstItem="WMO-Pt-7A5" firstAttribute="centerX" secondItem="b2v-xR-Q0e" secondAttribute="centerX" id="bHz-ZL-lM3"/>
                             <constraint firstItem="WVC-kD-KtM" firstAttribute="top" secondItem="zE3-Pc-mw7" secondAttribute="bottom" constant="30" id="fpl-hn-KBB"/>
                             <constraint firstAttribute="bottom" secondItem="WVC-kD-KtM" secondAttribute="bottom" id="kwr-DY-HVh"/>
                             <constraint firstItem="9j6-1B-njD" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" constant="10" id="olD-oq-ceu"/>
                             <constraint firstItem="M0k-e4-Vl8" firstAttribute="leading" secondItem="b2v-xR-Q0e" secondAttribute="leading" constant="29" id="rjT-YB-P2a"/>
                             <constraint firstItem="zE3-Pc-mw7" firstAttribute="leading" secondItem="b2v-xR-Q0e" secondAttribute="leading" constant="29" id="wDH-UV-1jS"/>
+                            <constraint firstItem="M0k-e4-Vl8" firstAttribute="top" relation="greaterThanOrEqual" secondItem="WMO-Pt-7A5" secondAttribute="bottom" constant="20" id="yIJ-wZ-tnD"/>
                         </constraints>
                     </view>
                     <connections>

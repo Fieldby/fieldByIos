@@ -146,11 +146,11 @@ class InfoViewController: UIViewController {
     }
     
     @IBAction func qna(_ sender: Any) {
-        openUrl(url: "https://hyuwo.notion.site/FAQ-f57a2a1fab7d46dabc48d5fa69d77932")
+        openUrl(url: "https://fieldby.notion.site/FAQ-f57a2a1fab7d46dabc48d5fa69d77932")
     }
     
     @IBAction func opennotion(_ sender: Any) {
-        openUrl(url: "https://hyuwo.notion.site/b8e080bdb4704c74883b486e4c0610db")
+        openUrl(url: "https://fieldby.notion.site/b8e080bdb4704c74883b486e4c0610db")
     }
     
     @IBAction func test(_ sender: Any) {

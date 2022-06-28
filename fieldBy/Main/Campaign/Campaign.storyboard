@@ -274,6 +274,7 @@
                         <outlet property="newImageView" destination="I4H-rM-ZCd" id="C2j-38-iaV"/>
                         <outlet property="pagerView" destination="xrk-iP-4gX" id="b2s-d9-5Uq"/>
                         <outlet property="priceLabel" destination="S5m-eO-ptD" id="Cid-iN-NuY"/>
+                        <outlet property="priceView" destination="fb1-wG-dL1" id="C9C-cW-0kD"/>
                         <outlet property="timeLabel" destination="vei-lX-k6r" id="HjL-Vq-YIJ"/>
                         <outlet property="titleLabel" destination="WQf-Jy-VGw" id="1dS-j6-S61"/>
                         <outlet property="topView" destination="afb-Zs-kxQ" id="LIX-QP-zSu"/>

@@ -40,11 +40,10 @@ class CampaignManager: CommonBackendType {
         }
     }
     
-    func mainImageUrl(campaignUuid: String) -> Single<[URL]> {
+    func mainImageUrl(campaignModel: CampaignModel) -> Single<[URL]> {
         return Single.create() { [unowned self] observable in
-            
-            
-            storageRef.child("campaignImages").child(campaignUuid).child("mainImages")
+                
+            storageRef.child("campaignImages").child(campaignModel.title).child("mainImages")
                 .listAll { result, error in
                     if let error = error {
                         
@@ -79,7 +78,7 @@ class CampaignManager: CommonBackendType {
         return Observable.create() { [unowned self] observable in
             var images = [UIImage](repeating: UIImage(systemName: "pencil")!, count: campaignModel.guides.count)
             for i in 0..<campaignModel.guides.count {
-                storageRef.child("campaignImages").child(campaignModel.uuid).child("guideImages").child(campaignModel.guides[i].imageUrl)
+                storageRef.child("campaignImages").child(campaignModel.title).child("guideImages").child(campaignModel.guides[i].imageUrl)
                     .getData(maxSize: 4096 * 4096) { data, error in
                         if let error = error {
                             print(error)
@@ -135,14 +134,14 @@ class CampaignManager: CommonBackendType {
         AuthManager.shared.addCampaign(uuid: campaignModel.uuid, size: size, color: color)
     }
     
-    func saveUploadImages(campaignUuid: String, images: [ImageData], index: Int) -> Completable {
+    func saveUploadIds(campaignUuid: String, images: [ImageData], index: Int) -> Completable {
         return Completable.create() { completable in
             
             self.ref.child("users").child(AuthManager.shared.myUserModel.uuid).child("campaigns").child(campaignUuid).child("images/\(index)")
-                .setValue(images.map{$0.mediaURL})
+                .setValue(images.map{$0.id})
             
             if let model = AuthManager.shared.myUserModel.campaigns.first(where: {$0.uuid == campaignUuid}) {
-                model.imageArray.append(images.map{$0.mediaURL})
+                model.imageArray.append(images.map{$0.id})
             }
 
             completable(.completed)
@@ -184,9 +183,7 @@ class CampaignManager: CommonBackendType {
                     AuthManager.shared.myUserModel.selectedCampaigns[uuid] = value
                     observable(.success(value))
                 }
-            
-            
-            
+
             return Disposables.create()
         }
     }

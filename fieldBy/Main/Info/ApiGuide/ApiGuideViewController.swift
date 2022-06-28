@@ -10,6 +10,7 @@ import RxSwift
 import RxCocoa
 import NSObject_Rx
 import FBSDKLoginKit
+import FirebaseAuth
 
 class ApiGuideViewController: UIViewController {
     

@@ -9,7 +9,7 @@ target 'fieldBy' do
 
   pod 'Firebase/Analytics'
   pod 'FSPagerView'
-  pod 'FBSDKLoginKit'
+  pod 'FBSDKLoginKit', '~> 14.0'
   pod 'PanModal'
   pod 'SnapKit'
   pod 'Then'

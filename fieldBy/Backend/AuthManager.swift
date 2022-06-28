@@ -10,6 +10,7 @@ import RxCocoa
 import NSObject_Rx
 import Alamofire
 import Firebase
+import FirebaseStorage
 
 class AuthManager: CommonBackendType {
     static let shared = AuthManager()
@@ -64,8 +65,30 @@ class AuthManager: CommonBackendType {
                        "token": igModel.token!,
                        "followers": igModel.followers,
                        "follows": igModel.follows,
-                       "mediaCount": igModel.mediaCount,
-                       "profileUrl": igModel.profileUrl])
+                       "mediaCount": igModel.mediaCount])
+        let imageRef = storageRef.child("userImages/\(myUserModel.uuid!)/profile.png")
+
+        if let url = igModel.profileUrl {
+            print("url")
+            let data = try! Data(contentsOf: URL(string: url)!)
+            let _ = imageRef.putData(data, metadata: nil) { metadata, error in
+              guard let _ = metadata else {
+                  print("에러")
+                  print(error)
+                return
+              }
+
+              imageRef.downloadURL { [unowned self] (url, error) in
+                guard let downloadURL = url else {
+                  print("URL 에러")
+                  return
+                }
+                  Database.database().reference().child("users/\(myUserModel.uuid!)/igInfo")
+                      .child("profileUrl").setValue(downloadURL.absoluteString)
+              }
+            }
+        }
+        
 
     }
     
