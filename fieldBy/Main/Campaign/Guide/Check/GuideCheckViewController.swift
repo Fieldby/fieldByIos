@@ -217,7 +217,7 @@ class GuideCheckViewController: CommonGuideViewController {
     }
     
     @IBAction func thirdParty(_ sender: Any) {
-        openUrl(url: "https://hyuwo.notion.site/3-c548547717794ec9ae4c524821ecf1d4")
+        openUrl(url: "https://fieldby.notion.site/3-c548547717794ec9ae4c524821ecf1d4")
     }
     
 }

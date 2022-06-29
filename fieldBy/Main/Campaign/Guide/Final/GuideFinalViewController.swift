@@ -31,7 +31,7 @@ class GuideFinalViewController: CommonGuideViewController {
         navigationController?.navigationBar.isHidden = true
         
         if let token = AuthManager.shared.myUserModel.igModel?.token {
-            InstagramManager.shared.igLogin(token: token) {
+            InstagramManager.shared.igLogin(viewController: self, token: token) {
                 
             }
         }

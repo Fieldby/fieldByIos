@@ -67,14 +67,12 @@ class InstagramManager: NSObject {
         }
     }
     
-    func igLogin(token: String, completion: @escaping () -> ()) {
+    func igLogin(viewController: UIViewController, token: String, completion: @escaping () -> ()) {
         facebookId(token: token)
             .subscribe { [unowned self] in
-                
                 print("token \(token)")
                 fbPageId(token: token)
                     .subscribe { [unowned self] in
-                        
                         instagramId(token: token)
                             .subscribe { [unowned self] in
                                 finalInfo(token: token)
@@ -88,15 +86,18 @@ class InstagramManager: NSObject {
 
                             } onError: { err in
                                 print("igId\(err)")
+                                viewController.presentAlert(message: "에러 1003: 페이스북 페이지에 인스타그램 비즈니스 계정을 연결해주세요.")
                             }
                             .disposed(by: rx.disposeBag)
 
                     } onError: { err in
                         print("fbpageid\(err)")
+                        viewController.presentAlert(message: "에러 1002: 페이스북 페이지를 생성하고 필드바이에 연결해주세요.")
                     }
                     .disposed(by: rx.disposeBag)
             } onError: { err in
                 print("fbid\(err)")
+                viewController.presentAlert(message: "에러 1001: 페이스북 로그인에 실패했습니다.")
             }
             .disposed(by: rx.disposeBag)
  

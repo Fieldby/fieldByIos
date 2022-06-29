@@ -12,6 +12,7 @@ import NSObject_Rx
 import FSPagerView
 import FirebaseStorage
 import FBSDKLoginKit
+import FirebaseDatabase
 
 class CampaignViewController: UIViewController {
 
@@ -46,6 +47,24 @@ class CampaignViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        var version: String? {
+            guard let dictionary = Bundle.main.infoDictionary,
+                  let version = dictionary["CFBundleShortVersionString"] as? String else { return nil }
+            return version
+        }
+        
+        Database.database().reference().child("appInfo").child("version")
+            .observeSingleEvent(of: .value) { [unowned self] DataSnapshot in
+                let value = DataSnapshot.value as! String
+                if value == version {
+                    print("최신버전입니다")
+                } else {
+                    presentUpdateAlert(message: "필드바이 최신 버전으로 업데이트 해주세요.")
+                }
+            }
+        
+        
         self.navigationController?.navigationBar.isHidden = true
 
         indicator.isHidden = true
@@ -58,6 +77,15 @@ class CampaignViewController: UIViewController {
         
         makeUI()
         bind()
+    }
+    
+    func presentUpdateAlert(message: String) {
+        let alert = UIAlertController(title: "업데이트 알림", message: message, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "확인", style: UIAlertAction.Style.default, handler: { [unowned self] UIAlertAction in
+            
+            openUrl(url: "https://apps.apple.com/us/app/%ED%95%84%EB%93%9C%EB%B0%94%EC%9D%B4/id1623339989")
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
     
     @IBAction func pushNoti(_ sender: Any) {

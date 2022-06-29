@@ -62,7 +62,7 @@ class ApiGuideViewController: UIViewController {
                 return
             }
                         
-            InstagramManager.shared.igLogin(token: result.token!.tokenString) { [unowned self] in
+            InstagramManager.shared.igLogin(viewController: self, token: result.token!.tokenString) { [unowned self] in
                 indicator.isHidden = true
                 indicator.stopAnimating()
                 let vc = storyboard?.instantiateViewController(withIdentifier: FeedListViewController.storyId) as! FeedListViewController

@@ -114,9 +114,8 @@
                                 <color key="textColor" name="Black"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="kM7-ma-3cq">
-                                <rect key="frame" x="197" y="438" width="20" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="kM7-ma-3cq">
+                                <rect key="frame" x="197" y="443" width="20" height="20"/>
                             </activityIndicatorView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="연결 가이드" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M0k-e4-Vl8">
                                 <rect key="frame" x="29" y="691.5" width="60" height="16"/>
@@ -137,6 +136,8 @@
                             <constraint firstItem="WVC-kD-KtM" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="Zpk-gy-bqL"/>
                             <constraint firstItem="WMO-Pt-7A5" firstAttribute="centerX" secondItem="b2v-xR-Q0e" secondAttribute="centerX" id="bHz-ZL-lM3"/>
                             <constraint firstItem="WVC-kD-KtM" firstAttribute="top" secondItem="zE3-Pc-mw7" secondAttribute="bottom" constant="30" id="fpl-hn-KBB"/>
+                            <constraint firstItem="kM7-ma-3cq" firstAttribute="centerX" secondItem="b2v-xR-Q0e" secondAttribute="centerX" id="jGn-ca-24F"/>
+                            <constraint firstItem="kM7-ma-3cq" firstAttribute="centerY" secondItem="b2v-xR-Q0e" secondAttribute="centerY" id="jzF-Yp-ksU"/>
                             <constraint firstAttribute="bottom" secondItem="WVC-kD-KtM" secondAttribute="bottom" id="kwr-DY-HVh"/>
                             <constraint firstItem="9j6-1B-njD" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" constant="10" id="olD-oq-ceu"/>
                             <constraint firstItem="M0k-e4-Vl8" firstAttribute="leading" secondItem="b2v-xR-Q0e" secondAttribute="leading" constant="29" id="rjT-YB-P2a"/>
