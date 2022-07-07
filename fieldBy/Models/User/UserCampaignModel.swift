@@ -13,7 +13,7 @@ class UserCampaignModel: Codable {
     var color: String?
     var isSelected: Bool?
     var juso: Juso?
-    var imageArray: [[String]] = [[]]
+    var imageArray: [String] = []
     
     init?(snapshot: DataSnapshot) {
         let value = snapshot.value as! [String: Any]
@@ -22,13 +22,10 @@ class UserCampaignModel: Codable {
         self.color = value["color"] as? String
         self.isSelected = value["isSelected"] as? Bool
         
-        var temp = [[String]]()
         
         if snapshot.childSnapshot(forPath: "images").exists() {
-            
-            for array in snapshot.childSnapshot(forPath: "images").children.allObjects as! [DataSnapshot] {
-                temp.append(array.value as! [String])
-            }
+            imageArray = snapshot.childSnapshot(forPath: "images").value as! [String]
+
         }
         
         if snapshot.childSnapshot(forPath: "address").exists() {
@@ -36,7 +33,6 @@ class UserCampaignModel: Codable {
         }
         
 
-        self.imageArray = temp
         
     }
     

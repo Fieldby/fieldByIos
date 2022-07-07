@@ -26,6 +26,20 @@ class FeedListViewController: UIViewController {
     private var imageSubject = BehaviorSubject<[ImageData]>(value: [])
     private var indexes = [Int]()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let tabBar = self.tabBarController as! MainTabBarController
+        tabBar.hide()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        let tabBar = self.tabBarController as! MainTabBarController
+        tabBar.show()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

@@ -43,7 +43,7 @@ struct IGModel: Codable {
     let profileUrl: String?
     var token: String?
     
-    init(snapshot: DataSnapshot) {
+    init?(snapshot: DataSnapshot) {
         let value = snapshot.value as! [String: Any]
         id = value["id"] as! String
         username = value["username"] as! String

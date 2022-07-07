@@ -138,6 +138,7 @@ class InfoViewController: UIViewController {
         nav.modalPresentationStyle = .fullScreen
         present(nav, animated: true)
     }
+    
     @IBAction func pushNoti(_ sender: Any) {
         
         let vc = UIStoryboard(name: "Noti", bundle: nil).instantiateViewController(withIdentifier: "notiVC") as! NotiViewController
@@ -163,5 +164,11 @@ class InfoViewController: UIViewController {
         if UIApplication.shared.canOpenURL(url) {
             UIApplication.shared.open(url)
         }
+    }
+    
+    @IBAction func uploadBestImages(_ sender: Any) {
+        let vc = UIStoryboard(name: "ApiGuide", bundle: nil).instantiateViewController(withIdentifier: FeedListViewController.storyId) as! FeedListViewController
+        self.navigationController?.pushViewController(vc, animated: true)
+        
     }
 }

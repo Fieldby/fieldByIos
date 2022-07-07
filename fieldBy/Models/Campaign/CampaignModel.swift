@@ -33,6 +33,7 @@ class CampaignModel: Codable {
     let leastFeed: Int
     
     let hashTagModel: HashTagModel
+    var priority = 0
     
     var users: [String: Bool]
     
@@ -100,6 +101,9 @@ class CampaignModel: Codable {
             return nil
         }
 
+        if let priority = value["priority"] as? String {
+            self.priority = Int(priority) ?? 0
+        }
         let itemValue = snapshot.childSnapshot(forPath: "item")
         if !itemValue.exists() { return nil }
         self.itemModel = ItemModel(snapshot: itemValue)

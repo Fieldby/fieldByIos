@@ -21,4 +21,13 @@ extension UIViewController {
             UIApplication.shared.open(url)
         }
     }
+    
+    func presentErrorAlert(message: String, viewController: UIViewController) {
+        let alert = UIAlertController(title: "오류", message: message, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "확인", style: UIAlertAction.Style.default, handler: { (UIAlertAction) in
+            self.openUrl(url: "https://fieldby.notion.site/3c12b2262bb444c0a73895bf4eaa4ef2")
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
 }

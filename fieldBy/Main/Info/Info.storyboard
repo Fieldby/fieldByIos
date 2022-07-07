@@ -341,8 +341,36 @@
                                             <constraint firstAttribute="bottom" secondItem="aUv-u9-t6N" secondAttribute="bottom" id="qxk-EL-mSr"/>
                                         </constraints>
                                     </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CO0-ub-aS8">
+                                        <rect key="frame" x="0.0" y="250" width="414" height="50"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O4g-8A-IrC">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <connections>
+                                                    <action selector="uploadBestImages:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="NaE-mU-ai1"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="대표 사진 등록하기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1dg-S7-vmR">
+                                                <rect key="frame" x="58" y="15.5" width="119.5" height="19.5"/>
+                                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="16"/>
+                                                <color key="textColor" name="Black"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="59n-c3-Bq8"/>
+                                            <constraint firstAttribute="trailing" secondItem="O4g-8A-IrC" secondAttribute="trailing" id="7K0-tw-dIB"/>
+                                            <constraint firstItem="O4g-8A-IrC" firstAttribute="top" secondItem="CO0-ub-aS8" secondAttribute="top" id="E0i-Jo-mBM"/>
+                                            <constraint firstItem="1dg-S7-vmR" firstAttribute="centerY" secondItem="CO0-ub-aS8" secondAttribute="centerY" id="XxV-az-I9w"/>
+                                            <constraint firstItem="O4g-8A-IrC" firstAttribute="leading" secondItem="CO0-ub-aS8" secondAttribute="leading" id="bXG-w5-2nL"/>
+                                            <constraint firstItem="1dg-S7-vmR" firstAttribute="leading" secondItem="CO0-ub-aS8" secondAttribute="leading" constant="58" id="hSc-gM-In2"/>
+                                            <constraint firstAttribute="bottom" secondItem="O4g-8A-IrC" secondAttribute="bottom" id="wsx-s2-gg8"/>
+                                        </constraints>
+                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="egE-AF-2vk">
-                                        <rect key="frame" x="0.0" y="250" width="414" height="316"/>
+                                        <rect key="frame" x="0.0" y="300" width="414" height="266"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </view>
                                 </subviews>
@@ -520,10 +548,17 @@
                                     <constraint firstAttribute="bottom" secondItem="I34-M5-2sq" secondAttribute="bottom" id="wT6-9F-Vms"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="roadADdr" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bNG-gl-jpN" userLabel="detailAddr">
+                                <rect key="frame" x="20" y="286" width="49" height="15"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="12"/>
+                                <color key="textColor" name="Black"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="2qf-dD-cig"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="bNG-gl-jpN" firstAttribute="leading" secondItem="cZw-c1-9rU" secondAttribute="leading" id="DJN-lo-uNX"/>
                             <constraint firstItem="cZw-c1-9rU" firstAttribute="top" secondItem="jBl-sl-4QO" secondAttribute="bottom" constant="25" id="HYC-H6-ZCF"/>
                             <constraint firstItem="7Xy-xI-9wC" firstAttribute="centerX" secondItem="2qf-dD-cig" secondAttribute="centerX" id="JeF-S0-cSf"/>
                             <constraint firstItem="wrL-7W-UEg" firstAttribute="leading" secondItem="czD-SZ-pDm" secondAttribute="leading" constant="10" id="MxQ-YH-4Lb"/>
@@ -536,6 +571,7 @@
                             <constraint firstItem="YSX-An-9OY" firstAttribute="leading" secondItem="2qf-dD-cig" secondAttribute="leading" constant="20" id="XlV-n8-BuZ"/>
                             <constraint firstItem="W0M-y5-7ny" firstAttribute="leading" secondItem="2qf-dD-cig" secondAttribute="leading" constant="20" id="atG-kS-OK5"/>
                             <constraint firstItem="cat-go-Nnh" firstAttribute="top" secondItem="cZw-c1-9rU" secondAttribute="bottom" constant="40" id="b1C-8K-oZQ"/>
+                            <constraint firstItem="bNG-gl-jpN" firstAttribute="top" secondItem="cZw-c1-9rU" secondAttribute="bottom" constant="2" id="b8b-Gt-M9z"/>
                             <constraint firstItem="Ae2-gL-LVZ" firstAttribute="leading" secondItem="PgE-of-zjX" secondAttribute="leading" id="cGU-mk-1hN"/>
                             <constraint firstItem="jBl-sl-4QO" firstAttribute="leading" secondItem="2qf-dD-cig" secondAttribute="leading" constant="20" id="cIn-B9-A22"/>
                             <constraint firstItem="jBl-sl-4QO" firstAttribute="top" secondItem="uSZ-dd-GGo" secondAttribute="bottom" constant="90" id="cwl-9a-daX"/>
@@ -549,6 +585,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="detailAddrLabel" destination="bNG-gl-jpN" id="kbY-e2-yzs"/>
                         <outlet property="nameLabel" destination="PgE-of-zjX" id="W8L-Kw-mP0"/>
                         <outlet property="phoneNumberLabel" destination="Ae2-gL-LVZ" id="QMD-XD-SHN"/>
                         <outlet property="roadAddrLabel" destination="cZw-c1-9rU" id="yBX-8z-f4i"/>

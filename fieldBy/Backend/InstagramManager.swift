@@ -38,17 +38,6 @@ class InstagramManager: NSObject {
             let url = graphUrl + "oauth/access_token?grant_type=fb_exchange_token&client_id=\(clientId)&client_secret=\(clientSecret)&fb_exchange_token=\(token)"
             
             AF.request(url, method: .get)
-                .responseString { response in
-                    switch response.result {
-                    case .success(let str):
-                        print("@#@ \(str)")
-                    case .failure(let err):
-                        print("@#@ \(err)")
-                    }
-                }
-            
-            
-            AF.request(url, method: .get)
                 .responseData { [unowned self] response in
                     switch response.result {
                     case .success(let data):
@@ -86,18 +75,18 @@ class InstagramManager: NSObject {
 
                             } onError: { err in
                                 print("igId\(err)")
-                                viewController.presentAlert(message: "에러 1003: 페이스북 페이지에 인스타그램 비즈니스 계정을 연결해주세요.")
+                                viewController.presentErrorAlert(message: "에러 1003: 페이스북 페이지에 인스타그램 비즈니스 계정을 연결해주세요.", viewController: viewController)
                             }
                             .disposed(by: rx.disposeBag)
 
                     } onError: { err in
                         print("fbpageid\(err)")
-                        viewController.presentAlert(message: "에러 1002: 페이스북 페이지를 생성하고 필드바이에 연결해주세요.")
+                        viewController.presentErrorAlert(message: "에러 1002: 페이스북 페이지를 생성하고 필드바이에 연결해주세요.", viewController: viewController)
                     }
                     .disposed(by: rx.disposeBag)
             } onError: { err in
                 print("fbid\(err)")
-                viewController.presentAlert(message: "에러 1001: 페이스북 로그인에 실패했습니다.")
+                viewController.presentErrorAlert(message: "에러 1001: 페이스북 로그인에 실패했습니다.", viewController: viewController)
             }
             .disposed(by: rx.disposeBag)
  
@@ -121,6 +110,7 @@ class InstagramManager: NSObject {
                     case .success(let data):
                         if let data = decode(jsonData: data, type: FBInfo.self) {
                             self.fbId = data.id
+                            print(self.fbId)
                             completable(.completed)
                         } else {
                             completable(.error(FetchError.decodingFailed))
@@ -171,7 +161,6 @@ class InstagramManager: NSObject {
                     case .success(let data):
                         if let data = decode(jsonData: data, type: IGData.self) {
                             self.instagramId = data.igModel.id
-                            
                             completable(.completed)
                         } else {
                             completable(.error(FetchError.decodingFailed))
@@ -222,17 +211,6 @@ class InstagramManager: NSObject {
             
             
             let url = "\(graphUrl)\(igId)?fields=media&access_token=\(igModel.token!)"
-            
-//            AF.request(url, method: .get)
-//                .responseString { response in
-//                    switch response.result {
-//                    case .success(let str):
-//                        print(str)
-//                    case .failure(let err):
-//                        print(err)
-//                    }
-//                }
-//
             
             AF.request(url, method: .get)
                 .validate(statusCode: 200..<300)

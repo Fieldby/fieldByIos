@@ -31,8 +31,8 @@ class CampaignManager: CommonBackendType {
                         campaignArray.append(campaignModel)
                     }
                 }
-                campaignArrayRelay.accept(campaignArray)
-                self.campaignArray = campaignArray
+                campaignArrayRelay.accept(campaignArray.sorted(by: { $0.priority > $1.priority }))
+                self.campaignArray = campaignArray.sorted(by: { $0.priority > $1.priority })
                 completable(.completed)
             }
                 
@@ -137,11 +137,11 @@ class CampaignManager: CommonBackendType {
     func saveUploadIds(campaignUuid: String, images: [ImageData], index: Int) -> Completable {
         return Completable.create() { completable in
             
-            self.ref.child("users").child(AuthManager.shared.myUserModel.uuid).child("campaigns").child(campaignUuid).child("images/\(index)")
+            self.ref.child("users").child(AuthManager.shared.myUserModel.uuid).child("campaigns").child(campaignUuid).child("images")
                 .setValue(images.map{$0.id})
             
             if let model = AuthManager.shared.myUserModel.campaigns.first(where: {$0.uuid == campaignUuid}) {
-                model.imageArray.append(images.map{$0.id})
+                model.imageArray = images.map{$0.id}
             }
 
             completable(.completed)

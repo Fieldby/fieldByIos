@@ -154,8 +154,6 @@ class ProgressMainCell: UITableViewCell {
             desLabel.text = "가이드에 맞게 컨텐츠를 업로드 해주세요 :)"
         }
         
-
-        
     }
     @IBAction func guideTap(_ sender: Any) {
         guidButtonHandler()

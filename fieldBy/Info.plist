@@ -36,7 +36,7 @@
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
-        <string>fb-messenger-share-api</string>
+		<string>fb-messenger-share-api</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>

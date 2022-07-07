@@ -10,12 +10,14 @@ import UIKit
 class EditProfileViewController: UIViewController {
 
     static let storyId = "editprofileVC"
+    @IBOutlet weak var detailAddrLabel: UILabel!
     @IBOutlet weak var roadAddrLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var phoneNumberLabel: UILabel!
     
     override func viewWillAppear(_ animated: Bool) {
         roadAddrLabel.text = AuthManager.shared.myUserModel.juso.roadAddr
+        detailAddrLabel.text = AuthManager.shared.myUserModel.juso.detail
         nameLabel.text = AuthManager.shared.myUserModel.name
         phoneNumberLabel.text = AuthManager.shared.myUserModel.phoneNumber
     }

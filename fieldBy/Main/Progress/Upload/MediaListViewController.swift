@@ -103,27 +103,22 @@ class MediaListViewController: UIViewController {
                 for i in 0..<indexes.count {
                     
                     let id = imageArray[indexes[i]].id
+                    let uuid = campaignModel.uuid
                     
-                    InstagramManager.shared.fetchChildImages(id: id) { [unowned self] imageArray in
-                        
-                        let uuid = campaignModel.uuid
-                        
-                        CampaignManager.shared.saveUploadIds(campaignUuid: uuid, images: imageArray.sorted(by: {$0.timestamp > $1.timestamp}), index: i)
-                            .subscribe { [unowned self] in
-                                print("이미지 업로드 성공")
- 
-                                count[i] = true
-                                if count == Array(repeating: true, count: indexes.count) {
-                                    navigationController?.popViewController(animated: true)
-                                }
-                                
-                            } onError: { [unowned self] err in
+                    CampaignManager.shared.saveUploadIds(campaignUuid: uuid, images: imageArray.sorted(by: {$0.timestamp > $1.timestamp}), index: i)
+                        .subscribe { [unowned self] in
+                            print("이미지 업로드 성공")
 
-                                print(err)
+                            count[i] = true
+                            if count == Array(repeating: true, count: indexes.count) {
+                                navigationController?.popViewController(animated: true)
                             }
-                            .disposed(by: rx.disposeBag)
-                        
-                    }
+                            
+                        } onError: { [unowned self] err in
+
+                            print(err)
+                        }
+                        .disposed(by: rx.disposeBag)
                 }
                 
                 
