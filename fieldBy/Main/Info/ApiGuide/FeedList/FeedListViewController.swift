@@ -29,15 +29,19 @@ class FeedListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        let tabBar = self.tabBarController as! MainTabBarController
-        tabBar.hide()
+        if let tabBar = self.tabBarController as? MainTabBarController {
+            tabBar.hide()
+        }
+
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        let tabBar = self.tabBarController as! MainTabBarController
-        tabBar.show()
+        
+        if let tabBar = self.tabBarController as? MainTabBarController {
+            tabBar.show()
+        }
     }
     
     override func viewDidLoad() {
