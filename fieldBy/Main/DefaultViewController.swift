@@ -21,7 +21,7 @@ class DefaultViewController: UIViewController {
         super.viewDidLoad()
 
 //
-//        checkAppInfo()
+        checkAppInfo()
 
     }
 
@@ -128,13 +128,17 @@ class DefaultViewController: UIViewController {
     func checkAppInfo() {
         var userCount = 0
         var igCount = 0
+        var bestImageCount = 0
         
         Database.database().reference().child("users")
             .observeSingleEvent(of: .value) { dataSnapShot in
                 for userData in dataSnapShot.children.allObjects as! [DataSnapshot] {
                     if let user = MyUserModel(data: userData) {
-                        print(user.name)
                         userCount += 1
+                        if user.bestImages.count > 0 {
+                            bestImageCount += 1
+                        }
+                        
                         if let _ = user.igModel {
                             igCount += 1
                         }
@@ -143,6 +147,7 @@ class DefaultViewController: UIViewController {
                 
                 Database.database().reference().child("appInfo").child("총유저수").setValue("\(userCount)명")
                 Database.database().reference().child("appInfo").child("인스타연동계정수").setValue("\(igCount)명")
+                Database.database().reference().child("appInfo").child("대표사진등록계정수").setValue("\(bestImageCount)명")
             }
     }
     

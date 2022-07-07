@@ -35,6 +35,8 @@ class MyUserModel {
     var campaignUuids: [String: Bool] = [:]
     var selectedCampaigns: [String: Bool] = [:]
     
+    var bestImages: [String] = []
+    
     
     init?(data: DataSnapshot) {
         let value = data.value as! [String: Any]
@@ -87,6 +89,11 @@ class MyUserModel {
         let igValue = data.childSnapshot(forPath: "igInfo")
         if igValue.exists() {
             igModel = IGModel(snapshot: igValue)
+        }
+        
+        let bestImages = data.childSnapshot(forPath: "bestImages")
+        if bestImages.exists() {
+            self.bestImages = bestImages.value as! [String]
         }
         
         if let userCampaignValue = data.childSnapshot(forPath: "campaigns").children.allObjects as? [DataSnapshot] {
