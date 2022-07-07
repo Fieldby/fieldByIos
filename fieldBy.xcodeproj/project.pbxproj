@@ -102,6 +102,7 @@
 		D1EDA1C62834CF8F0021595E /* GuideCampaign.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1EDA1C52834CF8F0021595E /* GuideCampaign.storyboard */; };
 		D1EDA1C82834CF9A0021595E /* GuideCampaignViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1EDA1C72834CF9A0021595E /* GuideCampaignViewController.swift */; };
 		D1EDA1CA2834CFA30021595E /* GuideCampaignViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1EDA1C92834CFA30021595E /* GuideCampaignViewModel.swift */; };
+		D1F5900228771AB800BE739B /* GAManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F5900128771AB800BE739B /* GAManager.swift */; };
 		D1FC0800282D2982006ED153 /* CampaignViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1FC07FF282D2982006ED153 /* CampaignViewModel.swift */; };
 		D1FC0803282D3FE8006ED153 /* DetailCampaignViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1FC0802282D3FE8006ED153 /* DetailCampaignViewController.swift */; };
 		D1FC0805282D3FF2006ED153 /* DetailCampaignViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1FC0804282D3FF2006ED153 /* DetailCampaignViewModel.swift */; };
@@ -221,6 +222,7 @@
 		D1EDA1C52834CF8F0021595E /* GuideCampaign.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GuideCampaign.storyboard; sourceTree = "<group>"; };
 		D1EDA1C72834CF9A0021595E /* GuideCampaignViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideCampaignViewController.swift; sourceTree = "<group>"; };
 		D1EDA1C92834CFA30021595E /* GuideCampaignViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideCampaignViewModel.swift; sourceTree = "<group>"; };
+		D1F5900128771AB800BE739B /* GAManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GAManager.swift; sourceTree = "<group>"; };
 		D1FC07FF282D2982006ED153 /* CampaignViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignViewModel.swift; sourceTree = "<group>"; };
 		D1FC0802282D3FE8006ED153 /* DetailCampaignViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCampaignViewController.swift; sourceTree = "<group>"; };
 		D1FC0804282D3FF2006ED153 /* DetailCampaignViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCampaignViewModel.swift; sourceTree = "<group>"; };
@@ -480,6 +482,7 @@
 				D1ED9E12282D1A9100855641 /* CampaignManager.swift */,
 				D132C130284095360002785A /* NotiManager.swift */,
 				D198302928509216009085A0 /* PushManager.swift */,
+				D1F5900128771AB800BE739B /* GAManager.swift */,
 			);
 			path = Backend;
 			sourceTree = "<group>";
@@ -971,6 +974,7 @@
 				D17780C82851D9D500CDB037 /* LogoutViewController.swift in Sources */,
 				D184D4ED283B8F8500BEB184 /* TokenModel.swift in Sources */,
 				D1C89EEB2822B70300DAA2F4 /* ProgressViewController.swift in Sources */,
+				D1F5900228771AB800BE739B /* GAManager.swift in Sources */,
 				D181C837283750F1008304C5 /* UserCampaignModel.swift in Sources */,
 				D181C839283754FB008304C5 /* ProgressViewModel.swift in Sources */,
 				D1FC0803282D3FE8006ED153 /* DetailCampaignViewController.swift in Sources */,

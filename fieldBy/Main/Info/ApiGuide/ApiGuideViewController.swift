@@ -48,7 +48,7 @@ class ApiGuideViewController: UIViewController {
         indicator.startAnimating()
         
         let manager = LoginManager()
-        manager.logIn(permissions: ["public_profile", "instagram_basic", "pages_show_list", "pages_read_engagement"], from: self) { result, error in
+        manager.logIn(permissions: ["public_profile", "instagram_basic", "pages_show_list", "pages_read_engagement", "read_insights"], from: self) { result, error in
             if let error = error {
                 print("Process error: \(error)")
                 return
