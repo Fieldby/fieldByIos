@@ -14,7 +14,7 @@ import UIKit
 import Moya
 
 
-class InstagramManager: NSObject {
+final class InstagramManager: CommonBackendType {
     
     static let shared = InstagramManager()
     var clientId = "680555059873566"
@@ -32,14 +32,6 @@ class InstagramManager: NSObject {
         return "\(graphUrl)\(path)?access_token=\(token)"
     }
     
-    func decode<T: Decodable>(jsonData: Data, type: T.Type) -> T? {
-        do {
-            let data = try JSONDecoder().decode(type.self, from: jsonData)
-            return data
-        } catch {
-            return nil
-        }
-    }
     
     func getLongToken(token: String) -> Single<String> {
         return Single.create() { [unowned self] observable in
@@ -68,70 +60,31 @@ class InstagramManager: NSObject {
     func igLogin(viewController: UIViewController, token: String, completion: @escaping () -> ()) {
         self.viewController = viewController
         self.token = token
-        
+
         getFacebookId()
-            .subscribe { [unowned self] in
-                print("token \(token)")
-                getFbPageId()
-                    .subscribe { [unowned self] in
-                        getInstagramId()
-                            .subscribe { [unowned self] in
-                                getFinalInfo()
-                                    .subscribe { [unowned self] in
-                                        print("IG 연동 성공")
-                                        completion()
-                                    } onError: { err in
-                                        print("final\(err)")
-                                    }
-                                    .disposed(by: rx.disposeBag)
-
-                            } onError: { err in
-                                print("igId\(err)")
-                                viewController.presentErrorAlert(message: "에러 1003: 페이스북 페이지에 인스타그램 비즈니스 계정을 연결해주세요.", viewController: viewController)
-                            }
-                            .disposed(by: rx.disposeBag)
-
-                    } onError: { err in
-                        print("fbpageid\(err)")
-                        viewController.presentErrorAlert(message: "에러 1002: 페이스북 페이지를 생성하고 필드바이에 연결해주세요.", viewController: viewController)
-                    }
-                    .disposed(by: rx.disposeBag)
-            } onError: { err in
-                print("fbid\(err)")
-                viewController.presentErrorAlert(message: "에러 1001: 페이스북 로그인에 실패했습니다.", viewController: viewController)
+            .andThen(getFbPageId())
+            .andThen(getInstagramId())
+            .andThen(getFinalInfo())
+            .subscribe {
+                print("IG 연동 성공")
+                completion()
             }
             .disposed(by: rx.disposeBag)
- 
-
     }
-    
     
     //페이지 접근 토큰, 내 id
     private func getFacebookId() -> Completable {
-        
         return Completable.create() { [unowned self] completable in
             let url = parseUrl(path: "me/", token: token)
-            
-            
-            
-            AF.request(url, method: .get)
-                .validate(statusCode: 200..<300)
-                .responseData { [unowned self] response in
-                    switch response.result {
-                    case .success(let data):
-                        if let data = decode(jsonData: data, type: FBInfo.self) {
-                            self.fbId = data.id
-                            print("fbid: \(self.fbId)")
-                            completable(.completed)
-                        } else {
-                            viewController.presentErrorAlert(message: "에러 1001-2: 올바르지 않은 페이스북 계정입니다. 페이스북 계정을 확인해주세요.", viewController: viewController)
-                            completable(.error(FetchError.decodingFailed))
-                        }
-                    case .failure(let error):
-                        viewController.presentErrorAlert(message: "에러 1001-1: 올바르지 않은 페이스북 계정입니다. 페이스북 계정을 확인해주세요.", viewController: viewController)
-                        completable(.error(error))
-                    }
+            getSingle(url: url, type: FBInfo.self)
+                .subscribe { [unowned self] data in
+                    fbId = data.id
+                    completable(.completed)
+                } onError: { [unowned self] err in
+                    viewController.presentErrorAlert(message: "에러 1001: 올바르지 않은 페이스북 계정입니다. 페이스북 계정을 확인해주세요.", viewController: viewController)
+                    completable(.error(err))
                 }
+                .disposed(by: rx.disposeBag)
             return Disposables.create()
         }
     }
@@ -139,27 +92,20 @@ class InstagramManager: NSObject {
     private func getFbPageId() -> Completable {
         return Completable.create() { [unowned self] completable in
             let url = parseUrl(path: "\(fbId!)/accounts/", token: token)
-            
-            AF.request(url, method: .get)
-                .validate(statusCode: 200..<300)
-                .responseData { [unowned self] response in
-                    switch response.result {
-                    case .success(let data):
-                        if let data = decode(jsonData: data, type: FBPageList.self) {
-                            if !data.data.isEmpty {
-                                self.fbPageId = data.data.first!.id
-                                print("fbPageId: \(self.fbPageId)")
-                                completable(.completed)
-                            } else {
-                                completable(.error(FetchError.emptyData))
-                            }
-                        } else {
-                            completable(.error(FetchError.decodingFailed))
-                        }
-                    case .failure(let error):
-                        completable(.error(error))
+            getSingle(url: url, type: FBPageList.self)
+                .subscribe { [unowned self] data in
+                    if !data.data.isEmpty {
+                        fbPageId = data.data.first!.id
+                        completable(.completed)
+                    } else {
+                        viewController.presentErrorAlert(message: "에러 1002-1: 비즈니스 계정에 연결된 페이스북 페이지가 존재하지 않습니다.", viewController: viewController)
+                        completable(.error(FetchError.emptyData))
                     }
+                } onError: { [unowned self] err in
+                    viewController.presentErrorAlert(message: "에러 1002-2: 페이스북 페이지를 생성하고 필드바이에 연결해주세요.", viewController: viewController)
+                    completable(.error(FetchError.decodingFailed))
                 }
+                .disposed(by: rx.disposeBag)
             return Disposables.create()
         }
     }
@@ -167,22 +113,15 @@ class InstagramManager: NSObject {
     private func getInstagramId() -> Completable {
         return Completable.create() { [unowned self] completable in
             let url = "\(graphUrl)\(fbPageId!)?fields=instagram_business_account&access_token=\(token!)"
-            
-            AF.request(url, method: .get)
-                .validate(statusCode: 200..<300)
-                .responseData { [unowned self] response in
-                    switch response.result {
-                    case .success(let data):
-                        if let data = decode(jsonData: data, type: IGData.self) {
-                            self.instagramId = data.igModel.id
-                            completable(.completed)
-                        } else {
-                            completable(.error(FetchError.decodingFailed))
-                        }
-                    case .failure(let error):
-                        completable(.error(error))
-                    }
+            getSingle(url: url, type: IGData.self)
+                .subscribe { [unowned self] data in
+                    instagramId = data.igModel.id
+                    completable(.completed)
+                } onError: { [unowned self] error in
+                    viewController.presentErrorAlert(message: "에러 1003-2: 페이스북 페이지에 인스타그램 비즈니스 계정을 연결해주세요.", viewController: viewController)
+                    completable(.error(error))
                 }
+                .disposed(by: rx.disposeBag)
             return Disposables.create()
         }
     }
@@ -190,7 +129,6 @@ class InstagramManager: NSObject {
     private func getFinalInfo() -> Completable {
         return Completable.create() { [unowned self] completable in
             let url = "\(graphUrl)\(instagramId!)?fields=name,username,profile_picture_url,followers_count,follows_count,media_count&access_token=\(token!)"
-            
             AF.request(url, method: .get)
                 .validate(statusCode: 200..<300)
                 .responseData { [unowned self] response in
@@ -207,8 +145,6 @@ class InstagramManager: NSObject {
                         completable(.error(error))
                     }
                 }
-            
-            
             return Disposables.create()
         }
     }
@@ -409,155 +345,4 @@ class InstagramManager: NSObject {
             return Disposables.create()
         }
     }
-    
-    func fetchInsights(ids: [String]) -> Single<[InsightModel]> {
-        return Single.create() { [unowned self] observable in
-            guard let igModel = AuthManager.shared.myUserModel.igModel else {
-                observable(.error(FetchError.tokenError))
-                return Disposables.create()
-            }
-            var temp = [InsightModel]()
-            
-            
-            for id in ids {
-                let url = "\(graphUrl)\(id)/insights?metric=impressions,reach,carousel_album_impressions,carousel_album_reach,carousel_album_engagement,carousel_album_saved&access_token=\(igModel.token!)"
-                
-                print(url)
-                
-                AF.request(url, method: .get)
-                    .responseString { result in
-                        switch result.result {
-                        case .success(let str):
-                            print(str)
-                        case .failure(let err):
-                            print(err)
-                        }
-                    }
-                
-                AF.request(url, method: .get)
-                    .validate(statusCode: 200..<300)
-                    .responseData { [unowned self] response in
-                        switch response.result {
-                        case .success(let data):
-                            if let insightModel = decode(jsonData: data, type: InsightModel.self) {
-                                temp.append(insightModel)
-                                if temp.count == ids.count {
-                                    observable(.success(temp))
-                                }
-                            } else {
-                                temp.append(InsightModel(data: []))
-                                if temp.count == ids.count {
-                                    observable(.success(temp))
-                                }
-                            }
-                        case .failure(let error):
-                            print(error)
-
-                            let url = "\(graphUrl)\(id)/insights?metric=impressions,reach&access_token=\(igModel.token!)"
-                            AF.request(url, method: .get)
-                                .validate(statusCode: 200..<300)
-                                .responseData { [unowned self] response in
-                                    switch response.result {
-                                    case .success(let data):
-                                        if let insightModel = decode(jsonData: data, type: InsightModel.self) {
-                                            temp.append(insightModel)
-                                            if temp.count == ids.count {
-                                                observable(.success(temp))
-                                            }
-                                        } else {
-                                            temp.append(InsightModel(data: []))
-                                            if temp.count == ids.count {
-                                                observable(.success(temp))
-                                            }
-                                        }
-                                    case .failure(let error):
-                                        print(error)
-                                        temp.append(InsightModel(data: []))
-                                        if temp.count == ids.count {
-                                            observable(.success(temp))
-                                        }
-                                    }
-                                }
-                        }
-                    }
-            }
-            
-            return Disposables.create()
-        }
-    }
-    
-    func fetchCounts(ids: [String]) -> Single<[CountsModel]> {
-        return Single.create() { [unowned self] observable in
-            guard let igModel = AuthManager.shared.myUserModel.igModel else {
-                observable(.error(FetchError.tokenError))
-                return Disposables.create()
-            }
-            var temp = [CountsModel]()
-            for id in ids {
-                let url = "\(graphUrl)\(id)?fields=like_count,comments_count&access_token=\(igModel.token!)"
-                AF.request(url, method: .get)
-                    .validate(statusCode: 200..<300)
-                    .responseData { [unowned self] response in
-                        switch response.result {
-                        case .success(let data):
-                            if let countsModel = decode(jsonData: data, type: CountsModel.self) {
-                                temp.append(countsModel)
-                                if temp.count == ids.count {
-                                    observable(.success(temp))
-                                }
-                            } else {
-                                temp.append(CountsModel(likeCount: 0, commentsCount: 0))
-                                if temp.count == ids.count {
-                                    observable(.success(temp))
-                                }
-                            }
-                        case .failure(let _):
-                            temp.append(CountsModel(likeCount: 0, commentsCount: 0))
-                            if temp.count == ids.count {
-                                observable(.success(temp))
-                            }
-                        }
-                    }
-            }
-            
-            return Disposables.create()
-        }
-    }
-    
-    func fetchIGInsightsDays28() -> Single<Days28Model> {
-        return Single.create() { [unowned self] observable in
-            guard let igModel = AuthManager.shared.myUserModel.igModel else {
-                observable(.error(FetchError.tokenError))
-                return Disposables.create()
-            }
-            let url = "\(graphUrl)\(igModel.id)/insights?metric=reach,impressions&period=days_28&access_token=\(igModel.token!)"
-            print(url)
-
-            AF.request(url, method: .get).responseString { response in
-                switch response.result {
-                case .success(let str):
-                    print(str)
-                case .failure(_):
-                    break
-                }
-            }
-            
-            AF.request(url, method: .get)
-                .validate(statusCode: 200..<300)
-                .responseData { [unowned self] response in
-                    switch response.result {
-                    case .success(let data):
-                        if let days28Model = decode(jsonData: data, type: Days28Model.self) {
-                            observable(.success(days28Model))
-                        } else {
-                            observable(.error(FetchError.decodingFailed))
-                        }
-                    case .failure(let error):
-                        observable(.error(error))
-                    }
-                }
-            return Disposables.create()
-        }
-    }
 }
-

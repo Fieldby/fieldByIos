@@ -28,6 +28,7 @@
 		D11376DA2836856200CFC3D2 /* CommonGuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11376D92836856200CFC3D2 /* CommonGuideViewController.swift */; };
 		D11FD9AE281F6D50008AE32A /* PhoneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11FD9AD281F6D50008AE32A /* PhoneViewModel.swift */; };
 		D11FD9B1281F74A5008AE32A /* CheckNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11FD9B0281F74A5008AE32A /* CheckNumberViewController.swift */; };
+		D121A5BA288ECC3600D9A983 /* InstagramAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D121A5B9288ECC3600D9A983 /* InstagramAPI.swift */; };
 		D12CFD0328503AF50071A86C /* MainImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12CFD0228503AF50071A86C /* MainImageViewController.swift */; };
 		D12D0E8428525EDD005173B2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D12D0E8628525EDD005173B2 /* InfoPlist.strings */; };
 		D1329DF3281FF2AD00760DDA /* CommonViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1329DF2281FF2AD00760DDA /* CommonViews.swift */; };
@@ -147,6 +148,7 @@
 		D11376D92836856200CFC3D2 /* CommonGuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonGuideViewController.swift; sourceTree = "<group>"; };
 		D11FD9AD281F6D50008AE32A /* PhoneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneViewModel.swift; sourceTree = "<group>"; };
 		D11FD9B0281F74A5008AE32A /* CheckNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckNumberViewController.swift; sourceTree = "<group>"; };
+		D121A5B9288ECC3600D9A983 /* InstagramAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramAPI.swift; sourceTree = "<group>"; };
 		D12CFD0228503AF50071A86C /* MainImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainImageViewController.swift; sourceTree = "<group>"; };
 		D12D0E8028525E9E005173B2 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		D12D0E8128525E9E005173B2 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Main.strings; sourceTree = "<group>"; };
@@ -481,11 +483,12 @@
 			children = (
 				D15391C828210A4900E12140 /* CommonBackendType.swift */,
 				D1A99CC228210FB300E414E4 /* AuthManager.swift */,
-				D199F3862827C2B200E3F892 /* InstagramManager.swift */,
 				D1ED9E12282D1A9100855641 /* CampaignManager.swift */,
 				D132C130284095360002785A /* NotiManager.swift */,
 				D198302928509216009085A0 /* PushManager.swift */,
 				D1F5900128771AB800BE739B /* GAManager.swift */,
+				D199F3862827C2B200E3F892 /* InstagramManager.swift */,
+				D121A5B9288ECC3600D9A983 /* InstagramAPI.swift */,
 			);
 			path = Backend;
 			sourceTree = "<group>";
@@ -983,6 +986,7 @@
 				D18910082833C8F0000685E8 /* String+.swift in Sources */,
 				D12CFD0328503AF50071A86C /* MainImageViewController.swift in Sources */,
 				D19A9DAB2822C4C700552C15 /* View+.swift in Sources */,
+				D121A5BA288ECC3600D9A983 /* InstagramAPI.swift in Sources */,
 				D145BBEC2831E62A009383D8 /* FinalInfoViewController.swift in Sources */,
 				D1A99CD02821220300E414E4 /* AddressViewModel.swift in Sources */,
 				D145BBEE2831EABB009383D8 /* Styles.swift in Sources */,
