@@ -42,6 +42,7 @@ class InfoViewController: UIViewController {
         navigationController?.navigationBar.isHidden = true
         makeUI()
         bind()
+
     }
     
     private func makeUI() {

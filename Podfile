@@ -6,7 +6,8 @@ target 'fieldBy' do
   use_frameworks!
 
   # Pods for fieldBy
-
+ 
+  pod 'ChannelIOSDK', podspec: 'https://mobile-static.channel.io/ios/latest/framework.podspec'
   pod 'Firebase/Analytics'
   pod 'FSPagerView'
   pod 'FBSDKLoginKit', '~> 14.0'
@@ -26,5 +27,9 @@ target 'fieldBy' do
   pod 'Firebase/Analytics'
   pod 'Firebase/Storage'
   pod 'Firebase/Database'
+  pod 'Moya'
+
+
+
 
 end

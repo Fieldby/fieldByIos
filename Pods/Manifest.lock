@@ -3,6 +3,7 @@ PODS:
     - RxCocoa (< 7.0, >= 5.0)
     - RxSwift (< 7.0, >= 5.0)
   - Alamofire (5.5.0)
+  - ChannelIOSDK (10.0.5)
   - FBAEMKit (14.0.0):
     - FBSDKCoreKit_Basics (= 14.0.0)
   - FBSDKCoreKit (14.0.0):
@@ -129,6 +130,10 @@ PODS:
   - GTMSessionFetcher/Core (1.7.0)
   - Kingfisher (7.1.2)
   - leveldb-library (1.22.1)
+  - Moya (15.0.0):
+    - Moya/Core (= 15.0.0)
+  - Moya/Core (15.0.0):
+    - Alamofire (~> 5.0)
   - nanopb (2.30908.0):
     - nanopb/decode (= 2.30908.0)
     - nanopb/encode (= 2.30908.0)
@@ -154,6 +159,7 @@ PODS:
 DEPENDENCIES:
   - Action
   - Alamofire
+  - ChannelIOSDK (from `https://mobile-static.channel.io/ios/latest/framework.podspec`)
   - FBSDKLoginKit (~> 14.0)
   - Firebase/Analytics
   - Firebase/Auth
@@ -162,6 +168,7 @@ DEPENDENCIES:
   - Firebase/Storage
   - FSPagerView
   - Kingfisher
+  - Moya
   - "NSObject+Rx"
   - ObjectMapper
   - PanModal
@@ -195,6 +202,7 @@ SPEC REPOS:
     - GTMSessionFetcher
     - Kingfisher
     - leveldb-library
+    - Moya
     - nanopb
     - "NSObject+Rx"
     - ObjectMapper
@@ -207,9 +215,14 @@ SPEC REPOS:
     - SnapKit
     - Then
 
+EXTERNAL SOURCES:
+  ChannelIOSDK:
+    :podspec: https://mobile-static.channel.io/ios/latest/framework.podspec
+
 SPEC CHECKSUMS:
   Action: 5dc2194f7a0b77857c82a677b0da655f197c005f
   Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
+  ChannelIOSDK: 4d5643431fa2286bfa97e10b17382955ac167ad3
   FBAEMKit: d00064597439e75885c70d9adbcb5f3e9ad84f5d
   FBSDKCoreKit: e5d3acfffe5063a9d0b967ba2ad1f5afc460cf43
   FBSDKCoreKit_Basics: 1ff46a12e80f0b66e6c00e1ef32d6a5b5b9008a5
@@ -230,6 +243,7 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 43748f93435c2aa068b1cbe39655aaf600652e91
   Kingfisher: 44ed6a8504763f27bab46163adfac83f5deb240c
   leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
+  Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   "NSObject+Rx": fa6bbcc1ab1faa06b01466bc09b1e0692bbc5946
   ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
@@ -242,6 +256,6 @@ SPEC CHECKSUMS:
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   Then: acfe0be7e98221c6204e12f8161459606d5d822d
 
-PODFILE CHECKSUM: a7dccda830c0dfd4a77a5f13b74cd912af9cb7e2
+PODFILE CHECKSUM: b2806c0b3e5c33c235428a97808f8ef127070c9f
 
 COCOAPODS: 1.11.2

@@ -45,13 +45,31 @@ struct IGModel: Codable {
     
     init?(snapshot: DataSnapshot) {
         let value = snapshot.value as! [String: Any]
-        id = value["id"] as! String
-        username = value["username"] as! String
-        name = value["name"] as! String
-        followers = value["followers"] as! Int
-        follows = value["follows"] as! Int
-        mediaCount = value["mediaCount"] as! Int
-        profileUrl = value["profileUrl"] as? String
+        
+        if let id = value["id"] as? String,
+           let username = value["username"] as? String,
+           let followers = value["followers"] as? Int,
+           let follows = value["follows"] as? Int,
+           let mediaCount = value["mediaCount"] as? Int,
+           let profileUrl = value["profileUrl"] as? String,
+           let token = value["token"] as? String,
+           let name = value["name"] as? String
+        {
+            
+            self.id = id
+            self.username = username
+            self.follows = follows
+            self.followers = followers
+            self.mediaCount = mediaCount
+            self.profileUrl = profileUrl
+            self.token = token
+            self.name = name
+            
+        } else {
+            return nil
+        }
+           
+
         if let token = value["token"] as? String {
             
             _ = InstagramManager.shared.getLongToken(token: token)

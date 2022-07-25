@@ -128,19 +128,17 @@ class CampaignModel: Codable {
     }
     
     
-    
-    //MARK: TODO - 수정할 것
     private func getStatus() -> CampaignStatus {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd-HH-mm"
         let dateStr = dateFormatter.string(from: Date())
         if dateStr < recruitingDate {
             return .unOpened
-        } else if dateStr < selectionDate {
+        } else if dateStr < "\(selectionDate)-23-59" {
             return .applied
-        } else if dateStr < itemDate {
+        } else if dateStr < "\(itemDate)-23-59" {
             return .delivering
-        } else if dateStr < uploadDate {
+        } else if dateStr < "\(uploadDate)-23-59" {
             return .uploading
         } else if dateStr < getFinishDate() {
             return .maintaining

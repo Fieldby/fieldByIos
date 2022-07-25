@@ -97,29 +97,24 @@ class MediaListViewController: UIViewController {
         
         doneButton.rx.tap
             .subscribe(onNext: { [unowned self] in
-                
-                var count = Array(repeating: false, count: indexes.count)
-                
+                                
+                var temp = [ImageData]()
                 for i in 0..<indexes.count {
-                    
-                    let id = imageArray[indexes[i]].id
-                    let uuid = campaignModel.uuid
-                    
-                    CampaignManager.shared.saveUploadIds(campaignUuid: uuid, images: imageArray.sorted(by: {$0.timestamp > $1.timestamp}), index: i)
-                        .subscribe { [unowned self] in
-                            print("이미지 업로드 성공")
-
-                            count[i] = true
-                            if count == Array(repeating: true, count: indexes.count) {
-                                navigationController?.popViewController(animated: true)
-                            }
-                            
-                        } onError: { [unowned self] err in
-
-                            print(err)
-                        }
-                        .disposed(by: rx.disposeBag)
+                    let imageData = imageArray[indexes[i]]
+                    temp.append(imageData)
                 }
+                
+                let uuid = campaignModel.uuid
+                
+                CampaignManager.shared.saveUploadIds(campaignUuid: uuid, images: temp)
+                    .subscribe { [unowned self] in
+
+                        navigationController?.popViewController(animated: true)
+                    } onError: { [unowned self] err in
+
+                        print(err)
+                    }
+                    .disposed(by: rx.disposeBag)
                 
                 
             })

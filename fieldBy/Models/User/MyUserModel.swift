@@ -70,6 +70,7 @@ class MyUserModel {
             self.reward = Int(reward)!
             
         } else {
+            print("one")
             return nil
         }
         
@@ -79,11 +80,19 @@ class MyUserModel {
         if data.childSnapshot(forPath: "address").exists() {
             let datasnapshot = data.childSnapshot(forPath: "address")
             self.juso = Juso(snapshot: datasnapshot)!
-        } else { return nil }
+        } else {
+            print("two")
+            return nil
+            
+        }
         
         if let styleValue = data.childSnapshot(forPath: "styles").value as? [String] {
             style = styleValue.map{Style(rawValue: $0)!}
-        } else { return nil }
+        } else {
+            print("three")
+            return nil
+            
+        }
         
         
         let igValue = data.childSnapshot(forPath: "igInfo")

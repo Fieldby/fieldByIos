@@ -21,6 +21,7 @@ DerivedData/
 !default.mode2v3
 *.perspectivev3
 !default.perspectivev3
+Pods/ChannelIOSDK/ChannelIOFront/
 
 ## Obj-C/Swift specific
 *.hmap

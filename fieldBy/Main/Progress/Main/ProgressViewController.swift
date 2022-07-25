@@ -223,6 +223,17 @@ class ProgressViewController: UIViewController {
                         })
                         .disposed(by: rx.disposeBag)
                     
+                } else if model.0.status == .done {
+                    indicator.isHidden = false
+                    indicator.startAnimating()
+                    if AuthManager.shared.myUserModel!.igModel != nil {
+                        indicator.isHidden = true
+                        indicator.stopAnimating()
+                    } else {
+                        indicator.isHidden = true
+                        indicator.stopAnimating()
+                        presentAlert(message: "인스타그램 연동이 필요합니다.")
+                    }
                 }
             })
             .disposed(by: rx.disposeBag)

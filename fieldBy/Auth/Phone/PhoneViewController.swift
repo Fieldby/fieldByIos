@@ -261,6 +261,8 @@ class PhoneViewController: UIViewController {
             .disposed(by: rx.disposeBag)
         
         
+        
+        
         /*
          ViewModel functions
          */
@@ -295,7 +297,7 @@ class PhoneViewController: UIViewController {
     }
     
     @objc func keyboardWillHideNotification(_ notification: Notification) {
-        self.bottomView.isHidden = true
+//        self.bottomView.isHidden = true
         self.bottomView.transform = .identity
     }
     

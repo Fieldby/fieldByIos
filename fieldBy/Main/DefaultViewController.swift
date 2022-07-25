@@ -11,17 +11,19 @@ import RxCocoa
 import NSObject_Rx
 import FirebaseAuth
 import FirebaseDatabase
+import Photos
+import AVFoundation
 
 class DefaultViewController: UIViewController {
     
     let bag = DisposeBag()
-    var isAdmin = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
 //
-        checkAppInfo()
+//        checkAppInfo()
+        
 
     }
 
@@ -56,36 +58,29 @@ class DefaultViewController: UIViewController {
     
     private func checkUserValid() -> Observable<Int> {
         Observable.create() { [unowned self] observable in
-            if isAdmin {
-                observable.onNext(0)
+            if let uuid = Auth.auth().currentUser?.uid {
+
+                AuthManager.shared.fetch(uuid: uuid)
+                    .subscribe { [unowned self] in
+                        CampaignManager.shared.fetch()
+                            .subscribe {
+                                observable.onNext(0)
+                            } onError: { error in
+                                print(error)
+                                observable.onNext(2)
+                            }
+                            .disposed(by: rx.disposeBag)
+                    } onError: { err in
+                        
+                        print(err)
+                        observable.onNext(1)
+                    }
+                    .disposed(by: rx.disposeBag)
+
             } else {
-                if let uuid = Auth.auth().currentUser?.uid {
-
-                    AuthManager.shared.fetch(uuid: uuid)
-                        .subscribe { [unowned self] in
-                            CampaignManager.shared.fetch()
-                                .subscribe {
-                                    observable.onNext(0)
-                                } onError: { error in
-                                    print(error)
-                                    observable.onNext(2)
-                                }
-                                .disposed(by: rx.disposeBag)
-                        } onError: { err in
-                            
-                            print(err)
-                            observable.onNext(1)
-                        }
-                        .disposed(by: rx.disposeBag)
-
-                } else {
-                    print("no Uid")
-                    observable.onNext(1)
-                }
+                print("no Uid")
+                observable.onNext(1)
             }
-            
-
-            
             return Disposables.create()
         }
     }
@@ -134,6 +129,10 @@ class DefaultViewController: UIViewController {
             .observeSingleEvent(of: .value) { dataSnapShot in
                 for userData in dataSnapShot.children.allObjects as! [DataSnapshot] {
                     if let user = MyUserModel(data: userData) {
+                        print(user.name)
+
+                        
+                        
                         userCount += 1
                         if user.bestImages.count > 0 {
                             bestImageCount += 1
@@ -150,5 +149,4 @@ class DefaultViewController: UIViewController {
                 Database.database().reference().child("appInfo").child("대표사진등록계정수").setValue("\(bestImageCount)명")
             }
     }
-    
 }

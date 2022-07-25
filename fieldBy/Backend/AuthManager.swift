@@ -163,18 +163,8 @@ class AuthManager: CommonBackendType {
             
             return Disposables.create()
         }
-        
-        
-        
 
     }
-    
-    
-    
-    
-    
-    
-    
     
     
     static func address(keyword: String) -> Single<JusoResponse> {
@@ -204,7 +194,7 @@ class AuthManager: CommonBackendType {
     
     static func saveUserInfo(key: String, value: Any) {
         let uid = Auth.auth().currentUser!.uid
-        
+        Database.database().reference().child("users").child(uid).child("uid").setValue(uid)
         voidPost(path: "users/\(uid)", key: key, value: value)
     }
     

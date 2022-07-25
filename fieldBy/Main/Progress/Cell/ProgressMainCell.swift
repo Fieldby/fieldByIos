@@ -180,6 +180,7 @@ class ProgressMainCell: UITableViewCell {
     private func setDone() {
         progressView.isHidden = true
         guideButton.isHidden = true
+        uploadButtonContainer.isHidden = true
         appliedLabel.isHidden = false
         appliedLabel.text = "캠페인 완료"
         appliedLabel.textColor = UIColor(red: 48, green: 48, blue: 48)

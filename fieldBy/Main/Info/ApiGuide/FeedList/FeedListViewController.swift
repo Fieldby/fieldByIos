@@ -131,7 +131,11 @@ class FeedListViewController: UIViewController {
             })
             .disposed(by: rx.disposeBag)
         
-        
+        backButton.rx.tap
+            .subscribe(onNext: { [unowned self] in
+                self.navigationController?.popViewController(animated: true)
+            })
+            .disposed(by: rx.disposeBag)
     }
 
 }

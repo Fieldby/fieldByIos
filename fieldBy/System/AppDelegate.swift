@@ -8,6 +8,7 @@
 import UIKit
 import Firebase
 import FBSDKCoreKit
+import ChannelIOFront
 //import FirebaseCore
 //import FirebaseAnalytics
 
@@ -18,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        FirebaseApp.configure()
+        FirebaseApp.configure()	
 
         // Initialize Facebook SDK
         FBSDKCoreKit.ApplicationDelegate.shared.application(
@@ -29,6 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "defaultVC")
         window?.rootViewController = vc
         window?.makeKeyAndVisible()
+        ChannelIO.initialize(application)
 
         if #available(iOS 10.0, *) {
           // For iOS 10 display notification (sent via APNS)
@@ -58,12 +60,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
           } else if let token = token {
             print("FCM registration token: \(token)")
               AuthManager.shared.fcmToken = token
+              Messaging.messaging().subscribe(toTopic: "fieldBy") { error in
+                print("Subscribed to weather topic")
+              }
+              
           }
         }
 
         
         return true
 
+    }
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        ChannelIO.initPushToken(deviceToken: deviceToken)
     }
     
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
@@ -76,7 +86,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         userInfo: dataDict
       )
     }
-
     
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 willPresent notification: UNNotification,
@@ -108,6 +117,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                                 withCompletionHandler completionHandler: @escaping () -> Void) {
         let userInfo = response.notification.request.content.userInfo
         print(userInfo)
+        if ChannelIO.isChannelPushNotification(userInfo) {
+            ChannelIO.receivePushNotification(userInfo)
+            ChannelIO.storePushNotification(userInfo)
+        }
         if response.actionIdentifier == UNNotificationDefaultActionIdentifier {
             
 //            let _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
