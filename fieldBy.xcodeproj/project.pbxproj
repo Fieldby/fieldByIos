@@ -43,7 +43,6 @@
 		D145BBF1283224D2009383D8 /* InfoStartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D145BBF0283224D2009383D8 /* InfoStartViewController.swift */; };
 		D145BBF32832285B009383D8 /* DefaultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D145BBF22832285B009383D8 /* DefaultViewController.swift */; };
 		D1462573283CA899008FEB8A /* CommonPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1462572283CA899008FEB8A /* CommonPopupViewController.swift */; };
-		D14A0E8F287AF04A00D9AF90 /* InsightModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14A0E8E287AF04A00D9AF90 /* InsightModel.swift */; };
 		D14A198C28336C2C00542F2B /* FBInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14A198B28336C2C00542F2B /* FBInfo.swift */; };
 		D14A198F28336D6300542F2B /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14A198E28336D6300542F2B /* Error.swift */; };
 		D14A199128338C9700542F2B /* Dictionary+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14A199028338C9700542F2B /* Dictionary+.swift */; };
@@ -165,7 +164,6 @@
 		D145BBF0283224D2009383D8 /* InfoStartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoStartViewController.swift; sourceTree = "<group>"; };
 		D145BBF22832285B009383D8 /* DefaultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultViewController.swift; sourceTree = "<group>"; };
 		D1462572283CA899008FEB8A /* CommonPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonPopupViewController.swift; sourceTree = "<group>"; };
-		D14A0E8E287AF04A00D9AF90 /* InsightModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightModel.swift; sourceTree = "<group>"; };
 		D14A198B28336C2C00542F2B /* FBInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBInfo.swift; sourceTree = "<group>"; };
 		D14A198E28336D6300542F2B /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		D14A199028338C9700542F2B /* Dictionary+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+.swift"; sourceTree = "<group>"; };
@@ -445,7 +443,6 @@
 			children = (
 				D14A198B28336C2C00542F2B /* FBInfo.swift */,
 				D1A29848283F69DA000F7D33 /* Media.swift */,
-				D14A0E8E287AF04A00D9AF90 /* InsightModel.swift */,
 			);
 			path = Facebook;
 			sourceTree = "<group>";
@@ -1024,7 +1021,6 @@
 				D1AA5CBC281EAF1A00279CC8 /* PhoneViewController.swift in Sources */,
 				D11376D8283673F700CFC3D2 /* GuideFinalViewController.swift in Sources */,
 				D1014762283BB4AF00B10F8A /* MediaListViewController.swift in Sources */,
-				D14A0E8F287AF04A00D9AF90 /* InsightModel.swift in Sources */,
 				D106B0A8281EA2A400E6CCFA /* AppDelegate.swift in Sources */,
 				D145BBF32832285B009383D8 /* DefaultViewController.swift in Sources */,
 				D14A199128338C9700542F2B /* Dictionary+.swift in Sources */,

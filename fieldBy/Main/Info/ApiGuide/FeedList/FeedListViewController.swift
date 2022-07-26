@@ -58,20 +58,36 @@ class FeedListViewController: UIViewController {
         collectionView.rx.setDelegate(self)
             .disposed(by: rx.disposeBag)
         
-        InstagramManager.shared.fetchImages { [unowned self] imageArray in
-            indicator.isHidden = true
-            indicator.stopAnimating()
-
-            imageSubject.onNext(imageArray)
-        }
-        
-        imageSubject
-            .map { $0.filter { $0.mediaType != .video }}
-            .bind(to: collectionView.rx.items(cellIdentifier: FeedCell.reuseId, cellType: FeedCell.self)) { [unowned self] idx, imageData, cell in
-                
-                cell.mainImageView.setImage(url: imageData.mediaURL)
+        InstagramManager.shared.getMediaList()
+            .asObservable()
+            .bind(to: collectionView.rx.items(cellIdentifier: FeedCell.reuseId, cellType: FeedCell.self)) { [unowned self] idx, mediaModel, cell in
+                indicator.isHidden = true
+                indicator.stopAnimating()
+                if let url = mediaModel.thumbnailURL {
+                    cell.mainImageView.setImage(url: url)
+                } else {
+                    cell.mainImageView.setImage(url: mediaModel.mediaURL)
+                }
             }
             .disposed(by: rx.disposeBag)
+        
+
+        
+//        InstagramManager.shared.fetchImages { [unowned self] imageArray in
+//            indicator.isHidden = true
+//            indicator.stopAnimating()
+//
+//            imageSubject.onNext(imageArray)
+//        }
+//
+//        imageSubject
+//            .map { $0.filter { $0.mediaType != .video }}
+//            .bind(to: collectionView.rx.items(cellIdentifier: FeedCell.reuseId, cellType: FeedCell.self)) { [unowned self] idx, imageData, cell in
+//
+//                cell.mainImageView.setImage(url: imageData.mediaURL)
+//            }
+//            .disposed(by: rx.disposeBag)
+        
         
         collectionView.rx.itemSelected
             .subscribe(onNext: { [unowned self] index in

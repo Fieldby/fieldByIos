@@ -36,23 +36,40 @@ struct ImageData: Codable {
     }
 }
 
-// MARK: - MediaData
-struct ChildrenData: Codable {
-    let children: Children
-}
-
-// MARK: - Children
-struct Children: Codable {
-    let data: [ChildId]
-}
-
-// MARK: - Datum
-struct ChildId: Codable {
-    let id: String
-}
 
 enum IGMediaType: String, Codable {
     case image = "IMAGE"
     case album = "CAROUSEL_ALBUM"
     case video = "VIDEO"
+}
+
+// MARK: - IGMediaModel
+struct IGMediaArrayModel: Codable {
+    let data: [IGMediaModel]
+    let paging: Paging
+}
+
+// MARK: - Datum
+struct IGMediaModel: Codable {
+    let mediaType: IGMediaType
+    let mediaURL: String
+    let thumbnailURL: String?
+    let id: String
+
+    enum CodingKeys: String, CodingKey {
+        case mediaType = "media_type"
+        case mediaURL = "media_url"
+        case thumbnailURL = "thumbnail_url"
+        case id
+    }
+}
+
+// MARK: - Paging
+struct Paging: Codable {
+    let cursors: Cursors
+}
+
+// MARK: - Cursors
+struct Cursors: Codable {
+    let before, after: String
 }
