@@ -23,7 +23,10 @@ class FeedListViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var button: UIButton!
     
-    private var imageSubject = BehaviorSubject<[ImageData]>(value: [])
+    
+    private var isFetching = false
+    private var isLastPage = false
+    private let mediaSubject = BehaviorRelay<[IGMediaModel]>(value: [])
     private var indexes = [Int]()
     
     override func viewWillAppear(_ animated: Bool) {
@@ -60,6 +63,11 @@ class FeedListViewController: UIViewController {
         
         InstagramManager.shared.getMediaList()
             .asObservable()
+            .map { $0.data }
+            .bind(to: mediaSubject)
+            .disposed(by: rx.disposeBag)
+        
+        mediaSubject
             .bind(to: collectionView.rx.items(cellIdentifier: FeedCell.reuseId, cellType: FeedCell.self)) { [unowned self] idx, mediaModel, cell in
                 indicator.isHidden = true
                 indicator.stopAnimating()
@@ -68,27 +76,19 @@ class FeedListViewController: UIViewController {
                 } else {
                     cell.mainImageView.setImage(url: mediaModel.mediaURL)
                 }
+                
+                switch mediaModel.mediaType {
+                case .image:
+                    cell.mediaTypeImageView.image = nil
+                case .album:
+                    cell.mediaTypeImageView.image = UIImage(named: "album")
+                case .video:
+                    cell.mediaTypeImageView.image = UIImage(named: "video")
+                }
+                
             }
             .disposed(by: rx.disposeBag)
-        
 
-        
-//        InstagramManager.shared.fetchImages { [unowned self] imageArray in
-//            indicator.isHidden = true
-//            indicator.stopAnimating()
-//
-//            imageSubject.onNext(imageArray)
-//        }
-//
-//        imageSubject
-//            .map { $0.filter { $0.mediaType != .video }}
-//            .bind(to: collectionView.rx.items(cellIdentifier: FeedCell.reuseId, cellType: FeedCell.self)) { [unowned self] idx, imageData, cell in
-//
-//                cell.mainImageView.setImage(url: imageData.mediaURL)
-//            }
-//            .disposed(by: rx.disposeBag)
-        
-        
         collectionView.rx.itemSelected
             .subscribe(onNext: { [unowned self] index in
                 let cell = collectionView.cellForItem(at: index) as! FeedCell
@@ -117,27 +117,31 @@ class FeedListViewController: UIViewController {
                     let cell = collectionView.cellForItem(at: [0, indexes[i]]) as! FeedCell
                     cell.select(idx: i+1)
                 }
-                
-            
+            })
+            .disposed(by: rx.disposeBag)
+        
+        collectionView.rx.didScroll
+            .subscribe(onNext: { [unowned self] in
+                let height = collectionView.frame.size.height
+                let contentYoffset = collectionView.contentOffset.y
+                let distanceFromBottom = collectionView.contentSize.height - contentYoffset
+                if distanceFromBottom < height {
+                    fetchNextPage()
+                }
             })
             .disposed(by: rx.disposeBag)
         
         
         button.rx.tap
             .subscribe(onNext: { [unowned self] in
-                
-                
-                imageSubject
-                    .map { $0.filter { $0.mediaType != .video }}
+        
+                mediaSubject
                     .subscribe(onNext: { [unowned self] imageArray in
-                        
                         var temp: [String] = []
                         for idx in indexes {
                             temp.append(imageArray[idx].id)
                         }
-                        
                         NotiManager.shared.sendInstagram()
-                        
                         AuthManager.shared.bestImages(urls: temp)
                     })
                     .disposed(by: rx.disposeBag)
@@ -152,6 +156,24 @@ class FeedListViewController: UIViewController {
                 self.navigationController?.popViewController(animated: true)
             })
             .disposed(by: rx.disposeBag)
+    }
+    
+    private func fetchNextPage() {
+        if !isFetching && !isLastPage {
+            isFetching = true
+            InstagramManager.shared.getNextPage()
+                .subscribe { [unowned self] mediaArrayModel in
+                    if let mediaArrayModel = mediaArrayModel {
+                        mediaSubject.accept(mediaSubject.value + mediaArrayModel.data)
+                    }
+                    isFetching = false
+                } onError: { [unowned self] err in
+                    print(err)
+                    isFetching = false
+                    isLastPage = true
+                }
+                .disposed(by: rx.disposeBag)
+        }
     }
 
 }
@@ -170,6 +192,7 @@ class FeedCell: UICollectionViewCell {
     @IBOutlet weak var mainImageView: UIImageView!
     @IBOutlet weak var numberLabel: UILabel!
     
+    @IBOutlet weak var mediaTypeImageView: UIImageView!
     @IBOutlet weak var numberContainer: UIView!
     var isOn: Bool = false
     

@@ -53,20 +53,26 @@ class MediaListViewController: UIViewController {
         collectionView.rx.setDelegate(self)
             .disposed(by: rx.disposeBag)
         
-        InstagramManager.shared.fetchImages { [unowned self] imageArray in
-            
-            imageSubject.onNext(imageArray.filter { $0.mediaType != .video})
-            self.imageArray = imageArray.filter { $0.mediaType != .video}
-
-        }
-        
-        imageSubject
-            .bind(to: collectionView.rx.items(cellIdentifier: FeedCell.reuseId, cellType: FeedCell.self)) { [unowned self] idx, image, cell in
+        InstagramManager.shared.getMediaList()
+            .asObservable()
+            .map { $0.data }
+            .bind(to: collectionView.rx.items(cellIdentifier: FeedCell.reuseId, cellType: FeedCell.self)) { [unowned self] idx, mediaModel, cell in
+                if let url = mediaModel.thumbnailURL {
+                    cell.mainImageView.setImage(url: url)
+                } else {
+                    cell.mainImageView.setImage(url: mediaModel.mediaURL)
+                }
                 
-                cell.mainImageView.setImage(url: image.mediaURL)
+                switch mediaModel.mediaType {
+                case .image:
+                    cell.mediaTypeImageView.image = nil
+                case .album:
+                    cell.mediaTypeImageView.image = UIImage(named: "album")
+                case .video:
+                    cell.mediaTypeImageView.image = UIImage(named: "video")
+                }
             }
             .disposed(by: rx.disposeBag)
-        
         
         
         collectionView.rx.itemSelected

@@ -67,6 +67,7 @@ struct IGMediaModel: Codable {
 // MARK: - Paging
 struct Paging: Codable {
     let cursors: Cursors
+    let next: String?
 }
 
 // MARK: - Cursors

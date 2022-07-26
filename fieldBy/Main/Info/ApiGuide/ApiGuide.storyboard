@@ -194,7 +194,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1t0-xI-jhG">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1t0-xI-jhG">
                                                     <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GQO-fM-FGH">
@@ -215,6 +215,13 @@
                                                         <constraint firstItem="0m2-VQ-uTJ" firstAttribute="centerX" secondItem="GQO-fM-FGH" secondAttribute="centerX" id="wsY-tn-L5N"/>
                                                     </constraints>
                                                 </view>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kEh-dO-IzL">
+                                                    <rect key="frame" x="111" y="111" width="12" height="12"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="12" id="RTZ-Os-j0G"/>
+                                                        <constraint firstAttribute="height" constant="12" id="zmQ-0b-bAA"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="GQO-fM-FGH" secondAttribute="trailing" constant="6" id="4pl-gT-stq"/>
@@ -223,10 +230,13 @@
                                                 <constraint firstAttribute="trailing" secondItem="1t0-xI-jhG" secondAttribute="trailing" id="Ldm-yM-fEe"/>
                                                 <constraint firstItem="GQO-fM-FGH" firstAttribute="top" secondItem="Kld-pM-03x" secondAttribute="top" constant="6" id="WS6-NW-aIv"/>
                                                 <constraint firstItem="1t0-xI-jhG" firstAttribute="top" secondItem="Kld-pM-03x" secondAttribute="top" id="jEu-Na-E33"/>
+                                                <constraint firstAttribute="bottom" secondItem="kEh-dO-IzL" secondAttribute="bottom" constant="5" id="n9t-pK-keS"/>
+                                                <constraint firstAttribute="trailing" secondItem="kEh-dO-IzL" secondAttribute="trailing" constant="5" id="yV8-cW-qUs"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <connections>
                                             <outlet property="mainImageView" destination="1t0-xI-jhG" id="kc5-wz-c6M"/>
+                                            <outlet property="mediaTypeImageView" destination="kEh-dO-IzL" id="soj-Gl-dCs"/>
                                             <outlet property="numberContainer" destination="GQO-fM-FGH" id="qmb-jR-N4V"/>
                                             <outlet property="numberLabel" destination="0m2-VQ-uTJ" id="IbI-Hl-EAI"/>
                                         </connections>

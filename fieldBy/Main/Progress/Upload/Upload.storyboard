@@ -57,10 +57,19 @@
                                                         <constraint firstItem="fje-rb-yMr" firstAttribute="centerX" secondItem="i9G-nE-69r" secondAttribute="centerX" id="lzI-9O-f2R"/>
                                                     </constraints>
                                                 </view>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VqF-2l-eI7">
+                                                    <rect key="frame" x="111" y="111" width="12" height="12"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="12" id="IHo-RG-bGk"/>
+                                                        <constraint firstAttribute="width" constant="12" id="TCa-UK-fEQ"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="v67-OH-G7z" secondAttribute="trailing" id="3Pq-gH-nFa"/>
+                                                <constraint firstAttribute="trailing" secondItem="VqF-2l-eI7" secondAttribute="trailing" constant="5" id="7Mt-tB-4TY"/>
                                                 <constraint firstAttribute="bottom" secondItem="v67-OH-G7z" secondAttribute="bottom" id="RQu-bc-n3j"/>
+                                                <constraint firstAttribute="bottom" secondItem="VqF-2l-eI7" secondAttribute="bottom" constant="5" id="nXg-A6-aYH"/>
                                                 <constraint firstAttribute="trailing" secondItem="i9G-nE-69r" secondAttribute="trailing" constant="6" id="q6d-2i-tay"/>
                                                 <constraint firstItem="v67-OH-G7z" firstAttribute="top" secondItem="D7y-aA-Yfp" secondAttribute="top" id="tz6-ea-44p"/>
                                                 <constraint firstItem="v67-OH-G7z" firstAttribute="leading" secondItem="D7y-aA-Yfp" secondAttribute="leading" id="xas-og-brS"/>
@@ -69,6 +78,7 @@
                                         </collectionViewCellContentView>
                                         <connections>
                                             <outlet property="mainImageView" destination="v67-OH-G7z" id="vs1-Jv-mJ2"/>
+                                            <outlet property="mediaTypeImageView" destination="VqF-2l-eI7" id="6ci-qH-Gvk"/>
                                             <outlet property="numberContainer" destination="i9G-nE-69r" id="UOX-of-An2"/>
                                             <outlet property="numberLabel" destination="fje-rb-yMr" id="Xf8-60-ype"/>
                                         </connections>
