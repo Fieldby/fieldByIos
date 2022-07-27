@@ -28,7 +28,7 @@ target 'fieldBy' do
   pod 'Firebase/Storage'
   pod 'Firebase/Database'
   pod 'Moya'
-
+  pod 'lottie-ios'
 
 
 

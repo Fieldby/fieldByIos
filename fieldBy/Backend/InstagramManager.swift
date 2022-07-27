@@ -78,6 +78,7 @@ final class InstagramManager: CommonBackendType {
     private func getFacebookId() -> Completable {
         return Completable.create() { [unowned self] completable in
             let url = parseUrl(path: "me/", token: token)
+            print(url)
             getSingle(url: url, type: FBInfo.self)
                 .subscribe { [unowned self] data in
                     fbId = data.id

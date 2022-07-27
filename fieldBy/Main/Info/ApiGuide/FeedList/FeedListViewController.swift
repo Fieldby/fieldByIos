@@ -27,7 +27,7 @@ class FeedListViewController: UIViewController {
     private var isFetching = false
     private var isLastPage = false
     private let mediaSubject = BehaviorRelay<[IGMediaModel]>(value: [])
-    private var indexes = [Int]()
+    private var indices = [Int]()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -62,60 +62,47 @@ class FeedListViewController: UIViewController {
             .disposed(by: rx.disposeBag)
         
         InstagramManager.shared.getMediaList()
-            .asObservable()
-            .map { $0.data }
-            .bind(to: mediaSubject)
+            .subscribe { [unowned self] mediaArrayModel in
+                mediaSubject.accept(mediaArrayModel.data)
+            } onError: { _ in
+                
+            }
             .disposed(by: rx.disposeBag)
+
         
         mediaSubject
             .bind(to: collectionView.rx.items(cellIdentifier: FeedCell.reuseId, cellType: FeedCell.self)) { [unowned self] idx, mediaModel, cell in
                 indicator.isHidden = true
                 indicator.stopAnimating()
-                if let url = mediaModel.thumbnailURL {
-                    cell.mainImageView.setImage(url: url)
-                } else {
-                    cell.mainImageView.setImage(url: mediaModel.mediaURL)
+                var num: Int? = nil
+                if indices.contains(idx) {
+                    num = indices.firstIndex(of: idx)! + 1
                 }
                 
-                switch mediaModel.mediaType {
-                case .image:
-                    cell.mediaTypeImageView.image = nil
-                case .album:
-                    cell.mediaTypeImageView.image = UIImage(named: "album")
-                case .video:
-                    cell.mediaTypeImageView.image = UIImage(named: "video")
-                }
-                
+                cell.bind(model: mediaModel, num)
             }
             .disposed(by: rx.disposeBag)
 
         collectionView.rx.itemSelected
             .subscribe(onNext: { [unowned self] index in
-                let cell = collectionView.cellForItem(at: index) as! FeedCell
-
-                if cell.isOn {
-                    cell.deSelect()
-                    let idx = indexes.firstIndex(of: index.row)!
-                    indexes.remove(at: idx)
-                    
-                    button.setTitle("선택 완료(\(indexes.count)/3)", for: .normal)
-                    button.isEnabled = false
-                } else {
-                    if indexes.count < 3{
-                        cell.select(idx: indexes.count+1)
-                        indexes.append(index.row)
-                        button.setTitle("선택 완료(\(indexes.count)/3)", for: .normal)
-                        
-                        if indexes.count == 3 {
-                            button.isEnabled = true
-                        } else {
-                            button.isEnabled = false
-                        }
+                guard let cell = collectionView.cellForItem(at: index) as? FeedCell else { return }
+                
+                if !indices.contains(index.row) {
+                    if indices.count < 3 {
+                        indices.append(index.row)
+                        cell.select(idx: indices.count)
                     }
-                }
-                for i in 0..<indexes.count {
-                    let cell = collectionView.cellForItem(at: [0, indexes[i]]) as! FeedCell
-                    cell.select(idx: i+1)
+                } else {
+                    let idx = indices.firstIndex(of: index.row)!
+                    indices.remove(at: idx)
+                    cell.deSelect()
+                    
+                    var newIndex = 1
+                    for index in indices {
+                        guard let selectedCell = collectionView.cellForItem(at: [0, index]) as? FeedCell else { return }
+                        selectedCell.select(idx: newIndex)
+                        newIndex += 1
+                    }
                 }
             })
             .disposed(by: rx.disposeBag)
@@ -138,7 +125,7 @@ class FeedListViewController: UIViewController {
                 mediaSubject
                     .subscribe(onNext: { [unowned self] imageArray in
                         var temp: [String] = []
-                        for idx in indexes {
+                        for idx in indices {
                             temp.append(imageArray[idx].id)
                         }
                         NotiManager.shared.sendInstagram()
@@ -194,6 +181,7 @@ class FeedCell: UICollectionViewCell {
     
     @IBOutlet weak var mediaTypeImageView: UIImageView!
     @IBOutlet weak var numberContainer: UIView!
+    
     var isOn: Bool = false
     
     override func awakeFromNib() {
@@ -218,7 +206,28 @@ class FeedCell: UICollectionViewCell {
         contentView.layer.borderWidth = 0
         
         numberContainer.isHidden = true
-
     }
     
+    func bind(model: IGMediaModel,_ idx: Int? = nil) {
+        if let url = model.thumbnailURL {
+            mainImageView.setImage(url: url)
+        } else {
+            mainImageView.setImage(url: model.mediaURL)
+        }
+        
+        switch model.mediaType {
+        case .image:
+            mediaTypeImageView.image = nil
+        case .album:
+            mediaTypeImageView.image = UIImage(named: "album")
+        case .video:
+            mediaTypeImageView.image = UIImage(named: "video")
+        }
+        
+        if let idx = idx {
+            select(idx: idx)
+        } else {
+            deSelect()
+        }
+    }
 }

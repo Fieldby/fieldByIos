@@ -13,17 +13,29 @@ import FirebaseAuth
 import FirebaseDatabase
 import Photos
 import AVFoundation
+import Lottie
 
 class DefaultViewController: UIViewController {
     
-    let bag = DisposeBag()
+    private let animationDone = BehaviorRelay<Bool>(value: false)
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-//
-//        checkAppInfo()
+        print("defaultView")
+        let animationView = AnimationView()
+        animationView.animation = Animation.named("logoAnimation")
+        animationView.frame = view.bounds
         
+        animationView.contentMode = .scaleAspectFit
+        animationView.loopMode = .playOnce
+        animationView.play { [unowned self] finished in
+            if finished {
+                animationDone.accept(true)
+            }
+        }
+        
+        view.addSubview(animationView)
+//        checkAppInfo()
 
     }
 
@@ -31,19 +43,33 @@ class DefaultViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        checkUserValid()
-            .subscribe(onNext: { [unowned self] code in
-                print(code)
-                
-                if code == 0 {
-                    toMain()
-                } else if code == 1 {
-                    toAuth()
-                } else if code == 2 {
-                    presentAlert(message: "서버 문제입니다. 관계자에게 문의하세요.")
+        Observable.combineLatest(checkUserValid(), animationDone)
+            .subscribe(onNext: { [unowned self] code, isDone in
+                if isDone {
+                    if code == 0 {
+                        toMain()
+                    } else if code == 1 {
+                        toAuth()
+                    } else if code == 2 {
+                        presentAlert(message: "서버 문제입니다. 관계자에게 문의하세요.")
+                    }
                 }
             })
             .disposed(by: rx.disposeBag)
+        
+//        checkUserValid()
+//            .subscribe(onNext: { [unowned self] code in
+//                print(code)
+//
+//                if code == 0 {
+//                    toMain()
+//                } else if code == 1 {
+//                    toAuth()
+//                } else if code == 2 {
+//                    presentAlert(message: "서버 문제입니다. 관계자에게 문의하세요.")
+//                }
+//            })
+//            .disposed(by: rx.disposeBag)
 
     }
     

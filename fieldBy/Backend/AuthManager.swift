@@ -29,6 +29,11 @@ class AuthManager: CommonBackendType {
     
     var defaultVC: DefaultViewController!
     
+    func setToken(token: String) {
+        self.fcmToken = token
+        ref.child("users").child(myUserModel.uuid).child("fcmToken").setValue(token)
+    }
+    
     func fetch(uuid: String) -> Completable {
         return Completable.create() { [unowned self] completable in
             ref.child("users").child(uuid)

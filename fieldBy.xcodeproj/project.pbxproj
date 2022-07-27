@@ -98,6 +98,7 @@
 		D1C89EEB2822B70300DAA2F4 /* ProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C89EEA2822B70300DAA2F4 /* ProgressViewController.swift */; };
 		D1C89EED2822B70F00DAA2F4 /* Info.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1C89EEC2822B70F00DAA2F4 /* Info.storyboard */; };
 		D1C89EEF2822B71500DAA2F4 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C89EEE2822B71500DAA2F4 /* InfoViewController.swift */; };
+		D1E911402891064600DEB7D0 /* logoAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = D1E9113F2891064600DEB7D0 /* logoAnimation.json */; };
 		D1EA5D9F282535E7000E35A0 /* MyUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1EA5D9E282535E7000E35A0 /* MyUserModel.swift */; };
 		D1ED9E13282D1A9100855641 /* CampaignManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1ED9E12282D1A9100855641 /* CampaignManager.swift */; };
 		D1EDA1C62834CF8F0021595E /* GuideCampaign.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1EDA1C52834CF8F0021595E /* GuideCampaign.storyboard */; };
@@ -220,6 +221,7 @@
 		D1C89EEA2822B70300DAA2F4 /* ProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewController.swift; sourceTree = "<group>"; };
 		D1C89EEC2822B70F00DAA2F4 /* Info.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Info.storyboard; sourceTree = "<group>"; };
 		D1C89EEE2822B71500DAA2F4 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		D1E9113F2891064600DEB7D0 /* logoAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = logoAnimation.json; sourceTree = "<group>"; };
 		D1EA5D9E282535E7000E35A0 /* MyUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyUserModel.swift; sourceTree = "<group>"; };
 		D1ED9E12282D1A9100855641 /* CampaignManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignManager.swift; sourceTree = "<group>"; };
 		D1EDA1C52834CF8F0021595E /* GuideCampaign.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GuideCampaign.storyboard; sourceTree = "<group>"; };
@@ -302,6 +304,7 @@
 		D106B0A6281EA2A400E6CCFA /* fieldBy */ = {
 			isa = PBXGroup;
 			children = (
+				D16271832891011F0078DBEA /* Animation */,
 				D11155E5282A650300C9ECA1 /* fieldBy.entitlements */,
 				D1B9A10B281FDC8100389BC1 /* System */,
 				D14A198D28336D5200542F2B /* Error */,
@@ -504,6 +507,14 @@
 				D15D4ADF284CE87900372149 /* CampaignUnSelectedViewController.swift */,
 			);
 			path = UnSelected;
+			sourceTree = "<group>";
+		};
+		D16271832891011F0078DBEA /* Animation */ = {
+			isa = PBXGroup;
+			children = (
+				D1E9113F2891064600DEB7D0 /* logoAnimation.json */,
+			);
+			path = Animation;
 			sourceTree = "<group>";
 		};
 		D16EC579283633C600076B4C /* Start */ = {
@@ -883,6 +894,7 @@
 				D1C89EED2822B70F00DAA2F4 /* Info.storyboard in Resources */,
 				D12D0E8428525EDD005173B2 /* InfoPlist.strings in Resources */,
 				D1014760283BB49F00B10F8A /* Upload.storyboard in Resources */,
+				D1E911402891064600DEB7D0 /* logoAnimation.json in Resources */,
 				D1B8EB8C282FC20800576970 /* UserInfo.storyboard in Resources */,
 				D1AA5CB5281EA41100279CC8 /* Auth.storyboard in Resources */,
 				D1A99CCB28211BBC00E414E4 /* Address.storyboard in Resources */,

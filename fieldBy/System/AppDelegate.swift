@@ -59,7 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             print("Error fetching FCM registration token: \(error)")
           } else if let token = token {
             print("FCM registration token: \(token)")
-              AuthManager.shared.fcmToken = token
+              AuthManager.shared.setToken(token: token)
               Messaging.messaging().subscribe(toTopic: "fieldBy") { error in
                 print("Subscribed to weather topic")
               }
@@ -122,10 +122,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                                 withCompletionHandler completionHandler: @escaping () -> Void) {
         let userInfo = response.notification.request.content.userInfo
         print(userInfo)
+        
         if ChannelIO.isChannelPushNotification(userInfo) {
             ChannelIO.receivePushNotification(userInfo)
             ChannelIO.storePushNotification(userInfo)
         }
+        
         if response.actionIdentifier == UNNotificationDefaultActionIdentifier {
             
 //            let _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
