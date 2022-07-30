@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -24,8 +25,81 @@
             </objects>
             <point key="canvasLocation" x="279" y="249"/>
         </scene>
+        <!--Popup View Controller-->
+        <scene sceneID="1wt-e2-oLa">
+            <objects>
+                <viewController storyboardIdentifier="popupVC" id="2Gn-hB-1iX" customClass="PopupViewController" customModule="fieldBy" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ceq-E5-nd1">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bvr-17-N1a">
+                                <rect key="frame" x="32" y="378" width="350" height="150"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZH4-OD-Nd6">
+                                        <rect key="frame" x="0.0" y="0.0" width="350" height="93"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Yz-6R-ew1">
+                                                <rect key="frame" x="30" y="36" width="290" height="31.5"/>
+                                                <string key="text">캠페인에 지원하려면 인스타그램 채널 연결이 필요합니다.
+연결은 마이페이지에서 진행할 수 있습니다.</string>
+                                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="13"/>
+                                                <color key="textColor" red="0.46274509800000002" green="0.43529411759999997" blue="0.43529411759999997" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="93" id="KSQ-bu-OsN"/>
+                                            <constraint firstItem="6Yz-6R-ew1" firstAttribute="centerX" secondItem="ZH4-OD-Nd6" secondAttribute="centerX" id="WOl-9o-onr"/>
+                                            <constraint firstItem="6Yz-6R-ew1" firstAttribute="top" secondItem="ZH4-OD-Nd6" secondAttribute="top" constant="36" id="roC-O3-WYA"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EjW-F0-pKD">
+                                        <rect key="frame" x="0.0" y="93" width="350" height="57"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="16"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="확인">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" name="MainColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="ZH4-OD-Nd6" secondAttribute="trailing" id="3eq-3B-cyn"/>
+                                    <constraint firstAttribute="bottom" secondItem="EjW-F0-pKD" secondAttribute="bottom" id="ICn-f5-89C"/>
+                                    <constraint firstItem="EjW-F0-pKD" firstAttribute="leading" secondItem="bvr-17-N1a" secondAttribute="leading" id="ZKo-Df-add"/>
+                                    <constraint firstAttribute="trailing" secondItem="EjW-F0-pKD" secondAttribute="trailing" id="cWs-pt-K2h"/>
+                                    <constraint firstItem="EjW-F0-pKD" firstAttribute="top" secondItem="ZH4-OD-Nd6" secondAttribute="bottom" id="jx2-yJ-c3g"/>
+                                    <constraint firstItem="ZH4-OD-Nd6" firstAttribute="top" secondItem="bvr-17-N1a" secondAttribute="top" id="oPb-O4-9jv"/>
+                                    <constraint firstAttribute="height" constant="150" id="tRm-Ci-8pv"/>
+                                    <constraint firstItem="ZH4-OD-Nd6" firstAttribute="leading" secondItem="bvr-17-N1a" secondAttribute="leading" id="xGA-gw-8A4"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="WHe-rH-2RX"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="bvr-17-N1a" firstAttribute="centerY" secondItem="WHe-rH-2RX" secondAttribute="centerY" id="La7-pu-q9J"/>
+                            <constraint firstItem="bvr-17-N1a" firstAttribute="leading" secondItem="WHe-rH-2RX" secondAttribute="leading" constant="32" id="SKW-hM-CsX"/>
+                            <constraint firstItem="bvr-17-N1a" firstAttribute="centerX" secondItem="WHe-rH-2RX" secondAttribute="centerX" id="mX4-fr-Wun"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="button" destination="EjW-F0-pKD" id="xhV-SA-dS4"/>
+                        <outlet property="containerView" destination="bvr-17-N1a" id="xpz-HD-M7L"/>
+                        <outlet property="contentLabel" destination="6Yz-6R-ew1" id="eXu-0j-DNg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QRG-fh-K7C" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1217" y="267"/>
+        </scene>
     </scenes>
     <resources>
+        <namedColor name="MainColor">
+            <color red="0.13333333333333333" green="0.72941176470588232" blue="0.6588235294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

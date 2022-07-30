@@ -120,7 +120,14 @@ class FeedListViewController: UIViewController {
         button.rx.tap
             .bind { [unowned self] in
                 if indices.count < 3 {
-                    presentAlert(message: "3장을 선택해주세요.")
+                    let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "popupVC") as! PopupViewController
+                    vc.modalTransitionStyle = .crossDissolve
+                    vc.modalPresentationStyle = .overCurrentContext
+                    vc.content = "3장을 선택해주세요."
+                    vc.afterDismiss = {
+                        
+                    }
+                    present(vc, animated: true)
                 } else if indices.count == 3 {
                     var temp = [String]()
                     for index in indices {
@@ -128,7 +135,14 @@ class FeedListViewController: UIViewController {
                         temp.append(mediaModel.id)
                     }
                     AuthManager.shared.bestImages(urls: temp)
-                    navigationController?.popViewController(animated: true)
+                    let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "popupVC") as! PopupViewController
+                    vc.modalTransitionStyle = .crossDissolve
+                    vc.modalPresentationStyle = .overCurrentContext
+                    vc.content = "대표사진 3장을 등록하였습니다."
+                    vc.afterDismiss = {
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                    present(vc, animated: true)
                 }
             }
             .disposed(by: rx.disposeBag)
