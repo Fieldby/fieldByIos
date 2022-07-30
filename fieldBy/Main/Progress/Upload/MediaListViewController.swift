@@ -56,77 +56,106 @@ class MediaListViewController: UIViewController {
             .disposed(by: rx.disposeBag)
         
         InstagramManager.shared.getMediaList()
-            .asObservable()
-            .map { $0.data }
-            .bind(to: collectionView.rx.items(cellIdentifier: FeedCell.reuseId, cellType: FeedCell.self)) { [unowned self] idx, mediaModel, cell in
-                if let url = mediaModel.thumbnailURL {
-                    cell.mainImageView.setImage(url: url)
-                } else {
-                    cell.mainImageView.setImage(url: mediaModel.mediaURL)
-                }
+            .subscribe { [unowned self] mediaArrayModel in
+                mediaSubject.accept(mediaArrayModel.data)
+            } onError: { _ in
                 
-                switch mediaModel.mediaType {
-                case .image:
-                    cell.mediaTypeImageView.image = nil
-                case .album:
-                    cell.mediaTypeImageView.image = UIImage(named: "album")
-                case .video:
-                    cell.mediaTypeImageView.image = UIImage(named: "video")
-                }
             }
             .disposed(by: rx.disposeBag)
+
         
-        
+        mediaSubject
+            .bind(to: collectionView.rx.items(cellIdentifier: FeedCell.reuseId, cellType: FeedCell.self)) { [unowned self] idx, mediaModel, cell in
+                var num: Int? = nil
+                if indices.contains(idx) {
+                    num = indices.firstIndex(of: idx)! + 1
+                }
+                
+                cell.bind(model: mediaModel, num)
+            }
+            .disposed(by: rx.disposeBag)
+
         collectionView.rx.itemSelected
             .subscribe(onNext: { [unowned self] index in
-                let cell = collectionView.cellForItem(at: index) as! FeedCell
-                if cell.isOn {
-                    let idx = indexes.firstIndex(of: index.row)!
-                    indexes.remove(at: idx)
-                    
-                    cell.deSelect()
-                    doneButton.setTitle("선택 완료(\(indexes.count)/\(campaignModel.leastFeed))", for: .normal)
+                guard let cell = collectionView.cellForItem(at: index) as? FeedCell else { return }
+                
+                if !indices.contains(index.row) {
+                    if indices.count < campaignModel.leastFeed {
+                        indices.append(index.row)
+                        cell.select(idx: indices.count)
+                    }
                 } else {
-                    if indexes.count < campaignModel.leastFeed {
-                        indexes.append(index.row)
-                        doneButton.setTitle("선택 완료(\(indexes.count)/\(campaignModel.leastFeed))", for: .normal)
-                        cell.select(idx: indexes.count)
+                    let idx = indices.firstIndex(of: index.row)!
+                    indices.remove(at: idx)
+                    cell.deSelect()
+                    
+                    var newIndex = 1
+                    for index in indices {
+                        guard let selectedCell = collectionView.cellForItem(at: [0, index]) as? FeedCell else { return }
+                        selectedCell.select(idx: newIndex)
+                        newIndex += 1
                     }
                 }
-                
-                for i in 0..<indexes.count {
-                    let cell = collectionView.cellForItem(at: [0, indexes[i]]) as! FeedCell
-                    cell.select(idx: i+1)
+                doneButton.setTitle("선택 완료(\(indices.count)/\(campaignModel.leastFeed))", for: .normal)
+            })
+            .disposed(by: rx.disposeBag)
+        
+        collectionView.rx.didScroll
+            .subscribe(onNext: { [unowned self] in
+                let height = collectionView.frame.size.height
+                let contentYoffset = collectionView.contentOffset.y
+                let distanceFromBottom = collectionView.contentSize.height - contentYoffset
+                if distanceFromBottom < height {
+                    fetchNextPage()
                 }
-                
             })
             .disposed(by: rx.disposeBag)
         
         doneButton.rx.tap
             .subscribe(onNext: { [unowned self] in
                                 
-                var temp = [ImageData]()
-//                for i in 0..<indexes.count {
-//                    let imageData = imageArray[indexes[i]]
-//                    temp.append(imageData)
-//                }
-//
-                let uuid = campaignModel.uuid
-                
-                CampaignManager.shared.saveUploadIds(campaignUuid: uuid, images: temp)
-                    .subscribe { [unowned self] in
-
-                        navigationController?.popViewController(animated: true)
-                    } onError: { [unowned self] err in
-
-                        print(err)
+                if indices.count < campaignModel.leastFeed {
+                    presentCustomAlert(content: "\(campaignModel.leastFeed)장을 선택해주세요.", afterDismiss: {})
+                } else if indices.count == campaignModel.leastFeed {
+                    var temp = [String]()
+                    for index in indices {
+                        let mediaModel = mediaSubject.value[index]
+                        temp.append(mediaModel.id)
                     }
-                    .disposed(by: rx.disposeBag)
-                
+                    CampaignManager.shared.saveUploadIds(campaignUuid: campaignModel.uuid, ids: temp)
+                        .subscribe { [unowned self] in
+                            presentCustomAlert(content: "캠페인을 위한 \(campaignModel.leastFeed)개의 피드를 등록하였습니다.") {
+                                self.navigationController?.popViewController(animated: true)
+                            }
+                        } onError: { err in
+                            print(err)
+                        }
+                        .disposed(by: rx.disposeBag)
+
+
+                }
                 
             })
             .disposed(by: rx.disposeBag)
         
+    }
+    
+    private func fetchNextPage() {
+        if !isFetching && !isLastPage {
+            isFetching = true
+            InstagramManager.shared.getNextPage()
+                .subscribe { [unowned self] mediaArrayModel in
+                    if let mediaArrayModel = mediaArrayModel {
+                        mediaSubject.accept(mediaSubject.value + mediaArrayModel.data)
+                    }
+                    isFetching = false
+                } onError: { [unowned self] err in
+                    print(err)
+                    isFetching = false
+                    isLastPage = true
+                }
+                .disposed(by: rx.disposeBag)
+        }
     }
     
     @IBAction func back(_ sender: Any) {

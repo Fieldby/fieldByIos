@@ -127,11 +127,14 @@ class ProgressViewController: UIViewController {
             .bind(to: tableView.rx.items(cellIdentifier: ProgressMainCell.reuseId, cellType: ProgressMainCell.self)) { [unowned self] idx, model, cell in
                 
                 cell.buttonHandler = { [unowned self] in
-                    let vc = UIStoryboard(name: "Upload", bundle: nil).instantiateViewController(withIdentifier: "medialistVC") as! MediaListViewController
-                    vc.modalPresentationStyle = .fullScreen
-                    vc.campaignModel = model.0
-                    self.navigationController?.pushViewController(vc, animated: true)
-                    
+                    if AuthManager.shared.myUserModel.igModel == nil {
+                        presentCustomAlert(content: "연동된 인스타그램 계정이 없습니다.\n 내정보 화면에서 연동을 해주세요.", afterDismiss: {})
+                    } else {
+                        let vc = UIStoryboard(name: "Upload", bundle: nil).instantiateViewController(withIdentifier: "medialistVC") as! MediaListViewController
+                        vc.modalPresentationStyle = .fullScreen
+                        vc.campaignModel = model.0
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
                 }
                 
                 cell.guidButtonHandler = { [unowned self] in

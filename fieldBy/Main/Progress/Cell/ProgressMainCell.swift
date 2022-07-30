@@ -132,7 +132,7 @@ class ProgressMainCell: UITableViewCell {
         uploadButtonContainer.isHidden = true
         guideButton.isHidden = false
         appliedLabel.isHidden = true
-        
+        guideButton.setTitle("송장번호 확인하기>", for: .normal)
         dateContentLabel.text = "예상 배송기간(~\(campaignModel.itemDate.month).\(campaignModel.itemDate.day))입니다!"
         desLabel.text = "곧 제품이 배송됩니다"
         
@@ -143,7 +143,7 @@ class ProgressMainCell: UITableViewCell {
         deliveryBar.backgroundColor = .main
         progressView.isHidden = false
         uploadView.isHidden = false
-        
+        guideButton.setTitle("가이드 확인하기>", for: .normal)
         uploadButtonContainer.isHidden = false
         
         if userModel.imageArray.count != 0 {

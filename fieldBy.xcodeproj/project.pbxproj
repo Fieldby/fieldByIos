@@ -67,6 +67,7 @@
 		D18DF965283F812000F143EE /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18DF964283F812000F143EE /* EditProfileViewController.swift */; };
 		D18F874C2894FB5F0097B183 /* PopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18F874B2894FB5F0097B183 /* PopupViewController.swift */; };
 		D18F874E289500390097B183 /* OptionPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18F874D289500390097B183 /* OptionPopupViewController.swift */; };
+		D18F8751289510700097B183 /* DeliveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18F8750289510700097B183 /* DeliveryViewController.swift */; };
 		D197A1F4283E2E4700691053 /* CampaignStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = D197A1F3283E2E4700691053 /* CampaignStatus.swift */; };
 		D197A1F6283E4D0500691053 /* Image+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D197A1F5283E4D0500691053 /* Image+.swift */; };
 		D198302A28509216009085A0 /* PushManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D198302928509216009085A0 /* PushManager.swift */; };
@@ -191,6 +192,7 @@
 		D18DF964283F812000F143EE /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		D18F874B2894FB5F0097B183 /* PopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupViewController.swift; sourceTree = "<group>"; };
 		D18F874D289500390097B183 /* OptionPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionPopupViewController.swift; sourceTree = "<group>"; };
+		D18F8750289510700097B183 /* DeliveryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryViewController.swift; sourceTree = "<group>"; };
 		D197A1F3283E2E4700691053 /* CampaignStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignStatus.swift; sourceTree = "<group>"; };
 		D197A1F5283E4D0500691053 /* Image+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+.swift"; sourceTree = "<group>"; };
 		D198302928509216009085A0 /* PushManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushManager.swift; sourceTree = "<group>"; };
@@ -596,6 +598,14 @@
 			path = EditProfile;
 			sourceTree = "<group>";
 		};
+		D18F874F289510630097B183 /* Delivery */ = {
+			isa = PBXGroup;
+			children = (
+				D18F8750289510700097B183 /* DeliveryViewController.swift */,
+			);
+			path = Delivery;
+			sourceTree = "<group>";
+		};
 		D1A29840283F575A000F7D33 /* ApiGuide */ = {
 			isa = PBXGroup;
 			children = (
@@ -757,6 +767,7 @@
 		D1C89EE22822B6C300DAA2F4 /* Progress */ = {
 			isa = PBXGroup;
 			children = (
+				D18F874F289510630097B183 /* Delivery */,
 				D181C83B283758CC008304C5 /* Cell */,
 				D101475E283BB49400B10F8A /* Upload */,
 				D181C83A283758C1008304C5 /* Main */,
@@ -1050,6 +1061,7 @@
 				D15D4AE0284CE87900372149 /* CampaignUnSelectedViewController.swift in Sources */,
 				D11376DA2836856200CFC3D2 /* CommonGuideViewController.swift in Sources */,
 				D1121D272830E4A300149263 /* GolfInfoViewModel.swift in Sources */,
+				D18F8751289510700097B183 /* DeliveryViewController.swift in Sources */,
 				D1FC0805282D3FF2006ED153 /* DetailCampaignViewModel.swift in Sources */,
 				D1EDA1C82834CF9A0021595E /* GuideCampaignViewController.swift in Sources */,
 				D1329DF3281FF2AD00760DDA /* CommonViews.swift in Sources */,

@@ -134,14 +134,14 @@ class CampaignManager: CommonBackendType {
         AuthManager.shared.addCampaign(uuid: campaignModel.uuid, size: size, color: color)
     }
     
-    func saveUploadIds(campaignUuid: String, images: [ImageData]) -> Completable {
+    func saveUploadIds(campaignUuid: String, ids: [String]) -> Completable {
         return Completable.create() { completable in
             
             self.ref.child("users").child(AuthManager.shared.myUserModel.uuid).child("campaigns").child(campaignUuid).child("images")
-                .setValue(images.map{$0.id})
+                .setValue(ids)
             
             if let model = AuthManager.shared.myUserModel.campaigns.first(where: {$0.uuid == campaignUuid}) {
-                model.imageArray = images.map{$0.id}
+                model.imageArray = ids
             }
 
             completable(.completed)

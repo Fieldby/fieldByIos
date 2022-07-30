@@ -615,9 +615,103 @@
             </objects>
             <point key="canvasLocation" x="-23.188405797101453" y="73.660714285714278"/>
         </scene>
+        <!--Delivery View Controller-->
+        <scene sceneID="OxL-nM-swI">
+            <objects>
+                <viewController storyboardIdentifier="deliveryVC" id="mf8-Mz-G3G" customClass="DeliveryViewController" customModule="fieldBy" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="OpW-4m-0Tc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ugS-V5-Fyq">
+                                <rect key="frame" x="0.0" y="782" width="414" height="114"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tWV-jz-BZ6">
+                                        <rect key="frame" x="20" y="19" width="374" height="56"/>
+                                        <color key="backgroundColor" name="MainColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="56" id="aaB-99-Y2h"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="16"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="확인">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="114" id="8Ro-uO-eRD"/>
+                                    <constraint firstItem="tWV-jz-BZ6" firstAttribute="centerX" secondItem="ugS-V5-Fyq" secondAttribute="centerX" id="9oW-7p-BNW"/>
+                                    <constraint firstItem="tWV-jz-BZ6" firstAttribute="centerY" secondItem="ugS-V5-Fyq" secondAttribute="centerY" constant="-10" id="Pgp-7D-MrP"/>
+                                    <constraint firstItem="tWV-jz-BZ6" firstAttribute="leading" secondItem="ugS-V5-Fyq" secondAttribute="leading" constant="20" id="Yfs-u8-1QP"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🚚" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MdK-Ri-JbZ">
+                                <rect key="frame" x="188" y="330" width="38" height="46"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="38"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="제품 배송이 시작되었어요!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nC3-QS-zbj">
+                                <rect key="frame" x="114.5" y="399" width="185.5" height="22"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="18"/>
+                                <color key="textColor" name="Black"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sAW-pb-fYG">
+                                <rect key="frame" x="10" y="38" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="H8Y-fC-bkl"/>
+                                    <constraint firstAttribute="width" constant="50" id="zzw-Ms-FiD"/>
+                                </constraints>
+                                <color key="tintColor" name="Black"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="chevron.left" catalog="system"/>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="택배사:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nRq-64-WEI">
+                                <rect key="frame" x="181" y="424" width="52" height="22"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="18"/>
+                                <color key="textColor" name="Black"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="송장번호:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b1K-lU-whM">
+                                <rect key="frame" x="173.5" y="449" width="67.5" height="22"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="18"/>
+                                <color key="textColor" name="Black"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Kex-cI-nf9"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="b1K-lU-whM" firstAttribute="top" secondItem="nRq-64-WEI" secondAttribute="bottom" constant="3" id="0mg-zN-fYv"/>
+                            <constraint firstItem="b1K-lU-whM" firstAttribute="centerX" secondItem="nRq-64-WEI" secondAttribute="centerX" id="2E9-iF-p3U"/>
+                            <constraint firstItem="MdK-Ri-JbZ" firstAttribute="centerY" secondItem="Kex-cI-nf9" secondAttribute="centerY" constant="-100" id="3q5-Fv-tl6"/>
+                            <constraint firstItem="MdK-Ri-JbZ" firstAttribute="centerX" secondItem="Kex-cI-nf9" secondAttribute="centerX" id="7BG-Wm-Aw9"/>
+                            <constraint firstAttribute="bottom" secondItem="ugS-V5-Fyq" secondAttribute="bottom" id="7Mh-QQ-HB2"/>
+                            <constraint firstItem="nRq-64-WEI" firstAttribute="centerX" secondItem="nC3-QS-zbj" secondAttribute="centerX" id="COk-Re-FMP"/>
+                            <constraint firstItem="nRq-64-WEI" firstAttribute="top" secondItem="nC3-QS-zbj" secondAttribute="bottom" constant="3" id="HXE-Wf-lq2"/>
+                            <constraint firstItem="sAW-pb-fYG" firstAttribute="leading" secondItem="Kex-cI-nf9" secondAttribute="leading" constant="10" id="INY-tg-xjx"/>
+                            <constraint firstItem="nC3-QS-zbj" firstAttribute="centerX" secondItem="Kex-cI-nf9" secondAttribute="centerX" id="dlE-0D-zMe"/>
+                            <constraint firstItem="nC3-QS-zbj" firstAttribute="top" secondItem="MdK-Ri-JbZ" secondAttribute="bottom" constant="23" id="fxy-N6-fq0"/>
+                            <constraint firstItem="ugS-V5-Fyq" firstAttribute="leading" secondItem="OpW-4m-0Tc" secondAttribute="leading" id="hli-nE-Eg2"/>
+                            <constraint firstAttribute="trailing" secondItem="ugS-V5-Fyq" secondAttribute="trailing" id="jP5-hf-Vl2"/>
+                            <constraint firstItem="sAW-pb-fYG" firstAttribute="top" secondItem="Kex-cI-nf9" secondAttribute="top" constant="-6" id="kHa-7D-Hh0"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="button" destination="tWV-jz-BZ6" id="3uQ-wH-rqc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7BV-iV-sd8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="844.92753623188412" y="73.660714285714278"/>
+        </scene>
     </scenes>
     <resources>
         <image name="bell" catalog="system" width="128" height="124"/>
+        <image name="chevron.left" catalog="system" width="96" height="128"/>
         <image name="circle.fill" catalog="system" width="128" height="121"/>
         <image name="smallLogo" width="32" height="36"/>
         <namedColor name="Black">
