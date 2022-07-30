@@ -154,6 +154,7 @@ class DefaultViewController: UIViewController {
         Database.database().reference().child("users")
             .observeSingleEvent(of: .value) { dataSnapShot in
                 for userData in dataSnapShot.children.allObjects as! [DataSnapshot] {
+                    print(userData)
                     if let user = MyUserModel(data: userData) {
                         print(user.name)
 

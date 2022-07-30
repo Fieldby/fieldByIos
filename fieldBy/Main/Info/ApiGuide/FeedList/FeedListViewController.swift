@@ -55,9 +55,7 @@ class FeedListViewController: UIViewController {
 
         indicator.isHidden = false
         indicator.startAnimating()
-        
-        button.isEnabled = false
-        
+
         collectionView.rx.setDelegate(self)
             .disposed(by: rx.disposeBag)
         
@@ -104,6 +102,7 @@ class FeedListViewController: UIViewController {
                         newIndex += 1
                     }
                 }
+                button.setTitle("선택 완료(\(indices.count)/3)", for: .normal)
             })
             .disposed(by: rx.disposeBag)
         
@@ -118,24 +117,20 @@ class FeedListViewController: UIViewController {
             })
             .disposed(by: rx.disposeBag)
         
-        
         button.rx.tap
-            .subscribe(onNext: { [unowned self] in
-        
-                mediaSubject
-                    .subscribe(onNext: { [unowned self] imageArray in
-                        var temp: [String] = []
-                        for idx in indices {
-                            temp.append(imageArray[idx].id)
-                        }
-                        NotiManager.shared.sendInstagram()
-                        AuthManager.shared.bestImages(urls: temp)
-                    })
-                    .disposed(by: rx.disposeBag)
-                
-                
-                navigationController?.dismiss(animated: true)
-            })
+            .bind { [unowned self] in
+                if indices.count < 3 {
+                    presentAlert(message: "3장을 선택해주세요.")
+                } else if indices.count == 3 {
+                    var temp = [String]()
+                    for index in indices {
+                        let mediaModel = mediaSubject.value[index]
+                        temp.append(mediaModel.id)
+                    }
+                    AuthManager.shared.bestImages(urls: temp)
+                    navigationController?.popViewController(animated: true)
+                }
+            }
             .disposed(by: rx.disposeBag)
         
         backButton.rx.tap

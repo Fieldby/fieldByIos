@@ -31,7 +31,6 @@ class AuthManager: CommonBackendType {
     
     func setToken(token: String) {
         self.fcmToken = token
-        ref.child("users").child(myUserModel.uuid).child("fcmToken").setValue(token)
     }
     
     func fetch(uuid: String) -> Completable {
@@ -41,6 +40,7 @@ class AuthManager: CommonBackendType {
                     if dataSnapShot.exists() {
                         if let myUserModel = MyUserModel(data: dataSnapShot) {
                             self.myUserModel = myUserModel
+                            print(myUserModel.name)
                             if let fcmToken = fcmToken {
                                 NotiManager.shared.setToken(token: fcmToken)
                             }

@@ -78,7 +78,6 @@ class MediaListViewController: UIViewController {
         collectionView.rx.itemSelected
             .subscribe(onNext: { [unowned self] index in
                 let cell = collectionView.cellForItem(at: index) as! FeedCell
-                
                 if cell.isOn {
                     let idx = indexes.firstIndex(of: index.row)!
                     indexes.remove(at: idx)
