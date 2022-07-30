@@ -95,6 +95,101 @@
             </objects>
             <point key="canvasLocation" x="1217" y="267"/>
         </scene>
+        <!--Option Popup View Controller-->
+        <scene sceneID="Vmh-ng-BYn">
+            <objects>
+                <viewController storyboardIdentifier="optionpopupVC" id="VVK-Ff-FsH" customClass="OptionPopupViewController" customModule="fieldBy" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="eOE-cy-XSQ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fFc-DU-xfh">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            </button>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1fW-li-yWy">
+                                <rect key="frame" x="32" y="378" width="350" height="150"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tty-9Z-cWy">
+                                        <rect key="frame" x="0.0" y="0.0" width="350" height="93"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ahr-O7-mCn">
+                                                <rect key="frame" x="30" y="36" width="290" height="31.5"/>
+                                                <string key="text">캠페인에 지원하려면 인스타그램 채널 연결이 필요합니다.
+연결은 마이페이지에서 진행할 수 있습니다.</string>
+                                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="13"/>
+                                                <color key="textColor" red="0.46274509800000002" green="0.43529411759999997" blue="0.43529411759999997" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="93" id="56h-2H-ivP"/>
+                                            <constraint firstItem="Ahr-O7-mCn" firstAttribute="top" secondItem="Tty-9Z-cWy" secondAttribute="top" constant="36" id="L2D-7g-QHX"/>
+                                            <constraint firstItem="Ahr-O7-mCn" firstAttribute="centerX" secondItem="Tty-9Z-cWy" secondAttribute="centerX" id="MAG-jg-qgZ"/>
+                                        </constraints>
+                                    </view>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Lf1-rv-AO8">
+                                        <rect key="frame" x="25" y="93" width="300" height="47"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dUV-r4-grV">
+                                                <rect key="frame" x="0.0" y="0.0" width="140" height="47"/>
+                                                <color key="backgroundColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.55686274509803924" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="16"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="돌아가기">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gxJ-uX-7If">
+                                                <rect key="frame" x="160" y="0.0" width="140" height="47"/>
+                                                <color key="backgroundColor" name="MainColor"/>
+                                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="16"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="확인">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="Tty-9Z-cWy" firstAttribute="top" secondItem="1fW-li-yWy" secondAttribute="top" id="9z5-fs-g1G"/>
+                                    <constraint firstItem="Lf1-rv-AO8" firstAttribute="leading" secondItem="1fW-li-yWy" secondAttribute="leading" constant="25" id="AdY-ZP-FcM"/>
+                                    <constraint firstItem="Tty-9Z-cWy" firstAttribute="leading" secondItem="1fW-li-yWy" secondAttribute="leading" id="Co6-SD-bd9"/>
+                                    <constraint firstAttribute="bottom" secondItem="Lf1-rv-AO8" secondAttribute="bottom" constant="10" id="Rwz-s3-2TY"/>
+                                    <constraint firstAttribute="trailing" secondItem="Lf1-rv-AO8" secondAttribute="trailing" constant="25" id="bUR-la-1Nq"/>
+                                    <constraint firstAttribute="height" constant="150" id="ers-9A-81S"/>
+                                    <constraint firstItem="Lf1-rv-AO8" firstAttribute="top" secondItem="Tty-9Z-cWy" secondAttribute="bottom" id="s6m-PC-cYO"/>
+                                    <constraint firstAttribute="trailing" secondItem="Tty-9Z-cWy" secondAttribute="trailing" id="zKv-dE-kM3"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Aoq-6i-2Lz"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="fFc-DU-xfh" firstAttribute="leading" secondItem="Aoq-6i-2Lz" secondAttribute="leading" id="0fP-sQ-ddg"/>
+                            <constraint firstItem="Aoq-6i-2Lz" firstAttribute="bottom" secondItem="fFc-DU-xfh" secondAttribute="bottom" id="2cm-IB-XAF"/>
+                            <constraint firstItem="1fW-li-yWy" firstAttribute="centerY" secondItem="Aoq-6i-2Lz" secondAttribute="centerY" id="5s3-o7-0sr"/>
+                            <constraint firstItem="Aoq-6i-2Lz" firstAttribute="trailing" secondItem="fFc-DU-xfh" secondAttribute="trailing" id="AC6-3j-aWK"/>
+                            <constraint firstItem="fFc-DU-xfh" firstAttribute="top" secondItem="Aoq-6i-2Lz" secondAttribute="top" id="GS3-F8-b3t"/>
+                            <constraint firstItem="1fW-li-yWy" firstAttribute="leading" secondItem="Aoq-6i-2Lz" secondAttribute="leading" constant="32" id="ScG-J6-PAc"/>
+                            <constraint firstItem="1fW-li-yWy" firstAttribute="centerX" secondItem="Aoq-6i-2Lz" secondAttribute="centerX" id="lP2-SM-Jud"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="backButton" destination="dUV-r4-grV" id="WMQ-yr-Xt1"/>
+                        <outlet property="backgroundButton" destination="fFc-DU-xfh" id="BVI-Th-LUR"/>
+                        <outlet property="containerView" destination="1fW-li-yWy" id="upg-mf-thZ"/>
+                        <outlet property="contentLabel" destination="Ahr-O7-mCn" id="VrK-dY-LME"/>
+                        <outlet property="yesButton" destination="gxJ-uX-7If" id="44M-EG-oxX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EFj-HB-tnl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2070" y="267"/>
+        </scene>
     </scenes>
     <resources>
         <namedColor name="MainColor">

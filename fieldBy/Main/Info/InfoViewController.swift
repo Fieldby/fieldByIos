@@ -31,6 +31,7 @@ class InfoViewController: UIViewController {
     
     @IBOutlet weak var newImageView: UIImageView!
     
+    @IBOutlet weak var disconnectButton: UIButton!
     
     
     
@@ -91,6 +92,18 @@ class InfoViewController: UIViewController {
             .disposed(by: rx.disposeBag)
         
         totalRewardsLabel.text = "\(AuthManager.shared.myUserModel.reward)원"
+        
+        disconnectButton.rx.tap
+            .bind { [unowned self] in
+                if AuthManager.shared.myUserModel.igModel == nil {
+                    presentCustomAlert(content: "연동된 인스타그램 계정이 없습니다.", afterDismiss: {})
+                } else {
+                    presentCustomOptionAlert(content: "정말 인스타그램 연동을 해제하시겠습니까?") {
+                        AuthManager.shared.removeIGInfo()
+                    }
+                }
+            }
+            .disposed(by: rx.disposeBag)
         
     }
     

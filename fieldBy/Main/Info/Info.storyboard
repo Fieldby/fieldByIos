@@ -369,8 +369,33 @@
                                             <constraint firstAttribute="bottom" secondItem="O4g-8A-IrC" secondAttribute="bottom" id="wsx-s2-gg8"/>
                                         </constraints>
                                     </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7cT-od-LUy">
+                                        <rect key="frame" x="0.0" y="300" width="414" height="50"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ztm-c9-53D">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="인스타그램 연동 해제하기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TkY-3L-EnP">
+                                                <rect key="frame" x="58" y="15.5" width="161" height="19.5"/>
+                                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="16"/>
+                                                <color key="textColor" name="Black"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="ztm-c9-53D" firstAttribute="leading" secondItem="7cT-od-LUy" secondAttribute="leading" id="Ehq-yy-jKp"/>
+                                            <constraint firstItem="TkY-3L-EnP" firstAttribute="leading" secondItem="7cT-od-LUy" secondAttribute="leading" constant="58" id="TQM-IH-vBN"/>
+                                            <constraint firstAttribute="height" constant="50" id="WOw-KO-Wwi"/>
+                                            <constraint firstAttribute="trailing" secondItem="ztm-c9-53D" secondAttribute="trailing" id="aCI-V6-vta"/>
+                                            <constraint firstItem="TkY-3L-EnP" firstAttribute="centerY" secondItem="7cT-od-LUy" secondAttribute="centerY" id="aCL-TB-5ig"/>
+                                            <constraint firstAttribute="bottom" secondItem="ztm-c9-53D" secondAttribute="bottom" id="pQO-Cf-8rI"/>
+                                            <constraint firstItem="ztm-c9-53D" firstAttribute="top" secondItem="7cT-od-LUy" secondAttribute="top" id="txO-qR-E6r"/>
+                                        </constraints>
+                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="egE-AF-2vk">
-                                        <rect key="frame" x="0.0" y="300" width="414" height="266"/>
+                                        <rect key="frame" x="0.0" y="350" width="414" height="216"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </view>
                                 </subviews>
@@ -400,6 +425,7 @@
                     </view>
                     <connections>
                         <outlet property="campaignCounts" destination="clI-SS-vB1" id="Zw7-xl-3Yj"/>
+                        <outlet property="disconnectButton" destination="ztm-c9-53D" id="VKy-1E-yHX"/>
                         <outlet property="followersCountLabel" destination="sNN-di-cmh" id="qaD-jz-TCk"/>
                         <outlet property="mediaButton" destination="cwA-bW-EHp" id="DcX-Hz-HHK"/>
                         <outlet property="newImageView" destination="40F-yf-D3x" id="VlF-r4-JwR"/>

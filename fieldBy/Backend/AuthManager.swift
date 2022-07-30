@@ -290,4 +290,10 @@ class AuthManager: CommonBackendType {
         let key = ref.child("letters").childByAutoId().key!
         ref.child("letters").child(key).setValue(reason)
     }
+    
+    func removeIGInfo() {
+        ref.child("users").child(myUserModel.uuid).child("igInfo").removeValue()
+        myUserModel.igModel = nil
+        igValidSubject.onNext(false)
+    }
 }

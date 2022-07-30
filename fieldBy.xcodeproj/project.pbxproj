@@ -66,6 +66,7 @@
 		D18910082833C8F0000685E8 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18910072833C8F0000685E8 /* String+.swift */; };
 		D18DF965283F812000F143EE /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18DF964283F812000F143EE /* EditProfileViewController.swift */; };
 		D18F874C2894FB5F0097B183 /* PopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18F874B2894FB5F0097B183 /* PopupViewController.swift */; };
+		D18F874E289500390097B183 /* OptionPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18F874D289500390097B183 /* OptionPopupViewController.swift */; };
 		D197A1F4283E2E4700691053 /* CampaignStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = D197A1F3283E2E4700691053 /* CampaignStatus.swift */; };
 		D197A1F6283E4D0500691053 /* Image+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D197A1F5283E4D0500691053 /* Image+.swift */; };
 		D198302A28509216009085A0 /* PushManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D198302928509216009085A0 /* PushManager.swift */; };
@@ -189,6 +190,7 @@
 		D18910072833C8F0000685E8 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		D18DF964283F812000F143EE /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		D18F874B2894FB5F0097B183 /* PopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupViewController.swift; sourceTree = "<group>"; };
+		D18F874D289500390097B183 /* OptionPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionPopupViewController.swift; sourceTree = "<group>"; };
 		D197A1F3283E2E4700691053 /* CampaignStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignStatus.swift; sourceTree = "<group>"; };
 		D197A1F5283E4D0500691053 /* Image+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+.swift"; sourceTree = "<group>"; };
 		D198302928509216009085A0 /* PushManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushManager.swift; sourceTree = "<group>"; };
@@ -672,6 +674,7 @@
 				D1C89EE22822B6C300DAA2F4 /* Progress */,
 				D1C89EE12822B6AC00DAA2F4 /* Campaign */,
 				D106B0AD281EA2A400E6CCFA /* Main.storyboard */,
+				D18F874D289500390097B183 /* OptionPopupViewController.swift */,
 				D18F874B2894FB5F0097B183 /* PopupViewController.swift */,
 				D145BBF22832285B009383D8 /* DefaultViewController.swift */,
 				D1C89EDF2822B65C00DAA2F4 /* MainTabBarController.swift */,
@@ -1000,6 +1003,7 @@
 				D12CFD0328503AF50071A86C /* MainImageViewController.swift in Sources */,
 				D19A9DAB2822C4C700552C15 /* View+.swift in Sources */,
 				D121A5BA288ECC3600D9A983 /* InstagramAPI.swift in Sources */,
+				D18F874E289500390097B183 /* OptionPopupViewController.swift in Sources */,
 				D145BBEC2831E62A009383D8 /* FinalInfoViewController.swift in Sources */,
 				D1A99CD02821220300E414E4 /* AddressViewModel.swift in Sources */,
 				D145BBEE2831EABB009383D8 /* Styles.swift in Sources */,

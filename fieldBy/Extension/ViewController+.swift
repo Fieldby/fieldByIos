@@ -30,4 +30,21 @@ extension UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
+    func presentCustomAlert(content: String, afterDismiss: @escaping (() -> Void)) {
+        guard let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "popupVC") as? PopupViewController else { return }
+        vc.modalTransitionStyle = .crossDissolve
+        vc.modalPresentationStyle = .overCurrentContext
+        vc.content = content
+        vc.afterDismiss = afterDismiss
+        present(vc, animated: true)
+    }
+    
+    func presentCustomOptionAlert(content: String, afterDismiss: @escaping (() -> Void)) {
+        guard let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "optionpopupVC") as? OptionPopupViewController else { return }
+        vc.modalTransitionStyle = .crossDissolve
+        vc.modalPresentationStyle = .overCurrentContext
+        vc.content = content
+        vc.afterDismiss = afterDismiss
+        present(vc, animated: true)
+    }
 }

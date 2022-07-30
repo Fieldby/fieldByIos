@@ -17,8 +17,10 @@ class MediaListViewController: UIViewController {
     
     @IBOutlet weak var doneButton: UIButton!
     
-    private var imageSubject = BehaviorSubject<[ImageData]>(value: [])
-    private var imageArray: [ImageData] = []
+    private var isFetching = false
+    private var isLastPage = false
+    private let mediaSubject = BehaviorRelay<[IGMediaModel]>(value: [])
+    private var indices = [Int]()
     
     var campaignModel: CampaignModel!
     static let storyId = "medialistVC"
@@ -26,15 +28,15 @@ class MediaListViewController: UIViewController {
     var indexes: [Int] = []
     
     override func viewWillAppear(_ animated: Bool) {
-        let tabVC = tabBarController as! MainTabBarController
-        tabVC.bottomView.isHidden = true
-        tabVC.tabBar.isHidden = true
+        if let tabBar = self.tabBarController as? MainTabBarController {
+            tabBar.hide()
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        let tabVC = tabBarController as! MainTabBarController
-        tabVC.bottomView.isHidden = false
-        tabVC.tabBar.isHidden = false
+        if let tabBar = self.tabBarController as? MainTabBarController {
+            tabBar.show()
+        }
     }
     
     override func viewDidLoad() {
@@ -104,11 +106,11 @@ class MediaListViewController: UIViewController {
             .subscribe(onNext: { [unowned self] in
                                 
                 var temp = [ImageData]()
-                for i in 0..<indexes.count {
-                    let imageData = imageArray[indexes[i]]
-                    temp.append(imageData)
-                }
-                
+//                for i in 0..<indexes.count {
+//                    let imageData = imageArray[indexes[i]]
+//                    temp.append(imageData)
+//                }
+//
                 let uuid = campaignModel.uuid
                 
                 CampaignManager.shared.saveUploadIds(campaignUuid: uuid, images: temp)

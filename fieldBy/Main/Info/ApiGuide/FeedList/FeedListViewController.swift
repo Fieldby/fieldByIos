@@ -40,8 +40,7 @@ class FeedListViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
-        
+    
         if let tabBar = self.tabBarController as? MainTabBarController {
             tabBar.show()
         }
@@ -120,14 +119,7 @@ class FeedListViewController: UIViewController {
         button.rx.tap
             .bind { [unowned self] in
                 if indices.count < 3 {
-                    let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "popupVC") as! PopupViewController
-                    vc.modalTransitionStyle = .crossDissolve
-                    vc.modalPresentationStyle = .overCurrentContext
-                    vc.content = "3장을 선택해주세요."
-                    vc.afterDismiss = {
-                        
-                    }
-                    present(vc, animated: true)
+                    presentCustomAlert(content: "3장을 선택해주세요.", afterDismiss: {})
                 } else if indices.count == 3 {
                     var temp = [String]()
                     for index in indices {
@@ -135,14 +127,9 @@ class FeedListViewController: UIViewController {
                         temp.append(mediaModel.id)
                     }
                     AuthManager.shared.bestImages(urls: temp)
-                    let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "popupVC") as! PopupViewController
-                    vc.modalTransitionStyle = .crossDissolve
-                    vc.modalPresentationStyle = .overCurrentContext
-                    vc.content = "대표사진 3장을 등록하였습니다."
-                    vc.afterDismiss = {
+                    presentCustomAlert(content: "대표사진 3장을 등록하였습니다.") {
                         self.navigationController?.popViewController(animated: true)
                     }
-                    present(vc, animated: true)
                 }
             }
             .disposed(by: rx.disposeBag)
