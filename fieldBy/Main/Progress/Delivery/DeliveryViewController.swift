@@ -15,8 +15,12 @@ class DeliveryViewController: UIViewController {
         super.viewDidLoad()
 
         button.layer.cornerRadius = 14
+        bind()
     }
     
+    private func bind() {
+        
+    }
 
 
 }
