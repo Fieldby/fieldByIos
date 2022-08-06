@@ -77,6 +77,7 @@ class DetailCampaignViewController: UIViewController {
     @IBOutlet weak var addressButton: UIButton!
     
     
+    @IBOutlet weak var imageGuideView: UIView!
     
     @IBOutlet weak var indicator: UIActivityIndicatorView!
     @IBOutlet var viewModel: DetailCampaignViewModel!
@@ -126,7 +127,7 @@ class DetailCampaignViewController: UIViewController {
         if AuthManager.shared.myUserModel.selectedCampaigns[campaignModel.uuid] == true { isSelected = true }
         
         mainImageView.image = mainImage
-        
+        imageGuideView.layer.cornerRadius = 16
         indicator.isHidden = true
         timeStickyContainer.layer.cornerRadius = 14.5
         isNewContainer.layer.cornerRadius = 9.5
@@ -187,6 +188,25 @@ class DetailCampaignViewController: UIViewController {
                 applyButton.backgroundColor = .unabled
             }
         }
+        
+        var cnt = 0
+        _ = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true, block: { [unowned self] timer in
+            
+            if cnt < 100 {
+                imageGuideView.alpha = CGFloat(100-cnt)/100
+            } else if cnt < 200 {
+                imageGuideView.alpha = CGFloat(cnt-100)/100
+            } else if cnt < 300 {
+                imageGuideView.alpha = CGFloat(300-cnt)/100
+            } else if cnt < 400 {
+                imageGuideView.alpha = CGFloat(cnt-300)/100
+            } else if cnt == 400 {
+                timer.invalidate()
+            }
+
+            
+            cnt += 1
+        })
         
     }
     

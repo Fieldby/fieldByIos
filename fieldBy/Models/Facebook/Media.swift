@@ -52,7 +52,7 @@ struct IGMediaArrayModel: Codable {
 // MARK: - Datum
 struct IGMediaModel: Codable {
     let mediaType: IGMediaType
-    let mediaURL: String
+    let mediaURL: String?
     let thumbnailURL: String?
     let id: String
 

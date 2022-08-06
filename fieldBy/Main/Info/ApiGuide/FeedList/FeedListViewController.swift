@@ -208,7 +208,7 @@ class FeedCell: UICollectionViewCell {
         if let url = model.thumbnailURL {
             mainImageView.setImage(url: url)
         } else {
-            mainImageView.setImage(url: model.mediaURL)
+            mainImageView.setImage(url: model.mediaURL ?? "")
         }
         
         switch model.mediaType {

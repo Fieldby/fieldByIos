@@ -19,7 +19,7 @@ class NotiModel: Codable {
     init?(snapshot: DataSnapshot) {
         let value = snapshot.value as! [String: Any]
         self.uuid = snapshot.key
-        if let type = NotiType(rawValue: (value["type"] as? String)!),
+        if let type = NotiType(rawValue: (value["type"] as? String ?? "")),
            let checked = value["checked"] as? Bool,
            let time = value["time"] as? String {
             self.type = type

@@ -140,19 +140,28 @@ class ProgressViewController: UIViewController {
                 cell.guidButtonHandler = { [unowned self] in
                     indicator.isHidden = false
                     indicator.startAnimating()
-                    CampaignManager.shared.guideImages(campaignModel: model.0)
-                        .subscribe(onNext: { [unowned self] images in
-                            let vc = UIStoryboard(name: "GuideCampaign", bundle: nil).instantiateViewController(withIdentifier: "guidecampaignVC") as! GuideCampaignViewController
-                            vc.guideImages = images
-                            vc.campaignModel = model.0
-                            
-                            let nav = UINavigationController(rootViewController: vc)
-                            indicator.stopAnimating()
-                            indicator.isHidden = true
-                            nav.modalPresentationStyle = .fullScreen
-                            present(nav, animated: true)
-                        })
-                        .disposed(by: rx.disposeBag)
+                    
+                    if model.0.status != .delivering {
+                        CampaignManager.shared.guideImages(campaignModel: model.0)
+                            .subscribe(onNext: { [unowned self] images in
+                                let vc = UIStoryboard(name: "GuideCampaign", bundle: nil).instantiateViewController(withIdentifier: "guidecampaignVC") as! GuideCampaignViewController
+                                vc.guideImages = images
+                                vc.campaignModel = model.0
+                                
+                                let nav = UINavigationController(rootViewController: vc)
+                                indicator.stopAnimating()
+                                indicator.isHidden = true
+                                nav.modalPresentationStyle = .fullScreen
+                                present(nav, animated: true)
+                            })
+                            .disposed(by: rx.disposeBag)
+                    } else {
+                        let vc = storyboard?.instantiateViewController(withIdentifier: "deliveryVC") as! DeliveryViewController
+                        vc.userCampaignModel = model.1
+                        vc.modalPresentationStyle = .fullScreen
+                        self.present(vc, animated: true)
+                    }
+
                 }
                 
                 

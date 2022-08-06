@@ -17,25 +17,11 @@ import Lottie
 
 class DefaultViewController: UIViewController {
     
-    private let animationDone = BehaviorRelay<Bool>(value: false)
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("defaultView")
-        let animationView = AnimationView()
-        animationView.animation = Animation.named("logoAnimation")
-        animationView.frame = view.bounds
         
-        animationView.contentMode = .scaleAspectFit
-        animationView.loopMode = .playOnce
-        animationView.play { [unowned self] finished in
-            if finished {
-                animationDone.accept(true)
-            }
-        }
-        
-        view.addSubview(animationView)
-//        checkAppInfo()
+        checkAppInfo()
 
     }
 
@@ -43,33 +29,20 @@ class DefaultViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        Observable.combineLatest(checkUserValid(), animationDone)
-            .subscribe(onNext: { [unowned self] code, isDone in
-                if isDone {
-                    if code == 0 {
-                        toMain()
-                    } else if code == 1 {
-                        toAuth()
-                    } else if code == 2 {
-                        presentAlert(message: "서버 문제입니다. 관계자에게 문의하세요.")
-                    }
+        
+        checkUserValid()
+            .subscribe(onNext: { [unowned self] code in
+                print(code)
+
+                if code == 0 {
+                    toMain()
+                } else if code == 1 {
+                    toAuth()
+                } else if code == 2 {
+                    presentAlert(message: "서버 문제입니다. 관계자에게 문의하세요.")
                 }
             })
             .disposed(by: rx.disposeBag)
-        
-//        checkUserValid()
-//            .subscribe(onNext: { [unowned self] code in
-//                print(code)
-//
-//                if code == 0 {
-//                    toMain()
-//                } else if code == 1 {
-//                    toAuth()
-//                } else if code == 2 {
-//                    presentAlert(message: "서버 문제입니다. 관계자에게 문의하세요.")
-//                }
-//            })
-//            .disposed(by: rx.disposeBag)
 
     }
     
@@ -154,19 +127,16 @@ class DefaultViewController: UIViewController {
         Database.database().reference().child("users")
             .observeSingleEvent(of: .value) { dataSnapShot in
                 for userData in dataSnapShot.children.allObjects as! [DataSnapshot] {
-                    print(userData)
-                    if let user = MyUserModel(data: userData) {
-                        print(user.name)
-
-                        
-                        
+                    if userData.exists() {
                         userCount += 1
-                        if user.bestImages.count > 0 {
-                            bestImageCount += 1
+                        
+                        
+                        if userData.childSnapshot(forPath: "igInfo").exists() {
+                            igCount += 1
                         }
                         
-                        if let _ = user.igModel {
-                            igCount += 1
+                        if userData.childSnapshot(forPath: "bestImages").exists() {
+                            bestImageCount += 1
                         }
                     }
                 }

@@ -160,13 +160,28 @@ final class InstagramManager: CommonBackendType {
             }
             let igId = igModel.id
             let url = "\(graphUrl)\(igId)/media?fields=media_type,media_url,thumbnail_url&access_token=\(igModel.token!)"
+            
+            
+            AF.request(url, method: .get)
+                .responseString { response in
+                    switch response.result {
+                    case .success(let data):
+                        print(data)
+                    case .failure(let err):
+                        print(err)
+                    }
+                }
+            
+            
             AF.request(url, method: .get)
                 .validate(statusCode: 200..<300)
                 .responseData { [unowned self] response in
                     switch response.result {
                     case .success(let data):
                         if let mediaData = decode(jsonData: data, type: IGMediaArrayModel.self) {
-                            self.nextPageUrl = mediaData.paging.next
+                            if mediaData.paging != nil {
+                                self.nextPageUrl = mediaData.paging.next
+                            }
                             single(.success(mediaData))
                         } else {
                             print("feedids decodingFailed")

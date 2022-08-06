@@ -298,6 +298,24 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="egh-rx-nVP">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="590"/>
                             </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G77-eO-VVo">
+                                <rect key="frame" x="10" y="548" width="106" height="32"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이미지를 눌러보세요 !" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vJg-cS-81v">
+                                        <rect key="frame" x="10" y="10" width="86" height="12"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="10"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" name="Black"/>
+                                <constraints>
+                                    <constraint firstItem="vJg-cS-81v" firstAttribute="leading" secondItem="G77-eO-VVo" secondAttribute="leading" constant="10" id="RSs-DP-SVi"/>
+                                    <constraint firstAttribute="trailing" secondItem="vJg-cS-81v" secondAttribute="trailing" constant="10" id="qpI-m4-Jgc"/>
+                                    <constraint firstItem="vJg-cS-81v" firstAttribute="top" secondItem="G77-eO-VVo" secondAttribute="top" constant="10" id="rJk-vU-b2x"/>
+                                    <constraint firstAttribute="bottom" secondItem="vJg-cS-81v" secondAttribute="bottom" constant="10" id="w3q-Qj-Dp0"/>
+                                </constraints>
+                            </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uke-1C-b2f">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="738"/>
                                 <subviews>
@@ -959,7 +977,9 @@
                             <constraint firstAttribute="bottom" secondItem="4Fa-Mi-GYL" secondAttribute="bottom" id="Bwv-MI-fR7"/>
                             <constraint firstAttribute="trailing" secondItem="uke-1C-b2f" secondAttribute="trailing" id="DDL-Yg-NJ8"/>
                             <constraint firstAttribute="trailing" secondItem="Qnu-6i-rea" secondAttribute="trailing" id="EFb-R0-Ahr"/>
+                            <constraint firstItem="G77-eO-VVo" firstAttribute="leading" secondItem="egh-rx-nVP" secondAttribute="leading" constant="10" id="J7i-q3-7jw"/>
                             <constraint firstItem="70D-ch-4B6" firstAttribute="leading" secondItem="47r-HL-dmv" secondAttribute="leading" id="No5-3r-poN"/>
+                            <constraint firstItem="G77-eO-VVo" firstAttribute="bottom" secondItem="egh-rx-nVP" secondAttribute="bottom" constant="-10" id="VhU-zh-DX1"/>
                             <constraint firstItem="lhs-AO-22I" firstAttribute="top" secondItem="47r-HL-dmv" secondAttribute="top" constant="38" id="anh-Dg-tx8"/>
                             <constraint firstItem="hT5-3k-MqM" firstAttribute="centerY" secondItem="47r-HL-dmv" secondAttribute="centerY" id="bjp-lK-kSE"/>
                             <constraint firstAttribute="bottom" secondItem="Qnu-6i-rea" secondAttribute="bottom" constant="2" id="cLP-j6-1mx"/>
@@ -995,6 +1015,7 @@
                         <outlet property="doneSelectionDateLabel" destination="Aho-KI-Beb" id="jQ5-Bm-Ta0"/>
                         <outlet property="doneView" destination="63G-ZO-Vl5" id="ZnO-zn-41a"/>
                         <outlet property="helpButton" destination="aWl-h8-Ues" id="2I4-ia-uHg"/>
+                        <outlet property="imageGuideView" destination="G77-eO-VVo" id="0o1-52-vhq"/>
                         <outlet property="indicator" destination="hT5-3k-MqM" id="k83-Uk-pRz"/>
                         <outlet property="infoContainer" destination="dV4-29-Q8L" id="UEv-9B-Bf9"/>
                         <outlet property="isNewContainer" destination="iL2-nm-tIg" id="zC8-SP-ZPL"/>
