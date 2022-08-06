@@ -39,7 +39,7 @@ class CampaignViewController: UIViewController {
     
     @IBOutlet var viewModel: CampaignViewModel!
     
-    private var campaignArray: [CampaignModel] = CampaignManager.shared.campaignArray
+    private var campaignArray: [CampaignModel] = CampaignManager.shared.campaignArray.filter{ $0.status == .exception || $0.status == .applied }
     
     private var showingIndexSubject = BehaviorSubject<Int>(value: 0)
     private var showingIndex = 0
@@ -222,9 +222,12 @@ class CampaignViewController: UIViewController {
             } else if model.uuid == "-N5ECdjzaPhLTEydEG6u" {
                 missionButton.setTitle("확인하기", for: .normal)
                 missionButton.backgroundColor = .main
-            } else {
+            } else if model.status == .applied {
                 missionButton.setTitle("제안하기", for: .normal)
                 missionButton.backgroundColor = .main
+            } else {
+                missionButton.setTitle("마감", for: .normal)
+                missionButton.backgroundColor = UIColor(red: 48, green: 48, blue: 48)
             }
             
             if model.uuid == "-N5E7C3YxZ7x4epf_8PY" {

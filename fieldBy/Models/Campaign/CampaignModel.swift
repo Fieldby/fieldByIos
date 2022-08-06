@@ -125,6 +125,7 @@ class CampaignModel: Codable {
         }
         self.users = tempUsers        
         self.status = getStatus()
+        print(title, status)
     }
     
     
@@ -142,6 +143,8 @@ class CampaignModel: Codable {
             return .uploading
         } else if dateStr < getFinishDate() {
             return .maintaining
+        } else if uuid == "-N5EALVGOYpLlZzZqA09" || uuid == "-N5ECdjzaPhLTEydEG6u" {
+            return .exception
         } else {
             return .done
         }

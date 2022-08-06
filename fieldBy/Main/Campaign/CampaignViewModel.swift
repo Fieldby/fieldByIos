@@ -15,6 +15,7 @@ class CampaignViewModel: NSObject {
     
     func reload() {
         CampaignManager.shared.campaignArrayRelay
+            .map { $0.filter{ $0.status == .applied || $0.status == .exception} }
             .bind(to: campaignRelay)
             .disposed(by: rx.disposeBag)
     }

@@ -14,4 +14,5 @@ enum CampaignStatus: String, Codable {
     case uploading
     case maintaining
     case done
+    case exception
 }

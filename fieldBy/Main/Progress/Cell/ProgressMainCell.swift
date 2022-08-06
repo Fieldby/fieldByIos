@@ -112,6 +112,8 @@ class ProgressMainCell: UITableViewCell {
             
         case .done:
             setDone()
+        case .exception:
+            break
             
         }
         
