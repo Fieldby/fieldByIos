@@ -10,17 +10,39 @@ import FirebaseDatabase
 import RxSwift
 import RxCocoa
 import Alamofire
+import UIKit
 
 class CampaignManager: CommonBackendType {
     
     static let shared = CampaignManager()
     
     let campaignArrayRelay = BehaviorRelay<[CampaignModel]>(value: [])
+    var campaignMainImage: [UIImage] = []
+    
     var campaignArray = [CampaignModel]()
+    
+    var loadingPercentage = BehaviorSubject<CGFloat>(value: 0)
     
     let path = "/campaigns"
     
     func fetch() -> Completable {
+        return Completable.create() { [unowned self] completable in
+            fetchModel()
+                .andThen(fetchMainImage())
+                .subscribe {
+                    completable(.completed)
+                } onError: { error in
+                    print(error)
+                    completable(.error(error))
+                }
+                .disposed(by: rx.disposeBag)
+
+            return Disposables.create()
+        }
+    }
+    
+    private func fetchModel() -> Completable {
+        print("@@@@@ fetch MODEL ")
         return Completable.create() { [unowned self] completable in
          
             ref.child(path).observeSingleEvent(of: .value) { [unowned self] dataSnapShot in
@@ -40,7 +62,43 @@ class CampaignManager: CommonBackendType {
         }
     }
     
-    func mainImageUrl(campaignModel: CampaignModel) -> Single<[URL]> {
+    private func fetchMainImage() -> Completable {
+        return Completable.create() { [unowned self] completable in
+            let campaignList = campaignArray.filter { $0.status == .applied }
+            var imageList = [UIImage?](repeating: nil, count: campaignList.count)
+            var cnt: CGFloat = 0
+            
+            for i in 0..<campaignList.count {
+                storageRef.child(campaignList[i].mainImageUrl)
+                    .downloadURL { [unowned self] url, error in
+                        if let error = error {
+                            print(error)
+                            completable(.error(FetchError.decodingFailed))
+                        }
+                        
+                        if let url = url {
+                            let data = try! Data(contentsOf: url)
+                            let image = UIImage(data: data)!
+                            
+                            imageList[i] = image
+                            cnt += 1
+                            loadingPercentage.onNext((cnt)/CGFloat(imageList.count))
+                            
+                            if !imageList.contains(nil) {
+                                for image in imageList {
+                                    self.campaignMainImage.append(image!)
+                                }
+                                completable(.completed)
+                            }
+                            
+                        }
+                    }
+            }
+            return Disposables.create()
+        }
+    }
+    
+    func subImageUrl(campaignModel: CampaignModel) -> Single<[URL]> {
         return Single.create() { [unowned self] observable in
                 
             storageRef.child("campaignImages").child(campaignModel.title).child("mainImages")

@@ -17,13 +17,31 @@
                     <view key="view" contentMode="scaleToFill" id="VJv-GW-XJI">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mainLogo" translatesAutoresizingMaskIntoConstraints="NO" id="8lv-7m-RVP">
+                                <rect key="frame" x="96.5" y="333" width="221" height="67"/>
+                            </imageView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="sFk-YT-ASm">
+                                <rect key="frame" x="188.5" y="450" width="37" height="37"/>
+                                <color key="tintColor" name="MainColor"/>
+                            </activityIndicatorView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="cZ0-Z6-tz1"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="sFk-YT-ASm" firstAttribute="centerX" secondItem="cZ0-Z6-tz1" secondAttribute="centerX" id="74g-RL-smD"/>
+                            <constraint firstItem="sFk-YT-ASm" firstAttribute="top" secondItem="8lv-7m-RVP" secondAttribute="bottom" constant="50" id="Jol-1v-O9g"/>
+                            <constraint firstItem="8lv-7m-RVP" firstAttribute="top" secondItem="cZ0-Z6-tz1" secondAttribute="top" constant="289" id="lLY-nx-y3m"/>
+                            <constraint firstItem="8lv-7m-RVP" firstAttribute="centerX" secondItem="cZ0-Z6-tz1" secondAttribute="centerX" id="xiW-R1-y9H"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="indicator" destination="sFk-YT-ASm" id="gKA-0E-app"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GGg-aj-d6T" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="279" y="249"/>
+            <point key="canvasLocation" x="278.26086956521743" y="248.4375"/>
         </scene>
         <!--Popup View Controller-->
         <scene sceneID="1wt-e2-oLa">
@@ -192,6 +210,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="mainLogo" width="221" height="67"/>
         <namedColor name="MainColor">
             <color red="0.13333333333333333" green="0.72941176470588232" blue="0.6588235294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

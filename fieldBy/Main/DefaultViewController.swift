@@ -18,11 +18,14 @@ import ChannelIOFront
 
 class DefaultViewController: UIViewController {
     
-
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        checkAppInfo()
+//        checkAppInfo()
+        
+        indicator.startAnimating()
 
     }
 
@@ -34,14 +37,16 @@ class DefaultViewController: UIViewController {
         checkUserValid()
             .subscribe(onNext: { [unowned self] code in
                 print(code)
-
+                
                 if code == 0 {
                     toMain()
                 } else if code == 1 {
                     toAuth()
                 } else if code == 2 {
-                    presentAlert(message: "서버 문제입니다. 관계자에게 문의하세요.")
+                    presentAlert(message: "서버 문제입니다. 관리자에게 문의하세요. code 0000")
                 }
+
+
             })
             .disposed(by: rx.disposeBag)
 
@@ -51,7 +56,6 @@ class DefaultViewController: UIViewController {
      code
      0 : Success
      1 : unValid
-     2 : ServerError
      */
     
     //MARK: TODO - 고칠 것
@@ -59,17 +63,9 @@ class DefaultViewController: UIViewController {
     private func checkUserValid() -> Observable<Int> {
         Observable.create() { [unowned self] observable in
             if let uuid = Auth.auth().currentUser?.uid {
-
                 AuthManager.shared.fetch(uuid: uuid)
                     .subscribe { [unowned self] in
-                        CampaignManager.shared.fetch()
-                            .subscribe {
-                                observable.onNext(0)
-                            } onError: { error in
-                                print(error)
-                                observable.onNext(2)
-                            }
-                            .disposed(by: rx.disposeBag)
+                        observable.onNext(0)
                     } onError: { err in
                         
                         print(err)
@@ -86,23 +82,27 @@ class DefaultViewController: UIViewController {
     }
 
     func toMain() {
+        
         CampaignManager.shared.fetch()
             .subscribe { [unowned self] in
+
+                indicator.stopAnimating()
                 let vc = MainTabBarController()
                 vc.modalPresentationStyle = .fullScreen
                 present(vc, animated: true)
+
             } onError: { [unowned self] error in
+                indicator.stopAnimating()
                 print(error)
-                let vc = MainTabBarController()
-                vc.modalPresentationStyle = .fullScreen
-                present(vc, animated: true)
+                presentAlert(message: "서버 문제입니다. 관리자에게 문의하세요.")
             }
             .disposed(by: rx.disposeBag)
-
 
     }
 
     private func toAuth() {
+        indicator.stopAnimating()
+
         let vc = UIStoryboard(name: "Auth", bundle: nil).instantiateViewController(withIdentifier: "signinVC") as! SigninViewController
         let nav = UINavigationController(rootViewController: vc)
         

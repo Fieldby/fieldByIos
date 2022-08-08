@@ -97,7 +97,6 @@ class CampaignViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        viewModel.reload()
         showingIndexSubject.onNext(showingIndex)
     }
     
@@ -146,7 +145,7 @@ class CampaignViewController: UIViewController {
 
         pagerView.register(pagerCell.self, forCellWithReuseIdentifier: pagerCell.reuseId)
         
-        viewModel.campaignRelay
+        Observable.just(campaignArray)
             .bind(to: barCollectionView.rx.items(cellIdentifier: "barCell", cellType: BarCell.self)) { [unowned self] idx, data, cell in
 
                 cell.contentView.backgroundColor = .none
@@ -316,7 +315,6 @@ extension CampaignViewController: FSPagerViewDelegate, FSPagerViewDataSource {
     
     func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
         let cell = pagerView.dequeueReusableCell(withReuseIdentifier: pagerCell.reuseId, at: index) as! pagerCell
-        cell.imageView?.contentMode = .scaleAspectFit
         let model = campaignArray[index]
 
         let parsedImageName = String(String(model.mainImageUrl.split(separator: ".")[0]).split(separator: "/")[2])
@@ -324,17 +322,7 @@ extension CampaignViewController: FSPagerViewDelegate, FSPagerViewDataSource {
             cell.imageView?.image = image
                         
         } else {
-            Storage.storage().reference().child(model.mainImageUrl)
-                .downloadURL { url, error in
-                    if let url = url {
-                        cell.imageView?.kf.setImage(with: url)
-                        if model.status == .unOpened {
-                            cell.imageView?.alpha = 0.5
-                        }
-                    } else {
-                        cell.imageView?.image = UIImage(named: "mainLogo")
-                    }
-                }
+            cell.imageView?.image = CampaignManager.shared.campaignMainImage[index]
         }
         
         

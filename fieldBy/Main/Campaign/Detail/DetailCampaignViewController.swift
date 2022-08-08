@@ -355,7 +355,7 @@ class DetailCampaignViewController: UIViewController {
         indicator.isHidden = false
         indicator.startAnimating()
         
-        CampaignManager.shared.mainImageUrl(campaignModel: campaignModel)
+        CampaignManager.shared.subImageUrl(campaignModel: campaignModel)
             .subscribe { [unowned self] urlArray in
                 let vc = storyboard?.instantiateViewController(withIdentifier: MainImageViewController.storyId) as! MainImageViewController
                 indicator.isHidden = true
