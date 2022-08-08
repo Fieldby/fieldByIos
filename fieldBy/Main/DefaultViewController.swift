@@ -14,6 +14,7 @@ import FirebaseDatabase
 import Photos
 import AVFoundation
 import Lottie
+import ChannelIOFront
 
 class DefaultViewController: UIViewController {
     
@@ -130,6 +131,17 @@ class DefaultViewController: UIViewController {
                     if userData.exists() {
                         userCount += 1
                         
+//                        let value = userData.value as! [String: Any]
+//                        let profile = Profile()
+//                            .set(name: value["name"] as! String)
+//                            .set(mobileNumber: value["phoneNumber"] as! String)
+//
+//                        print(value["name"] as! String)
+//
+//                        let bootConfig = BootConfig(pluginKey: "b3586a67-90a6-4295-a167-4be9af28ec9a",memberId: value["uid"] as! String, profile: profile, trackDefaultEvent: true)
+//                        bootConfig.channelButtonOption = ChannelButtonOption(position: .right, xMargin: 20, yMargin: 70)
+//                        ChannelIO.boot(with: bootConfig)
+//                        ChannelIO.showChannelButton()
                         
                         if userData.childSnapshot(forPath: "igInfo").exists() {
                             igCount += 1

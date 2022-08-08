@@ -64,7 +64,7 @@
                                     <constraint firstAttribute="height" constant="100" id="wYc-CT-iQC"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xrk-iP-4gX" customClass="FSPagerView" customModule="FSPagerView">
+                            <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="xrk-iP-4gX" customClass="FSPagerView" customModule="FSPagerView">
                                 <rect key="frame" x="0.0" y="120" width="414" height="591"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ddC-ke-Iwu" userLabel="BarView">
@@ -308,7 +308,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" name="Black"/>
+                                <color key="backgroundColor" red="0.23529411764705882" green="0.23529411764705882" blue="0.23529411764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="vJg-cS-81v" firstAttribute="leading" secondItem="G77-eO-VVo" secondAttribute="leading" constant="10" id="RSs-DP-SVi"/>
                                     <constraint firstAttribute="trailing" secondItem="vJg-cS-81v" secondAttribute="trailing" constant="10" id="qpI-m4-Jgc"/>
@@ -844,7 +844,7 @@
                                     <constraint firstAttribute="height" constant="50" id="Evz-LC-UA0"/>
                                     <constraint firstAttribute="width" constant="50" id="fC9-Bh-nRU"/>
                                 </constraints>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" name="MainColor"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="chevron.left" catalog="system">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

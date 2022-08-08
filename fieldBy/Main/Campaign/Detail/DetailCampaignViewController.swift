@@ -90,6 +90,7 @@ class DetailCampaignViewController: UIViewController {
     var mainImage: UIImage!
     var campaignModel: CampaignModel!
     var timeSubject = BehaviorSubject<String>(value: "")
+    var animationTimer: Timer?
     
     var isDone = false
     
@@ -111,7 +112,7 @@ class DetailCampaignViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
+        animationTimer?.invalidate()
         timer?.invalidate()
     }
     
@@ -189,24 +190,23 @@ class DetailCampaignViewController: UIViewController {
             }
         }
         
-//        var cnt = 0
-//        _ = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true, block: { [unowned self] timer in
-//
-//            if cnt < 100 {
-//                imageGuideView.alpha = CGFloat(100-cnt)/100
-//            } else if cnt < 200 {
-//                imageGuideView.alpha = CGFloat(cnt-100)/100
-//            } else if cnt < 300 {
-//                imageGuideView.alpha = CGFloat(300-cnt)/100
-//            } else if cnt < 400 {
-//                imageGuideView.alpha = CGFloat(cnt-300)/100
-//            } else if cnt == 400 {
-//                timer.invalidate()
-//            }
-//
-//
-//            cnt += 1
-//        })
+        var cnt = 0
+        animationTimer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true, block: { [unowned self] timer in
+
+            if cnt < 100 {
+                imageGuideView.alpha = CGFloat(100-cnt)/100
+            } else if cnt < 200 {
+                imageGuideView.alpha = CGFloat(cnt-100)/100
+            } else if cnt < 300 {
+                imageGuideView.alpha = CGFloat(300-cnt)/100
+            } else if cnt < 400 {
+                imageGuideView.alpha = CGFloat(cnt-300)/100
+            } else if cnt == 400 {
+                timer.invalidate()
+            }
+            cnt += 1
+        })
+        
         
     }
     

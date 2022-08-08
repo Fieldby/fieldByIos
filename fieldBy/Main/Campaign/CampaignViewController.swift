@@ -341,7 +341,7 @@ extension CampaignViewController: FSPagerViewDelegate, FSPagerViewDataSource {
 
         cell.layer.masksToBounds = true
         cell.layer.cornerRadius = 21
-        cell.imageView?.contentMode = .scaleToFill
+        cell.imageView?.contentMode = .scaleAspectFill
         cell.imageView?.addGrayShadow(color: .lightGray, opacity: 0.15, radius: 3)
         
         return cell
