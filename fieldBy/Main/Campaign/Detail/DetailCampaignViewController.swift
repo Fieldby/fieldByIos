@@ -10,17 +10,15 @@ import Kingfisher
 import FirebaseStorage
 import RxSwift
 import RxRelay
+import RxGesture
 
 class DetailCampaignViewController: UIViewController {
 
     static let storyId = "detailcampaignVC"
     
-    @IBOutlet weak var mainImageView: UIImageView!
     @IBOutlet weak var backButton: UIButton!
 
     @IBOutlet weak var transparentView: UIView!
-    @IBOutlet weak var mainImageButton: UIButton!
-    
     
     @IBOutlet weak var mainScrollView: UIScrollView!
     @IBOutlet weak var timeStickyContainer: UIView!
@@ -76,22 +74,24 @@ class DetailCampaignViewController: UIViewController {
     @IBOutlet weak var cancelInfoLabel: UILabel!
     @IBOutlet weak var addressButton: UIButton!
     
-    
-    @IBOutlet weak var imageGuideView: UIView!
-    
+        
     @IBOutlet weak var indicator: UIActivityIndicatorView!
     @IBOutlet var viewModel: DetailCampaignViewModel!
+    @IBOutlet weak var pageControl: UIPageControl!
     
     private var timer: Timer?
     
     private let mainTabBar = AuthManager.shared.mainTabBar
     
     private var isSelected = false
-    var mainImage: UIImage!
     var campaignModel: CampaignModel!
     var timeSubject = BehaviorSubject<String>(value: "")
     var animationTimer: Timer?
+    var mainImage: UIImage!
     
+    var subImageVC: SubImagesViewController!
+    
+    private var isUrlLoadingDone = BehaviorRelay<Bool>(value: false)
     var isDone = false
     
     override func viewWillAppear(_ animated: Bool) {
@@ -125,10 +125,10 @@ class DetailCampaignViewController: UIViewController {
     
 
     private func makeUI() {
+        pageControl.isHidden = true
+        
         if AuthManager.shared.myUserModel.selectedCampaigns[campaignModel.uuid] == true { isSelected = true }
         
-        mainImageView.image = mainImage
-        imageGuideView.layer.cornerRadius = 16
         indicator.isHidden = true
         timeStickyContainer.layer.cornerRadius = 14.5
         isNewContainer.layer.cornerRadius = 9.5
@@ -189,28 +189,24 @@ class DetailCampaignViewController: UIViewController {
                 applyButton.backgroundColor = .unabled
             }
         }
-        
-        var cnt = 0
-        animationTimer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true, block: { [unowned self] timer in
-
-            if cnt < 100 {
-                imageGuideView.alpha = CGFloat(100-cnt)/100
-            } else if cnt < 200 {
-                imageGuideView.alpha = CGFloat(cnt-100)/100
-            } else if cnt < 300 {
-                imageGuideView.alpha = CGFloat(300-cnt)/100
-            } else if cnt < 400 {
-                imageGuideView.alpha = CGFloat(cnt-300)/100
-            } else if cnt == 400 {
-                timer.invalidate()
-            }
-            cnt += 1
-        })
-        
-        
+                
     }
     
     private func bind() {
+        
+        subImageVC = (self.children.first as! SubImagesViewController)
+        
+        CampaignManager.shared.subImageUrl(campaignModel: campaignModel)
+            .subscribe { [unowned self] urlArray in
+                pageControl.isHidden = false
+                pageControl.numberOfPages = urlArray.count
+                subImageVC.imageRelay.accept(urlArray)
+                isUrlLoadingDone.accept(true)
+            } onError: { error in
+                print(error)
+            }
+            .disposed(by: rx.disposeBag)
+
         
         brandNameLabel.text = campaignModel.brandName
         titleLabel.text = campaignModel.itemModel.name
@@ -334,12 +330,6 @@ class DetailCampaignViewController: UIViewController {
             })
             .disposed(by: rx.disposeBag)
         
-        mainImageButton.rx.tap
-            .subscribe(onNext: { [unowned self] in
-                presentImageVC()
-            })
-            .disposed(by: rx.disposeBag)
-        
         addressButton.rx.tap
             .subscribe(onNext: { [unowned self] in
                 let vc = UIStoryboard(name: "Address", bundle: nil).instantiateViewController(withIdentifier: "addressVC") as! AddressViewController
@@ -349,32 +339,14 @@ class DetailCampaignViewController: UIViewController {
                 self.present(vc, animated: true)
             })
             .disposed(by: rx.disposeBag)
-    }
-    
-    private func presentImageVC() {
-        indicator.isHidden = false
-        indicator.startAnimating()
         
-        CampaignManager.shared.subImageUrl(campaignModel: campaignModel)
-            .subscribe { [unowned self] urlArray in
-                let vc = storyboard?.instantiateViewController(withIdentifier: MainImageViewController.storyId) as! MainImageViewController
-                indicator.isHidden = true
-                indicator.stopAnimating()
-                
-                vc.modalPresentationStyle = .fullScreen
-                vc.modalTransitionStyle = .crossDissolve
-                vc.imageRelay.accept(urlArray)
-                self.present(vc, animated: true)
-            } onError: { [unowned self] err in
-                indicator.isHidden = true
-                indicator.stopAnimating()
-                
-                print(err)
-            }
+        isUrlLoadingDone
+            .subscribe(onNext: { [unowned self] bool in
+                if bool {
+                    detectSwipeGesture()
+                }
+            })
             .disposed(by: rx.disposeBag)
-
-        
-
     }
     
     private func pushGuideVC() {
@@ -427,6 +399,30 @@ class DetailCampaignViewController: UIViewController {
                 timeSubject.onNext("\(diffHour):\(diffMin):\(diff) 후 마감")
             }
         }
+    }
+    
+    private func detectSwipeGesture() {
+        self.transparentView.rx.gesture(.swipe(direction: .left))
+            .bind { [unowned self] _ in
+                if pageControl.currentPage == pageControl.numberOfPages - 1 {
+                    pageControl.currentPage = 0
+                } else {
+                    pageControl.currentPage += 1
+                }
+                subImageVC.scrollNext()
+            }
+            .disposed(by: rx.disposeBag)
+        
+        self.transparentView.rx.gesture(.swipe(direction: .right))
+            .bind { [unowned self] _ in
+                if pageControl.currentPage == 0 {
+                    pageControl.currentPage = pageControl.numberOfPages-1
+                } else {
+                    pageControl.currentPage -= 1
+                }
+                subImageVC.scrollBack()
+            }
+            .disposed(by: rx.disposeBag)
     }
 
     

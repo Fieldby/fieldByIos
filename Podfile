@@ -17,6 +17,7 @@ target 'fieldBy' do
   pod 'Alamofire'  
   pod 'RxSwift', '~> 5.1.1'
   pod 'RxCocoa'
+  pod 'RxGesture'
   pod 'RxViewController'
   pod 'Action'
   pod 'NSObject+Rx'

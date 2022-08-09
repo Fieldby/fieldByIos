@@ -120,7 +120,7 @@ class CampaignManager: CommonBackendType {
                                     temp.append(url!)
                                     
                                     if temp.count == result.items.count {
-                                        observable(.success(temp))
+                                        observable(.success(temp.sorted(by: { $0.absoluteString < $1.absoluteString })))
                                     }
                                 }
                             }
