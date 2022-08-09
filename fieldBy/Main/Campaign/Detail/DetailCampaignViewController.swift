@@ -242,7 +242,7 @@ class DetailCampaignViewController: UIViewController {
         priceLabel.text = getComma(price: campaignModel.itemModel.price) + "원"
         
         maintainLabel.text = "\(campaignModel.maintain)일"
-        leastFeedLabel.text = "\(campaignModel.leastFeed)회"
+        leastFeedLabel.text = campaignModel.feedDes ?? "\(campaignModel.leastFeed)회"
         
         applyButton.rx.tap
             .throttle(.seconds(3), latest: false, scheduler: MainScheduler.instance)

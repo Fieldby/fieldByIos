@@ -31,6 +31,7 @@ class CampaignModel: Codable {
     let uploadDate: String
     let maintain: Int
     let leastFeed: Int
+    let feedDes: String?
     
     let hashTagModel: HashTagModel
     var priority = 0
@@ -41,7 +42,7 @@ class CampaignModel: Codable {
     
     
     
-    init(url: String, brandUuid: String, isNew: Bool, itemModel: ItemModel, dueDate: String, selectionDate: String, itemDate: String, uploadDate: String, leastFeed: Int, maintain: Int, brandName: String, guides: [GuideModel], uuid: String, brandInstagram: String, hashTagModel: HashTagModel, users: [String: Bool], recruitingDate: String, status: CampaignStatus, title: String) {
+    init(url: String, brandUuid: String, isNew: Bool, itemModel: ItemModel, dueDate: String, selectionDate: String, itemDate: String, uploadDate: String, leastFeed: Int, maintain: Int, brandName: String, guides: [GuideModel], uuid: String, brandInstagram: String, hashTagModel: HashTagModel, users: [String: Bool], recruitingDate: String, status: CampaignStatus, title: String, feedDes: String) {
         self.mainImageUrl = url
         self.brandUuid = brandUuid
         self.isNew = isNew
@@ -62,6 +63,7 @@ class CampaignModel: Codable {
         self.recruitingDate = recruitingDate
         self.status = status
         self.title = title
+        self.feedDes = feedDes
     }
     
     init?(snapshot: DataSnapshot) {
@@ -82,7 +84,6 @@ class CampaignModel: Codable {
            let brandInstagram = value["brandInstagram"] as? String,
            let recruitingDate = value["recruitingDate"] as? String,
            let title = value["campaignTitle"] as? String
-            
         {
             self.title = title
             self.mainImageUrl = "campaignImages/\(self.title)/\(imageUrl)"
@@ -115,6 +116,7 @@ class CampaignModel: Codable {
             tempGuides.append(guideModel)
         }
         self.guides = tempGuides
+        self.feedDes = value["feedDes"] as? String
         
         if !snapshot.childSnapshot(forPath: "hashTags").exists() { return nil }
         self.hashTagModel = HashTagModel(snapshot: snapshot.childSnapshot(forPath: "hashTags"))!

@@ -120,7 +120,7 @@ class GuideCampaignViewController: CommonGuideViewController {
             })
             .disposed(by: rx.disposeBag)
         
-        leastFeedLabel.text = "\(campaignModel.leastFeed)회"
+        leastFeedLabel.text = campaignModel.feedDes ?? "\(campaignModel.leastFeed)회"
         maintainLabel.text = "\(campaignModel.maintain)일"
         
         

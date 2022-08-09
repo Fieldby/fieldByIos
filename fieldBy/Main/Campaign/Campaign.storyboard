@@ -656,7 +656,7 @@
                                                         <rect key="frame" x="15" y="13" width="384" height="49"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BxV-EF-9p2">
-                                                                <rect key="frame" x="39.5" y="17.5" width="305.5" height="14.5"/>
+                                                                <rect key="frame" x="51.5" y="17.5" width="281.5" height="14.5"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1회" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Pp-NZ-8IR">
                                                                         <rect key="frame" x="85.5" y="0.0" width="15" height="14.5"/>
@@ -664,14 +664,14 @@
                                                                         <color key="textColor" name="MainColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(최소 사진 슬라이드 3장) | 피드 유지" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7wj-xz-c7l">
-                                                                        <rect key="frame" x="103.5" y="0.0" width="171.5" height="14.5"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(최소 사진 슬라이드 3장) | 유지" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7wj-xz-c7l">
+                                                                        <rect key="frame" x="103.5" y="0.0" width="147.5" height="14.5"/>
                                                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="12"/>
                                                                         <color key="textColor" name="Black"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="110일" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hyr-a9-74X">
-                                                                        <rect key="frame" x="278" y="0.0" width="27.5" height="14.5"/>
+                                                                        <rect key="frame" x="254" y="0.0" width="27.5" height="14.5"/>
                                                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="12"/>
                                                                         <color key="textColor" name="MainColor"/>
                                                                         <nil key="highlightedColor"/>
