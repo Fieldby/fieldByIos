@@ -30,7 +30,8 @@ target 'fieldBy' do
   pod 'Firebase/Database'
   pod 'Moya'
   pod 'lottie-ios'
-
+  pod 'GoogleAPIClientForREST/YouTube'
+  pod 'Google/SignIn'
 
 
 end

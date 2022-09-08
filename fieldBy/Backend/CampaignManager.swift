@@ -67,8 +67,9 @@ class CampaignManager: CommonBackendType {
             let campaignList = campaignArray.filter { $0.status == .applied }
             var imageList = [UIImage?](repeating: nil, count: campaignList.count)
             var cnt: CGFloat = 0
-            
+            print("@@@ mainimage")
             for i in 0..<campaignList.count {
+                
                 storageRef.child(campaignList[i].mainImageUrl)
                     .downloadURL { [unowned self] url, error in
                         if let error = error {
@@ -77,10 +78,12 @@ class CampaignManager: CommonBackendType {
                         }
                         
                         if let url = url {
+                            print(url)
                             let data = try! Data(contentsOf: url)
                             let image = UIImage(data: data)!
                             
                             imageList[i] = image
+                            print(imageList)
                             cnt += 1
                             loadingPercentage.onNext((cnt)/CGFloat(imageList.count))
                             

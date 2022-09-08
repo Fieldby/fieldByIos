@@ -44,6 +44,7 @@ struct IGModel: Codable {
     var token: String?
     
     init?(snapshot: DataSnapshot) {
+        print("@@@ ig")
         let value = snapshot.value as! [String: Any]
         
         if let id = value["id"] as? String,
@@ -66,6 +67,7 @@ struct IGModel: Codable {
             self.name = name
             
         } else {
+            print("some error")
             return nil
         }
            
