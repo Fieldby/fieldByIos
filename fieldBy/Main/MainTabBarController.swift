@@ -56,6 +56,7 @@ class MainTabBarController: UITabBarController {
         
         let bootConfig = BootConfig(pluginKey: "b3586a67-90a6-4295-a167-4be9af28ec9a",memberId: userModel.uuid, profile: profile, trackDefaultEvent: true)
         
+        
                               
 
         bootConfig.channelButtonOption = ChannelButtonOption(position: .right, xMargin: 20, yMargin: 70)
