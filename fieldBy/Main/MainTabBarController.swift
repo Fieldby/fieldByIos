@@ -8,12 +8,10 @@
 import UIKit
 import SnapKit
 import Then
-import ChannelIOFront
 
 class MainTabBarController: UITabBarController {
 
     var bottomView: UIView!
-
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -44,24 +42,6 @@ class MainTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let userModel = AuthManager.shared.myUserModel!
-        
-        if ChannelIO.hasStoredPushNotification() {
-          ChannelIO.openStoredPushNotification()
-        }
-        
-        let profile = Profile()
-            .set(name: userModel.name)
-            .set(mobileNumber: userModel.phoneNumber)
-            .set(avatarUrl: userModel.igModel?.profileUrl ?? "")
-        
-        let bootConfig = BootConfig(pluginKey: "b3586a67-90a6-4295-a167-4be9af28ec9a",memberId: userModel.uuid, profile: profile, trackDefaultEvent: true)
-        
-        
-                              
-
-        bootConfig.channelButtonOption = ChannelButtonOption(position: .right, xMargin: 20, yMargin: 70)
-        ChannelIO.boot(with: bootConfig)
-        ChannelIO.showChannelButton()
         
         AuthManager.shared.mainTabBar = self
 

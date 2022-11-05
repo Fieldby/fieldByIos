@@ -26,9 +26,7 @@ class UserInfoViewModel: NSObject {
     let regions = ["서울", "경기", "인천", "부산", "대구", "울산", "세종", "광주", "강원", "충남", "충북", "경남", "경북", "전남", "전북", "제주"]
     
     var selectedIndex: Int? = nil
-    
-    var pushGolfInfoVC: (() -> Void)!
-    
+        
     override init() {
         super.init()
         

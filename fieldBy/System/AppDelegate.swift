@@ -8,7 +8,6 @@
 import UIKit
 import Firebase
 import FBSDKCoreKit
-import ChannelIOFront
 //import FirebaseCore
 //import FirebaseAnalytics
 
@@ -30,7 +29,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "defaultVC")
         window?.rootViewController = vc
         window?.makeKeyAndVisible()
-        ChannelIO.initialize(application)
 
         if #available(iOS 10.0, *) {
           // For iOS 10 display notification (sent via APNS)
@@ -77,9 +75,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         return UIInterfaceOrientationMask.portrait
     }
     
-    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        ChannelIO.initPushToken(deviceToken: deviceToken)
-    }
     
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
       print("Firebase registration token: \(String(describing: fcmToken))")
@@ -122,11 +117,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                                 withCompletionHandler completionHandler: @escaping () -> Void) {
         let userInfo = response.notification.request.content.userInfo
         print(userInfo)
-        
-        if ChannelIO.isChannelPushNotification(userInfo) {
-            ChannelIO.receivePushNotification(userInfo)
-            ChannelIO.storePushNotification(userInfo)
-        }
         
         if response.actionIdentifier == UNNotificationDefaultActionIdentifier {
             

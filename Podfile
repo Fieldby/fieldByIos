@@ -6,9 +6,9 @@ target 'fieldBy' do
   use_frameworks!
 
   # Pods for fieldBy
- 
-  pod 'ChannelIOSDK', podspec: 'https://mobile-static.channel.io/ios/latest/framework.podspec'
-  pod 'Firebase/Analytics'
+
+
+  pod 'Firebase/Core' 
   pod 'FSPagerView'
   pod 'FBSDKLoginKit', '~> 14.0'
   pod 'PanModal'
@@ -16,22 +16,18 @@ target 'fieldBy' do
   pod 'Then'
   pod 'Alamofire'  
   pod 'RxSwift', '~> 5.1.1'
-  pod 'RxCocoa'
-  pod 'RxGesture'
+  pod 'RxCocoa', '~> 5.1.3'
+  pod 'RxGesture', '~> 3.0.0'
   pod 'RxViewController'
-  pod 'Action'
-  pod 'NSObject+Rx'
+  pod 'NSObject+Rx', '~> 5.0.1'
   pod 'Kingfisher'
   pod 'ObjectMapper'
   pod 'Firebase/Auth'
   pod 'Firebase/Messaging'
-  pod 'Firebase/Analytics'
   pod 'Firebase/Storage'
   pod 'Firebase/Database'
   pod 'Moya'
   pod 'lottie-ios'
-  pod 'GoogleAPIClientForREST/YouTube'
-  pod 'Google/SignIn'
-
+  pod 'Firebase/Analytics'
 
 end

@@ -36,6 +36,7 @@ class CommonBackendType: NSObject {
         } catch {
             return nil
         }
+        
     }
     
     static func getRequest(_ url: URL, method: HTTPMethod = .get) -> URLRequest {

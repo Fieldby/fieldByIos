@@ -35,10 +35,13 @@ class AuthManager: CommonBackendType {
     
     func fetch(uuid: String) -> Completable {
         return Completable.create() { [unowned self] completable in
+            print("@@@ fetch")
             ref.child("users").child(uuid)
                 .observeSingleEvent(of: .value) { [unowned self] dataSnapShot in
                     if dataSnapShot.exists() {
+                        print("@@@ exist")
                         if let myUserModel = MyUserModel(data: dataSnapShot) {
+                            print("@@@ usermodel")
                             self.myUserModel = myUserModel
                             print(myUserModel.name)
                             if let fcmToken = fcmToken {
@@ -115,9 +118,9 @@ class AuthManager: CommonBackendType {
         }
     }
     
-    func addCampaign(uuid: String, size: String?, color: String?) {
+    func addCampaign(uuid: String, option: String?) {
         myUserModel.campaignUuids[uuid] = true
-        myUserModel.campaigns.append(UserCampaignModel(uuid: uuid, size: size, color: color))
+        myUserModel.campaigns.append(UserCampaignModel(uuid: uuid, option: option))
     }
     
     func removeCampaign(uuid: String, completion: @escaping (() -> Void)) {

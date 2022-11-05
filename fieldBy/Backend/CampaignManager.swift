@@ -114,15 +114,15 @@ class CampaignManager: CommonBackendType {
                         
                         var temp = [URL]()
                         
-                        for i in 0..<result.items.count {
+                        for i in 0..<result!.items.count {
                             
-                            result.items[i].downloadURL { url, urlError in
+                            result!.items[i].downloadURL { url, urlError in
                                 if let urlError = urlError {
                                     observable(.error(urlError))
                                 } else {
                                     temp.append(url!)
                                     
-                                    if temp.count == result.items.count {
+                                    if temp.count == result!.items.count {
                                         observable(.success(temp.sorted(by: { $0.absoluteString < $1.absoluteString })))
                                     }
                                 }
@@ -180,19 +180,19 @@ class CampaignManager: CommonBackendType {
         }
     }
     
-    func save(campaignModel: CampaignModel, size: String?, color: String?) {
+    func save(campaignModel: CampaignModel, option: String?) {
         let myUid = AuthManager.shared.myUserModel.uuid!
         
         ref.child("campaigns/\(campaignModel.uuid)/users").child(myUid).setValue(myUid)
         ref.child("brands").child(campaignModel.brandUuid).child("campaigns").child(campaignModel.uuid).child("users").child(myUid).setValue(myUid)
-        ref.child("users").child(AuthManager.shared.myUserModel.uuid).child("campaigns").child(campaignModel.uuid).setValue(["size": size ?? "free", "color": color ?? "free"])
+        ref.child("users").child(AuthManager.shared.myUserModel.uuid).child("campaigns").child(campaignModel.uuid).setValue(["option": option ?? ""])
 
         if let model = model(uuid: campaignModel.uuid) {
             model.users[myUid] = true
             campaignArrayRelay.accept(campaignArray)
         }
         
-        AuthManager.shared.addCampaign(uuid: campaignModel.uuid, size: size, color: color)
+        AuthManager.shared.addCampaign(uuid: campaignModel.uuid, option: option)
     }
     
     func saveUploadIds(campaignUuid: String, ids: [String]) -> Completable {

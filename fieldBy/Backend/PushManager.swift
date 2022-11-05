@@ -101,4 +101,9 @@ class PushManager: Mappable {
             print(responce)
         }
     }
+    
+    func solstayPush() {
+        let url = self.url
+        let header = self.header
+    }
 }

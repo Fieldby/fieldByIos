@@ -41,6 +41,9 @@ struct LayerAnimationContext {
   /// The AnimationKeypath represented by the current layer
   var currentKeypath: AnimationKeypath
 
+  /// The `AnimationTextProvider`
+  var textProvider: AnimationTextProvider
+
   /// Whether or not to log `AnimationKeypath`s for all of the animation's layers
   ///  - Used for `CoreAnimationLayer.logHierarchyKeypaths()`
   var logHierarchyKeypaths: Bool
@@ -61,6 +64,12 @@ struct LayerAnimationContext {
   /// accounting for the `timeRemapping` applied to this layer
   func progressTime(for frame: AnimationFrameTime) -> AnimationProgressTime {
     animation.progressTime(forFrame: timeRemapping(frame), clamped: false)
+  }
+
+  /// The real-time `TimeInterval` for the given `AnimationFrameTime` within this layer,
+  /// accounting for the `timeRemapping` applied to this layer
+  func time(for frame: AnimationFrameTime) -> TimeInterval {
+    animation.time(forFrame: timeRemapping(frame))
   }
 
   /// Chains an additional `timeRemapping` closure onto this layer context

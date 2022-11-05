@@ -14,7 +14,6 @@ import FirebaseDatabase
 import Photos
 import AVFoundation
 import Lottie
-import ChannelIOFront
 
 class DefaultViewController: UIViewController {
     
@@ -26,6 +25,7 @@ class DefaultViewController: UIViewController {
 //        checkAppInfo()
         
         indicator.startAnimating()
+        
 
     }
 

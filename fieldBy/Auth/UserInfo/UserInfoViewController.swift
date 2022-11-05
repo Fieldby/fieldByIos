@@ -292,15 +292,11 @@ class UserInfoViewController: UIViewController {
             .subscribe(onNext: { [unowned self] in
                 if viewModel.selectedIndex != nil {
                     viewModel.saveInfo()
-                    viewModel.pushGolfInfoVC()
+                    self.navigationController?.dismiss(animated: true)
                 }
             })
             .disposed(by: rx.disposeBag)
-        
-        viewModel.pushGolfInfoVC = { [unowned self] in
-            let vc = storyboard?.instantiateViewController(withIdentifier: "golfinfoVC") as! GolfInfoViewController
-            self.navigationController?.pushViewController(vc, animated: true)
-        }
+
         
     }
     

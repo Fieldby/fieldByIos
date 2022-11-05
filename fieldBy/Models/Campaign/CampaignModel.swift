@@ -32,6 +32,7 @@ class CampaignModel: Codable {
     let maintain: Int
     let leastFeed: Int
     let feedDes: String?
+    let option: String
     
     let hashTagModel: HashTagModel
     var priority = 0
@@ -42,7 +43,7 @@ class CampaignModel: Codable {
     
     
     
-    init(url: String, brandUuid: String, isNew: Bool, itemModel: ItemModel, dueDate: String, selectionDate: String, itemDate: String, uploadDate: String, leastFeed: Int, maintain: Int, brandName: String, guides: [GuideModel], uuid: String, brandInstagram: String, hashTagModel: HashTagModel, users: [String: Bool], recruitingDate: String, status: CampaignStatus, title: String, feedDes: String) {
+    init(url: String, brandUuid: String, isNew: Bool, itemModel: ItemModel, dueDate: String, selectionDate: String, itemDate: String, uploadDate: String, leastFeed: Int, maintain: Int, brandName: String, guides: [GuideModel], uuid: String, brandInstagram: String, hashTagModel: HashTagModel, users: [String: Bool], recruitingDate: String, status: CampaignStatus, title: String, feedDes: String, option: String) {
         self.mainImageUrl = url
         self.brandUuid = brandUuid
         self.isNew = isNew
@@ -64,6 +65,7 @@ class CampaignModel: Codable {
         self.status = status
         self.title = title
         self.feedDes = feedDes
+        self.option = option
     }
     
     init?(snapshot: DataSnapshot) {
@@ -83,7 +85,8 @@ class CampaignModel: Codable {
            let brandName = value["brandName"] as? String,
            let brandInstagram = value["brandInstagram"] as? String,
            let recruitingDate = value["recruitingDate"] as? String,
-           let title = value["campaignTitle"] as? String
+           let title = value["campaignTitle"] as? String,
+           let option = value["option"] as? String
         {
             self.title = title
             self.mainImageUrl = "campaignImages/\(self.title)/\(imageUrl)"
@@ -98,6 +101,7 @@ class CampaignModel: Codable {
             self.brandName = brandName
             self.brandInstagram = brandInstagram
             self.recruitingDate = recruitingDate
+            self.option = option
         } else {
             return nil
         }

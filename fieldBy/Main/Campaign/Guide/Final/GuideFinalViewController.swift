@@ -20,8 +20,7 @@ class GuideFinalViewController: CommonGuideViewController {
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var dueDateLabel: UILabel!
     
-    var size: String?
-    var color: String?
+    var option: String?
     
     var isAppling = true
     
@@ -45,7 +44,7 @@ class GuideFinalViewController: CommonGuideViewController {
         dueDateLabel.text = "\(campaignModel.selectionDate.month)월 \(campaignModel.selectionDate.day)일"
         
         if isAppling {
-            CampaignManager.shared.save(campaignModel: campaignModel, size: size, color: color)
+            CampaignManager.shared.save(campaignModel: campaignModel, option: option)
             navigationController?.interactivePopGestureRecognizer?.isEnabled = false
             backButton.isHidden = true
         } else {

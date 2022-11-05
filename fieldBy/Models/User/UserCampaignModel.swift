@@ -14,6 +14,7 @@ class UserCampaignModel: Codable {
     var isSelected: Bool?
     var juso: Juso?
     var imageArray: [String] = []
+    var option: String?
     
     var shipmentName: String?
     var shipmentNumber: String?
@@ -44,5 +45,10 @@ class UserCampaignModel: Codable {
         self.uuid = uuid
         self.size = size
         self.color = color
+    }
+    
+    init(uuid: String, option: String?) {
+        self.uuid = uuid
+        self.option = option
     }
 }
